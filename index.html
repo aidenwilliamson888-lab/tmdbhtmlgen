@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔥 TMDB GENERATOR FINAL · Trailer + Backdrop + SEO</title>
+    <title>🔥 TMDB GENERATOR FINAL · RSS + TXT Import + Multi Bahasa</title>
     <!-- Google Fonts + Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,6 +60,22 @@
         }
         .input-group textarea { min-height: 100px; resize: vertical; }
         
+        .file-import {
+            grid-column: 1 / -1;
+            background: #0e1a2a;
+            border-radius: 1rem;
+            padding: 1rem;
+            border: 1px dashed #3b82f6;
+        }
+        .file-import label {
+            color: #9bb5ff;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
         .button-group { display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end; }
         .btn {
             background: #25344f;
@@ -77,6 +93,7 @@
         }
         .btn-primary { background: #1d4ed8; border-color: #3b82f6; }
         .btn-success { background: #0f6e4a; border-color: #10b981; }
+        .btn-info { background: #7c3aed; border-color: #a78bfa; }
         .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
         
         .progress-area {
@@ -148,7 +165,7 @@
 <body>
 <div class="container">
     <h1><i class="fas fa-layer-group" style="color:#3b82f6;"></i> TMDB GENERATOR FINAL</h1>
-    <div class="subtitle">✨ Trailer Fix + Backdrop + Artikel SEO + Multi Bahasa</div>
+    <div class="subtitle">✨ RSS Feed · TXT Import · Slug Unik · Vietnam + Bulgaria</div>
 
     <div class="control-panel">
         <div class="input-group">
@@ -158,7 +175,16 @@
         
         <div class="input-group">
             <label><i class="fas fa-list"></i> ID TMDB</label>
-            <textarea id="movieIds" placeholder="76600, 157336, 299534">76600, 157336, 299534</textarea>
+            <textarea id="movieIds" placeholder="76600&#10;157336&#10;299534">76600
+157336
+299534</textarea>
+            <small style="color: #8ba3d9;">Satu ID per baris (bisa paste dari file .txt)</small>
+        </div>
+
+        <div class="file-import">
+            <label><i class="fas fa-file-import"></i> Import dari file .txt</label>
+            <input type="file" id="txtFileInput" accept=".txt">
+            <small style="color: #8ba3d9; display: block; margin-top: 0.5rem;">File dengan satu ID per baris</small>
         </div>
 
         <div class="input-group">
@@ -168,6 +194,8 @@
                 <option value="es-ES">🇪🇸 Español</option>
                 <option value="th-TH">🇹🇭 ไทย</option>
                 <option value="id-ID">🇮🇩 Indonesia</option>
+                <option value="vi-VN" selected>🇻🇳 Tiếng Việt</option>
+                <option value="bg-BG">🇧🇬 Български</option>
             </select>
         </div>
 
@@ -191,6 +219,7 @@
         <div class="button-group">
             <button class="btn btn-primary" id="generateBulkBtn"><i class="fas fa-cogs"></i> Generate HTML</button>
             <button class="btn btn-success" id="downloadZipBtn" disabled><i class="fas fa-file-archive"></i> Download ZIP</button>
+            <button class="btn btn-info" id="downloadRssBtn" disabled><i class="fas fa-rss"></i> Download RSS</button>
             <button class="btn" id="clearLogsBtn"><i class="fas fa-broom"></i> Clear Logs</button>
         </div>
     </div>
@@ -208,7 +237,7 @@
     <div class="preview-grid" id="filePreviewGrid"><div style="color: #6b83b0;">Belum ada file</div></div>
 
     <div class="footer">
-        <i class="fas fa-check-circle" style="color:#10b981;"></i> FINAL VERSION · Trailer + Backdrop + 3 Artikel SEO
+        <i class="fas fa-check-circle" style="color:#10b981;"></i> FINAL VERSION · RSS Feed · Slug Unik · TXT Import · Vietnam + Bulgaria
     </div>
 </div>
 
@@ -219,6 +248,7 @@
     const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
     const BACKDROP_BASE = 'https://image.tmdb.org/t/p/original';
     const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
+    const DOMAIN = 'exampledomain.com'; // Ganti nanti
     
     // ========== ELEMEN DOM ==========
     const apiKeyInput = document.getElementById('apiKey');
@@ -227,8 +257,10 @@
     const bulkLink1Text = document.getElementById('bulkLink1Text');
     const bulkLink2Text = document.getElementById('bulkLink2Text');
     const titleTemplatesArea = document.getElementById('titleTemplates');
+    const txtFileInput = document.getElementById('txtFileInput');
     const generateBtn = document.getElementById('generateBulkBtn');
     const downloadBtn = document.getElementById('downloadZipBtn');
+    const downloadRssBtn = document.getElementById('downloadRssBtn');
     const clearLogsBtn = document.getElementById('clearLogsBtn');
     const logArea = document.getElementById('logArea');
     const progressPercent = document.getElementById('progressPercent');
@@ -262,6 +294,50 @@
         return templates[Math.floor(Math.random() * templates.length)].replace(/{TITLE}/g, movieTitle);
     }
 
+    // Generate kode unik random (5-8 karakter)
+    function generateUniqueCode() {
+        const length = Math.floor(Math.random() * 4) + 5; // 5-8
+        const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+
+    // Create slug from title
+    function createSlug(title, id) {
+        const slugTitle = title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-|-$/g, '');
+        const uniqueCode = generateUniqueCode();
+        return `${id}-${slugTitle}-${uniqueCode}`;
+    }
+
+    // ========== IMPORT TXT ==========
+    txtFileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const content = e.target.result;
+            // Split by new line, filter empty lines, trim
+            const ids = content.split(/\r?\n/)
+                .map(line => line.trim())
+                .filter(line => line && /^\d+$/.test(line));
+            
+            if (ids.length > 0) {
+                movieIdsTextarea.value = ids.join('\n');
+                log(`📄 Import ${ids.length} ID dari file ${file.name}`, 'success');
+            } else {
+                log('❌ Tidak ada ID valid dalam file', 'error');
+            }
+        };
+        reader.readAsText(file);
+    });
+
     // ========== FETCH TMDB LENGKAP ==========
     async function fetchMovieDetails(apiKey, movieId, language) {
         const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${language}&append_to_response=videos,images,recommendations`;
@@ -275,6 +351,39 @@
         }
     }
 
+    // ========== GENERATE RSS FEED ==========
+    function generateRssFeed(movies) {
+        const now = new Date().toUTCString();
+        const items = movies.map(m => {
+            const slug = createSlug(m.title, m.movieId);
+            const url = `https://${DOMAIN}/${slug}.html`;
+            const description = m.overview ? m.overview.substring(0, 200) : 'Watch online';
+            
+            return `
+    <item>
+        <title>${m.title}</title>
+        <link>${url}</link>
+        <guid isPermaLink="false">${slug}</guid>
+        <pubDate>${now}</pubDate>
+        <description>${description.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</description>
+    </item>`;
+        }).join('');
+
+        return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>TMDB Movie Feed</title>
+        <link>https://${DOMAIN}/</link>
+        <description>Latest generated movies from TMDB</description>
+        <language>en-us</language>
+        <pubDate>${now}</pubDate>
+        <lastBuildDate>${now}</lastBuildDate>
+        <atom:link href="https://${DOMAIN}/feed.xml" rel="self" type="application/rss+xml"/>
+        ${items}
+    </channel>
+</rss>`;
+    }
+
     // ========== GENERATE HTML PREMIUM ==========
     async function generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates) {
         const movie = await fetchMovieDetails(apiKey, movieId, lang);
@@ -282,6 +391,7 @@
 
         const seoTitle = getRandomTitle(titleTemplates, movie.title);
         const year = movie.release_date ? movie.release_date.slice(0,4) : new Date().getFullYear();
+        const slug = createSlug(movie.title, movieId);
         
         // Cari trailer YouTube
         const trailer = movie.videos?.results?.find(v => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser'));
@@ -310,6 +420,8 @@
     <meta property="og:title" content="${seoTitle}">
     <meta property="og:image" content="${movie.poster_path ? IMG_BASE + movie.poster_path : ''}">
     <meta property="og:type" content="video.movie">
+    <meta property="og:url" content="https://${DOMAIN}/${slug}.html">
+    <link rel="canonical" href="https://${DOMAIN}/${slug}.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -399,7 +511,7 @@
             </div>
         </div>
 
-        <!-- TRAILER SECTION (FIX) -->
+        <!-- TRAILER SECTION -->
         ${trailerKey ? `
         <h2 style="margin-bottom: 1rem;"><i class="fab fa-youtube" style="color:#ff0000;"></i> Official Trailer</h2>
         <div class="trailer-container">
@@ -464,12 +576,12 @@
         ` : ''}
 
         <div class="footer">
-            <i class="fas fa-crown"></i> Generated by TMDB Generator · ID ${movieId} · ${year}
+            <i class="fas fa-crown"></i> All rights reserved ID ${movieId} · 2026
         </div>
     </div>
 </body>
 </html>`;
-        return { html, title: movie.title, movieId };
+        return { html, title: movie.title, movieId, overview: movie.overview };
     }
 
     // ========== BULK GENERATE ==========
@@ -483,7 +595,11 @@
         const titleTemplates = getTitleTemplates();
         
         const idsText = movieIdsTextarea.value.trim();
-        const idMatches = idsText.match(/\d+/g);
+        // Split by new line and filter valid numbers
+        const idMatches = idsText.split(/\r?\n/)
+            .map(line => line.trim())
+            .filter(line => line && /^\d+$/.test(line));
+            
         if (!idMatches?.length) { log('❌ Tidak ada ID valid', 'error'); return; }
 
         const uniqueIds = [...new Set(idMatches)];
@@ -494,9 +610,10 @@
         generatedFiles = [];
         updateFilePreview();
 
-        log(`🚀 Generate ${uniqueIds.length} file dengan trailer fix...`);
+        log(`🚀 Generate ${uniqueIds.length} file dengan slug unik...`);
         isGenerating = true;
         downloadBtn.disabled = true;
+        downloadRssBtn.disabled = true;
 
         let successCount = 0;
         for (let i = 0; i < uniqueIds.length; i++) {
@@ -506,15 +623,16 @@
             const result = await generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates);
             
             if (result) {
-                const safeTitle = result.title.replace(/[^a-z0-9]/gi, '_').substring(0, 40);
+                const slug = createSlug(result.title, movieId);
                 generatedFiles.push({
-                    filename: `${movieId}_${safeTitle}.html`,
+                    filename: `${slug}.html`,
                     content: result.html,
                     movieId,
-                    title: result.title
+                    title: result.title,
+                    overview: result.overview
                 });
                 successCount++;
-                log(`✅ ID ${movieId} (${result.title}) berhasil`, 'success');
+                log(`✅ ID ${movieId} (${result.title}) -> ${slug}.html`, 'success');
             }
 
             const percent = Math.round(((i + 1) / uniqueIds.length) * 100);
@@ -526,7 +644,10 @@
 
         log(`🎉 Selesai! ${successCount} file`, 'success');
         isGenerating = false;
-        if (successCount > 0) downloadBtn.disabled = false;
+        if (successCount > 0) {
+            downloadBtn.disabled = false;
+            downloadRssBtn.disabled = false;
+        }
     }
 
     function updateFilePreview() {
@@ -556,9 +677,21 @@
         });
     }
 
+    function downloadRss() {
+        if (!generatedFiles.length) return;
+        const rssContent = generateRssFeed(generatedFiles);
+        const blob = new Blob([rssContent], { type: 'application/rss+xml' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'feed.xml';
+        link.click();
+        log('📡 RSS feed berhasil didownload', 'success');
+    }
+
     // ========== EVENT ==========
     generateBtn.addEventListener('click', bulkGenerate);
     downloadBtn.addEventListener('click', downloadZip);
+    downloadRssBtn.addEventListener('click', downloadRss);
     clearLogsBtn.addEventListener('click', clearLogs);
 
     titleTemplatesArea.addEventListener('input', () => {
@@ -569,7 +702,7 @@
         }
     });
 
-    log('✅ FINAL VERSION READY · Trailer fix, backdrop, 3 artikel SEO, rekomendasi');
+    log('✅ FINAL VERSION · RSS Feed · TXT Import · Slug Unik · Vietnam + Bulgaria');
 })();
 </script>
 </body>
