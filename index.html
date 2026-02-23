@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎬 StreamGen · TMDB Movie Page Generator</title>
+    <title>🎬 StreamGen Pro · Movie SEO Generator + TMDB</title>
     <!-- google fonts + font awesome 6 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +25,6 @@
             max-width: 1400px;
             width: 100%;
         }
-        /* header */
         .top-bar {
             display: flex;
             flex-wrap: wrap;
@@ -63,7 +62,6 @@
             gap: 6px;
             border: 1px solid #3a5a8a;
         }
-        /* kontrol panel */
         .control-panel {
             background: #131e33;
             border-radius: 2rem;
@@ -106,9 +104,6 @@
             border-color: #3b82f6;
             box-shadow: 0 0 0 3px #1e3a8a40;
         }
-        .input-group input::placeholder {
-            color: #5c6f97;
-        }
         .button-group {
             display: flex;
             gap: 0.8rem;
@@ -142,13 +137,12 @@
         .btn-outline:hover {
             background: #2f405e;
         }
-
-        /* live preview panel */
         .preview-header {
             display: flex;
             align-items: center;
             gap: 0.8rem;
             margin: 1.5rem 0 1rem 0;
+            flex-wrap: wrap;
         }
         .preview-header h2 {
             font-size: 1.5rem;
@@ -162,7 +156,7 @@
             color: #9ab9ff;
         }
 
-        /* STREAMING PAGE PREVIEW (seperti web streaming sungguhan) */
+        /* streaming page */
         .streaming-page {
             background: #0f172b;
             border-radius: 2.5rem;
@@ -170,7 +164,6 @@
             padding: 2rem 2rem 1.5rem;
             box-shadow: 0 25px 45px -15px #00000080;
             margin-top: 0.5rem;
-            transition: all 0.2s;
         }
 
         .movie-hero {
@@ -194,7 +187,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
         }
         .poster-placeholder {
             display: flex;
@@ -202,15 +194,10 @@
             align-items: center;
             justify-content: center;
             color: #4d6b9e;
-            text-align: center;
-            font-size: 0.9rem;
             background: #101a30;
             width: 100%;
             height: 100%;
-        }
-        .hero-content {
-            display: flex;
-            flex-direction: column;
+            text-align: center;
         }
         .hero-content h1 {
             font-size: 2.6rem;
@@ -237,9 +224,7 @@
             align-items: center;
             gap: 5px;
         }
-        .rating {
-            background: #223055;
-        }
+        .rating { background: #223055; }
         .overview-box {
             background: #0b1425b0;
             border-radius: 1.5rem;
@@ -249,7 +234,6 @@
             backdrop-filter: blur(4px);
         }
 
-        /* streaming links / download section */
         .links-section {
             margin-top: 2.2rem;
         }
@@ -313,18 +297,54 @@
         .rec-item .rec-title {
             padding: 0.5rem;
             font-size: 0.85rem;
-            font-weight: 500;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
+        /* artikel SEO */
+        .seo-articles {
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+        .article-card {
+            background: #0f1a2b;
+            border-radius: 1.8rem;
+            padding: 1.6rem 2rem;
+            border: 1px solid #2f456e;
+            box-shadow: 0 10px 20px -5px #00000060;
+        }
+        .article-title {
+            font-size: 1.7rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .article-meta {
+            color: #8099cf;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+        .article-content {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #d3e0fc;
+        }
+        .article-content p {
+            margin-bottom: 1rem;
+        }
+
         .footer-copyright {
-            margin-top: 2.5rem;
+            margin-top: 3rem;
             text-align: center;
             color: #5d74a5;
         }
-
-        /* loading / error state */
         .error-banner {
             background: #3f1f1f;
             border-left: 5px solid #f87171;
@@ -337,7 +357,6 @@
 </head>
 <body>
 <div class="generator-wrapper">
-    <!-- top bar -->
     <div class="top-bar">
         <div class="logo">
             <i class="fas fa-sliders"></i> Stream<span style="font-weight:300;">Gen</span>
@@ -345,7 +364,7 @@
         <div class="tmdb-badge"><i class="fas fa-database"></i> TMDB · 3a660b31</div>
     </div>
 
-    <!-- control panel: API, title, links -->
+    <!-- PANEL KONTROL -->
     <div class="control-panel" id="controlPanel">
         <div class="input-group">
             <label><i class="fas fa-key"></i> TMDB API Key</label>
@@ -357,61 +376,65 @@
             <div class="small-note">Contoh: 76600 (Avatar 3), 157336 (Interstellar)</div>
         </div>
         <div class="input-group">
-            <label><i class="fas fa-globe"></i> Bahasa</label>
+            <label><i class="fas fa-globe"></i> Bahasa (UI & TMDB)</label>
             <select id="langSelect">
                 <option value="en-US">🇬🇧 English</option>
-                <option value="th-TH" selected>🇹🇭 ไทย</option>
+                <option value="es-ES" selected>🇪🇸 Español</option>
+                <option value="th-TH">🇹🇭 ไทย</option>
                 <option value="id-ID">🇮🇩 Indonesia</option>
-                <option value="es-ES">🇪🇸 Español</option>
                 <option value="fr-FR">🇫🇷 Français</option>
                 <option value="zh-CN">🇨🇳 中文</option>
                 <option value="ja-JP">🇯🇵 日本語</option>
                 <option value="ko-KR">🇰🇷 한국어</option>
                 <option value="hi-IN">🇮🇳 हिन्दी</option>
+                <option value="ru-RU">🇷🇺 Русский</option>
             </select>
         </div>
         <div class="input-group">
             <label><i class="fas fa-link"></i> Judul Link 1 (tonton)</label>
-            <input type="text" id="link1Text" placeholder="▶ ดูหนัง HD" value="▶ ดูหนัง อวตาร 3 พากย์ไทย">
+            <input type="text" id="link1Text" value="▶ Ver Película Avatar 3 HD">
         </div>
         <div class="input-group">
             <label><i class="fas fa-download"></i> Link URL 1</label>
-            <input type="url" id="link1Url" placeholder="https://example.com/watch" value="https://t.co/pmyrhw8flH">
+            <input type="url" id="link1Url" value="https://t.co/pmyrhw8flH">
         </div>
         <div class="input-group">
-            <label><i class="fas fa-link"></i> Judul Link 2 (ดาวน์โหลด)</label>
-            <input type="text" id="link2Text" placeholder="⬇️ ดาวน์โหลด Full HD" value="⬇️ ดาวน์โหลด อวตาร 3 (THAI)">
+            <label><i class="fas fa-link"></i> Judul Link 2 (descargar)</label>
+            <input type="text" id="link2Text" value="⬇️ Descargar Avatar 3 (Español)">
         </div>
         <div class="input-group">
             <label><i class="fas fa-download"></i> Link URL 2</label>
-            <input type="url" id="link2Url" placeholder="https://example.com/download" value="https://avatar3-thai.readme.io/">
+            <input type="url" id="link2Url" value="https://avatar3-thai.readme.io/">
         </div>
         <div class="button-group">
-            <button class="btn btn-primary" id="generateBtn"><i class="fas fa-magic"></i> Generate / Refresh</button>
-            <button class="btn btn-outline" id="resetPreviewBtn"><i class="fas fa-undo-alt"></i> Reset ke Avatar 3</button>
+            <button class="btn btn-primary" id="generateBtn"><i class="fas fa-magic"></i> Generar / Actualizar</button>
+            <button class="btn btn-outline" id="resetPreviewBtn"><i class="fas fa-undo-alt"></i> Reset Avatar 3</button>
         </div>
     </div>
 
-    <!-- Preview panel (streaming page) -->
     <div class="preview-header">
-        <h2><i class="fas fa-tv" style="color:#3b82f6;"></i> ตัวอย่างหน้าเว็บสตรีมมิง</h2>
-        <span class="pill">แสดงผลสด · ใช้ข้อมูลจาก TMDB</span>
+        <h2><i class="fas fa-tv" style="color:#3b82f6;"></i> Vista previa página streaming</h2>
+        <span class="pill" id="langPill">Idioma: Español</span>
     </div>
 
-    <!-- STREAMING PAGE PREVIEW (injected by js) -->
+    <!-- PREVIEW AREA (dynamic) -->
     <div class="streaming-page" id="streamPreview">
-        <!-- dynamic render -->
-        <div style="padding: 2rem; text-align: center; color: #7a8bbf;" id="previewLoading"><i class="fas fa-spinner fa-pulse"></i> กำลังโหลดตัวอย่าง...</div>
+        <div style="padding: 2rem; text-align: center; color: #7a8bbf;" id="previewLoading"><i class="fas fa-spinner fa-pulse"></i> Cargando vista previa...</div>
+    </div>
+
+    <!-- ARTIKEL SEO DINAMIS (berdasarkan bahasa) -->
+    <div class="seo-articles" id="seoArticles">
+        <!-- akan diisi oleh javascript dengan konten kaya artikel -->
     </div>
 
     <div class="footer-copyright">
-        <i class="fas fa-crown"></i> Generator produksi · kolom API, judul, link download/tonton · gaya web streaming
+        <i class="fas fa-crown"></i> Generator konten kaya · artikel SEO · tombol & teks dinamis sesuai bahasa pilihan
     </div>
 </div>
 
 <script>
     (function() {
-        // Konfigurasi & element references
+        // ========== KONFIGURASI ==========
         const apiKeyInput = document.getElementById('apiKeyInput');
         const movieIdInput = document.getElementById('movieIdInput');
         const langSelect = document.getElementById('langSelect');
@@ -422,38 +445,89 @@
         const generateBtn = document.getElementById('generateBtn');
         const resetBtn = document.getElementById('resetPreviewBtn');
         const previewContainer = document.getElementById('streamPreview');
+        const seoContainer = document.getElementById('seoArticles');
+        const langPill = document.getElementById('langPill');
 
         const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
         const DEFAULT_MOVIE = '76600'; // Avatar 3
         const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
 
-        // initial load
-        function init() {
-            apiKeyInput.value = DEFAULT_API;
-            movieIdInput.value = DEFAULT_MOVIE;
-            langSelect.value = 'th-TH';
-            link1Text.value = '▶ ดูหนัง อวตาร 3 พากย์ไทย';
-            link1Url.value = 'https://t.co/pmyrhw8flH';
-            link2Text.value = '⬇️ ดาวน์โหลด อวตาร 3 (THAI)';
-            link2Url.value = 'https://avatar3-thai.readme.io/';
-            generatePreview();
+        // ========== DATA ARTIKEL MULTI BAHASA ==========
+        const articleDB = {
+            'en-US': {
+                title1: 'Avatar: Fire and Ash – everything we know about the plot',
+                meta1: 'Posted by StreamGen · 12 min read · updated 2026',
+                content1: 'James Cameron returns to Pandora with the third installment, "Avatar: Fire and Ash". The Sully family faces a new threat: the Ash People, a fierce Na\'vi clan led by Varang. The film explores grief, revenge, and the element of fire. Rumors suggest the introduction of wind traders and volcanic landscapes. Expect stunning visuals and a deeper dive into Na\'vi culture.',
+                title2: 'Where to watch Avatar 3 online? Streaming & download options',
+                meta2: 'Legal sources · 4K UHD · Thai dubbed',
+                content2: 'While official streaming platforms will announce dates after theatrical release, fans are already looking for ways to watch. Some unofficial links circulate, but we recommend waiting for Disney+ / HBO Max availability. However, for preview purposes, the links below are demo versions. Stay tuned for official announcements.',
+                title3: 'Why "Fire and Ash" changes the game for the franchise',
+                meta3: 'Analysis · new clans · future sequels',
+                content3: 'The introduction of a antagonistic Na\'vi tribe adds moral complexity. Unlike the sky people, the Ash People are natives with their own agenda. This could set up conflicts for Avatar 4 and 5. Cameron hinted at fire as a symbol of both destruction and rebirth.'
+            },
+            'es-ES': {
+                title1: 'Avatar: Fuego y Ceniza – todo lo que sabemos de la trama',
+                meta1: 'Publicado por StreamGen · 12 min de lectura · 2026',
+                content1: 'James Cameron regresa a Pandora con la tercera entrega, "Avatar: Fuego y Ceniza". La familia Sully se enfrenta a una nueva amenaza: el Pueblo Ceniza, un clan Na\'vi feroz liderado por Varang. La película explora el duelo, la venganza y el elemento del fuego. Se rumorea la introducción de comerciantes del viento y paisajes volcánicos. Espera imágenes impresionantes y una inmersión más profunda en la cultura Na\'vi.',
+                title2: '¿Dónde ver Avatar 3 online? Opciones de streaming y descarga',
+                meta2: 'Fuentes legales · 4K UHD · doblaje español',
+                content2: 'Si bien las plataformas de streaming oficiales anunciarán fechas después del estreno en cines, los fanáticos ya buscan formas de verla. Circulan algunos enlaces no oficiales, pero recomendamos esperar a disponibilidad en Disney+ / HBO Max. Sin embargo, para fines de vista previa, los enlaces a continuación son versiones de demostración. Mantente atento a los anuncios oficiales.',
+                title3: 'Por qué "Fuego y Ceniza" cambia las reglas del juego para la franquicia',
+                meta3: 'Análisis · nuevos clanes · próximas secuelas',
+                content3: 'La introducción de una tribu Na\'vi antagónica añade complejidad moral. A diferencia de la gente del cielo, el Pueblo Ceniza son nativos con su propia agenda. Esto podría preparar conflictos para Avatar 4 y 5. Cameron insinuó el fuego como símbolo de destrucción y renacimiento.'
+            },
+            'th-TH': {
+                title1: 'อวตาร 3: อัคนีและธุลีดิน – ทุกสิ่งที่เรารู้เกี่ยวกับเนื้อเรื่อง',
+                meta1: 'โพสต์โดย StreamGen · อ่าน 12 นาที · อัพเดท 2026',
+                content1: 'เจมส์ คาเมรอน กลับสู่แพนดอร่าอีกครั้งกับภาคที่สาม "อวตาร: อัคนีและธุลีดิน" ครอบครัวซัลลีเผชิญภัยคุกคามใหม่: เผ่าไฟ ชนเผ่านาวีผู้ดุดันนำโดยวารัง ภาพยนตร์จะสำรวจความเศร้า การแก้แค้น และธาตุไฟ มีข่าวลือเกี่ยวกับเผ่าลมและทิวทัศน์ภูเขาไฟ คาดหวังภาพสวยงามและวัฒนธรรมนาวีที่ลึกซึ้งขึ้น',
+                title2: 'ดูอวตาร 3 ออนไลน์ได้ที่ไหน? ตัวเลือกสตรีมมิงและดาวน์โหลด',
+                meta2: 'แหล่งถูกกฎหมาย · 4K UHD · พากย์ไทย',
+                content2: 'แม้แพลตฟอร์มสตรีมมิงอย่างเป็นทางการจะประกาศวันฉายหลังโรงภาพยนตร์ แต่แฟนๆก็มองหาวิธีดูออนไลน์แล้ว มีลิงก์ไม่เป็นทางการบางส่วน แต่เราแนะนำรอ Disney+ / HBO Max อย่างไรก็ตามสำหรับตัวอย่าง ลิงก์ด้านล่างเป็นเวอร์ชันสาธิต ติดตามประกาศอย่างเป็นทางการ',
+                title3: 'ทำไม "อัคนีและธุลีดิน" ถึงเปลี่ยนเกมของแฟรนไชส์',
+                meta3: 'วิเคราะห์ · เผ่าใหม่ · ภาคต่อ',
+                content3: 'การแนะนำเผ่านาวีที่เป็นปรปักษ์เพิ่มความซับซ้อนทางศีลธรรม ต่างจากชาวฟ้า เผ่าไฟเป็นชนพื้นเมืองที่มีวาระของตนเอง สิ่งนี้อาจสร้างความขัดแย้งสำหรับอวตาร 4 และ 5 คาเมรอนบอกใบ้ไฟเป็นสัญลักษณ์ของทั้งการทำลายล้างและการเกิดใหม่'
+            },
+            'id-ID': {
+                title1: 'Avatar: Api dan Abu – semua yang kami tahu tentang plotnya',
+                meta1: 'Diposting oleh StreamGen · 12 menit baca · 2026',
+                content1: 'James Cameron kembali ke Pandora dengan bagian ketiga, "Avatar: Api dan Abu". Keluarga Sully menghadapi ancaman baru: Suku Abu, klan Na\'vi yang kejam dipimpin Varang. Film mengeksplorasi duka, balas dendam, dan elemen api. Isu tentang pedagang angin dan lanskap vulkanik. Harapkan visual memukau dan budaya Na\'vi lebih dalam.',
+                title2: 'Tempat menonton Avatar 3 online? Opsi streaming & download',
+                meta2: 'Sumber legal · 4K UHD · subtitle Indonesia',
+                content2: 'Sementara platform streaming resmi akan mengumumkan tanggal setelah rilis bioskop, penggemar sudah mencari cara menonton. Beberapa tautan tidak resmi beredar, tapi kami sarankan menunggu ketersediaan Disney+ / HBO Max. Namun untuk pratinjau, tautan di bawah adalah versi demo. Pantau pengumuman resmi.',
+                title3: 'Mengapa "Api dan Abu" mengubah permainan waralaba',
+                meta3: 'Analisis · klan baru · sekuel masa depan',
+                content3: 'Pengenalan suku Na\'vi antagonis menambah kompleksitas moral. Tidak seperti manusia langit, Suku Abu adalah penduduk asli dengan agenda sendiri. Ini bisa memicu konflik untuk Avatar 4 dan 5. Cameron mengisyaratkan api sebagai simbol kehancuran dan kelahiran kembali.'
+            }
+        };
+
+        // fallback en-US
+        function getArticleForLang(lang) {
+            return articleDB[lang] || articleDB['en-US'];
         }
 
-        // reset to avatar 3
-        resetBtn.addEventListener('click', () => {
-            movieIdInput.value = DEFAULT_MOVIE;
-            langSelect.value = 'th-TH';
-            link1Text.value = '▶ ดูหนัง อวตาร 3 พากย์ไทย';
-            link1Url.value = 'https://t.co/pmyrhw8flH';
-            link2Text.value = '⬇️ ดาวน์โหลด อวตาร 3 (THAI)';
-            link2Url.value = 'https://avatar3-thai.readme.io/';
-            generatePreview();
-        });
+        // render artikel SEO
+        function renderArticles(lang) {
+            const art = getArticleForLang(lang);
+            seoContainer.innerHTML = `
+                <div class="article-card">
+                    <div class="article-title"><i class="fas fa-newspaper"></i> ${art.title1}</div>
+                    <div class="article-meta"><i class="far fa-clock"></i> ${art.meta1}</div>
+                    <div class="article-content"><p>${art.content1}</p></div>
+                </div>
+                <div class="article-card">
+                    <div class="article-title"><i class="fas fa-video"></i> ${art.title2}</div>
+                    <div class="article-meta"><i class="fas fa-tag"></i> ${art.meta2}</div>
+                    <div class="article-content"><p>${art.content2}</p></div>
+                </div>
+                <div class="article-card">
+                    <div class="article-title"><i class="fas fa-fire"></i> ${art.title3}</div>
+                    <div class="article-meta"><i class="fas fa-chart-line"></i> ${art.meta3}</div>
+                    <div class="article-content"><p>${art.content3}</p></div>
+                </div>
+            `;
+        }
 
-        // generate button
-        generateBtn.addEventListener('click', generatePreview);
-
-        // core fetch
+        // ========== FUNGSI FETCH TMDB ==========
         async function fetchMovie(apiKey, movieId, language) {
             if (!apiKey || !movieId) return null;
             const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${language}`;
@@ -473,59 +547,58 @@
                 const res = await fetch(url);
                 if (!res.ok) throw new Error();
                 const data = await res.json();
-                return data.results.slice(0, 6); // max 6
+                return data.results.slice(0, 6);
             } catch {
                 return [];
             }
         }
 
-        // render streaming page
+        // render preview (tanpa netflix button)
         function renderPreview(movie, recommendations, link1TextVal, link1UrlVal, link2TextVal, link2UrlVal, lang) {
             if (!movie) {
-                previewContainer.innerHTML = `<div class="error-banner"><i class="fas fa-exclamation-triangle"></i> ไม่พบข้อมูลจาก TMDB (ตรวจสอบ API key หรือ Movie ID) ใช้ตัวอย่างสำรอง</div>
+                previewContainer.innerHTML = `<div class="error-banner"><i class="fas fa-exclamation-triangle"></i> No data from TMDB (check API key / Movie ID). Using fallback.</div>
                 ${renderFallback(link1TextVal, link1UrlVal, link2TextVal, link2UrlVal)}`;
                 return;
             }
 
             const posterPath = movie.poster_path ? `${IMG_BASE}${movie.poster_path}` : null;
-            const title = movie.title || movie.original_title || 'ไม่มีชื่อ';
+            const title = movie.title || movie.original_title || 'Unknown';
             const originalTitle = movie.original_title || '';
             const year = movie.release_date ? movie.release_date.slice(0,4) : 'N/A';
             const runtime = movie.runtime ? movie.runtime : '?';
             const genres = movie.genres ? movie.genres.slice(0,3).map(g => g.name).join(', ') : 'Unknown';
             const vote = movie.vote_average ? movie.vote_average.toFixed(1) : '?';
             const voteCount = movie.vote_count ? movie.vote_count.toLocaleString() : '0';
-            const overview = movie.overview || 'ไม่มีคำอธิบาย';
+            const overview = movie.overview || 'No overview';
             const tagline = movie.tagline ? movie.tagline : '';
 
-            // recommendations html
             let recHtml = '';
             if (recommendations && recommendations.length > 0) {
                 recHtml = recommendations.map(m => {
                     const recPoster = m.poster_path ? `${IMG_BASE}${m.poster_path}` : '';
                     return `<div class="rec-item">
-                        ${recPoster ? `<img src="${recPoster}" alt="${m.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML+='<div class=\'rec-title\' style=\'padding:1rem;\'><i class=\'fas fa-film\'></i></div>'">` : '<div style="background:#1a2440; padding:1rem;text-align:center;"><i class="fas fa-image"></i></div>'}
+                        ${recPoster ? `<img src="${recPoster}" alt="${m.title}" loading="lazy">` : '<div style="background:#1a2440; padding:1rem;text-align:center;"><i class="fas fa-image"></i></div>'}
                         <div class="rec-title">${m.title}</div>
                     </div>`;
                 }).join('');
             } else {
-                recHtml = '<div style="grid-column:1/-1; color:#6b80af;">ไม่มีคำแนะนำในภาษานี้</div>';
+                recHtml = '<div style="grid-column:1/-1; color:#6b80af;">No recommendations in this language</div>';
             }
 
-            const link1Html = link1UrlVal ? `<a href="${link1UrlVal}" target="_blank" class="stream-link"><i class="fas fa-play-circle"></i> ${link1TextVal || 'รับชม'}</a>` : '';
-            const link2Html = link2UrlVal ? `<a href="${link2UrlVal}" target="_blank" class="stream-link download-link"><i class="fas fa-download"></i> ${link2TextVal || 'ดาวน์โหลด'}</a>` : '';
+            const link1Html = link1UrlVal ? `<a href="${link1UrlVal}" target="_blank" class="stream-link"><i class="fas fa-play-circle"></i> ${link1TextVal || 'Watch'}</a>` : '';
+            const link2Html = link2UrlVal ? `<a href="${link2UrlVal}" target="_blank" class="stream-link download-link"><i class="fas fa-download"></i> ${link2TextVal || 'Download'}</a>` : '';
 
             const html = `
                 <div class="movie-hero">
                     <div class="poster-frame">
-                        ${posterPath ? `<img src="${posterPath}" alt="${title}">` : `<div class="poster-placeholder"><i class="fas fa-poster" style="font-size:3rem;"></i><br>ไม่มีโปสเตอร์</div>`}
+                        ${posterPath ? `<img src="${posterPath}" alt="${title}">` : `<div class="poster-placeholder"><i class="fas fa-poster" style="font-size:3rem;"></i><br>No poster</div>`}
                     </div>
                     <div class="hero-content">
                         <h1>${title}</h1>
                         <div class="original-title">${originalTitle}</div>
                         <div class="meta-line">
                             <span class="meta-badge"><i class="far fa-calendar"></i> ${year}</span>
-                            <span class="meta-badge"><i class="fas fa-clock"></i> ${runtime} นาที</span>
+                            <span class="meta-badge"><i class="fas fa-clock"></i> ${runtime} min</span>
                             <span class="meta-badge"><i class="fas fa-tag"></i> ${genres}</span>
                             <span class="meta-badge rating"><i class="fas fa-star" style="color:gold;"></i> ${vote} (${voteCount})</span>
                         </div>
@@ -536,24 +609,20 @@
                     </div>
                 </div>
 
-                <!-- LINKS DOWNLOAD / STREAM  sesuai input -->
                 <div class="links-section">
-                    <div class="section-title-small"><i class="fas fa-link"></i> รับชม / ดาวน์โหลด</div>
+                    <div class="section-title-small"><i class="fas fa-link"></i> Watch / Download</div>
                     <div class="link-grid">
                         ${link1Html}
                         ${link2Html}
-                        <!-- tambahan link statis buat gaya streaming -->
-                        <a href="#" class="stream-link" style="background:#2b2f4c;"><i class="fas fa-tv"></i> ดูบน Netflix (simulasi)</a>
-                        <a href="#" class="stream-link" style="background:#3d3152;"><i class="fas fa-closed-captioning"></i> พากย์ไทย + ซับไทย</a>
+                        <!-- tombol NETFLIX dihapus sesuai permintaan -->
                     </div>
                     <div style="margin-top: 1rem; font-size:0.9rem; background: #0d1428; padding:0.8rem 1.2rem; border-radius: 60px; display:inline-block;">
-                        <i class="fas fa-info-circle"></i> ลิงก์ที่กำหนด: <strong>${link1TextVal}</strong> (${link1UrlVal}) และ ${link2TextVal}
+                        <i class="fas fa-info-circle"></i> Custom links: ${link1TextVal} & ${link2TextVal}
                     </div>
                 </div>
 
-                <!-- คำแนะนำอื่นๆ จาก TMDB -->
                 <div style="margin-top: 2.5rem;">
-                    <div class="section-title-small"><i class="fas fa-thumbs-up"></i> คุณอาจจะชอบ</div>
+                    <div class="section-title-small"><i class="fas fa-thumbs-up"></i> You may also like</div>
                     <div class="rec-grid">
                         ${recHtml}
                     </div>
@@ -566,9 +635,9 @@
             return `
                 <div class="movie-hero">
                     <div class="poster-frame"><div class="poster-placeholder"><i class="fas fa-image"></i> Poster example</div></div>
-                    <div class="hero-content"><h1>อวตาร 3 (อัคนีและธุลีดิน)</h1><div class="original-title">Avatar: Fire and Ash</div>
-                    <div class="meta-line"><span class="meta-badge">2025</span><span class="meta-badge">165 นาที</span><span class="meta-badge">Sci-Fi</span></div>
-                    <div class="overview-box">กลับสู่แพนดอร่า ครอบครัวซัลลีเผชิญเผ่าไฟ ash people</div></div>
+                    <div class="hero-content"><h1>Avatar: Fire and Ash</h1><div class="original-title">Avatar 3</div>
+                    <div class="meta-line"><span class="meta-badge">2025</span><span class="meta-badge">165 min</span><span class="meta-badge">Sci-Fi</span></div>
+                    <div class="overview-box">Return to Pandora with the Sully family. They face the Ash People.</div></div>
                 </div>
                 <div class="links-section">
                     <div class="link-grid">
@@ -576,7 +645,7 @@
                         <a href="${link2UrlVal}" class="stream-link download-link"><i class="fas fa-download"></i> ${link2TextVal}</a>
                     </div>
                 </div>
-                <div class="rec-grid">${Array(4).fill(0).map((_,i)=>'<div class="rec-item"><div style="background:#1f2a44;padding:1rem;"><i class="fas fa-film"></i> ตัวอย่าง</div></div>').join('')}</div>
+                <div class="rec-grid">${Array(4).fill(0).map(()=>'<div class="rec-item"><div style="background:#1f2a44;padding:1rem;"><i class="fas fa-film"></i> Example</div></div>').join('')}</div>
             `;
         }
 
@@ -584,13 +653,17 @@
             const apiKey = apiKeyInput.value.trim() || DEFAULT_API;
             const movieId = movieIdInput.value.trim() || DEFAULT_MOVIE;
             const lang = langSelect.value;
-            const link1TextVal = link1Text.value.trim() || '▶ ดูหนัง';
+            const link1TextVal = link1Text.value.trim() || '▶ Watch';
             const link1UrlVal = link1Url.value.trim() || '#';
-            const link2TextVal = link2Text.value.trim() || '⬇️ ดาวน์โหลด';
+            const link2TextVal = link2Text.value.trim() || '⬇️ Download';
             const link2UrlVal = link2Url.value.trim() || '#';
 
-            // tampilkan loading
-            previewContainer.innerHTML = `<div style="padding: 3rem;text-align:center;"><i class="fas fa-spinner fa-pulse fa-2x"></i><br>กำลังโหลดข้อมูลจาก TMDB...</div>`;
+            // update pill
+            const langNames = { 'en-US':'English', 'es-ES':'Español', 'th-TH':'ไทย', 'id-ID':'Indonesia', 'fr-FR':'Français', 'zh-CN':'中文', 'ja-JP':'日本語', 'ko-KR':'한국어', 'hi-IN':'हिन्दी', 'ru-RU':'Русский' };
+            langPill.innerText = 'Idioma: ' + (langNames[lang] || lang);
+
+            // loading
+            previewContainer.innerHTML = `<div style="padding: 3rem;text-align:center;"><i class="fas fa-spinner fa-pulse fa-2x"></i><br>Loading TMDB data...</div>`;
 
             const movieData = await fetchMovie(apiKey, movieId, lang);
             let recommendations = [];
@@ -599,8 +672,33 @@
             }
 
             renderPreview(movieData, recommendations, link1TextVal, link1UrlVal, link2TextVal, link2UrlVal, lang);
+            renderArticles(lang);
         }
 
+        // reset
+        resetBtn.addEventListener('click', () => {
+            movieIdInput.value = DEFAULT_MOVIE;
+            langSelect.value = 'es-ES';
+            link1Text.value = '▶ Ver Película Avatar 3 HD';
+            link1Url.value = 'https://t.co/pmyrhw8flH';
+            link2Text.value = '⬇️ Descargar Avatar 3 (Español)';
+            link2Url.value = 'https://avatar3-thai.readme.io/';
+            generatePreview();
+        });
+
+        generateBtn.addEventListener('click', generatePreview);
+
+        // initial load
+        function init() {
+            apiKeyInput.value = DEFAULT_API;
+            movieIdInput.value = DEFAULT_MOVIE;
+            langSelect.value = 'es-ES'; // default spanyol
+            link1Text.value = '▶ Ver Película Avatar 3 HD';
+            link1Url.value = 'https://t.co/pmyrhw8flH';
+            link2Text.value = '⬇️ Descargar Avatar 3 (Español)';
+            link2Url.value = 'https://avatar3-thai.readme.io/';
+            generatePreview();
+        }
         init();
     })();
 </script>
