@@ -3,657 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔥 TMDB Bulk Pro · Final Version (Fixed)</title>
-    <!-- Google Fonts + Font Awesome -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* ===== CSS ANDA SAMA SEPERTI SEBELUMNYA ===== */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: #0a0f1e;
-            font-family: 'Inter', sans-serif;
-            color: #eef3fc;
-            padding: 2rem 1.5rem;
-        }
-        .container { max-width: 1400px; margin: 0 auto; }
-        h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(135deg, #a5d8ff, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
-        .subtitle { color: #8ba3d9; margin-bottom: 2rem; font-size: 1.1rem; }
-        .control-panel {
-            background: #131f33;
-            border-radius: 2rem;
-            padding: 2rem;
-            border: 1px solid #2d4068;
-            margin-bottom: 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
-        .input-group label {
-            color: #9bb5ff;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .input-group input, .input-group select, .input-group textarea {
-            background: #0b1425;
-            border: 1px solid #2f4570;
-            border-radius: 12px;
-            padding: 0.8rem 1rem;
-            color: white;
-            font-family: 'Inter', monospace;
-        }
-        .input-group textarea { min-height: 120px; resize: vertical; }
-        .button-group { display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end; }
-        .btn {
-            background: #25344f;
-            border: none;
-            border-radius: 40px;
-            padding: 0.8rem 1.8rem;
-            font-weight: 600;
-            color: white;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            border: 1px solid #415e96;
-            transition: 0.2s;
-        }
-        .btn-primary { background: #1d4ed8; border-color: #3b82f6; }
-        .btn-success { background: #0f6e4a; border-color: #10b981; }
-        .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
-        .progress-area {
-            background: #0f1a2c;
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border: 1px solid #364d7a;
-        }
-        .progress-bar {
-            height: 8px;
-            background: #25385c;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 1rem 0;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            width: 0%;
-            transition: width 0.3s;
-        }
-        .log-area {
-            background: #0a1220;
-            border-radius: 1rem;
-            padding: 1rem;
-            max-height: 200px;
-            overflow-y: auto;
-            font-family: monospace;
-            font-size: 0.9rem;
-            border: 1px solid #2e4270;
-        }
-        .preview-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-            max-height: 300px;
-            overflow-y: auto;
-            padding: 0.5rem;
-        }
-        .file-card {
-            background: #16243d;
-            border-radius: 1rem;
-            padding: 0.8rem;
-            border: 1px solid #3a5090;
-            font-size: 0.85rem;
-        }
-        .file-card i { color: #10b981; margin-right: 0.3rem; }
-        .footer { margin-top: 3rem; text-align: center; color: #5f79b0; }
-        .title-templates {
-            grid-column: 1 / -1;
-            background: #0e1a2a;
-            border-radius: 1rem;
-            padding: 1rem;
-            border: 1px solid #3d5a8c;
-        }
-        .example-box {
-            background: #1e2a45;
-            padding: 0.5rem 1rem;
-            border-radius: 30px;
-            color: #b5d0ff;
-            font-size: 0.85rem;
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-    <h1><i class="fas fa-layer-group" style="color:#3b82f6;"></i> TMDB Bulk Pro · Fixed Version</h1>
-    <div class="subtitle">Trailer cerdas: jika error, tampilkan backdrop sebagai gambar di dalam iframe (Sintaks Telah Diperbaiki)</div>
-
-    <!-- Control Panel (Sama seperti sebelumnya) -->
-    <div class="control-panel">
-        <div class="input-group">
-            <label><i class="fas fa-key"></i> TMDB API Key</label>
-            <input type="text" id="apiKey" value="3a660b31f4af8da5f2bd6f2799c11e2e" placeholder="Your TMDB API Key">
-        </div>
-        <div class="input-group">
-            <label><i class="fas fa-list"></i> Daftar ID TMDB</label>
-            <textarea id="movieIds" placeholder="Contoh: 76600, 157336, 299534">76600, 157336, 299534, 24428, 11, 155, 27205, 49026, 49538, 68721</textarea>
-        </div>
-        <div class="input-group">
-            <label><i class="fas fa-globe"></i> Bahasa</label>
-            <select id="bulkLang">
-                <option value="en-US">🇬🇧 English</option>
-                <option value="es-ES" selected>🇪🇸 Español</option>
-                <option value="th-TH">🇹🇭 ไทย</option>
-                <option value="id-ID">🇮🇩 Indonesia</option>
-                <option value="fr-FR">🇫🇷 Français</option>
-            </select>
-        </div>
-        <div class="input-group">
-            <label><i class="fas fa-link"></i> Teks Link 1</label>
-            <input type="text" id="bulkLink1Text" value="▶ Watch Movie HD">
-        </div>
-        <div class="input-group">
-            <label><i class="fas fa-download"></i> Teks Link 2</label>
-            <input type="text" id="bulkLink2Text" value="⬇️ Download (UHD)">
-        </div>
-        <div class="title-templates">
-            <label><i class="fas fa-random"></i> Template Title (random)</label>
-            <textarea id="titleTemplates" rows="3">La asistenta (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒 Down𝗅oad 𝟩𝟤𝟢𝗉, 𝟦𝟪𝟢𝗉 𝖺𝗇𝖽 𝟣𝟢𝟪𝟢𝗉 on IBOMMA|{TITLE} (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒 𝟩𝟤𝟢𝗉, 𝟦𝟪𝟢𝗉 𝖺𝗇𝖽 𝟣𝟢𝟪𝟢𝗉 on IBOMMA|✨ {TITLE} (2026) 4K HDR | Watch Online Free</textarea>
-            <div class="example-box" id="templateExample">
-                <i class="fas fa-eye"></i> Contoh dengan {TITLE}
-            </div>
-        </div>
-        <div class="button-group">
-            <button class="btn btn-primary" id="generateBulkBtn"><i class="fas fa-cogs"></i> Generate HTML</button>
-            <button class="btn btn-success" id="downloadZipBtn" disabled><i class="fas fa-file-archive"></i> Download ZIP</button>
-            <button class="btn" id="clearLogsBtn"><i class="fas fa-broom"></i> Clear Logs</button>
-        </div>
-    </div>
-
-    <!-- Progress Area -->
-    <div class="progress-area">
-        <div style="display: flex; justify-content: space-between;">
-            <span><i class="fas fa-chart-line"></i> Progress: <span id="progressPercent">0%</span></span>
-            <span><i class="fas fa-film"></i> <span id="generatedCount">0</span> / <span id="totalCount">0</span> files</span>
-        </div>
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <div class="log-area" id="logArea">
-            <div>⏳ Siap generate dengan smart trailer (backdrop fallback)...</div>
-        </div>
-    </div>
-
-    <!-- Generated Files Preview -->
-    <h3><i class="fas fa-file-code"></i> Generated Files (<span id="previewCount">0</span>)</h3>
-    <div class="preview-grid" id="filePreviewGrid">
-        <div style="color: #6b83b0;">Belum ada file yang digenerate</div>
-    </div>
-
-    <div class="footer">
-        <i class="fas fa-check-circle" style="color:#10b981;"></i> Final Version: Trailer otomatis + fallback backdrop di dalam iframe (SINTAKS FIX)
-    </div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script>
-    (function() {
-        // ========== KONFIGURASI ==========
-        const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
-        const BACKDROP_BASE = 'https://image.tmdb.org/t/p/original';
-        const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
-
-        // ========== ELEMEN DOM ==========
-        const apiKeyInput = document.getElementById('apiKey');
-        const movieIdsTextarea = document.getElementById('movieIds');
-        const bulkLang = document.getElementById('bulkLang');
-        const bulkLink1Text = document.getElementById('bulkLink1Text');
-        const bulkLink2Text = document.getElementById('bulkLink2Text');
-        const titleTemplatesArea = document.getElementById('titleTemplates');
-        const generateBtn = document.getElementById('generateBulkBtn');
-        const downloadBtn = document.getElementById('downloadZipBtn');
-        const clearLogsBtn = document.getElementById('clearLogsBtn');
-        const logArea = document.getElementById('logArea');
-        const progressPercent = document.getElementById('progressPercent');
-        const progressFill = document.getElementById('progressFill');
-        const generatedCountSpan = document.getElementById('generatedCount');
-        const totalCountSpan = document.getElementById('totalCount');
-        const filePreviewGrid = document.getElementById('filePreviewGrid');
-        const previewCountSpan = document.getElementById('previewCount');
-
-        // ========== STATE ==========
-        let generatedFiles = [];
-        let isGenerating = false;
-
-        // ========== FUNGSI BANTU ==========
-        const keywordTranslations = {
-            'en-US': { watch: 'watch online', download: 'download', streaming: 'streaming' },
-            'es-ES': { watch: 'ver online', download: 'descargar', streaming: 'streaming' },
-            'th-TH': { watch: 'ดูออนไลน์', download: 'ดาวน์โหลด', streaming: 'สตรีมมิ่ง' },
-            'id-ID': { watch: 'nonton online', download: 'download', streaming: 'streaming' },
-            'fr-FR': { watch: 'regarder en ligne', download: 'télécharger', streaming: 'streaming' }
-        };
-
-        function getKeywords(lang, movieTitle, year) {
-            const t = keywordTranslations[lang] || keywordTranslations['en-US'];
-            return `${movieTitle}, ${t.watch}, ${t.download}, ${year}, 4k, hd, ${t.streaming}, full movie`;
-        }
-
-        function log(message, type = 'info') {
-            const entry = document.createElement('div');
-            entry.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}`;
-            if (type === 'error') entry.style.color = '#f87171';
-            else if (type === 'success') entry.style.color = '#4ade80';
-            else entry.style.color = '#a5d8ff';
-            logArea.appendChild(entry);
-            logArea.scrollTop = logArea.scrollHeight;
-        }
-
-        function clearLogs() {
-            logArea.innerHTML = '';
-            log('Logs cleared.');
-        }
-
-        function getTitleTemplates() {
-            const text = titleTemplatesArea.value.trim();
-            if (!text) return ['{TITLE} (2026) Watch Online HD'];
-            return text.split('|').map(t => t.trim()).filter(t => t.length > 0);
-        }
-
-        function getRandomTitle(templates, movieTitle) {
-            if (templates.length === 0) return movieTitle;
-            const randomIndex = Math.floor(Math.random() * templates.length);
-            return templates[randomIndex].replace(/{TITLE}/g, movieTitle);
-        }
-
-        // ========== FETCH TMDB ==========
-        async function fetchMovieDetails(apiKey, movieId, language) {
-            const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${language}&append_to_response=videos,images`;
-            try {
-                const res = await fetch(url);
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                return await res.json();
-            } catch (e) {
-                log(`❌ Gagal fetch ID ${movieId}: ${e.message}`, 'error');
-                return null;
-            }
-        }
-
-        async function fetchRecommendations(apiKey, movieId, language) {
-            try {
-                const url = `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${apiKey}&language=${language}`;
-                const res = await fetch(url);
-                if (!res.ok) return [];
-                const data = await res.json();
-                return data.results.slice(0, 6);
-            } catch {
-                return [];
-            }
-        }
-
-        function getTrailerInfo(videos) {
-            if (!videos || !videos.results || videos.results.length === 0) return null;
-            const youtubeVids = videos.results.filter(v => v.site === 'YouTube');
-            if (youtubeVids.length === 0) return null;
-            const officialTrailer = youtubeVids.find(v => v.type === 'Trailer' && v.official === true);
-            if (officialTrailer) return { key: officialTrailer.key, name: officialTrailer.name };
-            const anyTrailer = youtubeVids.find(v => v.type === 'Trailer');
-            if (anyTrailer) return { key: anyTrailer.key, name: anyTrailer.name };
-            const teaser = youtubeVids.find(v => v.type === 'Teaser');
-            if (teaser) return { key: teaser.key, name: teaser.name };
-            return { key: youtubeVids[0].key, name: youtubeVids[0].name };
-        }
-
-        // ========== GENERATE HTML PER FILM (YANG DIPERBAIKI) ==========
-        async function generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates) {
-            const movie = await fetchMovieDetails(apiKey, movieId, lang);
-            if (!movie) return null;
-
-            const recommendations = await fetchRecommendations(apiKey, movieId, lang);
-            const trailerInfo = getTrailerInfo(movie.videos);
-            const backdropUrl = movie.backdrop_path ? BACKDROP_BASE + movie.backdrop_path : null;
-            const images = movie.images?.backdrops?.slice(0, 3) || [];
-
-            if (trailerInfo) log(`🎬 ID ${movieId} (${movie.title}) punya trailer: ${trailerInfo.key}`, 'success');
-            else log(`ℹ️ ID ${movieId} (${movie.title}) tidak punya trailer`, 'info');
-
-            const seoTitle = getRandomTitle(titleTemplates, movie.title);
-            const year = movie.release_date ? movie.release_date.slice(0, 4) : new Date().getFullYear();
-            const keywords = getKeywords(lang, movie.title, year);
-
-            const articleQuote = `The final line of the teaser—"You ran from Woodsboro. You ran from New York. But you can’t run from me."—is the perfect closing sentiment, reinforcing the central theme of the franchise: no matter how far you go, Ghostface will always find you. This is a darker, faster, and more relentless version of the slasher killer we’ve known and feared.`;
-            const articleConclusion = `In conclusion, ${movie.title} promises to be a game-changing entry in the franchise, bringing a darker, more psychological edge to the series while maintaining the familiar thrills fans have come to love. The introduction of new characters, the intense evolution of the story, and the looming, unpredictable danger make this installment a must-watch.`;
-
-            // --- BAGIAN YANG DIPERBAIKI: MEDIA SECTION HTML ---
-            let mediaSectionHtml = '';
-
-            if (trailerInfo && backdropUrl) {
-                // Kasus 1: Ada trailer dan backdrop
-                mediaSectionHtml = `
-                    <h2 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fab fa-youtube" style="color: #ff0000;"></i> Official Trailer
-                    </h2>
-                    <div class="trailer-container" id="trailer-${movieId}" style="position: relative; width: 100%; aspect-ratio: 16/9; background: #0b1425; border-radius: 1.5rem; overflow: hidden;">
-                        <iframe id="iframe-${movieId}"
-                            src="https://www.youtube.com/embed/${trailerInfo.key}?si=vw5nReFuvih-LEFL"
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
-                            title="${movie.title} trailer"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin"
-                            allowfullscreen
-                            loading="lazy">
-                        </iframe>
-                        <div id="fallback-${movieId}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; background-image: url('${backdropUrl}'); background-size: cover; background-position: center;">
-                            <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem; background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 100%);">
-                                <div style="display: flex; align-items: center; gap: 1rem;">
-                                    <i class="fab fa-youtube" style="color: #ff0000; font-size: 2rem;"></i>
-                                    <div>
-                                        <h3 style="color: white;">Trailer Unavailable</h3>
-                                        <p style="color: #b5d0ff;">Enjoy this scene from ${movie.title}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <script>
-                        (function() {
-                            const iframe = document.getElementById('iframe-${movieId}');
-                            const fallback = document.getElementById('fallback-${movieId}');
-                            if (iframe && fallback) {
-                                setTimeout(function() {
-                                    if (iframe.offsetHeight < 50) {
-                                        iframe.style.display = 'none';
-                                        fallback.style.display = 'block';
-                                    }
-                                }, 5000);
-                            }
-                        })();
-                    </script>
-                `;
-            } else if (trailerInfo && !backdropUrl) {
-                // Kasus 2: Ada trailer, tidak ada backdrop
-                mediaSectionHtml = `
-                    <h2 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fab fa-youtube" style="color: #ff0000;"></i> Official Trailer
-                    </h2>
-                    <div class="trailer-container" style="aspect-ratio: 16/9; border-radius: 1.5rem; overflow: hidden;">
-                        <iframe src="https://www.youtube.com/embed/${trailerInfo.key}?si=vw5nReFuvih-LEFL"
-                                style="width: 100%; height: 100%; border: none;"
-                                title="${movie.title} trailer"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen
-                                loading="lazy">
-                        </iframe>
-                    </div>
-                `;
-            } else if (!trailerInfo && backdropUrl) {
-                // Kasus 3: Tidak ada trailer, ada backdrop
-                mediaSectionHtml = `
-                    <h2 style="margin-bottom: 1rem;"><i class="fas fa-image"></i> Featured Scene</h2>
-                    <div style="aspect-ratio: 16/9; border-radius: 1.5rem; overflow: hidden; background-image: url('${backdropUrl}'); background-size: cover; background-position: center; position: relative;">
-                        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem; background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 100%);">
-                            <h3 style="color: white;">${movie.title}</h3>
-                            <p style="color: #b5d0ff;">Official trailer coming soon</p>
-                        </div>
-                    </div>
-                `;
-            } else if (images.length > 0) {
-                // Kasus 4: Tidak ada trailer, tidak ada backdrop, tapi ada images
-                const galleryItems = images.map(img => `
-                    <div style="border-radius: 1rem; overflow: hidden; aspect-ratio: 16/9;">
-                        <img src="${BACKDROP_BASE}${img.file_path}" alt="${movie.title} scene" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
-                    </div>
-                `).join('');
-                mediaSectionHtml = `
-                    <h2 style="margin-bottom: 1rem;"><i class="fas fa-images"></i> Scene Gallery</h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
-                        ${galleryItems}
-                    </div>
-                `;
-            } else {
-                // Kasus 5: Fallback total
-                mediaSectionHtml = `
-                    <div style="background: #1a2645; border-radius: 1.5rem; padding: 3rem; text-align: center; margin: 2rem 0;">
-                        <i class="fas fa-film" style="font-size: 4rem; color: #3b82f6; margin-bottom: 1rem;"></i>
-                        <h3>${movie.title} - Coming Soon</h3>
-                        <p style="color: #b5d0ff;">Official trailer will be released soon. Stay tuned!</p>
-                    </div>
-                `;
-            }
-
-            // --- TEMPLATE HTML UTAMA (RAPI DAN LENGKAP) ---
-            const html = `<!DOCTYPE html>
-<html lang="${lang}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${seoTitle}</title>
-    <meta name="description" content="${movie.overview ? movie.overview.substring(0, 160).replace(/"/g, '&quot;') : 'Watch online full movie HD'}">
-    <meta name="keywords" content="${keywords}">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://example.com/movie/${movieId}">
-    <meta property="og:title" content="${seoTitle}">
-    <meta property="og:description" content="${movie.overview ? movie.overview.substring(0, 160).replace(/"/g, '&quot;') : 'Watch online'}">
-    <meta property="og:image" content="${movie.poster_path ? IMG_BASE + movie.poster_path : ''}">
-    <meta property="og:type" content="video.movie">
-    <meta name="twitter:card" content="summary_large_image">
+    <title>🔥 TMDB Generator (Simple & Stable)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Salin CSS dari kode sebelumnya atau gunakan CSS sederhana di sini */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #0b0f1a; font-family: 'Inter', sans-serif; color: #eef3fc; }
-        .backdrop {
-            width: 100%;
-            height: 400px;
-            background-size: cover;
-            background-position: center 20%;
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            padding: 2rem;
+        body { background: #0a0f1e; font-family: 'Inter', sans-serif; color: #eef3fc; padding: 2rem 1.5rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .subtitle { color: #8ba3d9; margin-bottom: 2rem; }
+        .panel { background: #131f33; border-radius: 2rem; padding: 2rem; border: 1px solid #2d4068; margin-bottom: 2rem; }
+        .input-group { margin-bottom: 1rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; color: #9bb5ff; }
+        .input-group input, .input-group select, .input-group textarea {
+            width: 100%; background: #0b1425; border: 1px solid #2f4570; border-radius: 12px; padding: 0.8rem 1rem; color: white;
         }
-        .backdrop::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(0deg, #0b0f1a 0%, transparent 50%, transparent 100%);
-        }
-        .backdrop-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; width: 100%; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
-        .movie-card { background: #131f33; border-radius: 2rem; padding: 2rem; border: 1px solid #2d4068; margin-bottom: 2rem; }
-        .movie-hero { display: grid; grid-template-columns: 260px 1fr; gap: 2rem; }
-        .poster { border-radius: 1.5rem; overflow: hidden; background: #0b1425; aspect-ratio: 2/3; }
-        .poster img { width: 100%; height: 100%; object-fit: cover; }
-        h1 { font-size: 2.5rem; }
-        .meta { display: flex; gap: 1rem; margin: 1rem 0; flex-wrap: wrap; }
-        .meta span { background: #1b2848; padding: 0.4rem 1.2rem; border-radius: 30px; }
-        .overview { background: #0b1425b0; border-radius: 1.5rem; padding: 1.3rem; margin: 1.5rem 0; }
-        .links { display: flex; gap: 1rem; flex-wrap: wrap; }
-        .link-btn { background: #1f2c48; padding: 0.8rem 1.8rem; border-radius: 40px; color: white; text-decoration: none; display: inline-flex; align-items: center; gap: 0.6rem; border: 1px solid #3f5b92; transition: 0.2s; }
-        .link-btn:hover { background: #2d4070; transform: translateY(-2px); }
-        .trailer-container { margin: 2rem 0; border-radius: 1.5rem; overflow: hidden; background: #0b1425; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .article { background: #0f1a2b; border-radius: 1.8rem; padding: 1.6rem; margin-top: 2rem; border: 1px solid #2f456e; }
-        .article h2 { font-size: 1.8rem; margin-bottom: 1rem; }
-        .article-meta { color: #8099cf; margin-bottom: 1rem; }
-        .article-quote { font-style: italic; border-left: 4px solid #3b82f6; padding-left: 1.5rem; margin: 1.5rem 0; color: #b5d0ff; }
-        .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; margin-top: 2rem; }
-        .rec-item { background: #162035; border-radius: 1rem; overflow: hidden; transition: 0.2s; }
-        .rec-item:hover { transform: scale(1.02); }
-        .rec-item img { width: 100%; aspect-ratio: 2/3; object-fit: cover; }
-        .rec-item .rec-title { padding: 0.5rem; font-size: 0.85rem; }
-        .footer { margin-top: 2rem; color: #5f79b0; text-align: center; }
-        @media (max-width: 700px) { .movie-hero { grid-template-columns: 1fr; } .backdrop { height: 250px; } }
+        .btn { background: #1d4ed8; border: none; border-radius: 40px; padding: 0.8rem 1.8rem; color: white; cursor: pointer; }
+        .log-area { background: #0a1220; border-radius: 1rem; padding: 1rem; min-height: 100px; font-family: monospace; }
     </style>
 </head>
 <body>
-    ${movie.backdrop_path ? `<div class="backdrop" style="background-image: url('${BACKDROP_BASE}${movie.backdrop_path}');"><div class="backdrop-content"><h1 style="font-size: 3rem; text-shadow: 2px 2px 10px black;">${movie.title}</h1></div></div>` : ''}
-    <div class="container">
-        <div class="movie-card">
-            <div class="movie-hero">
-                <div class="poster">
-                    ${movie.poster_path ? `<img src="${IMG_BASE}${movie.poster_path}" alt="${movie.title}">` : '<div style="display: flex; align-items: center; justify-content: center; height: 100%;"><i class="fas fa-film fa-3x"></i></div>'}
-                </div>
-                <div>
-                    <h1>${movie.title}</h1>
-                    <div style="color: #97b5f0;">${movie.original_title || ''}</div>
-                    <div class="meta">
-                        <span><i class="far fa-calendar"></i> ${year}</span>
-                        <span><i class="fas fa-clock"></i> ${movie.runtime || '?'} min</span>
-                        <span><i class="fas fa-star" style="color: gold;"></i> ${movie.vote_average ? movie.vote_average.toFixed(1) : '?'}</span>
-                        <span><i class="fas fa-language"></i> ${movie.original_language?.toUpperCase() || 'EN'}</span>
-                    </div>
-                    <div class="overview">${movie.overview || 'No overview available.'}</div>
-                    <div class="links">
-                        <a href="#" class="link-btn" onclick="return false;"><i class="fas fa-play-circle"></i> ${link1Text}</a>
-                        <a href="#" class="link-btn" style="background:#1d3a3a;" onclick="return false;"><i class="fas fa-download"></i> ${link2Text}</a>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <h1>🔥 TMDB Generator (Simple & Stable)</h1>
+    <div class="subtitle">Versi minimal untuk memastikan tools berfungsi</div>
+
+    <div class="panel">
+        <div class="input-group">
+            <label><i class="fas fa-key"></i> TMDB API Key</label>
+            <input type="text" id="apiKey" value="3a660b31f4af8da5f2bd6f2799c11e2e">
         </div>
-
-        <!-- MEDIA SECTION (Trailer atau Fallback) -->
-        ${mediaSectionHtml}
-
-        <!-- ARTIKEL 1 -->
-        <div class="article">
-            <h2>${movie.title}: The Story Unveiled</h2>
-            <div class="article-meta"><i class="far fa-clock"></i> Posted by StreamGen · 15 min read · updated ${year}</div>
-            <p>${movie.overview ? movie.overview : 'The film brings new adventures and stunning visual effects.'} The story continues with exciting twists and turns, pushing the boundaries of storytelling.</p>
-            <div class="article-quote">${articleQuote}</div>
-            <p>The psychological depth and intense narrative structure make this installment a standout. Fans of the franchise will appreciate the callbacks to previous moments while being introduced to fresh elements that expand the universe.</p>
+        <div class="input-group">
+            <label><i class="fas fa-list"></i> Daftar ID TMDB</label>
+            <textarea id="movieIds" rows="3">76600, 157336</textarea>
         </div>
-
-        <!-- ARTIKEL 2 -->
-        <div class="article">
-            <h2>Where to Watch ${movie.title} Online</h2>
-            <div class="article-meta"><i class="fas fa-tag"></i> Legal sources · 4K UHD · Streaming options</div>
-            <p>Looking for where to watch ${movie.title} online? While official streaming platforms will announce dates after theatrical release, fans are already searching for ways to experience this epic film. We recommend checking these platforms:</p>
-            <ul style="margin: 1rem 0 0 2rem; color: #cbd5e1;">
-                <li>Disney+ Hotstar (expected release)</li>
-                <li>Netflix (regional availability)</li>
-                <li>Amazon Prime Video (rental/purchase)</li>
-                <li>Local streaming providers in your country</li>
-            </ul>
-        </div>
-
-        <!-- ARTIKEL 3 -->
-        <div class="article">
-            <h2>Why ${movie.title} Changes Everything</h2>
-            <div class="article-meta"><i class="fas fa-chart-line"></i> Analysis · new characters · future sequels</div>
-            <p>The introduction of new characters and conflicts adds moral complexity to the franchise. This installment expands the universe significantly, setting up potential for future sequels and spin-offs.</p>
-            <div class="article-quote">${articleConclusion}</div>
-        </div>
-
-        <!-- Rekomendasi -->
-        <h3 style="margin: 2rem 0 1rem;"><i class="fas fa-thumbs-up"></i> You may also like</h3>
-        <div class="rec-grid">
-            ${recommendations.map(m => `
-                <div class="rec-item">
-                    ${m.poster_path ? `<img src="${IMG_BASE}${m.poster_path}" alt="${m.title}" loading="lazy">` : '<div style="background:#1a2440; padding:1.5rem; text-align:center;"><i class="fas fa-image fa-2x"></i></div>'}
-                    <div class="rec-title">${m.title}</div>
-                </div>
-            `).join('')}
-        </div>
-
-        <div class="footer">
-            <i class="fas fa-check-circle" style="color:#10b981;"></i> ID ${movieId} · ${year}
+        <button class="btn" id="generateBtn"><i class="fas fa-cogs"></i> Generate & Log</button>
+        <div style="margin-top: 1rem;">
+            <h3>Log:</h3>
+            <div class="log-area" id="logArea">⏳ Siap...</div>
         </div>
     </div>
-</body>
-</html>`;
-            return { html, title: movie.title, movieId };
+</div>
+
+<script>
+    (function() {
+        const apiKeyInput = document.getElementById('apiKey');
+        const movieIdsTextarea = document.getElementById('movieIds');
+        const generateBtn = document.getElementById('generateBtn');
+        const logArea = document.getElementById('logArea');
+
+        function log(message) {
+            logArea.innerHTML += `<div>[${new Date().toLocaleTimeString()}] ${message}</div>`;
+            logArea.scrollTop = logArea.scrollHeight;
         }
 
-        // ========== BULK GENERATE ==========
-        async function bulkGenerate() {
-            if (isGenerating) { log('⏳ Masih dalam proses generate...', 'error'); return; }
-            const apiKey = apiKeyInput.value.trim() || DEFAULT_API;
-            const lang = bulkLang.value;
-            const link1Text = bulkLink1Text.value.trim() || '▶ Watch';
-            const link2Text = bulkLink2Text.value.trim() || '⬇️ Download';
-            const titleTemplates = getTitleTemplates();
+        async function testFetch(movieId) {
+            const apiKey = apiKeyInput.value.trim();
+            const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
+            try {
+                const res = await fetch(url);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+                log(`✅ ID ${movieId}: ${data.title} berhasil diambil.`);
+                return data;
+            } catch (e) {
+                log(`❌ ID ${movieId} gagal: ${e.message}`);
+                return null;
+            }
+        }
+
+        generateBtn.addEventListener('click', async () => {
+            logArea.innerHTML = ''; // Clear log
+            log('🚀 Memulai proses...');
             const idsText = movieIdsTextarea.value.trim();
             const idMatches = idsText.match(/\d+/g);
-            if (!idMatches || idMatches.length === 0) { log('❌ Tidak ada ID TMDB valid ditemukan', 'error'); return; }
-            const uniqueIds = [...new Set(idMatches)];
-            totalCountSpan.innerText = uniqueIds.length;
-            generatedCountSpan.innerText = '0';
-            progressPercent.innerText = '0%';
-            progressFill.style.width = '0%';
-            generatedFiles = [];
-            updateFilePreview();
-            log(`🚀 Memulai generate ${uniqueIds.length} file dengan smart trailer...`);
-            isGenerating = true;
-            downloadBtn.disabled = true;
-            let successCount = 0;
-            for (let i = 0; i < uniqueIds.length; i++) {
-                const movieId = uniqueIds[i];
-                log(`⏳ [${i+1}/${uniqueIds.length}] Generating ID: ${movieId}...`);
-                const result = await generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates);
-                if (result) {
-                    const safeTitle = result.title.replace(/[^a-z0-9]/gi, '_').substring(0, 40);
-                    const filename = `${movieId}_${safeTitle}.html`;
-                    generatedFiles.push({ filename, content: result.html, movieId, title: result.title });
-                    successCount++;
-                }
-                const percent = Math.round(((i + 1) / uniqueIds.length) * 100);
-                progressPercent.innerText = `${percent}%`;
-                progressFill.style.width = `${percent}%`;
-                generatedCountSpan.innerText = successCount;
-                updateFilePreview();
-            }
-            log(`🎉 Selesai! ${successCount} file berhasil digenerate.`, 'success');
-            isGenerating = false;
-            if (successCount > 0) downloadBtn.disabled = false;
-        }
-
-        function updateFilePreview() {
-            previewCountSpan.innerText = generatedFiles.length;
-            if (generatedFiles.length === 0) {
-                filePreviewGrid.innerHTML = '<div style="color: #6b83b0;">Belum ada file</div>';
+            if (!idMatches) {
+                log('❌ Tidak ada ID ditemukan.');
                 return;
             }
-            filePreviewGrid.innerHTML = generatedFiles.map(f => `
-                <div class="file-card">
-                    <i class="fas fa-file-code"></i> ${f.filename.substring(0, 25)}...
-                    <div style="font-size:0.7rem; color:#8ba3d9; margin-top:0.2rem;">${f.title}</div>
-                </div>
-            `).join('');
-        }
+            for (const movieId of idMatches) {
+                await testFetch(movieId);
+            }
+            log('🎉 Selesai.');
+        });
 
-        function downloadZip() {
-            if (generatedFiles.length === 0) return;
-            const zip = new JSZip();
-            generatedFiles.forEach(file => zip.file(file.filename, file.content));
-            zip.generateAsync({ type: 'blob' }).then(blob => {
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = `tmdb_bulk_fixed_${new Date().getTime()}.zip`;
-                link.click();
-                log('📦 ZIP berhasil didownload', 'success');
-            });
-        }
-
-        generateBtn.addEventListener('click', bulkGenerate);
-        downloadBtn.addEventListener('click', downloadZip);
-        clearLogsBtn.addEventListener('click', clearLogs);
-        log('✅ FIXED VERSION: Smart trailer dengan fallback backdrop di dalam iframe');
+        log('✅ Tools siap. Masukkan ID dan klik Generate.');
     })();
 </script>
 </body>
