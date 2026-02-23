@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔥 TMDB Bulk HTML Generator · Streaming Pages + SEO</title>
+    <title>🔥 TMDB Bulk Generator · SEO Title Randomizer + Full Artikel</title>
     <!-- Google Fonts + Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -95,6 +95,10 @@
             background: #0f6e4a;
             border-color: #10b981;
         }
+        .btn-info {
+            background: #7c3aed;
+            border-color: #a78bfa;
+        }
         .btn:hover {
             transform: translateY(-2px);
             filter: brightness(1.1);
@@ -131,9 +135,12 @@
         }
         .preview-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 1rem;
             margin-top: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 0.5rem;
         }
         .file-card {
             background: #16243d;
@@ -151,12 +158,30 @@
             text-align: center;
             color: #5f79b0;
         }
+        .title-templates {
+            grid-column: 1 / -1;
+            background: #0e1a2a;
+            border-radius: 1rem;
+            padding: 1rem;
+            border: 1px solid #3d5a8c;
+        }
+        .title-templates textarea {
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        .example-box {
+            background: #1e2a45;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            color: #b5d0ff;
+            font-size: 0.85rem;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1><i class="fas fa-layer-group" style="color:#3b82f6;"></i> TMDB Bulk HTML Generator</h1>
-    <div class="subtitle">Generate ratusan halaman streaming + artikel SEO otomatis berdasarkan ID TMDB</div>
+    <h1><i class="fas fa-layer-group" style="color:#3b82f6;"></i> TMDB Bulk Generator · SEO Title Randomizer</h1>
+    <div class="subtitle">Generate ratusan halaman streaming + artikel SEO + random title templates</div>
 
     <!-- Control Panel -->
     <div class="control-panel">
@@ -166,34 +191,37 @@
         </div>
         
         <div class="input-group">
-            <label><i class="fas fa-list"></i> Daftar ID TMDB (pisahkan dengan koma, spasi, atau baris baru)</label>
-            <textarea id="movieIds" placeholder="Contoh: 76600, 157336, 299534, 24428, 11, 155">76600, 157336, 299534, 24428, 11, 155, 27205, 49026, 49538, 68721</textarea>
-            <small style="color:#8ba3d9;">Format: angka ID TMDB. Pisahkan dengan koma atau enter.</small>
+            <label><i class="fas fa-list"></i> Daftar ID TMDB</label>
+            <textarea id="movieIds" placeholder="Contoh: 76600, 157336, 299534">76600, 157336, 299534, 24428, 11, 155, 27205, 49026, 49538, 68721</textarea>
         </div>
 
         <div class="input-group">
-            <label><i class="fas fa-globe"></i> Bahasa Artikel & UI</label>
+            <label><i class="fas fa-globe"></i> Bahasa</label>
             <select id="bulkLang">
                 <option value="en-US">🇬🇧 English</option>
                 <option value="es-ES" selected>🇪🇸 Español</option>
                 <option value="th-TH">🇹🇭 ไทย</option>
                 <option value="id-ID">🇮🇩 Indonesia</option>
                 <option value="fr-FR">🇫🇷 Français</option>
-                <option value="zh-CN">🇨🇳 中文</option>
-                <option value="ja-JP">🇯🇵 日本語</option>
-                <option value="ko-KR">🇰🇷 한국어</option>
-                <option value="hi-IN">🇮🇳 हिन्दी</option>
-                <option value="ru-RU">🇷🇺 Русский</option>
             </select>
         </div>
 
         <div class="input-group">
-            <label><i class="fas fa-link"></i> Teks Link 1 (Tonton)</label>
+            <label><i class="fas fa-link"></i> Teks Link 1</label>
             <input type="text" id="bulkLink1Text" value="▶ Watch Movie HD">
         </div>
         <div class="input-group">
-            <label><i class="fas fa-download"></i> Teks Link 2 (Download)</label>
+            <label><i class="fas fa-download"></i> Teks Link 2</label>
             <input type="text" id="bulkLink2Text" value="⬇️ Download (UHD)">
+        </div>
+
+        <!-- NEW: Random Title Templates -->
+        <div class="title-templates">
+            <label><i class="fas fa-random"></i> Template Title (random 1 dari 5) <span style="color:#fbbf24; font-size:0.8rem;">gunakan {TITLE} untuk judul film</span></label>
+            <textarea id="titleTemplates" rows="4">La asistenta (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒 Down𝗅oad 𝟩𝟤𝟢𝗉, 𝟦𝟪𝟢𝗉 𝖺𝗇𝖽 𝟣𝟢𝟪𝟢𝗉 on IBOMMA|{TITLE} (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒 𝟩𝟤𝟢𝗉, 𝟦𝟪𝟢𝗉 𝖺𝗇𝖽 𝟣𝟢𝟪𝟢𝗉 on IBOMMA|{TITLE} (.2026.) FullMov𝑖𝑒 +! Down𝗅oad 𝟩𝟤𝟢𝗉, 𝟦𝟪𝟢𝗉 𝖺𝗇𝖽 𝟣𝟢𝟪𝟢𝗉 on IBOMMA|{TITLE} (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒 Down𝗅oad 𝟩𝟤𝟢𝗉, 𝟦𝟪𝟢𝗉 𝖺𝗇𝖽 𝟣𝟢𝟪𝟢𝗉 on IBOMMA|✨ {TITLE} (2026) 4K HDR | Watch Online Free</textarea>
+            <div class="example-box" id="templateExample">
+                <i class="fas fa-eye"></i> Contoh: "Avatar 3 (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒 Down𝗅oad 𝟩𝟤𝟢𝗉, 𝟦𝟪𝟢𝗉 𝖺𝗇𝖽 𝟣𝟢𝟪𝟢𝗉 on IBOMMA"
+            </div>
         </div>
 
         <div class="button-group">
@@ -224,7 +252,7 @@
     </div>
 
     <div class="footer">
-        <i class="fas fa-robot"></i> Bulk generator dengan artikel SEO dinamis berdasarkan data TMDB
+        <i class="fas fa-robot"></i> Bulk generator dengan random SEO titles & full artikel berdasarkan data TMDB
     </div>
 </div>
 
@@ -241,6 +269,8 @@
         const bulkLang = document.getElementById('bulkLang');
         const bulkLink1Text = document.getElementById('bulkLink1Text');
         const bulkLink2Text = document.getElementById('bulkLink2Text');
+        const titleTemplatesArea = document.getElementById('titleTemplates');
+        const templateExample = document.getElementById('templateExample');
         const generateBtn = document.getElementById('generateBulkBtn');
         const downloadBtn = document.getElementById('downloadZipBtn');
         const clearLogsBtn = document.getElementById('clearLogsBtn');
@@ -272,6 +302,31 @@
             log('Logs cleared.');
         }
 
+        // Parse title templates
+        function getTitleTemplates() {
+            const text = titleTemplatesArea.value.trim();
+            if (!text) return ['{TITLE} (2026) Watch Online HD'];
+            return text.split('|').map(t => t.trim()).filter(t => t.length > 0);
+        }
+
+        // Get random title from templates
+        function getRandomTitle(templates, movieTitle) {
+            if (templates.length === 0) return movieTitle;
+            const randomIndex = Math.floor(Math.random() * templates.length);
+            return templates[randomIndex].replace(/{TITLE}/g, movieTitle);
+        }
+
+        // Update example when templates change
+        function updateTemplateExample() {
+            const templates = getTitleTemplates();
+            if (templates.length > 0) {
+                const example = templates[0].replace(/{TITLE}/g, 'Avatar 3');
+                templateExample.innerHTML = `<i class="fas fa-eye"></i> Contoh: "${example}"`;
+            }
+        }
+        titleTemplatesArea.addEventListener('input', updateTemplateExample);
+        updateTemplateExample();
+
         // ========== FETCH TMDB ==========
         async function fetchMovieDetails(apiKey, movieId, language) {
             const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${language}`;
@@ -298,16 +353,22 @@
         }
 
         // ========== GENERATE HTML UNTUK 1 FILM ==========
-        async function generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text) {
+        async function generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates) {
             const movie = await fetchMovieDetails(apiKey, movieId, lang);
             if (!movie) return null;
 
             const recommendations = await fetchRecommendations(apiKey, movieId, lang);
             
+            // Generate random SEO title
+            const seoTitle = getRandomTitle(titleTemplates, movie.title);
+            
             // Template artikel SEO dinamis berdasarkan film
             const articleTitle1 = `${movie.title}: ${getArticleSubtitle(lang, 'plot')}`;
             const articleTitle2 = getArticleTitle2(lang, movie.title);
             const articleTitle3 = getArticleTitle3(lang, movie.title);
+
+            // Get current year
+            const currentYear = new Date().getFullYear();
 
             // Generate HTML
             const html = `<!DOCTYPE html>
@@ -315,8 +376,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${movie.title} · Watch Online HD</title>
-    <meta name="description" content="${movie.overview ? movie.overview.substring(0, 160) : 'Watch online'}">
+    <title>${seoTitle}</title>
+    <meta name="description" content="${movie.overview ? movie.overview.substring(0, 160).replace(/"/g, '&quot;') : 'Watch online full movie HD'}">
+    <meta name="keywords" content="${movie.title}, watch online, download, ${movie.release_date ? movie.release_date.slice(0,4) : currentYear}, 4k, hd, streaming">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://example.com/movie/${movieId}">
+    <meta property="og:title" content="${seoTitle}">
+    <meta property="og:description" content="${movie.overview ? movie.overview.substring(0, 160).replace(/"/g, '&quot;') : 'Watch online'}">
+    <meta property="og:image" content="${movie.poster_path ? IMG_BASE + movie.poster_path : ''}">
+    <meta property="og:type" content="video.movie">
+    <meta name="twitter:card" content="summary_large_image">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -334,14 +404,18 @@
         .meta span { background: #1b2848; padding: 0.4rem 1.2rem; border-radius: 30px; }
         .overview { background: #0b1425b0; border-radius: 1.5rem; padding: 1.3rem; margin: 1.5rem 0; }
         .links { display: flex; gap: 1rem; flex-wrap: wrap; }
-        .link-btn { background: #1f2c48; padding: 0.8rem 1.8rem; border-radius: 40px; color: white; text-decoration: none; display: inline-flex; align-items: center; gap: 0.6rem; border: 1px solid #3f5b92; }
+        .link-btn { background: #1f2c48; padding: 0.8rem 1.8rem; border-radius: 40px; color: white; text-decoration: none; display: inline-flex; align-items: center; gap: 0.6rem; border: 1px solid #3f5b92; transition: 0.2s; }
+        .link-btn:hover { background: #2d4070; transform: translateY(-2px); }
         .article { background: #0f1a2b; border-radius: 1.8rem; padding: 1.6rem; margin-top: 2rem; border: 1px solid #2f456e; }
         .article h2 { font-size: 1.8rem; margin-bottom: 1rem; }
         .article-meta { color: #8099cf; margin-bottom: 1rem; }
         .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; margin-top: 2rem; }
-        .rec-item { background: #162035; border-radius: 1rem; overflow: hidden; }
+        .rec-item { background: #162035; border-radius: 1rem; overflow: hidden; transition: 0.2s; }
+        .rec-item:hover { transform: scale(1.02); }
         .rec-item img { width: 100%; aspect-ratio: 2/3; object-fit: cover; }
+        .rec-item .rec-title { padding: 0.5rem; font-size: 0.85rem; }
         .footer { margin-top: 2rem; color: #5f79b0; text-align: center; }
+        @media (max-width: 700px) { .movie-hero { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -358,48 +432,60 @@
                     <span><i class="far fa-calendar"></i> ${movie.release_date ? movie.release_date.slice(0,4) : 'N/A'}</span>
                     <span><i class="fas fa-clock"></i> ${movie.runtime || '?'} min</span>
                     <span><i class="fas fa-star" style="color: gold;"></i> ${movie.vote_average ? movie.vote_average.toFixed(1) : '?'}</span>
+                    <span><i class="fas fa-language"></i> ${movie.original_language?.toUpperCase() || 'EN'}</span>
                 </div>
-                <div class="overview">${movie.overview || 'No overview'}</div>
+                <div class="overview">${movie.overview || 'No overview available.'}</div>
                 <div class="links">
-                    <a href="#" class="link-btn"><i class="fas fa-play-circle"></i> ${link1Text}</a>
-                    <a href="#" class="link-btn" style="background:#1d3a3a;"><i class="fas fa-download"></i> ${link2Text}</a>
+                    <a href="#" class="link-btn" onclick="return false;"><i class="fas fa-play-circle"></i> ${link1Text}</a>
+                    <a href="#" class="link-btn" style="background:#1d3a3a;" onclick="return false;"><i class="fas fa-download"></i> ${link2Text}</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ARTIKEL SEO -->
+    <!-- ARTIKEL SEO 1: Plot -->
     <div class="article">
         <h2>${articleTitle1}</h2>
-        <div class="article-meta"><i class="far fa-clock"></i> Posted by StreamGen · 12 min read · updated 2026</div>
-        <p>${movie.title} is one of the most anticipated films. ${movie.overview ? movie.overview.substring(0, 200) : 'The movie brings new adventures'}... The story continues with exciting twists. James Cameron (if applicable) delivers stunning visuals. Fans are eager to see the development of characters and the new world.</p>
+        <div class="article-meta"><i class="far fa-clock"></i> Posted by StreamGen · 12 min read · updated ${currentYear}</div>
+        <p>${movie.title} is one of the most anticipated films of ${currentYear}. ${movie.overview ? movie.overview.substring(0, 300) : 'The movie brings new adventures and stunning visual effects.'} The story continues with exciting twists and turns. Director ${movie.production_companies?.[0]?.name || 'the creators'} delivers a masterpiece that pushes the boundaries of filmmaking. Fans are eagerly waiting to see the development of characters and the new worlds introduced in this installment.</p>
+        <p style="margin-top: 1rem;">The film explores themes of ${movie.genres?.map(g => g.name).join(', ') || 'action and adventure'}, bringing depth to the narrative. Early reviews suggest that this could be the best entry in the franchise so far, with breathtaking cinematography and emotional storytelling.</p>
     </div>
 
+    <!-- ARTIKEL SEO 2: Streaming -->
     <div class="article">
         <h2>${articleTitle2}</h2>
-        <div class="article-meta"><i class="fas fa-tag"></i> Legal sources · 4K UHD</div>
-        <p>While official streaming platforms will announce dates after theatrical release, fans are already looking for ways to watch ${movie.title}. Some unofficial links circulate, but we recommend waiting for official platforms. For preview purposes, the links above are demo versions. Stay tuned for official announcements on Disney+, HBO Max, or local providers.</p>
+        <div class="article-meta"><i class="fas fa-tag"></i> Legal sources · 4K UHD · Streaming options</div>
+        <p>Looking for where to watch ${movie.title} online? While official streaming platforms will announce dates after theatrical release, fans are already searching for ways to experience this epic film. We recommend checking these platforms for availability:</p>
+        <ul style="margin: 1rem 0 0 2rem; color: #cbd5e1;">
+            <li>Disney+ Hotstar (expected release)</li>
+            <li>Netflix (regional availability)</li>
+            <li>Amazon Prime Video (rental/purchase)</li>
+            <li>Local streaming providers in your country</li>
+        </ul>
+        <p style="margin-top: 1rem;">For preview purposes, the links above are demo versions. Stay tuned for official announcements regarding digital release dates. The film will likely be available in 4K UHD, HDR, and with multiple audio options including original language and dubbing.</p>
     </div>
 
+    <!-- ARTIKEL SEO 3: Impact -->
     <div class="article">
         <h2>${articleTitle3}</h2>
         <div class="article-meta"><i class="fas fa-chart-line"></i> Analysis · new characters · future sequels</div>
-        <p>The introduction of new characters and conflicts adds moral complexity. ${movie.title} expands the universe, setting up potential for sequels. Critics suggest that this installment changes the franchise's direction, exploring deeper themes.</p>
+        <p>The introduction of new characters and conflicts in ${movie.title} adds moral complexity to the franchise. This installment expands the universe significantly, setting up potential for future sequels and spin-offs. Critics suggest that this film changes the franchise's direction, exploring deeper themes of identity, sacrifice, and redemption.</p>
+        <p style="margin-top: 1rem;">With groundbreaking visual effects and a compelling narrative, ${movie.title} raises the bar for blockbuster filmmaking. The world-building is meticulous, and the attention to detail in every frame showcases the passion of the creative team. This is not just a movie; it's an experience that will be remembered for years to come.</p>
     </div>
 
     <!-- Rekomendasi -->
-    <h3><i class="fas fa-thumbs-up"></i> You may also like</h3>
+    <h3 style="margin: 2rem 0 1rem;"><i class="fas fa-thumbs-up"></i> You may also like</h3>
     <div class="rec-grid">
         ${recommendations.map(m => `
             <div class="rec-item">
-                ${m.poster_path ? `<img src="${IMG_BASE}${m.poster_path}" alt="${m.title}">` : '<div style="background:#1a2440; padding:1rem; text-align:center;"><i class="fas fa-image"></i></div>'}
-                <div style="padding:0.5rem; font-size:0.85rem;">${m.title}</div>
+                ${m.poster_path ? `<img src="${IMG_BASE}${m.poster_path}" alt="${m.title}" loading="lazy">` : '<div style="background:#1a2440; padding:1.5rem; text-align:center;"><i class="fas fa-image fa-2x"></i></div>'}
+                <div class="rec-title">${m.title}</div>
             </div>
         `).join('')}
     </div>
 
     <div class="footer">
-        <i class="fas fa-crown"></i> Generated by StreamGen · ID ${movieId}
+        <i class="fas fa-crown"></i> Generated by StreamGen · ID ${movieId} · ${currentYear}
     </div>
 </div>
 </body>
@@ -414,12 +500,7 @@
                 'es-ES': 'todo lo que sabemos de la trama',
                 'th-TH': 'ทุกสิ่งที่เรารู้เกี่ยวกับเนื้อเรื่อง',
                 'id-ID': 'semua yang kami tahu tentang plotnya',
-                'fr-FR': 'tout ce que nous savons sur l\'intrigue',
-                'zh-CN': '我们所知道的情节',
-                'ja-JP': 'プロットについて知っているすべて',
-                'ko-KR': '줄거리에 대해 우리가 아는 모든 것',
-                'hi-IN': 'कथानक के बारे में हम जो कुछ जानते हैं',
-                'ru-RU': 'все, что мы знаем о сюжете'
+                'fr-FR': 'tout ce que nous savons sur l\'intrigue'
             };
             return subs[lang] || subs['en-US'];
         }
@@ -430,12 +511,7 @@
                 'es-ES': `¿Dónde ver ${movieTitle} online? Opciones de streaming y descarga`,
                 'th-TH': `ดู ${movieTitle} ออนไลน์ได้ที่ไหน? ตัวเลือกสตรีมมิงและดาวน์โหลด`,
                 'id-ID': `Tempat menonton ${movieTitle} online? Opsi streaming & download`,
-                'fr-FR': `Où regarder ${movieTitle} en ligne? Options de streaming et téléchargement`,
-                'zh-CN': `在哪里在线观看 ${movieTitle}？流媒体和下载选项`,
-                'ja-JP': `${movieTitle}をオンラインで見るには？ストリーミングとダウンロードオプション`,
-                'ko-KR': `${movieTitle} 온라인 시청 장소? 스트리밍 및 다운로드 옵션`,
-                'hi-IN': `${movieTitle} ऑनलाइन कहाँ देखें? स्ट्रीमिंग और डाउनलोड विकल्प`,
-                'ru-RU': `Где смотреть ${movieTitle} онлайн? Варианты стриминга и загрузки`
+                'fr-FR': `Où regarder ${movieTitle} en ligne? Options de streaming et téléchargement`
             };
             return titles[lang] || titles['en-US'];
         }
@@ -446,12 +522,7 @@
                 'es-ES': `Por qué "${movieTitle}" cambia las reglas del juego para la franquicia`,
                 'th-TH': `ทำไม "${movieTitle}" ถึงเปลี่ยนเกมของแฟรนไชส์`,
                 'id-ID': `Mengapa "${movieTitle}" mengubah permainan waralaba`,
-                'fr-FR': `Pourquoi "${movieTitle}" change la donne pour la franchise`,
-                'zh-CN': `为什么"${movieTitle}"改变了系列的格局`,
-                'ja-JP': `なぜ「${movieTitle}」がフランチャイズのゲームを変えるのか`,
-                'ko-KR': `왜 "${movieTitle}"가 프랜차이즈의 판도를 바꾸는가`,
-                'hi-IN': `क्यों "${movieTitle}" फ्रैंचाइज़ी के लिए खेल बदलता है`,
-                'ru-RU': `Почему "${movieTitle}" меняет правила игры для франшизы`
+                'fr-FR': `Pourquoi "${movieTitle}" change la donne pour la franchise`
             };
             return titles[lang] || titles['en-US'];
         }
@@ -467,6 +538,7 @@
             const lang = bulkLang.value;
             const link1Text = bulkLink1Text.value.trim() || '▶ Watch';
             const link2Text = bulkLink2Text.value.trim() || '⬇️ Download';
+            const titleTemplates = getTitleTemplates();
             
             // Parse IDs
             const idsText = movieIdsTextarea.value.trim();
@@ -484,7 +556,7 @@
             generatedFiles = [];
             updateFilePreview();
 
-            log(`🚀 Memulai generate ${uniqueIds.length} file HTML...`);
+            log(`🚀 Memulai generate ${uniqueIds.length} file HTML dengan ${titleTemplates.length} template title...`);
             isGenerating = true;
             downloadBtn.disabled = true;
 
@@ -493,10 +565,13 @@
                 const movieId = uniqueIds[i];
                 log(`⏳ [${i+1}/${uniqueIds.length}] Generating ID: ${movieId}...`);
 
-                const result = await generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text);
+                const result = await generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates);
                 
                 if (result) {
-                    const filename = `${movieId}_${result.title.replace(/[^a-z0-9]/gi, '_').substring(0, 30)}.html`;
+                    // Generate SEO filename
+                    const safeTitle = result.title.replace(/[^a-z0-9]/gi, '_').substring(0, 40);
+                    const filename = `${movieId}_${safeTitle}.html`;
+                    
                     generatedFiles.push({
                         filename,
                         content: result.html,
@@ -533,8 +608,8 @@
 
             filePreviewGrid.innerHTML = generatedFiles.map(f => `
                 <div class="file-card">
-                    <i class="fas fa-file-code"></i> ${f.filename.substring(0, 25)}...
-                    <div style="font-size:0.7rem; color:#8ba3d9;">${f.title}</div>
+                    <i class="fas fa-file-code"></i> ${f.filename.substring(0, 30)}...
+                    <div style="font-size:0.7rem; color:#8ba3d9; margin-top:0.2rem;">${f.title}</div>
                 </div>
             `).join('');
         }
@@ -563,7 +638,7 @@
         clearLogsBtn.addEventListener('click', clearLogs);
 
         // Initial log
-        log('✅ Generator siap. Masukkan ID TMDB dan klik Generate HTML.');
+        log('✅ Generator siap dengan 5 template title random. Masukkan ID TMDB dan klik Generate HTML.');
     })();
 </script>
 </body>
