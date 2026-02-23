@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔥 TMDB Bulk Pro · Fixed Trailer + Fallback System</title>
+    <title>🔥 TMDB Bulk Pro · Trailer Fixed (No Error 153)</title>
     <!-- Google Fonts + Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -95,10 +95,6 @@
             background: #0f6e4a;
             border-color: #10b981;
         }
-        .btn-info {
-            background: #7c3aed;
-            border-color: #a78bfa;
-        }
         .btn:hover {
             transform: translateY(-2px);
             filter: brightness(1.1);
@@ -172,20 +168,20 @@
             color: #b5d0ff;
             font-size: 0.85rem;
         }
-        .feature-badge {
-            background: #2d4b7a;
-            color: white;
+        .trailer-note {
+            background: #1e3a5f;
+            color: #ffd966;
             padding: 0.2rem 0.8rem;
             border-radius: 30px;
-            font-size: 0.7rem;
-            margin-left: 0.5rem;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1><i class="fas fa-layer-group" style="color:#3b82f6;"></i> TMDB Bulk Pro · Trailer Fixed + Fallback Gallery</h1>
-    <div class="subtitle">Trailer otomatis dengan validasi + fallback gambar backdrop jika tidak ada trailer</div>
+    <h1><i class="fas fa-layer-group" style="color:#3b82f6;"></i> TMDB Bulk Pro · Trailer Tanpa Error</h1>
+    <div class="subtitle">Trailer YouTube dengan embed sederhana (no API JS) + backup link</div>
 
     <!-- Control Panel -->
     <div class="control-panel">
@@ -207,10 +203,6 @@
                 <option value="th-TH">🇹🇭 ไทย</option>
                 <option value="id-ID">🇮🇩 Indonesia</option>
                 <option value="fr-FR">🇫🇷 Français</option>
-                <option value="de-DE">🇩🇪 Deutsch</option>
-                <option value="ja-JP">🇯🇵 日本語</option>
-                <option value="ko-KR">🇰🇷 한국어</option>
-                <option value="zh-CN">🇨🇳 中文</option>
             </select>
         </div>
 
@@ -225,10 +217,10 @@
 
         <!-- Random Title Templates -->
         <div class="title-templates">
-            <label><i class="fas fa-random"></i> Template Title (random) <span class="feature-badge">SEO</span></label>
-            <textarea id="titleTemplates" rows="3">La asistenta (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒 Down𝗅oad 𝟩𝟤𝟢𝗉, 𝟦𝟪𝟢𝗉 𝖺𝗇𝖽 𝟣𝟢𝟪𝟢𝗉 on IBOMMA|{TITLE} (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒 𝟩𝟤𝟢𝗉, 𝟦𝟪𝟢𝗉 𝖺𝗇𝖽 𝟣𝟢𝟪𝟢𝗉 on IBOMMA|{TITLE} (.2026.) FullMov𝑖𝑒 +! Down𝗅oad 𝟩𝟤𝟢𝗉, 𝟦𝟪𝟢𝗉 𝖺𝗇𝖽 𝟣𝟢𝟪𝟢𝗉 on IBOMMA|✨ {TITLE} (2026) 4K HDR | Watch Online Free</textarea>
+            <label><i class="fas fa-random"></i> Template Title (random)</label>
+            <textarea id="titleTemplates" rows="3">La asistenta (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒 Down𝗅oad 𝟩𝟤𝟢𝗉, 𝟦𝟪𝟢𝗉 𝖺𝗇𝖽 𝟣𝟢𝟪𝟢𝗉 on IBOMMA|{TITLE} (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒 𝟩𝟤𝟢𝗉, 𝟦𝟪𝟢𝗉 𝖺𝗇𝖽 𝟣𝟢𝟪𝟢𝗉 on IBOMMA|✨ {TITLE} (2026) 4K HDR | Watch Online Free</textarea>
             <div class="example-box" id="templateExample">
-                <i class="fas fa-eye"></i> Contoh: "Avatar 3 (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒 Down𝗅oad 𝟩𝟤𝟢𝗉..."
+                <i class="fas fa-eye"></i> Contoh dengan {TITLE}
             </div>
         </div>
 
@@ -249,7 +241,7 @@
             <div class="progress-fill" id="progressFill"></div>
         </div>
         <div class="log-area" id="logArea">
-            <div>⏳ Siap generate dengan validasi trailer otomatis...</div>
+            <div>⏳ Siap generate dengan trailer fix (no API JS)...</div>
         </div>
     </div>
 
@@ -260,7 +252,7 @@
     </div>
 
     <div class="footer">
-        <i class="fas fa-robot"></i> Pro Version · Trailer dengan validasi · Fallback gallery jika trailer tidak ada
+        <i class="fas fa-check-circle" style="color:#10b981;"></i> Trailer menggunakan embed murni · backup link langsung ke YouTube
     </div>
 </div>
 
@@ -279,7 +271,6 @@
         const bulkLink1Text = document.getElementById('bulkLink1Text');
         const bulkLink2Text = document.getElementById('bulkLink2Text');
         const titleTemplatesArea = document.getElementById('titleTemplates');
-        const templateExample = document.getElementById('templateExample');
         const generateBtn = document.getElementById('generateBulkBtn');
         const downloadBtn = document.getElementById('downloadZipBtn');
         const clearLogsBtn = document.getElementById('clearLogsBtn');
@@ -301,11 +292,7 @@
             'es-ES': { watch: 'ver online', download: 'descargar', streaming: 'streaming' },
             'th-TH': { watch: 'ดูออนไลน์', download: 'ดาวน์โหลด', streaming: 'สตรีมมิ่ง' },
             'id-ID': { watch: 'nonton online', download: 'download', streaming: 'streaming' },
-            'fr-FR': { watch: 'regarder en ligne', download: 'télécharger', streaming: 'streaming' },
-            'de-DE': { watch: 'online ansehen', download: 'herunterladen', streaming: 'streaming' },
-            'ja-JP': { watch: 'オンライン視聴', download: 'ダウンロード', streaming: 'ストリーミング' },
-            'ko-KR': { watch: '온라인 시청', download: '다운로드', streaming: '스트리밍' },
-            'zh-CN': { watch: '在线观看', download: '下载', streaming: '流媒体' }
+            'fr-FR': { watch: 'regarder en ligne', download: 'télécharger', streaming: 'streaming' }
         };
 
         function getKeywords(lang, movieTitle, year) {
@@ -342,17 +329,6 @@
             return templates[randomIndex].replace(/{TITLE}/g, movieTitle);
         }
 
-        // Update example
-        function updateTemplateExample() {
-            const templates = getTitleTemplates();
-            if (templates.length > 0) {
-                const example = templates[0].replace(/{TITLE}/g, 'Avatar 3');
-                templateExample.innerHTML = `<i class="fas fa-eye"></i> Contoh: "${example}"`;
-            }
-        }
-        titleTemplatesArea.addEventListener('input', updateTemplateExample);
-        updateTemplateExample();
-
         // ========== FETCH TMDB ==========
         async function fetchMovieDetails(apiKey, movieId, language) {
             const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${language}&append_to_response=videos,images`;
@@ -378,57 +354,64 @@
             }
         }
 
-        // ========== VALIDASI TRAILER YANG LEBIH BAIK ==========
-        function getValidTrailer(videos) {
+        // ========== GET TRAILER - LEBIH FLEKSIBEL ==========
+        function getTrailerInfo(videos) {
             if (!videos || !videos.results || videos.results.length === 0) {
                 return null;
             }
             
-            // Cari trailer resmi dalam bahasa yang dipilih atau bahasa Inggris
-            const trailers = videos.results.filter(v => 
-                v.site === 'YouTube' && 
-                (v.type === 'Trailer' || v.type === 'Teaser')
+            // Cari semua video YouTube (trailer, teaser, featurette)
+            const youtubeVids = videos.results.filter(v => v.site === 'YouTube');
+            
+            if (youtubeVids.length === 0) return null;
+            
+            // Prioritaskan: Official Trailer > Trailer > Teaser > Video lainnya
+            const officialTrailer = youtubeVids.find(v => 
+                v.type === 'Trailer' && v.official === true
             );
+            if (officialTrailer) return { key: officialTrailer.key, name: officialTrailer.name };
             
-            if (trailers.length === 0) return null;
+            const anyTrailer = youtubeVids.find(v => v.type === 'Trailer');
+            if (anyTrailer) return { key: anyTrailer.key, name: anyTrailer.name };
             
-            // Prioritaskan trailer resmi, lalu teaser
-            const officialTrailer = trailers.find(v => v.type === 'Trailer' && v.official === true);
-            if (officialTrailer) return officialTrailer.key;
+            const teaser = youtubeVids.find(v => v.type === 'Teaser');
+            if (teaser) return { key: teaser.key, name: teaser.name };
             
-            const teaser = trailers.find(v => v.type === 'Teaser');
-            if (teaser) return teaser.key;
-            
-            // Jika tidak ada, ambil video YouTube pertama yang valid
-            return trailers[0].key;
+            // Jika tidak ada, ambil video pertama yang ada
+            return { key: youtubeVids[0].key, name: youtubeVids[0].name };
         }
 
-        // ========== GENERATE HTML DENGAN FALLBACK ==========
+        // ========== GENERATE HTML DENGAN TRAILER SIMPLE ==========
         async function generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates) {
             const movie = await fetchMovieDetails(apiKey, movieId, lang);
             if (!movie) return null;
 
             const recommendations = await fetchRecommendations(apiKey, movieId, lang);
-            const trailerKey = getValidTrailer(movie.videos);
+            const trailerInfo = getTrailerInfo(movie.videos);
             
-            // Log trailer status
-            if (trailerKey) {
-                log(`🎬 ID ${movieId} (${movie.title}) punya trailer: ${trailerKey}`, 'success');
+            // Log status trailer
+            if (trailerInfo) {
+                log(`🎬 ID ${movieId} (${movie.title}) punya trailer: ${trailerInfo.key}`, 'success');
             } else {
-                log(`⚠️ ID ${movieId} (${movie.title}) tidak punya trailer, menggunakan fallback gallery`, 'info');
+                log(`ℹ️ ID ${movieId} (${movie.title}) tidak punya trailer YouTube`, 'info');
             }
             
             const seoTitle = getRandomTitle(titleTemplates, movie.title);
             const year = movie.release_date ? movie.release_date.slice(0,4) : new Date().getFullYear();
             const keywords = getKeywords(lang, movie.title, year);
             
-            // Artikel quote (dinamis)
-            const articleQuote = `The final line of the teaser—"You ran from Woodsboro. You ran from New York. But you can’t run from me."—is the perfect closing sentiment, reinforcing the central theme of the franchise: no matter how far you go, Ghostface will always find you. This is a darker, faster, and more relentless version of the slasher killer we’ve known and feared. The psychological terror will now delve deeper into the minds of the survivors, forcing them to confront their past and face the ultimate evil once again.`;
+            // Artikel quotes
+            const articleQuote = `The final line of the teaser—"You ran from Woodsboro. You ran from New York. But you can’t run from me."—is the perfect closing sentiment, reinforcing the central theme of the franchise: no matter how far you go, Ghostface will always find you. This is a darker, faster, and more relentless version of the slasher killer we’ve known and feared.`;
 
-            const articleConclusion = `In conclusion, ${movie.title} promises to be a game-changing entry in the franchise, bringing a darker, more psychological edge to the series while maintaining the familiar thrills fans have come to love. The introduction of new characters, the intense evolution of the story, and the looming, unpredictable danger make this installment a must-watch. With a chilling atmosphere, suspenseful storytelling, and shocking twists, ${movie.title} will undoubtedly leave audiences gasping for air and begging for more.`;
+            const articleConclusion = `In conclusion, ${movie.title} promises to be a game-changing entry in the franchise, bringing a darker, more psychological edge to the series while maintaining the familiar thrills fans have come to love. The introduction of new characters, the intense evolution of the story, and the looming, unpredictable danger make this installment a must-watch.`;
 
-            // Ambil beberapa gambar untuk gallery jika tidak ada trailer
+            // Ambil beberapa gambar untuk gallery
             const images = movie.images?.backdrops?.slice(0, 3) || [];
+
+            // YouTube embed SIMPLE - tanpa parameter API JS
+            const youtubeEmbedUrl = trailerInfo 
+                ? `https://www.youtube.com/embed/${trailerInfo.key}?rel=0&showinfo=0&modestbranding=1` 
+                : '';
 
             const html = `<!DOCTYPE html>
 <html lang="${lang}">
@@ -489,13 +472,14 @@
         .link-btn { background: #1f2c48; padding: 0.8rem 1.8rem; border-radius: 40px; color: white; text-decoration: none; display: inline-flex; align-items: center; gap: 0.6rem; border: 1px solid #3f5b92; transition: 0.2s; }
         .link-btn:hover { background: #2d4070; transform: translateY(-2px); }
         
-        /* Trailer Container */
+        /* Trailer Container - Simple */
         .trailer-container {
             margin: 2rem 0;
             border-radius: 1.5rem;
             overflow: hidden;
             aspect-ratio: 16/9;
             background: #0b1425;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .trailer-container iframe {
             width: 100%;
@@ -503,7 +487,23 @@
             border: none;
         }
         
-        /* Fallback Gallery */
+        /* Backup link */
+        .trailer-backup {
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+        .trailer-backup a {
+            color: #ff0000;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #1f2c48;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            border: 1px solid #ff0000;
+        }
+        
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -521,17 +521,7 @@
             object-fit: cover;
             transition: transform 0.3s;
         }
-        .gallery-item img:hover {
-            transform: scale(1.05);
-        }
-        .no-trailer-message {
-            background: #1a2645;
-            border-radius: 1rem;
-            padding: 2rem;
-            text-align: center;
-            margin: 2rem 0;
-            border: 1px solid #3d5a8c;
-        }
+        .gallery-item img:hover { transform: scale(1.05); }
         
         .article { background: #0f1a2b; border-radius: 1.8rem; padding: 1.6rem; margin-top: 2rem; border: 1px solid #2f456e; }
         .article h2 { font-size: 1.8rem; margin-bottom: 1rem; }
@@ -584,11 +574,24 @@
             </div>
         </div>
 
-        <!-- VIDEO SECTION: Trailer atau Fallback Gallery -->
-        ${trailerKey ? `
-        <h2 style="margin-bottom: 1rem;"><i class="fab fa-youtube" style="color: #ff0000;"></i> Official Trailer</h2>
+        <!-- VIDEO SECTION: Trailer dengan embed SIMPLE + backup link -->
+        ${trailerInfo ? `
+        <h2 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fab fa-youtube" style="color: #ff0000;"></i> 
+            Official Trailer: ${movie.title}
+        </h2>
         <div class="trailer-container">
-            <iframe src="https://www.youtube.com/embed/${trailerKey}" title="${movie.title} Trailer" allowfullscreen loading="lazy"></iframe>
+            <iframe src="${youtubeEmbedUrl}" 
+                    title="${movie.title} trailer" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    loading="lazy">
+            </iframe>
+        </div>
+        <div class="trailer-backup">
+            <a href="https://www.youtube.com/watch?v=${trailerInfo.key}" target="_blank" rel="nofollow">
+                <i class="fab fa-youtube"></i> Watch on YouTube (backup link)
+            </a>
         </div>
         ` : images.length > 0 ? `
         <h2 style="margin-bottom: 1rem;"><i class="fas fa-images"></i> Scene Gallery</h2>
@@ -600,25 +603,23 @@
             `).join('')}
         </div>
         ` : `
-        <div class="no-trailer-message">
-            <i class="fas fa-film" style="font-size: 3rem; color: #3b82f6; margin-bottom: 1rem;"></i>
-            <h3>Experience ${movie.title} in Theaters</h3>
-            <p style="color: #b5d0ff;">Official trailer will be released soon. Stay tuned for updates!</p>
+        <div style="background: #1a2645; border-radius: 1rem; padding: 3rem; text-align: center; margin: 2rem 0;">
+            <i class="fas fa-film" style="font-size: 4rem; color: #3b82f6; margin-bottom: 1rem;"></i>
+            <h3>${movie.title} - Coming Soon</h3>
+            <p style="color: #b5d0ff;">Official trailer will be released soon. Stay tuned!</p>
         </div>
         `}
 
-        <!-- ARTIKEL 1: Plot dengan Quote -->
+        <!-- ARTIKEL 1 -->
         <div class="article">
             <h2>${movie.title}: The Story Unveiled</h2>
             <div class="article-meta"><i class="far fa-clock"></i> Posted by StreamGen · 15 min read · updated ${year}</div>
             <p>${movie.overview ? movie.overview : 'The film brings new adventures and stunning visual effects.'} The story continues with exciting twists and turns, pushing the boundaries of storytelling.</p>
-            <div class="article-quote">
-                ${articleQuote}
-            </div>
+            <div class="article-quote">${articleQuote}</div>
             <p>The psychological depth and intense narrative structure make this installment a standout. Fans of the franchise will appreciate the callbacks to previous moments while being introduced to fresh elements that expand the universe.</p>
         </div>
 
-        <!-- ARTIKEL 2: Streaming -->
+        <!-- ARTIKEL 2 -->
         <div class="article">
             <h2>Where to Watch ${movie.title} Online</h2>
             <div class="article-meta"><i class="fas fa-tag"></i> Legal sources · 4K UHD · Streaming options</div>
@@ -629,18 +630,14 @@
                 <li>Amazon Prime Video (rental/purchase)</li>
                 <li>Local streaming providers in your country</li>
             </ul>
-            <p style="margin-top: 1rem;">The film will be available in 4K UHD, HDR, and with multiple audio options including original language and dubbing.</p>
         </div>
 
-        <!-- ARTIKEL 3: Impact dengan kesimpulan -->
+        <!-- ARTIKEL 3 -->
         <div class="article">
             <h2>Why ${movie.title} Changes Everything</h2>
             <div class="article-meta"><i class="fas fa-chart-line"></i> Analysis · new characters · future sequels</div>
             <p>The introduction of new characters and conflicts adds moral complexity to the franchise. This installment expands the universe significantly, setting up potential for future sequels and spin-offs.</p>
-            <div class="article-quote">
-                ${articleConclusion}
-            </div>
-            <p>With groundbreaking visual effects and a compelling narrative, ${movie.title} raises the bar for blockbuster filmmaking. The world-building is meticulous, and the attention to detail in every frame showcases the passion of the creative team.</p>
+            <div class="article-quote">${articleConclusion}</div>
         </div>
 
         <!-- Rekomendasi -->
@@ -655,7 +652,7 @@
         </div>
 
         <div class="footer">
-            <i class="fas fa-crown"></i> Generated by StreamGen Pro · ID ${movieId} · ${year}
+            <i class="fas fa-check-circle" style="color:#10b981;"></i> ID ${movieId} · ${year}
         </div>
     </div>
 </body>
@@ -691,7 +688,7 @@
             generatedFiles = [];
             updateFilePreview();
 
-            log(`🚀 Memulai generate ${uniqueIds.length} file dengan validasi trailer...`);
+            log(`🚀 Memulai generate ${uniqueIds.length} file...`);
             isGenerating = true;
             downloadBtn.disabled = true;
 
@@ -713,9 +710,6 @@
                         title: result.title
                     });
                     successCount++;
-                    log(`✅ ID ${movieId} (${result.title}) berhasil`, 'success');
-                } else {
-                    log(`❌ ID ${movieId} gagal`, 'error');
                 }
 
                 const percent = Math.round(((i + 1) / uniqueIds.length) * 100);
@@ -735,30 +729,26 @@
         function updateFilePreview() {
             previewCountSpan.innerText = generatedFiles.length;
             if (generatedFiles.length === 0) {
-                filePreviewGrid.innerHTML = '<div style="color: #6b83b0;">Belum ada file yang digenerate</div>';
+                filePreviewGrid.innerHTML = '<div style="color: #6b83b0;">Belum ada file</div>';
                 return;
             }
 
             filePreviewGrid.innerHTML = generatedFiles.map(f => `
                 <div class="file-card">
-                    <i class="fas fa-file-code"></i> ${f.filename.substring(0, 30)}...
-                    <div style="font-size:0.7rem; color:#8ba3d9; margin-top:0.2rem;">${f.title}</div>
+                    <i class="fas fa-file-code"></i> ${f.filename.substring(0, 25)}...
+                    <div style="font-size:0.7rem;">${f.title}</div>
                 </div>
             `).join('');
         }
 
         function downloadZip() {
             if (generatedFiles.length === 0) return;
-
             const zip = new JSZip();
-            generatedFiles.forEach(file => {
-                zip.file(file.filename, file.content);
-            });
-
-            zip.generateAsync({ type: 'blob' }).then(function(blob) {
+            generatedFiles.forEach(file => zip.file(file.filename, file.content));
+            zip.generateAsync({ type: 'blob' }).then(blob => {
                 const link = document.createElement('a');
                 link.href = URL.createObjectURL(blob);
-                link.download = `tmdb_bulk_pro_${new Date().getTime()}.zip`;
+                link.download = `tmdb_bulk_${new Date().getTime()}.zip`;
                 link.click();
                 log('📦 ZIP berhasil didownload', 'success');
             });
@@ -769,7 +759,7 @@
         downloadBtn.addEventListener('click', downloadZip);
         clearLogsBtn.addEventListener('click', clearLogs);
 
-        log('✅ Pro Generator siap dengan validasi trailer & fallback gallery');
+        log('✅ Generator siap dengan trailer fix (no error 153)');
     })();
 </script>
 </body>
