@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎬 StreamGen Pro · Movie SEO Generator + TMDB</title>
-    <!-- google fonts + font awesome 6 -->
+    <title>🔥 TMDB Bulk HTML Generator · Streaming Pages + SEO</title>
+    <!-- Google Fonts + Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&display=swap" rel="stylesheet">
@@ -12,67 +12,36 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: #0b0f1a;
-            font-family: 'Inter', system-ui, sans-serif;
+            background: #0a0f1e;
+            font-family: 'Inter', sans-serif;
             color: #eef3fc;
             padding: 2rem 1.5rem;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
-        .generator-wrapper {
+        .container {
             max-width: 1400px;
-            width: 100%;
+            margin: 0 auto;
         }
-        .top-bar {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-            gap: 1rem;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-weight: 700;
-            font-size: 1.9rem;
-            background: linear-gradient(145deg, #a0c0ff, #ffffff);
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #a5d8ff, #ffffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
         }
-        .logo i {
-            background: #1f2b48;
-            padding: 0.7rem;
-            border-radius: 1.5rem;
-            color: #5f8aff;
-            font-size: 1.8rem;
-            -webkit-text-fill-color: #5f8aff;
-        }
-        .tmdb-badge {
-            background: #032541;
-            color: white;
-            padding: 0.4rem 1.2rem;
-            border-radius: 40px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            border: 1px solid #3a5a8a;
+        .subtitle {
+            color: #8ba3d9;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
         }
         .control-panel {
-            background: #131e33;
+            background: #131f33;
             border-radius: 2rem;
-            padding: 1.8rem 2rem;
-            margin-bottom: 2.5rem;
-            border: 1px solid #2e3f60;
-            box-shadow: 0 20px 35px -10px black;
+            padding: 2rem;
+            border: 1px solid #2d4068;
+            margin-bottom: 2rem;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem 2rem;
-            align-items: end;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
         .input-group {
             display: flex;
@@ -80,304 +49,131 @@
             gap: 0.5rem;
         }
         .input-group label {
-            font-size: 0.9rem;
+            color: #9bb5ff;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.02em;
-            color: #a5c0ff;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.5rem;
         }
-        .input-group input, .input-group select {
-            background: #0c1322;
-            border: 1px solid #2c3d60;
-            border-radius: 60px;
-            padding: 0.8rem 1.3rem;
-            font-size: 1rem;
+        .input-group input, .input-group select, .input-group textarea {
+            background: #0b1425;
+            border: 1px solid #2f4570;
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
             color: white;
-            outline: none;
-            transition: 0.2s;
             font-family: 'Inter', monospace;
         }
-        .input-group input:focus, .input-group select:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px #1e3a8a40;
+        .input-group textarea {
+            min-height: 120px;
+            resize: vertical;
         }
         .button-group {
             display: flex;
-            gap: 0.8rem;
+            gap: 1rem;
             flex-wrap: wrap;
-            justify-content: flex-end;
-            align-items: center;
+            align-items: flex-end;
         }
         .btn {
-            background: #28344e;
+            background: #25344f;
             border: none;
             border-radius: 40px;
             padding: 0.8rem 1.8rem;
             font-weight: 600;
-            font-size: 0.95rem;
             color: white;
             cursor: pointer;
-            transition: 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 0.6rem;
-            border: 1px solid #3f5185;
+            border: 1px solid #415e96;
+            transition: 0.2s;
         }
         .btn-primary {
             background: #1d4ed8;
             border-color: #3b82f6;
         }
-        .btn-primary:hover {
-            background: #2563eb;
-            transform: scale(1.02);
+        .btn-success {
+            background: #0f6e4a;
+            border-color: #10b981;
         }
-        .btn-outline:hover {
-            background: #2f405e;
+        .btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
         }
-        .preview-header {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin: 1.5rem 0 1rem 0;
-            flex-wrap: wrap;
+        .progress-area {
+            background: #0f1a2c;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid #364d7a;
         }
-        .preview-header h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-        .pill {
-            background: #1b2a45;
-            border-radius: 30px;
-            padding: 0.3rem 1rem;
-            font-size: 0.8rem;
-            color: #9ab9ff;
-        }
-
-        /* streaming page */
-        .streaming-page {
-            background: #0f172b;
-            border-radius: 2.5rem;
-            border: 1px solid #293b60;
-            padding: 2rem 2rem 1.5rem;
-            box-shadow: 0 25px 45px -15px #00000080;
-            margin-top: 0.5rem;
-        }
-
-        .movie-hero {
-            display: grid;
-            grid-template-columns: 260px 1fr;
-            gap: 2rem;
-            margin-bottom: 2.5rem;
-        }
-        .poster-frame {
-            border-radius: 1.8rem;
+        .progress-bar {
+            height: 8px;
+            background: #25385c;
+            border-radius: 10px;
             overflow: hidden;
-            background: #0b1425;
-            box-shadow: 0 20px 30px -10px black;
-            border: 1px solid #354d7a;
-            aspect-ratio: 2/3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .poster-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .poster-placeholder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #4d6b9e;
-            background: #101a30;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-        }
-        .hero-content h1 {
-            font-size: 2.6rem;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-        .original-title {
-            color: #97b5f0;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-        }
-        .meta-line {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
             margin: 1rem 0;
         }
-        .meta-badge {
-            background: #1b2848;
-            padding: 0.4rem 1.2rem;
-            border-radius: 30px;
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        .log-area {
+            background: #0a1220;
+            border-radius: 1rem;
+            padding: 1rem;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
             font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            border: 1px solid #2e4270;
         }
-        .rating { background: #223055; }
-        .overview-box {
-            background: #0b1425b0;
-            border-radius: 1.5rem;
-            padding: 1.3rem 1.5rem;
-            border: 1px solid #2a3d64;
-            margin: 1.5rem 0 1rem;
-            backdrop-filter: blur(4px);
-        }
-
-        .links-section {
-            margin-top: 2.2rem;
-        }
-        .section-title-small {
-            font-size: 1.2rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-bottom: 2px solid #1d2d4e;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.2rem;
-        }
-        .link-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .stream-link {
-            background: #1f2c48;
-            padding: 0.8rem 1.6rem;
-            border-radius: 40px;
-            border: 1px solid #3f5b92;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            transition: 0.2s;
-            font-size: 0.95rem;
-        }
-        .stream-link:hover {
-            background: #2d4070;
-            border-color: #5f8aff;
-            transform: translateY(-2px);
-        }
-        .download-link {
-            background: #1d3a3a;
-            border-color: #1e7e6c;
-        }
-        .download-link:hover { background: #25655a; }
-
-        .rec-grid {
+        .preview-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 1.2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
         }
-        .rec-item {
-            background: #162035;
-            border-radius: 1.2rem;
-            overflow: hidden;
-            border: 1px solid #31486a;
-        }
-        .rec-item img {
-            width: 100%;
-            aspect-ratio: 2/3;
-            object-fit: cover;
-        }
-        .rec-item .rec-title {
-            padding: 0.5rem;
+        .file-card {
+            background: #16243d;
+            border-radius: 1rem;
+            padding: 0.8rem;
+            border: 1px solid #3a5090;
             font-size: 0.85rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
-
-        /* artikel SEO */
-        .seo-articles {
-            margin-top: 3rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.8rem;
+        .file-card i {
+            color: #10b981;
+            margin-right: 0.3rem;
         }
-        .article-card {
-            background: #0f1a2b;
-            border-radius: 1.8rem;
-            padding: 1.6rem 2rem;
-            border: 1px solid #2f456e;
-            box-shadow: 0 10px 20px -5px #00000060;
-        }
-        .article-title {
-            font-size: 1.7rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .article-meta {
-            color: #8099cf;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-            display: flex;
-            gap: 1.5rem;
-        }
-        .article-content {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: #d3e0fc;
-        }
-        .article-content p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-copyright {
+        .footer {
             margin-top: 3rem;
             text-align: center;
-            color: #5d74a5;
+            color: #5f79b0;
         }
-        .error-banner {
-            background: #3f1f1f;
-            border-left: 5px solid #f87171;
-            padding: 0.8rem 1.5rem;
-            border-radius: 60px;
-            margin-bottom: 1rem;
-        }
-        .small-note { font-size: 0.85rem; color: #7b93c7; margin-top: 0.3rem; }
     </style>
 </head>
 <body>
-<div class="generator-wrapper">
-    <div class="top-bar">
-        <div class="logo">
-            <i class="fas fa-sliders"></i> Stream<span style="font-weight:300;">Gen</span>
-        </div>
-        <div class="tmdb-badge"><i class="fas fa-database"></i> TMDB · 3a660b31</div>
-    </div>
+<div class="container">
+    <h1><i class="fas fa-layer-group" style="color:#3b82f6;"></i> TMDB Bulk HTML Generator</h1>
+    <div class="subtitle">Generate ratusan halaman streaming + artikel SEO otomatis berdasarkan ID TMDB</div>
 
-    <!-- PANEL KONTROL -->
-    <div class="control-panel" id="controlPanel">
+    <!-- Control Panel -->
+    <div class="control-panel">
         <div class="input-group">
             <label><i class="fas fa-key"></i> TMDB API Key</label>
-            <input type="text" id="apiKeyInput" placeholder="3a660b31f4af8da5f2bd6f2799c11e2e" value="3a660b31f4af8da5f2bd6f2799c11e2e">
+            <input type="text" id="apiKey" value="3a660b31f4af8da5f2bd6f2799c11e2e" placeholder="Your TMDB API Key">
         </div>
+        
         <div class="input-group">
-            <label><i class="fas fa-film"></i> Movie ID / judul</label>
-            <input type="text" id="movieIdInput" placeholder="76600 (Avatar 3)" value="76600">
-            <div class="small-note">Contoh: 76600 (Avatar 3), 157336 (Interstellar)</div>
+            <label><i class="fas fa-list"></i> Daftar ID TMDB (pisahkan dengan koma, spasi, atau baris baru)</label>
+            <textarea id="movieIds" placeholder="Contoh: 76600, 157336, 299534, 24428, 11, 155">76600, 157336, 299534, 24428, 11, 155, 27205, 49026, 49538, 68721</textarea>
+            <small style="color:#8ba3d9;">Format: angka ID TMDB. Pisahkan dengan koma atau enter.</small>
         </div>
+
         <div class="input-group">
-            <label><i class="fas fa-globe"></i> Bahasa (UI & TMDB)</label>
-            <select id="langSelect">
+            <label><i class="fas fa-globe"></i> Bahasa Artikel & UI</label>
+            <select id="bulkLang">
                 <option value="en-US">🇬🇧 English</option>
                 <option value="es-ES" selected>🇪🇸 Español</option>
                 <option value="th-TH">🇹🇭 ไทย</option>
@@ -390,153 +186,101 @@
                 <option value="ru-RU">🇷🇺 Русский</option>
             </select>
         </div>
+
         <div class="input-group">
-            <label><i class="fas fa-link"></i> Judul Link 1 (tonton)</label>
-            <input type="text" id="link1Text" value="▶ Ver Película Avatar 3 HD">
+            <label><i class="fas fa-link"></i> Teks Link 1 (Tonton)</label>
+            <input type="text" id="bulkLink1Text" value="▶ Watch Movie HD">
         </div>
         <div class="input-group">
-            <label><i class="fas fa-download"></i> Link URL 1</label>
-            <input type="url" id="link1Url" value="https://t.co/pmyrhw8flH">
+            <label><i class="fas fa-download"></i> Teks Link 2 (Download)</label>
+            <input type="text" id="bulkLink2Text" value="⬇️ Download (UHD)">
         </div>
-        <div class="input-group">
-            <label><i class="fas fa-link"></i> Judul Link 2 (descargar)</label>
-            <input type="text" id="link2Text" value="⬇️ Descargar Avatar 3 (Español)">
-        </div>
-        <div class="input-group">
-            <label><i class="fas fa-download"></i> Link URL 2</label>
-            <input type="url" id="link2Url" value="https://avatar3-thai.readme.io/">
-        </div>
+
         <div class="button-group">
-            <button class="btn btn-primary" id="generateBtn"><i class="fas fa-magic"></i> Generar / Actualizar</button>
-            <button class="btn btn-outline" id="resetPreviewBtn"><i class="fas fa-undo-alt"></i> Reset Avatar 3</button>
+            <button class="btn btn-primary" id="generateBulkBtn"><i class="fas fa-cogs"></i> Generate HTML</button>
+            <button class="btn btn-success" id="downloadZipBtn" disabled><i class="fas fa-file-archive"></i> Download ZIP</button>
+            <button class="btn" id="clearLogsBtn"><i class="fas fa-broom"></i> Clear Logs</button>
         </div>
     </div>
 
-    <div class="preview-header">
-        <h2><i class="fas fa-tv" style="color:#3b82f6;"></i> Vista previa página streaming</h2>
-        <span class="pill" id="langPill">Idioma: Español</span>
+    <!-- Progress Area -->
+    <div class="progress-area">
+        <div style="display: flex; justify-content: space-between;">
+            <span><i class="fas fa-chart-line"></i> Progress: <span id="progressPercent">0%</span></span>
+            <span><i class="fas fa-film"></i> <span id="generatedCount">0</span> / <span id="totalCount">0</span> files</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="log-area" id="logArea">
+            <div>⏳ Siap generate... masukkan ID TMDB</div>
+        </div>
     </div>
 
-    <!-- PREVIEW AREA (dynamic) -->
-    <div class="streaming-page" id="streamPreview">
-        <div style="padding: 2rem; text-align: center; color: #7a8bbf;" id="previewLoading"><i class="fas fa-spinner fa-pulse"></i> Cargando vista previa...</div>
+    <!-- Generated Files Preview -->
+    <h3><i class="fas fa-file-code"></i> Generated Files (<span id="previewCount">0</span>)</h3>
+    <div class="preview-grid" id="filePreviewGrid">
+        <div style="color: #6b83b0;">Belum ada file yang digenerate</div>
     </div>
 
-    <!-- ARTIKEL SEO DINAMIS (berdasarkan bahasa) -->
-    <div class="seo-articles" id="seoArticles">
-        <!-- akan diisi oleh javascript dengan konten kaya artikel -->
-    </div>
-
-    <div class="footer-copyright">
-        <i class="fas fa-crown"></i> Generator konten kaya · artikel SEO · tombol & teks dinamis sesuai bahasa pilihan
+    <div class="footer">
+        <i class="fas fa-robot"></i> Bulk generator dengan artikel SEO dinamis berdasarkan data TMDB
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
     (function() {
-        // ========== KONFIGURASI ==========
-        const apiKeyInput = document.getElementById('apiKeyInput');
-        const movieIdInput = document.getElementById('movieIdInput');
-        const langSelect = document.getElementById('langSelect');
-        const link1Text = document.getElementById('link1Text');
-        const link1Url = document.getElementById('link1Url');
-        const link2Text = document.getElementById('link2Text');
-        const link2Url = document.getElementById('link2Url');
-        const generateBtn = document.getElementById('generateBtn');
-        const resetBtn = document.getElementById('resetPreviewBtn');
-        const previewContainer = document.getElementById('streamPreview');
-        const seoContainer = document.getElementById('seoArticles');
-        const langPill = document.getElementById('langPill');
-
-        const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
-        const DEFAULT_MOVIE = '76600'; // Avatar 3
+        // ========== CONFIG ==========
         const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
+        const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
+        
+        // DOM elements
+        const apiKeyInput = document.getElementById('apiKey');
+        const movieIdsTextarea = document.getElementById('movieIds');
+        const bulkLang = document.getElementById('bulkLang');
+        const bulkLink1Text = document.getElementById('bulkLink1Text');
+        const bulkLink2Text = document.getElementById('bulkLink2Text');
+        const generateBtn = document.getElementById('generateBulkBtn');
+        const downloadBtn = document.getElementById('downloadZipBtn');
+        const clearLogsBtn = document.getElementById('clearLogsBtn');
+        const logArea = document.getElementById('logArea');
+        const progressPercent = document.getElementById('progressPercent');
+        const progressFill = document.getElementById('progressFill');
+        const generatedCountSpan = document.getElementById('generatedCount');
+        const totalCountSpan = document.getElementById('totalCount');
+        const filePreviewGrid = document.getElementById('filePreviewGrid');
+        const previewCountSpan = document.getElementById('previewCount');
 
-        // ========== DATA ARTIKEL MULTI BAHASA ==========
-        const articleDB = {
-            'en-US': {
-                title1: 'Avatar: Fire and Ash – everything we know about the plot',
-                meta1: 'Posted by StreamGen · 12 min read · updated 2026',
-                content1: 'James Cameron returns to Pandora with the third installment, "Avatar: Fire and Ash". The Sully family faces a new threat: the Ash People, a fierce Na\'vi clan led by Varang. The film explores grief, revenge, and the element of fire. Rumors suggest the introduction of wind traders and volcanic landscapes. Expect stunning visuals and a deeper dive into Na\'vi culture.',
-                title2: 'Where to watch Avatar 3 online? Streaming & download options',
-                meta2: 'Legal sources · 4K UHD · Thai dubbed',
-                content2: 'While official streaming platforms will announce dates after theatrical release, fans are already looking for ways to watch. Some unofficial links circulate, but we recommend waiting for Disney+ / HBO Max availability. However, for preview purposes, the links below are demo versions. Stay tuned for official announcements.',
-                title3: 'Why "Fire and Ash" changes the game for the franchise',
-                meta3: 'Analysis · new clans · future sequels',
-                content3: 'The introduction of a antagonistic Na\'vi tribe adds moral complexity. Unlike the sky people, the Ash People are natives with their own agenda. This could set up conflicts for Avatar 4 and 5. Cameron hinted at fire as a symbol of both destruction and rebirth.'
-            },
-            'es-ES': {
-                title1: 'Avatar: Fuego y Ceniza – todo lo que sabemos de la trama',
-                meta1: 'Publicado por StreamGen · 12 min de lectura · 2026',
-                content1: 'James Cameron regresa a Pandora con la tercera entrega, "Avatar: Fuego y Ceniza". La familia Sully se enfrenta a una nueva amenaza: el Pueblo Ceniza, un clan Na\'vi feroz liderado por Varang. La película explora el duelo, la venganza y el elemento del fuego. Se rumorea la introducción de comerciantes del viento y paisajes volcánicos. Espera imágenes impresionantes y una inmersión más profunda en la cultura Na\'vi.',
-                title2: '¿Dónde ver Avatar 3 online? Opciones de streaming y descarga',
-                meta2: 'Fuentes legales · 4K UHD · doblaje español',
-                content2: 'Si bien las plataformas de streaming oficiales anunciarán fechas después del estreno en cines, los fanáticos ya buscan formas de verla. Circulan algunos enlaces no oficiales, pero recomendamos esperar a disponibilidad en Disney+ / HBO Max. Sin embargo, para fines de vista previa, los enlaces a continuación son versiones de demostración. Mantente atento a los anuncios oficiales.',
-                title3: 'Por qué "Fuego y Ceniza" cambia las reglas del juego para la franquicia',
-                meta3: 'Análisis · nuevos clanes · próximas secuelas',
-                content3: 'La introducción de una tribu Na\'vi antagónica añade complejidad moral. A diferencia de la gente del cielo, el Pueblo Ceniza son nativos con su propia agenda. Esto podría preparar conflictos para Avatar 4 y 5. Cameron insinuó el fuego como símbolo de destrucción y renacimiento.'
-            },
-            'th-TH': {
-                title1: 'อวตาร 3: อัคนีและธุลีดิน – ทุกสิ่งที่เรารู้เกี่ยวกับเนื้อเรื่อง',
-                meta1: 'โพสต์โดย StreamGen · อ่าน 12 นาที · อัพเดท 2026',
-                content1: 'เจมส์ คาเมรอน กลับสู่แพนดอร่าอีกครั้งกับภาคที่สาม "อวตาร: อัคนีและธุลีดิน" ครอบครัวซัลลีเผชิญภัยคุกคามใหม่: เผ่าไฟ ชนเผ่านาวีผู้ดุดันนำโดยวารัง ภาพยนตร์จะสำรวจความเศร้า การแก้แค้น และธาตุไฟ มีข่าวลือเกี่ยวกับเผ่าลมและทิวทัศน์ภูเขาไฟ คาดหวังภาพสวยงามและวัฒนธรรมนาวีที่ลึกซึ้งขึ้น',
-                title2: 'ดูอวตาร 3 ออนไลน์ได้ที่ไหน? ตัวเลือกสตรีมมิงและดาวน์โหลด',
-                meta2: 'แหล่งถูกกฎหมาย · 4K UHD · พากย์ไทย',
-                content2: 'แม้แพลตฟอร์มสตรีมมิงอย่างเป็นทางการจะประกาศวันฉายหลังโรงภาพยนตร์ แต่แฟนๆก็มองหาวิธีดูออนไลน์แล้ว มีลิงก์ไม่เป็นทางการบางส่วน แต่เราแนะนำรอ Disney+ / HBO Max อย่างไรก็ตามสำหรับตัวอย่าง ลิงก์ด้านล่างเป็นเวอร์ชันสาธิต ติดตามประกาศอย่างเป็นทางการ',
-                title3: 'ทำไม "อัคนีและธุลีดิน" ถึงเปลี่ยนเกมของแฟรนไชส์',
-                meta3: 'วิเคราะห์ · เผ่าใหม่ · ภาคต่อ',
-                content3: 'การแนะนำเผ่านาวีที่เป็นปรปักษ์เพิ่มความซับซ้อนทางศีลธรรม ต่างจากชาวฟ้า เผ่าไฟเป็นชนพื้นเมืองที่มีวาระของตนเอง สิ่งนี้อาจสร้างความขัดแย้งสำหรับอวตาร 4 และ 5 คาเมรอนบอกใบ้ไฟเป็นสัญลักษณ์ของทั้งการทำลายล้างและการเกิดใหม่'
-            },
-            'id-ID': {
-                title1: 'Avatar: Api dan Abu – semua yang kami tahu tentang plotnya',
-                meta1: 'Diposting oleh StreamGen · 12 menit baca · 2026',
-                content1: 'James Cameron kembali ke Pandora dengan bagian ketiga, "Avatar: Api dan Abu". Keluarga Sully menghadapi ancaman baru: Suku Abu, klan Na\'vi yang kejam dipimpin Varang. Film mengeksplorasi duka, balas dendam, dan elemen api. Isu tentang pedagang angin dan lanskap vulkanik. Harapkan visual memukau dan budaya Na\'vi lebih dalam.',
-                title2: 'Tempat menonton Avatar 3 online? Opsi streaming & download',
-                meta2: 'Sumber legal · 4K UHD · subtitle Indonesia',
-                content2: 'Sementara platform streaming resmi akan mengumumkan tanggal setelah rilis bioskop, penggemar sudah mencari cara menonton. Beberapa tautan tidak resmi beredar, tapi kami sarankan menunggu ketersediaan Disney+ / HBO Max. Namun untuk pratinjau, tautan di bawah adalah versi demo. Pantau pengumuman resmi.',
-                title3: 'Mengapa "Api dan Abu" mengubah permainan waralaba',
-                meta3: 'Analisis · klan baru · sekuel masa depan',
-                content3: 'Pengenalan suku Na\'vi antagonis menambah kompleksitas moral. Tidak seperti manusia langit, Suku Abu adalah penduduk asli dengan agenda sendiri. Ini bisa memicu konflik untuk Avatar 4 dan 5. Cameron mengisyaratkan api sebagai simbol kehancuran dan kelahiran kembali.'
-            }
-        };
+        // State
+        let generatedFiles = []; // { filename, content, movieId, title }
+        let isGenerating = false;
 
-        // fallback en-US
-        function getArticleForLang(lang) {
-            return articleDB[lang] || articleDB['en-US'];
+        // ========== UTILS ==========
+        function log(message, type = 'info') {
+            const entry = document.createElement('div');
+            entry.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}`;
+            if (type === 'error') entry.style.color = '#f87171';
+            else if (type === 'success') entry.style.color = '#4ade80';
+            else entry.style.color = '#a5d8ff';
+            logArea.appendChild(entry);
+            logArea.scrollTop = logArea.scrollHeight;
         }
 
-        // render artikel SEO
-        function renderArticles(lang) {
-            const art = getArticleForLang(lang);
-            seoContainer.innerHTML = `
-                <div class="article-card">
-                    <div class="article-title"><i class="fas fa-newspaper"></i> ${art.title1}</div>
-                    <div class="article-meta"><i class="far fa-clock"></i> ${art.meta1}</div>
-                    <div class="article-content"><p>${art.content1}</p></div>
-                </div>
-                <div class="article-card">
-                    <div class="article-title"><i class="fas fa-video"></i> ${art.title2}</div>
-                    <div class="article-meta"><i class="fas fa-tag"></i> ${art.meta2}</div>
-                    <div class="article-content"><p>${art.content2}</p></div>
-                </div>
-                <div class="article-card">
-                    <div class="article-title"><i class="fas fa-fire"></i> ${art.title3}</div>
-                    <div class="article-meta"><i class="fas fa-chart-line"></i> ${art.meta3}</div>
-                    <div class="article-content"><p>${art.content3}</p></div>
-                </div>
-            `;
+        function clearLogs() {
+            logArea.innerHTML = '';
+            log('Logs cleared.');
         }
 
-        // ========== FUNGSI FETCH TMDB ==========
-        async function fetchMovie(apiKey, movieId, language) {
-            if (!apiKey || !movieId) return null;
+        // ========== FETCH TMDB ==========
+        async function fetchMovieDetails(apiKey, movieId, language) {
             const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${language}`;
             try {
                 const res = await fetch(url);
-                if (!res.ok) throw new Error(`status ${res.status}`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 return await res.json();
             } catch (e) {
-                console.warn('TMDB fetch error', e);
+                log(`❌ Gagal fetch ID ${movieId}: ${e.message}`, 'error');
                 return null;
             }
         }
@@ -545,7 +289,7 @@
             try {
                 const url = `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${apiKey}&language=${language}`;
                 const res = await fetch(url);
-                if (!res.ok) throw new Error();
+                if (!res.ok) return [];
                 const data = await res.json();
                 return data.results.slice(0, 6);
             } catch {
@@ -553,153 +297,273 @@
             }
         }
 
-        // render preview (tanpa netflix button)
-        function renderPreview(movie, recommendations, link1TextVal, link1UrlVal, link2TextVal, link2UrlVal, lang) {
-            if (!movie) {
-                previewContainer.innerHTML = `<div class="error-banner"><i class="fas fa-exclamation-triangle"></i> No data from TMDB (check API key / Movie ID). Using fallback.</div>
-                ${renderFallback(link1TextVal, link1UrlVal, link2TextVal, link2UrlVal)}`;
+        // ========== GENERATE HTML UNTUK 1 FILM ==========
+        async function generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text) {
+            const movie = await fetchMovieDetails(apiKey, movieId, lang);
+            if (!movie) return null;
+
+            const recommendations = await fetchRecommendations(apiKey, movieId, lang);
+            
+            // Template artikel SEO dinamis berdasarkan film
+            const articleTitle1 = `${movie.title}: ${getArticleSubtitle(lang, 'plot')}`;
+            const articleTitle2 = getArticleTitle2(lang, movie.title);
+            const articleTitle3 = getArticleTitle3(lang, movie.title);
+
+            // Generate HTML
+            const html = `<!DOCTYPE html>
+<html lang="${lang}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${movie.title} · Watch Online HD</title>
+    <meta name="description" content="${movie.overview ? movie.overview.substring(0, 160) : 'Watch online'}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0b0f1a; font-family: 'Inter', sans-serif; color: #eef3fc; padding: 2rem 1.5rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .movie-card { background: #131f33; border-radius: 2rem; padding: 2rem; border: 1px solid #2d4068; margin-bottom: 2rem; }
+        .movie-hero { display: grid; grid-template-columns: 260px 1fr; gap: 2rem; }
+        .poster { border-radius: 1.5rem; overflow: hidden; background: #0b1425; aspect-ratio: 2/3; }
+        .poster img { width: 100%; height: 100%; object-fit: cover; }
+        h1 { font-size: 2.5rem; }
+        .meta { display: flex; gap: 1rem; margin: 1rem 0; flex-wrap: wrap; }
+        .meta span { background: #1b2848; padding: 0.4rem 1.2rem; border-radius: 30px; }
+        .overview { background: #0b1425b0; border-radius: 1.5rem; padding: 1.3rem; margin: 1.5rem 0; }
+        .links { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .link-btn { background: #1f2c48; padding: 0.8rem 1.8rem; border-radius: 40px; color: white; text-decoration: none; display: inline-flex; align-items: center; gap: 0.6rem; border: 1px solid #3f5b92; }
+        .article { background: #0f1a2b; border-radius: 1.8rem; padding: 1.6rem; margin-top: 2rem; border: 1px solid #2f456e; }
+        .article h2 { font-size: 1.8rem; margin-bottom: 1rem; }
+        .article-meta { color: #8099cf; margin-bottom: 1rem; }
+        .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; margin-top: 2rem; }
+        .rec-item { background: #162035; border-radius: 1rem; overflow: hidden; }
+        .rec-item img { width: 100%; aspect-ratio: 2/3; object-fit: cover; }
+        .footer { margin-top: 2rem; color: #5f79b0; text-align: center; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="movie-card">
+        <div class="movie-hero">
+            <div class="poster">
+                ${movie.poster_path ? `<img src="${IMG_BASE}${movie.poster_path}" alt="${movie.title}">` : '<div style="display: flex; align-items: center; justify-content: center; height: 100%;"><i class="fas fa-film fa-3x"></i></div>'}
+            </div>
+            <div>
+                <h1>${movie.title}</h1>
+                <div style="color: #97b5f0;">${movie.original_title || ''}</div>
+                <div class="meta">
+                    <span><i class="far fa-calendar"></i> ${movie.release_date ? movie.release_date.slice(0,4) : 'N/A'}</span>
+                    <span><i class="fas fa-clock"></i> ${movie.runtime || '?'} min</span>
+                    <span><i class="fas fa-star" style="color: gold;"></i> ${movie.vote_average ? movie.vote_average.toFixed(1) : '?'}</span>
+                </div>
+                <div class="overview">${movie.overview || 'No overview'}</div>
+                <div class="links">
+                    <a href="#" class="link-btn"><i class="fas fa-play-circle"></i> ${link1Text}</a>
+                    <a href="#" class="link-btn" style="background:#1d3a3a;"><i class="fas fa-download"></i> ${link2Text}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ARTIKEL SEO -->
+    <div class="article">
+        <h2>${articleTitle1}</h2>
+        <div class="article-meta"><i class="far fa-clock"></i> Posted by StreamGen · 12 min read · updated 2026</div>
+        <p>${movie.title} is one of the most anticipated films. ${movie.overview ? movie.overview.substring(0, 200) : 'The movie brings new adventures'}... The story continues with exciting twists. James Cameron (if applicable) delivers stunning visuals. Fans are eager to see the development of characters and the new world.</p>
+    </div>
+
+    <div class="article">
+        <h2>${articleTitle2}</h2>
+        <div class="article-meta"><i class="fas fa-tag"></i> Legal sources · 4K UHD</div>
+        <p>While official streaming platforms will announce dates after theatrical release, fans are already looking for ways to watch ${movie.title}. Some unofficial links circulate, but we recommend waiting for official platforms. For preview purposes, the links above are demo versions. Stay tuned for official announcements on Disney+, HBO Max, or local providers.</p>
+    </div>
+
+    <div class="article">
+        <h2>${articleTitle3}</h2>
+        <div class="article-meta"><i class="fas fa-chart-line"></i> Analysis · new characters · future sequels</div>
+        <p>The introduction of new characters and conflicts adds moral complexity. ${movie.title} expands the universe, setting up potential for sequels. Critics suggest that this installment changes the franchise's direction, exploring deeper themes.</p>
+    </div>
+
+    <!-- Rekomendasi -->
+    <h3><i class="fas fa-thumbs-up"></i> You may also like</h3>
+    <div class="rec-grid">
+        ${recommendations.map(m => `
+            <div class="rec-item">
+                ${m.poster_path ? `<img src="${IMG_BASE}${m.poster_path}" alt="${m.title}">` : '<div style="background:#1a2440; padding:1rem; text-align:center;"><i class="fas fa-image"></i></div>'}
+                <div style="padding:0.5rem; font-size:0.85rem;">${m.title}</div>
+            </div>
+        `).join('')}
+    </div>
+
+    <div class="footer">
+        <i class="fas fa-crown"></i> Generated by StreamGen · ID ${movieId}
+    </div>
+</div>
+</body>
+</html>`;
+            return { html, title: movie.title, movieId };
+        }
+
+        // Helper untuk judul artikel berdasarkan bahasa
+        function getArticleSubtitle(lang, key) {
+            const subs = {
+                'en-US': 'everything we know about the plot',
+                'es-ES': 'todo lo que sabemos de la trama',
+                'th-TH': 'ทุกสิ่งที่เรารู้เกี่ยวกับเนื้อเรื่อง',
+                'id-ID': 'semua yang kami tahu tentang plotnya',
+                'fr-FR': 'tout ce que nous savons sur l\'intrigue',
+                'zh-CN': '我们所知道的情节',
+                'ja-JP': 'プロットについて知っているすべて',
+                'ko-KR': '줄거리에 대해 우리가 아는 모든 것',
+                'hi-IN': 'कथानक के बारे में हम जो कुछ जानते हैं',
+                'ru-RU': 'все, что мы знаем о сюжете'
+            };
+            return subs[lang] || subs['en-US'];
+        }
+
+        function getArticleTitle2(lang, movieTitle) {
+            const titles = {
+                'en-US': `Where to watch ${movieTitle} online? Streaming & download options`,
+                'es-ES': `¿Dónde ver ${movieTitle} online? Opciones de streaming y descarga`,
+                'th-TH': `ดู ${movieTitle} ออนไลน์ได้ที่ไหน? ตัวเลือกสตรีมมิงและดาวน์โหลด`,
+                'id-ID': `Tempat menonton ${movieTitle} online? Opsi streaming & download`,
+                'fr-FR': `Où regarder ${movieTitle} en ligne? Options de streaming et téléchargement`,
+                'zh-CN': `在哪里在线观看 ${movieTitle}？流媒体和下载选项`,
+                'ja-JP': `${movieTitle}をオンラインで見るには？ストリーミングとダウンロードオプション`,
+                'ko-KR': `${movieTitle} 온라인 시청 장소? 스트리밍 및 다운로드 옵션`,
+                'hi-IN': `${movieTitle} ऑनलाइन कहाँ देखें? स्ट्रीमिंग और डाउनलोड विकल्प`,
+                'ru-RU': `Где смотреть ${movieTitle} онлайн? Варианты стриминга и загрузки`
+            };
+            return titles[lang] || titles['en-US'];
+        }
+
+        function getArticleTitle3(lang, movieTitle) {
+            const titles = {
+                'en-US': `Why "${movieTitle}" changes the game for the franchise`,
+                'es-ES': `Por qué "${movieTitle}" cambia las reglas del juego para la franquicia`,
+                'th-TH': `ทำไม "${movieTitle}" ถึงเปลี่ยนเกมของแฟรนไชส์`,
+                'id-ID': `Mengapa "${movieTitle}" mengubah permainan waralaba`,
+                'fr-FR': `Pourquoi "${movieTitle}" change la donne pour la franchise`,
+                'zh-CN': `为什么"${movieTitle}"改变了系列的格局`,
+                'ja-JP': `なぜ「${movieTitle}」がフランチャイズのゲームを変えるのか`,
+                'ko-KR': `왜 "${movieTitle}"가 프랜차이즈의 판도를 바꾸는가`,
+                'hi-IN': `क्यों "${movieTitle}" फ्रैंचाइज़ी के लिए खेल बदलता है`,
+                'ru-RU': `Почему "${movieTitle}" меняет правила игры для франшизы`
+            };
+            return titles[lang] || titles['en-US'];
+        }
+
+        // ========== BULK GENERATE ==========
+        async function bulkGenerate() {
+            if (isGenerating) {
+                log('⏳ Masih dalam proses generate...', 'error');
                 return;
             }
 
-            const posterPath = movie.poster_path ? `${IMG_BASE}${movie.poster_path}` : null;
-            const title = movie.title || movie.original_title || 'Unknown';
-            const originalTitle = movie.original_title || '';
-            const year = movie.release_date ? movie.release_date.slice(0,4) : 'N/A';
-            const runtime = movie.runtime ? movie.runtime : '?';
-            const genres = movie.genres ? movie.genres.slice(0,3).map(g => g.name).join(', ') : 'Unknown';
-            const vote = movie.vote_average ? movie.vote_average.toFixed(1) : '?';
-            const voteCount = movie.vote_count ? movie.vote_count.toLocaleString() : '0';
-            const overview = movie.overview || 'No overview';
-            const tagline = movie.tagline ? movie.tagline : '';
-
-            let recHtml = '';
-            if (recommendations && recommendations.length > 0) {
-                recHtml = recommendations.map(m => {
-                    const recPoster = m.poster_path ? `${IMG_BASE}${m.poster_path}` : '';
-                    return `<div class="rec-item">
-                        ${recPoster ? `<img src="${recPoster}" alt="${m.title}" loading="lazy">` : '<div style="background:#1a2440; padding:1rem;text-align:center;"><i class="fas fa-image"></i></div>'}
-                        <div class="rec-title">${m.title}</div>
-                    </div>`;
-                }).join('');
-            } else {
-                recHtml = '<div style="grid-column:1/-1; color:#6b80af;">No recommendations in this language</div>';
-            }
-
-            const link1Html = link1UrlVal ? `<a href="${link1UrlVal}" target="_blank" class="stream-link"><i class="fas fa-play-circle"></i> ${link1TextVal || 'Watch'}</a>` : '';
-            const link2Html = link2UrlVal ? `<a href="${link2UrlVal}" target="_blank" class="stream-link download-link"><i class="fas fa-download"></i> ${link2TextVal || 'Download'}</a>` : '';
-
-            const html = `
-                <div class="movie-hero">
-                    <div class="poster-frame">
-                        ${posterPath ? `<img src="${posterPath}" alt="${title}">` : `<div class="poster-placeholder"><i class="fas fa-poster" style="font-size:3rem;"></i><br>No poster</div>`}
-                    </div>
-                    <div class="hero-content">
-                        <h1>${title}</h1>
-                        <div class="original-title">${originalTitle}</div>
-                        <div class="meta-line">
-                            <span class="meta-badge"><i class="far fa-calendar"></i> ${year}</span>
-                            <span class="meta-badge"><i class="fas fa-clock"></i> ${runtime} min</span>
-                            <span class="meta-badge"><i class="fas fa-tag"></i> ${genres}</span>
-                            <span class="meta-badge rating"><i class="fas fa-star" style="color:gold;"></i> ${vote} (${voteCount})</span>
-                        </div>
-                        ${tagline ? `<div style="font-style:italic; color:#a7c2ff;">“${tagline}”</div>` : ''}
-                        <div class="overview-box">
-                            ${overview}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="links-section">
-                    <div class="section-title-small"><i class="fas fa-link"></i> Watch / Download</div>
-                    <div class="link-grid">
-                        ${link1Html}
-                        ${link2Html}
-                        <!-- tombol NETFLIX dihapus sesuai permintaan -->
-                    </div>
-                    <div style="margin-top: 1rem; font-size:0.9rem; background: #0d1428; padding:0.8rem 1.2rem; border-radius: 60px; display:inline-block;">
-                        <i class="fas fa-info-circle"></i> Custom links: ${link1TextVal} & ${link2TextVal}
-                    </div>
-                </div>
-
-                <div style="margin-top: 2.5rem;">
-                    <div class="section-title-small"><i class="fas fa-thumbs-up"></i> You may also like</div>
-                    <div class="rec-grid">
-                        ${recHtml}
-                    </div>
-                </div>
-            `;
-            previewContainer.innerHTML = html;
-        }
-
-        function renderFallback(link1TextVal, link1UrlVal, link2TextVal, link2UrlVal) {
-            return `
-                <div class="movie-hero">
-                    <div class="poster-frame"><div class="poster-placeholder"><i class="fas fa-image"></i> Poster example</div></div>
-                    <div class="hero-content"><h1>Avatar: Fire and Ash</h1><div class="original-title">Avatar 3</div>
-                    <div class="meta-line"><span class="meta-badge">2025</span><span class="meta-badge">165 min</span><span class="meta-badge">Sci-Fi</span></div>
-                    <div class="overview-box">Return to Pandora with the Sully family. They face the Ash People.</div></div>
-                </div>
-                <div class="links-section">
-                    <div class="link-grid">
-                        <a href="${link1UrlVal}" class="stream-link"><i class="fas fa-play"></i> ${link1TextVal}</a>
-                        <a href="${link2UrlVal}" class="stream-link download-link"><i class="fas fa-download"></i> ${link2TextVal}</a>
-                    </div>
-                </div>
-                <div class="rec-grid">${Array(4).fill(0).map(()=>'<div class="rec-item"><div style="background:#1f2a44;padding:1rem;"><i class="fas fa-film"></i> Example</div></div>').join('')}</div>
-            `;
-        }
-
-        async function generatePreview() {
             const apiKey = apiKeyInput.value.trim() || DEFAULT_API;
-            const movieId = movieIdInput.value.trim() || DEFAULT_MOVIE;
-            const lang = langSelect.value;
-            const link1TextVal = link1Text.value.trim() || '▶ Watch';
-            const link1UrlVal = link1Url.value.trim() || '#';
-            const link2TextVal = link2Text.value.trim() || '⬇️ Download';
-            const link2UrlVal = link2Url.value.trim() || '#';
-
-            // update pill
-            const langNames = { 'en-US':'English', 'es-ES':'Español', 'th-TH':'ไทย', 'id-ID':'Indonesia', 'fr-FR':'Français', 'zh-CN':'中文', 'ja-JP':'日本語', 'ko-KR':'한국어', 'hi-IN':'हिन्दी', 'ru-RU':'Русский' };
-            langPill.innerText = 'Idioma: ' + (langNames[lang] || lang);
-
-            // loading
-            previewContainer.innerHTML = `<div style="padding: 3rem;text-align:center;"><i class="fas fa-spinner fa-pulse fa-2x"></i><br>Loading TMDB data...</div>`;
-
-            const movieData = await fetchMovie(apiKey, movieId, lang);
-            let recommendations = [];
-            if (movieData) {
-                recommendations = await fetchRecommendations(apiKey, movieId, lang);
+            const lang = bulkLang.value;
+            const link1Text = bulkLink1Text.value.trim() || '▶ Watch';
+            const link2Text = bulkLink2Text.value.trim() || '⬇️ Download';
+            
+            // Parse IDs
+            const idsText = movieIdsTextarea.value.trim();
+            const idMatches = idsText.match(/\d+/g);
+            if (!idMatches || idMatches.length === 0) {
+                log('❌ Tidak ada ID TMDB valid ditemukan', 'error');
+                return;
             }
 
-            renderPreview(movieData, recommendations, link1TextVal, link1UrlVal, link2TextVal, link2UrlVal, lang);
-            renderArticles(lang);
+            const uniqueIds = [...new Set(idMatches)];
+            totalCountSpan.innerText = uniqueIds.length;
+            generatedCountSpan.innerText = '0';
+            progressPercent.innerText = '0%';
+            progressFill.style.width = '0%';
+            generatedFiles = [];
+            updateFilePreview();
+
+            log(`🚀 Memulai generate ${uniqueIds.length} file HTML...`);
+            isGenerating = true;
+            downloadBtn.disabled = true;
+
+            let successCount = 0;
+            for (let i = 0; i < uniqueIds.length; i++) {
+                const movieId = uniqueIds[i];
+                log(`⏳ [${i+1}/${uniqueIds.length}] Generating ID: ${movieId}...`);
+
+                const result = await generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text);
+                
+                if (result) {
+                    const filename = `${movieId}_${result.title.replace(/[^a-z0-9]/gi, '_').substring(0, 30)}.html`;
+                    generatedFiles.push({
+                        filename,
+                        content: result.html,
+                        movieId,
+                        title: result.title
+                    });
+                    successCount++;
+                    log(`✅ ID ${movieId} (${result.title}) berhasil`, 'success');
+                } else {
+                    log(`❌ ID ${movieId} gagal`, 'error');
+                }
+
+                // Update progress
+                const percent = Math.round(((i + 1) / uniqueIds.length) * 100);
+                progressPercent.innerText = `${percent}%`;
+                progressFill.style.width = `${percent}%`;
+                generatedCountSpan.innerText = successCount;
+                updateFilePreview();
+            }
+
+            log(`🎉 Selesai! ${successCount} file berhasil digenerate.`, 'success');
+            isGenerating = false;
+            if (successCount > 0) {
+                downloadBtn.disabled = false;
+            }
         }
 
-        // reset
-        resetBtn.addEventListener('click', () => {
-            movieIdInput.value = DEFAULT_MOVIE;
-            langSelect.value = 'es-ES';
-            link1Text.value = '▶ Ver Película Avatar 3 HD';
-            link1Url.value = 'https://t.co/pmyrhw8flH';
-            link2Text.value = '⬇️ Descargar Avatar 3 (Español)';
-            link2Url.value = 'https://avatar3-thai.readme.io/';
-            generatePreview();
-        });
+        function updateFilePreview() {
+            previewCountSpan.innerText = generatedFiles.length;
+            if (generatedFiles.length === 0) {
+                filePreviewGrid.innerHTML = '<div style="color: #6b83b0;">Belum ada file yang digenerate</div>';
+                return;
+            }
 
-        generateBtn.addEventListener('click', generatePreview);
-
-        // initial load
-        function init() {
-            apiKeyInput.value = DEFAULT_API;
-            movieIdInput.value = DEFAULT_MOVIE;
-            langSelect.value = 'es-ES'; // default spanyol
-            link1Text.value = '▶ Ver Película Avatar 3 HD';
-            link1Url.value = 'https://t.co/pmyrhw8flH';
-            link2Text.value = '⬇️ Descargar Avatar 3 (Español)';
-            link2Url.value = 'https://avatar3-thai.readme.io/';
-            generatePreview();
+            filePreviewGrid.innerHTML = generatedFiles.map(f => `
+                <div class="file-card">
+                    <i class="fas fa-file-code"></i> ${f.filename.substring(0, 25)}...
+                    <div style="font-size:0.7rem; color:#8ba3d9;">${f.title}</div>
+                </div>
+            `).join('');
         }
-        init();
+
+        // ========== DOWNLOAD ZIP ==========
+        function downloadZip() {
+            if (generatedFiles.length === 0) return;
+
+            const zip = new JSZip();
+            generatedFiles.forEach(file => {
+                zip.file(file.filename, file.content);
+            });
+
+            zip.generateAsync({ type: 'blob' }).then(function(blob) {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = `tmdb_bulk_${new Date().getTime()}.zip`;
+                link.click();
+                log('📦 ZIP berhasil didownload', 'success');
+            });
+        }
+
+        // ========== EVENT LISTENERS ==========
+        generateBtn.addEventListener('click', bulkGenerate);
+        downloadBtn.addEventListener('click', downloadZip);
+        clearLogsBtn.addEventListener('click', clearLogs);
+
+        // Initial log
+        log('✅ Generator siap. Masukkan ID TMDB dan klik Generate HTML.');
     })();
 </script>
 </body>
