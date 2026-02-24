@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔥 TMDB GENERATOR FINAL · Multi Language Paragraf + Link Dinamis</title>
+    <title>🔥 TMDB GENERATOR FINAL · Smart Slug + TXT URLs</title>
     <!-- Google Fonts + Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,6 +94,7 @@
         .btn-primary { background: #1d4ed8; border-color: #3b82f6; }
         .btn-success { background: #0f6e4a; border-color: #10b981; }
         .btn-info { background: #7c3aed; border-color: #a78bfa; }
+        .btn-warning { background: #b45309; border-color: #f59e0b; }
         .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
         
         .progress-area {
@@ -165,7 +166,7 @@
 <body>
 <div class="container">
     <h1><i class="fas fa-layer-group" style="color:#3b82f6;"></i> TMDB GENERATOR FINAL</h1>
-    <div class="subtitle">✨ Multi Language Paragraf · Link Dinamis + ID · RSS · TXT Import</div>
+    <div class="subtitle">✨ Smart Slug · TXT URLs · Multi Bahasa · RSS · Import TXT</div>
 
     <div class="control-panel">
         <div class="input-group">
@@ -190,7 +191,7 @@
         <div class="input-group">
             <label><i class="fas fa-link"></i> Base Link (opsional)</label>
             <input type="text" id="baseLink" value="https://inflix.pages.dev/" placeholder="https://domainmu.com/">
-            <small style="color: #8ba3d9;">Akan menjadi https://domainmu.com/{id} di tombol</small>
+            <small style="color: #8ba3d9;">Akan menjadi https://domainmu.com/{slug}</small>
         </div>
 
         <div class="input-group">
@@ -226,6 +227,7 @@
             <button class="btn btn-primary" id="generateBulkBtn"><i class="fas fa-cogs"></i> Generate HTML</button>
             <button class="btn btn-success" id="downloadZipBtn" disabled><i class="fas fa-file-archive"></i> Download ZIP</button>
             <button class="btn btn-info" id="downloadRssBtn" disabled><i class="fas fa-rss"></i> Download RSS</button>
+            <button class="btn btn-warning" id="downloadUrlsBtn" disabled><i class="fas fa-file-alt"></i> Download URLs TXT</button>
             <button class="btn" id="clearLogsBtn"><i class="fas fa-broom"></i> Clear Logs</button>
         </div>
     </div>
@@ -243,7 +245,7 @@
     <div class="preview-grid" id="filePreviewGrid"><div style="color: #6b83b0;">Belum ada file</div></div>
 
     <div class="footer">
-        <i class="fas fa-check-circle" style="color:#10b981;"></i> FINAL ULTIMATE · Paragraf Multi Bahasa · Link Dinamis + ID
+        <i class="fas fa-check-circle" style="color:#10b981;"></i> FINAL ULTIMATE · Smart Slug · TXT URLs · Multi Bahasa
     </div>
 </div>
 
@@ -255,6 +257,9 @@
     const BACKDROP_BASE = 'https://image.tmdb.org/t/p/original';
     const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
     const DOMAIN = 'exampledomain.com'; // Untuk RSS
+    
+    // Bahasa non-latin yang perlu slug khusus
+    const NON_LATIN_LANGS = ['th-TH', 'bg-BG', 'ja-JP', 'ko-KR', 'zh-CN', 'zh-TW', 'ar-SA', 'he-IL'];
     
     // ========== PARAGRAF MULTI BAHASA ==========
     const articleTexts = {
@@ -292,7 +297,7 @@
         },
         'vi-VN': {
             intro: 'Câu chuyện tiếp tục với những tình tiết bất ngờ, đẩy ranh giới kể chuyện lên tầm cao mới.',
-            quote: '"Mày đã chạy khỏi Woodsboro. Mày đã chạy khỏi New York. Nhưng mày không thể chạy khỏi tao." — Câu nói rùng rợn này nắm bắt bản chất của thương hiệu: dù bạn có đi xa đến đâu, nỗi kinh hoàng vẫn luôn tìm thấy bạn. {title} hứa hẹn một góc tối tăm và tâm lý hơn, đồng thời duy trị sự hồi hộp kinh điển mà người hâm mộ yêu thích.',
+            quote: '"Mày đã chạy khỏi Woodsboro. Mày đã chạy khỏi New York. Nhưng mày không thể chạy khỏi tao." — Câu nói rùng rợn này nắm bắt bản chất của thương hiệu: dù bạn có đi xa đến đâu, nỗi kinh hoàng vẫn luôn tìm thấy bạn. {title} hứa hẹn một góc tối tăm và tâm lý hơn, đồng thời duy trì sự hồi hộp kinh điển mà người hâm mộ yêu thích.',
             psychology: 'Chiều sâu tâm lý và cấu trúc kể chuyện dữ dội khiến phần này trở nên nổi bật. Người hâm mộ sẽ trân trọng những liên hệ với quá khứ trong khi khám phá các yếu tố mới mở rộng vũ trụ điện ảnh.',
             streaming: 'Tìm nơi xem {title} trực tuyến? Trong khi các nền tảng phát trực tuyến chính thức sẽ công bố ngày phát hành sau rạp, người hâm mộ đã bắt đầu tìm cách xem bộ phim hoành tráng này. Chúng tôi đề xuất:',
             analysis: 'Sự ra mắt của nhân vật và xung đột mới thêm phức tạp về đạo đức vào thương hiệu. Phần này mở rộng đáng kể vũ trụ, tạo tiền đề cho các phần tiếp theo.',
@@ -320,6 +325,7 @@
     const generateBtn = document.getElementById('generateBulkBtn');
     const downloadBtn = document.getElementById('downloadZipBtn');
     const downloadRssBtn = document.getElementById('downloadRssBtn');
+    const downloadUrlsBtn = document.getElementById('downloadUrlsBtn');
     const clearLogsBtn = document.getElementById('clearLogsBtn');
     const logArea = document.getElementById('logArea');
     const progressPercent = document.getElementById('progressPercent');
@@ -364,14 +370,22 @@
         return result;
     }
 
-    // Create slug from title
-    function createSlug(title, id) {
+    // Create slug berdasarkan bahasa
+    function createSlug(title, id, lang) {
+        const uniqueCode = generateUniqueCode();
+        
+        // Jika bahasa non-latin, return {kodeunik}.html
+        if (NON_LATIN_LANGS.includes(lang)) {
+            return `${uniqueCode}.html`;
+        }
+        
+        // Untuk bahasa latin: {kodeunik}-{title}.html
         const slugTitle = title
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/^-|-$/g, '');
-        const uniqueCode = generateUniqueCode();
-        return `${id}-${slugTitle}-${uniqueCode}`;
+        
+        return `${uniqueCode}-${slugTitle}.html`;
     }
 
     // ========== IMPORT TXT ==========
@@ -410,11 +424,11 @@
     }
 
     // ========== GENERATE RSS FEED ==========
-    function generateRssFeed(movies) {
+    function generateRssFeed(movies, lang) {
         const now = new Date().toUTCString();
         const items = movies.map(m => {
-            const slug = createSlug(m.title, m.movieId);
-            const url = `https://${DOMAIN}/${slug}.html`;
+            const slug = createSlug(m.title, m.movieId, lang);
+            const url = `https://${DOMAIN}/${slug}`;
             const description = m.overview ? m.overview.substring(0, 200) : 'Watch online';
             
             return `
@@ -442,6 +456,16 @@
 </rss>`;
     }
 
+    // ========== GENERATE URLs TXT ==========
+    function generateUrlsTxt(movies, baseLink, lang) {
+        if (!baseLink) return 'No base link provided';
+        
+        return movies.map(m => {
+            const slug = createSlug(m.title, m.movieId, lang);
+            return `${baseLink}${slug}`;
+        }).join('\n');
+    }
+
     // ========== GENERATE HTML PREMIUM ==========
     async function generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates, baseLink) {
         const movie = await fetchMovieDetails(apiKey, movieId, lang);
@@ -449,7 +473,7 @@
 
         const seoTitle = getRandomTitle(titleTemplates, movie.title);
         const year = movie.release_date ? movie.release_date.slice(0,4) : new Date().getFullYear();
-        const slug = createSlug(movie.title, movieId);
+        const slug = createSlug(movie.title, movieId, lang);
         
         // Cari trailer YouTube
         const trailer = movie.videos?.results?.find(v => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser'));
@@ -464,9 +488,9 @@
         // Ambil teks artikel sesuai bahasa
         const texts = articleTexts[lang] || articleTexts['en-US'];
         
-        // Link dinamis dengan ID
-        const link1Url = baseLink ? `${baseLink}${movieId}` : '#';
-        const link2Url = baseLink ? `${baseLink}${movieId}` : '#';
+        // Link dinamis dengan slug
+        const link1Url = baseLink ? `${baseLink}${slug}` : '#';
+        const link2Url = baseLink ? `${baseLink}${slug}` : '#';
 
         // ===== HTML TEMPLATE =====
         const html = `<!DOCTYPE html>
@@ -480,8 +504,8 @@
     <meta property="og:title" content="${seoTitle}">
     <meta property="og:image" content="${movie.poster_path ? IMG_BASE + movie.poster_path : ''}">
     <meta property="og:type" content="video.movie">
-    <meta property="og:url" content="https://${DOMAIN}/${slug}.html">
-    <link rel="canonical" href="https://${DOMAIN}/${slug}.html">
+    <meta property="og:url" content="${baseLink ? baseLink + slug : '#'}">
+    <link rel="canonical" href="${baseLink ? baseLink + slug : '#'}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -640,7 +664,7 @@
     </div>
 </body>
 </html>`;
-        return { html, title: movie.title, movieId, overview: movie.overview };
+        return { html, title: movie.title, movieId, overview: movie.overview, slug };
     }
 
     // ========== BULK GENERATE ==========
@@ -669,10 +693,11 @@
         generatedFiles = [];
         updateFilePreview();
 
-        log(`🚀 Generate ${uniqueIds.length} file dengan paragraf multi bahasa...`);
+        log(`🚀 Generate ${uniqueIds.length} file dengan smart slug...`);
         isGenerating = true;
         downloadBtn.disabled = true;
         downloadRssBtn.disabled = true;
+        downloadUrlsBtn.disabled = true;
 
         let successCount = 0;
         for (let i = 0; i < uniqueIds.length; i++) {
@@ -682,16 +707,16 @@
             const result = await generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates, baseLink);
             
             if (result) {
-                const slug = createSlug(result.title, movieId);
                 generatedFiles.push({
-                    filename: `${slug}.html`,
+                    filename: result.slug,
                     content: result.html,
                     movieId,
                     title: result.title,
-                    overview: result.overview
+                    overview: result.overview,
+                    slug: result.slug
                 });
                 successCount++;
-                log(`✅ ID ${movieId} (${result.title}) -> ${slug}.html`, 'success');
+                log(`✅ ID ${movieId} (${result.title}) -> ${result.slug}`, 'success');
             }
 
             const percent = Math.round(((i + 1) / uniqueIds.length) * 100);
@@ -706,6 +731,7 @@
         if (successCount > 0) {
             downloadBtn.disabled = false;
             downloadRssBtn.disabled = false;
+            downloadUrlsBtn.disabled = false;
         }
     }
 
@@ -738,7 +764,7 @@
 
     function downloadRss() {
         if (!generatedFiles.length) return;
-        const rssContent = generateRssFeed(generatedFiles);
+        const rssContent = generateRssFeed(generatedFiles, bulkLang.value);
         const blob = new Blob([rssContent], { type: 'application/rss+xml' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
@@ -747,10 +773,28 @@
         log('📡 RSS feed berhasil didownload', 'success');
     }
 
+    function downloadUrls() {
+        if (!generatedFiles.length) return;
+        const baseLink = baseLinkInput.value.trim();
+        if (!baseLink) {
+            log('❌ Base link tidak diisi', 'error');
+            return;
+        }
+        
+        const urlsContent = generateUrlsTxt(generatedFiles, baseLink, bulkLang.value);
+        const blob = new Blob([urlsContent], { type: 'text/plain' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'urls.txt';
+        link.click();
+        log('📄 URLs TXT berhasil didownload', 'success');
+    }
+
     // ========== EVENT ==========
     generateBtn.addEventListener('click', bulkGenerate);
     downloadBtn.addEventListener('click', downloadZip);
     downloadRssBtn.addEventListener('click', downloadRss);
+    downloadUrlsBtn.addEventListener('click', downloadUrls);
     clearLogsBtn.addEventListener('click', clearLogs);
 
     titleTemplatesArea.addEventListener('input', () => {
@@ -761,7 +805,7 @@
         }
     });
 
-    log('✅ FINAL ULTIMATE · Paragraf Multi Bahasa · Link Dinamis + ID');
+    log('✅ FINAL ULTIMATE · Smart Slug · TXT URLs · Multi Bahasa');
 })();
 </script>
 </body>
