@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔥 TMDB GENERATOR FINAL · RSS + TXT Import + Multi Bahasa</title>
+    <title>🔥 TMDB GENERATOR FINAL · Multi Language Paragraf + Link Dinamis</title>
     <!-- Google Fonts + Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -165,7 +165,7 @@
 <body>
 <div class="container">
     <h1><i class="fas fa-layer-group" style="color:#3b82f6;"></i> TMDB GENERATOR FINAL</h1>
-    <div class="subtitle">✨ RSS Feed · TXT Import · Slug Unik · Vietnam + Bulgaria</div>
+    <div class="subtitle">✨ Multi Language Paragraf · Link Dinamis + ID · RSS · TXT Import</div>
 
     <div class="control-panel">
         <div class="input-group">
@@ -185,6 +185,12 @@
             <label><i class="fas fa-file-import"></i> Import dari file .txt</label>
             <input type="file" id="txtFileInput" accept=".txt">
             <small style="color: #8ba3d9; display: block; margin-top: 0.5rem;">File dengan satu ID per baris</small>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fas fa-link"></i> Base Link (opsional)</label>
+            <input type="text" id="baseLink" value="https://inflix.pages.dev/" placeholder="https://domainmu.com/">
+            <small style="color: #8ba3d9;">Akan menjadi https://domainmu.com/{id} di tombol</small>
         </div>
 
         <div class="input-group">
@@ -237,7 +243,7 @@
     <div class="preview-grid" id="filePreviewGrid"><div style="color: #6b83b0;">Belum ada file</div></div>
 
     <div class="footer">
-        <i class="fas fa-check-circle" style="color:#10b981;"></i> FINAL VERSION · RSS Feed · Slug Unik · TXT Import · Vietnam + Bulgaria
+        <i class="fas fa-check-circle" style="color:#10b981;"></i> FINAL ULTIMATE · Paragraf Multi Bahasa · Link Dinamis + ID
     </div>
 </div>
 
@@ -248,14 +254,67 @@
     const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
     const BACKDROP_BASE = 'https://image.tmdb.org/t/p/original';
     const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
-    const DOMAIN = 'exampledomain.com'; // Ganti nanti
+    const DOMAIN = 'exampledomain.com'; // Untuk RSS
     
+    // ========== PARAGRAF MULTI BAHASA ==========
+    const articleTexts = {
+        'en-US': {
+            intro: 'The story continues with exciting twists and turns, pushing the boundaries of storytelling.',
+            quote: '"You ran from Woodsboro. You ran from New York. But you can\'t run from me." — This chilling line captures the essence of the franchise: no matter how far you go, the terror follows. {title} promises a darker, more psychological edge while maintaining the classic thrills fans love.',
+            psychology: 'The psychological depth and intense narrative structure make this installment a standout. Fans will appreciate the callbacks while being introduced to fresh elements that expand the universe.',
+            streaming: 'Looking for where to watch {title} online? While official streaming platforms will announce dates after theatrical release, fans are already searching for ways to experience this epic film. We recommend checking:',
+            analysis: 'The introduction of new characters and conflicts adds moral complexity to the franchise. This installment expands the universe significantly, setting up potential for future sequels and spin-offs.',
+            impact: 'With groundbreaking visual effects and a compelling narrative, {title} raises the bar for blockbuster filmmaking. The world-building is meticulous, and the attention to detail in every frame showcases the passion of the creative team.'
+        },
+        'es-ES': {
+            intro: 'La historia continúa con giros emocionantes y sorpresas, llevando la narración a nuevos límites.',
+            quote: '"Huiste de Woodsboro. Huiste de Nueva York. Pero no puedes huir de mí." — Esta escalofriante línea captura la esencia de la franquicia: no importa lo lejos que vayas, el terror te persigue. {title} promete un enfoque más oscuro y psicológico, manteniendo la emoción clásica que los fans aman.',
+            psychology: 'La profundidad psicológica y la intensa estructura narrativa hacen de esta entrega algo excepcional. Los fans apreciarán las referencias mientras descubren nuevos elementos que expanden el universo.',
+            streaming: '¿Buscas dónde ver {title} online? Mientras las plataformas oficiales anunciarán fechas después del estreno, los fans ya buscan formas de ver esta película épica. Recomendamos:',
+            analysis: 'La introducción de nuevos personajes y conflictos añade complejidad moral a la franquicia. Esta entrega expande el universo significativamente, preparando el terreno para futuras secuelas.',
+            impact: 'Con efectos visuales innovadores y una narrativa convincente, {title} eleva el estándar del cine de gran presupuesto. Cada fotograma muestra la pasión del equipo creativo.'
+        },
+        'th-TH': {
+            intro: 'เรื่องราวดำเนินต่อไปด้วยความตื่นเต้นและพลิกผัน ผลักดันขอบเขตของการเล่าเรื่อง',
+            quote: '"คุณหนีจากวูดสโบโร คุณหนีจากนิวยอร์ก แต่คุณหนีจากฉันไม่ได้" — ประโยคสุดสยองนี้สะท้อนแก่นแท้ของแฟรนไชส์: ไม่ว่าคุณจะไปไกลแค่ไหน ความสยองจะตามคุณไป {title} สัญญาว่าจะเข้มข้น ดาร์กขึ้น และแนวจิตวิทยามากขึ้น พร้อมความระทึกใจที่แฟนๆชื่นชอบ',
+            psychology: 'ความลึกซึ้งทางจิตวิทยาและโครงสร้างที่เข้มข้นทำให้ภาคนี้โดดเด่น แฟนๆจะซาบซึ้งกับการอ้างอิงถึงภาคก่อน ขณะเดียวกันก็ได้สัมผัสองค์ประกอบใหม่ที่ขยายจักรวาล',
+            streaming: 'กำลังหาที่ดู {title} ออนไลน์อยู่ใช่ไหม? แม้แพลตฟอร์มสตรีมมิ่งจะประกาศวันฉายหลังโรงภาพยนตร์ แต่แฟนๆก็เริ่มหาวิธีดูหนังมหากาพย์เรื่องนี้แล้ว แนะนำให้ตรวจสอบ:',
+            analysis: 'การแนะนำตัวละครและความขัดแย้งใหม่ๆ เพิ่มมิติทางศีลธรรมให้กับแฟรนไชส์ ภาคนี้ขยายจักรวาลอย่างมีนัยสำคัญ ปูทางสู่ภาคต่อและเรื่องแยก',
+            impact: 'ด้วยวิชวลเอฟเฟกต์ล้ำสมัยและเนื้อเรื่องที่ทรงพลัง {title} ยกระดับมาตรฐานภาพยนตร์บล็อกบัสเตอร์ ทุกรายละเอียดในทุกเฟรมสะท้อนความหลงใหลของทีมงาน'
+        },
+        'id-ID': {
+            intro: 'Cerita berlanjut dengan liku-liku menarik, mendorong batas-batas penceritaan.',
+            quote: '"Kau lari dari Woodsboro. Kau lari dari New York. Tapi kau tak bisa lari dariku." — Kalimat mengerikan ini menangkap esensi franchise: sejauh apapun kau pergi, teror akan selalu mengikutimu. {title} menjanjikan sisi lebih gelap dan psikologis, tetap mempertahankan sensasi klasik yang dicintai fans.',
+            psychology: 'Kedalaman psikologis dan struktur naratif yang intens membuat installment ini menonjol. Fans akan menghargai referensi masa lalu sambil diperkenalkan pada elemen baru yang memperluas semesta.',
+            streaming: 'Mencari tempat menonton {title} online? Sementara platform streaming resmi akan mengumumkan tanggal setelah rilis bioskop, fans sudah mencari cara untuk menikmati film epik ini. Kami rekomendasikan:',
+            analysis: 'Pengenalan karakter dan konflik baru menambah kompleksitas moral pada franchise. Installment ini memperluas semesta secara signifikan, mempersiapkan sekuel masa depan.',
+            impact: 'Dengan efek visual mutakhir dan narasi menarik, {title} meningkatkan standar pembuatan film blockbuster. Setiap bingkai menunjukkan passion tim kreatif.'
+        },
+        'vi-VN': {
+            intro: 'Câu chuyện tiếp tục với những tình tiết bất ngờ, đẩy ranh giới kể chuyện lên tầm cao mới.',
+            quote: '"Mày đã chạy khỏi Woodsboro. Mày đã chạy khỏi New York. Nhưng mày không thể chạy khỏi tao." — Câu nói rùng rợn này nắm bắt bản chất của thương hiệu: dù bạn có đi xa đến đâu, nỗi kinh hoàng vẫn luôn tìm thấy bạn. {title} hứa hẹn một góc tối tăm và tâm lý hơn, đồng thời duy trị sự hồi hộp kinh điển mà người hâm mộ yêu thích.',
+            psychology: 'Chiều sâu tâm lý và cấu trúc kể chuyện dữ dội khiến phần này trở nên nổi bật. Người hâm mộ sẽ trân trọng những liên hệ với quá khứ trong khi khám phá các yếu tố mới mở rộng vũ trụ điện ảnh.',
+            streaming: 'Tìm nơi xem {title} trực tuyến? Trong khi các nền tảng phát trực tuyến chính thức sẽ công bố ngày phát hành sau rạp, người hâm mộ đã bắt đầu tìm cách xem bộ phim hoành tráng này. Chúng tôi đề xuất:',
+            analysis: 'Sự ra mắt của nhân vật và xung đột mới thêm phức tạp về đạo đức vào thương hiệu. Phần này mở rộng đáng kể vũ trụ, tạo tiền đề cho các phần tiếp theo.',
+            impact: 'Với hiệu ứng hình ảnh đột phá và câu chuyện hấp dẫn, {title} nâng tầm tiêu chuẩn làm phim bom tấn. Mỗi khung hình đều thể hiện niềm đam mê của đội ngũ sáng tạo.'
+        },
+        'bg-BG': {
+            intro: 'Историята продължава с вълнуващи обрати, разширявайки границите на разказа.',
+            quote: '"Избяга от Уудсбъро. Избяга от Ню Йорк. Но не можеш да избягаш от мен." — Тази смразяваща реплика улавя същността на франчайза: колкото и далеч да отидеш, ужасът винаги ще те намери. {title} обещава по-мрачен, психологически ръб, запазвайки класическия тръпки, които феновете обичат.',
+            psychology: 'Психологическата дълбочина и интензивната наративна структура правят тази част забележителна. Феновете ще оценят връзките с миналото, докато се запознават с нови елементи, разширяващи вселената.',
+            streaming: 'Търсите къде да гледате {title} онлайн? Докато официалните стрийминг платформи обявят дати след кино премиерата, феновете вече търсят начини да гледат този епичен филм. Препоръчваме да проверите:',
+            analysis: 'Въвеждането на нови герои и конфликти добавя морална сложност към франчайза. Тази част значително разширява вселената, подготвяйки почвата за бъдещи продължения.',
+            impact: 'С новаторски визуални ефекти и завладяващ разказ, {title} повишава летвата за блокбъстър киното. Всеки кадър показва страстта на творческия екип.'
+        }
+    };
+
     // ========== ELEMEN DOM ==========
     const apiKeyInput = document.getElementById('apiKey');
     const movieIdsTextarea = document.getElementById('movieIds');
     const bulkLang = document.getElementById('bulkLang');
     const bulkLink1Text = document.getElementById('bulkLink1Text');
     const bulkLink2Text = document.getElementById('bulkLink2Text');
+    const baseLinkInput = document.getElementById('baseLink');
     const titleTemplatesArea = document.getElementById('titleTemplates');
     const txtFileInput = document.getElementById('txtFileInput');
     const generateBtn = document.getElementById('generateBulkBtn');
@@ -323,7 +382,6 @@
         const reader = new FileReader();
         reader.onload = function(e) {
             const content = e.target.result;
-            // Split by new line, filter empty lines, trim
             const ids = content.split(/\r?\n/)
                 .map(line => line.trim())
                 .filter(line => line && /^\d+$/.test(line));
@@ -385,7 +443,7 @@
     }
 
     // ========== GENERATE HTML PREMIUM ==========
-    async function generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates) {
+    async function generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates, baseLink) {
         const movie = await fetchMovieDetails(apiKey, movieId, lang);
         if (!movie) return null;
 
@@ -403,10 +461,12 @@
         // Rekomendasi (max 4)
         const recommendations = movie.recommendations?.results?.slice(0, 4) || [];
 
-        // Artikel SEO panjang (dengan konten dinamis)
-        const articleQuote = `"You ran from Woodsboro. You ran from New York. But you can’t run from me." — This chilling line captures the essence of the franchise: no matter how far you go, the terror follows. ${movie.title} promises a darker, more psychological edge while maintaining the classic thrills fans love.`;
+        // Ambil teks artikel sesuai bahasa
+        const texts = articleTexts[lang] || articleTexts['en-US'];
         
-        const articleAnalysis = `With stunning visuals and a gripping narrative, ${movie.title} expands the universe in unexpected ways. New characters, moral complexities, and breathtaking action sequences make this a must-watch for cinema lovers.`;
+        // Link dinamis dengan ID
+        const link1Url = baseLink ? `${baseLink}${movieId}` : '#';
+        const link2Url = baseLink ? `${baseLink}${movieId}` : '#';
 
         // ===== HTML TEMPLATE =====
         const html = `<!DOCTYPE html>
@@ -504,8 +564,8 @@
                     </div>
                     <div class="overview">${movie.overview || 'No overview available.'}</div>
                     <div class="links">
-                        <a href="#" class="link-btn" onclick="return false;"><i class="fas fa-play-circle"></i> ${link1Text}</a>
-                        <a href="#" class="link-btn" style="background:#1d3a3a;" onclick="return false;"><i class="fas fa-download"></i> ${link2Text}</a>
+                        <a href="${link1Url}" class="link-btn" target="_blank" rel="nofollow"><i class="fas fa-play-circle"></i> ${link1Text}</a>
+                        <a href="${link2Url}" class="link-btn" style="background:#1d3a3a;" target="_blank" rel="nofollow"><i class="fas fa-download"></i> ${link2Text}</a>
                     </div>
                 </div>
             </div>
@@ -535,16 +595,16 @@
         <div class="article">
             <h2>${movie.title}: The Story Unveiled</h2>
             <div class="article-meta"><i class="far fa-clock"></i> 15 min read · updated ${year}</div>
-            <p>${movie.overview || 'The film brings new adventures and stunning visual effects.'} The story continues with exciting twists and turns, pushing the boundaries of storytelling.</p>
-            <div class="article-quote">${articleQuote}</div>
-            <p>The psychological depth and intense narrative structure make this installment a standout. Fans will appreciate the callbacks while being introduced to fresh elements that expand the universe.</p>
+            <p>${movie.overview || 'The film brings new adventures and stunning visual effects.'} ${texts.intro}</p>
+            <div class="article-quote">${texts.quote.replace(/{title}/g, movie.title)}</div>
+            <p>${texts.psychology}</p>
         </div>
 
         <!-- ARTIKEL SEO 2 -->
         <div class="article">
             <h2>Where to Watch ${movie.title} Online</h2>
             <div class="article-meta"><i class="fas fa-tag"></i> Legal sources · 4K UHD</div>
-            <p>Looking for where to watch ${movie.title} online? While official streaming platforms will announce dates after theatrical release, fans are already searching for ways to experience this epic film. We recommend checking:</p>
+            <p>${texts.streaming.replace(/{title}/g, movie.title)}</p>
             <ul style="margin: 1rem 0 0 2rem; color: #cbd5e1;">
                 <li>Disney+ Hotstar (expected release)</li>
                 <li>Netflix (regional availability)</li>
@@ -557,9 +617,8 @@
         <div class="article">
             <h2>Why ${movie.title} Changes Everything</h2>
             <div class="article-meta"><i class="fas fa-chart-line"></i> Analysis · new characters</div>
-            <p>The introduction of new characters and conflicts adds moral complexity to the franchise. This installment expands the universe significantly, setting up potential for future sequels and spin-offs.</p>
-            <div class="article-quote">${articleAnalysis}</div>
-            <p>With groundbreaking visual effects and a compelling narrative, ${movie.title} raises the bar for blockbuster filmmaking. The world-building is meticulous, and the attention to detail in every frame showcases the passion of the creative team.</p>
+            <p>${texts.analysis}</p>
+            <div class="article-quote">${texts.impact.replace(/{title}/g, movie.title)}</div>
         </div>
 
         <!-- REKOMENDASI -->
@@ -592,10 +651,10 @@
         const lang = bulkLang.value;
         const link1Text = bulkLink1Text.value.trim() || '▶ Watch';
         const link2Text = bulkLink2Text.value.trim() || '⬇️ Download';
+        const baseLink = baseLinkInput.value.trim();
         const titleTemplates = getTitleTemplates();
         
         const idsText = movieIdsTextarea.value.trim();
-        // Split by new line and filter valid numbers
         const idMatches = idsText.split(/\r?\n/)
             .map(line => line.trim())
             .filter(line => line && /^\d+$/.test(line));
@@ -610,7 +669,7 @@
         generatedFiles = [];
         updateFilePreview();
 
-        log(`🚀 Generate ${uniqueIds.length} file dengan slug unik...`);
+        log(`🚀 Generate ${uniqueIds.length} file dengan paragraf multi bahasa...`);
         isGenerating = true;
         downloadBtn.disabled = true;
         downloadRssBtn.disabled = true;
@@ -620,7 +679,7 @@
             const movieId = uniqueIds[i];
             log(`⏳ [${i+1}/${uniqueIds.length}] ID ${movieId}...`);
 
-            const result = await generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates);
+            const result = await generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates, baseLink);
             
             if (result) {
                 const slug = createSlug(result.title, movieId);
@@ -702,7 +761,7 @@
         }
     });
 
-    log('✅ FINAL VERSION · RSS Feed · TXT Import · Slug Unik · Vietnam + Bulgaria');
+    log('✅ FINAL ULTIMATE · Paragraf Multi Bahasa · Link Dinamis + ID');
 })();
 </script>
 </body>
