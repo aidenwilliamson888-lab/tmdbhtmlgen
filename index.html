@@ -553,6 +553,7 @@
             <span class="badge"><i class="fas fa-slug"></i> Smart Slug</span>
             <span class="badge"><i class="fas fa-rss"></i> RSS Feed</span>
             <span class="badge"><i class="fas fa-file-alt"></i> URLs TXT</span>
+            <span class="badge"><i class="fas fa-link"></i> Self Target</span>
         </div>
     </div>
 
@@ -579,7 +580,7 @@
         <div class="input-group">
             <label><i class="fas fa-link"></i> Base Link</label>
             <input type="text" id="baseLink" value="https://inflix.pages.dev/" placeholder="https://domainmu.com/">
-            <small style="color: #8ba3d9;">Button akan mengarah ke https://domainmu.com/{id}</small>
+            <small style="color: #8ba3d9;">Button akan mengarah ke https://domainmu.com/{id} (tab sama)</small>
         </div>
 
         <div class="input-group">
@@ -647,7 +648,7 @@
     </div>
 
     <div class="footer">
-        <i class="fas fa-check-circle" style="color:#10b981;"></i> FINAL VERSION · Link Button ke ID · Smart Slug · Multi Bahasa · UI Premium
+        <i class="fas fa-check-circle" style="color:#10b981;"></i> FINAL VERSION · Auto Translate All Text · Link Self Target · UI Premium
     </div>
 </div>
 
@@ -663,53 +664,71 @@
     // Bahasa non-latin yang perlu slug khusus
     const NON_LATIN_LANGS = ['th-TH', 'bg-BG', 'ja-JP', 'ko-KR', 'zh-CN', 'zh-TW', 'ar-SA', 'he-IL'];
     
-    // ========== PARAGRAF MULTI BAHASA ==========
+    // ========== PARAGRAF MULTI BAHASA LENGKAP ==========
     const articleTexts = {
         'en-US': {
+            storyTitle: '{title}: The Story Unveiled',
             intro: 'The story continues with exciting twists and turns, pushing the boundaries of storytelling.',
             quote: '"You ran from Woodsboro. You ran from New York. But you can\'t run from me." — This chilling line captures the essence of the franchise: no matter how far you go, the terror follows. {title} promises a darker, more psychological edge while maintaining the classic thrills fans love.',
             psychology: 'The psychological depth and intense narrative structure make this installment a standout. Fans will appreciate the callbacks while being introduced to fresh elements that expand the universe.',
+            watchTitle: 'Where to Watch {title} Online',
             streaming: 'Looking for where to watch {title} online? While official streaming platforms will announce dates after theatrical release, fans are already searching for ways to experience this epic film. We recommend checking:',
+            whyTitle: 'Why {title} Changes Everything',
             analysis: 'The introduction of new characters and conflicts adds moral complexity to the franchise. This installment expands the universe significantly, setting up potential for future sequels and spin-offs.',
             impact: 'With groundbreaking visual effects and a compelling narrative, {title} raises the bar for blockbuster filmmaking. The world-building is meticulous, and the attention to detail in every frame showcases the passion of the creative team.'
         },
         'es-ES': {
+            storyTitle: '{title}: La Historia Revelada',
             intro: 'La historia continúa con giros emocionantes y sorpresas, llevando la narración a nuevos límites.',
             quote: '"Huiste de Woodsboro. Huiste de Nueva York. Pero no puedes huir de mí." — Esta escalofriante línea captura la esencia de la franquicia: no importa lo lejos que vayas, el terror te persigue. {title} promete un enfoque más oscuro y psicológico, manteniendo la emoción clásica que los fans aman.',
             psychology: 'La profundidad psicológica y la intensa estructura narrativa hacen de esta entrega algo excepcional. Los fans apreciarán las referencias mientras descubren nuevos elementos que expanden el universo.',
+            watchTitle: 'Dónde Ver {title} Online',
             streaming: '¿Buscas dónde ver {title} online? Mientras las plataformas oficiales anunciarán fechas después del estreno, los fans ya buscan formas de ver esta película épica. Recomendamos:',
+            whyTitle: 'Por Qué {title} Cambia Todo',
             analysis: 'La introducción de nuevos personajes y conflictos añade complejidad moral a la franquicia. Esta entrega expande el universo significativamente, preparando el terreno para futuras secuelas.',
             impact: 'Con efectos visuales innovadores y una narrativa convincente, {title} eleva el estándar del cine de gran presupuesto. Cada fotograma muestra la pasión del equipo creativo.'
         },
         'th-TH': {
+            storyTitle: '{title}: เปิดโปงเรื่องราว',
             intro: 'เรื่องราวดำเนินต่อไปด้วยความตื่นเต้นและพลิกผัน ผลักดันขอบเขตของการเล่าเรื่อง',
             quote: '"คุณหนีจากวูดสโบโร คุณหนีจากนิวยอร์ก แต่คุณหนีจากฉันไม่ได้" — ประโยคสุดสยองนี้สะท้อนแก่นแท้ของแฟรนไชส์: ไม่ว่าคุณจะไปไกลแค่ไหน ความสยองจะตามคุณไป {title} สัญญาว่าจะเข้มข้น ดาร์กขึ้น และแนวจิตวิทยามากขึ้น พร้อมความระทึกใจที่แฟนๆชื่นชอบ',
             psychology: 'ความลึกซึ้งทางจิตวิทยาและโครงสร้างที่เข้มข้นทำให้ภาคนี้โดดเด่น แฟนๆจะซาบซึ้งกับการอ้างอิงถึงภาคก่อน ขณะเดียวกันก็ได้สัมผัสองค์ประกอบใหม่ที่ขยายจักรวาล',
+            watchTitle: 'ดู {title} ออนไลน์ได้ที่ไหน',
             streaming: 'กำลังหาที่ดู {title} ออนไลน์อยู่ใช่ไหม? แม้แพลตฟอร์มสตรีมมิ่งจะประกาศวันฉายหลังโรงภาพยนตร์ แต่แฟนๆก็เริ่มหาวิธีดูหนังมหากาพย์เรื่องนี้แล้ว แนะนำให้ตรวจสอบ:',
+            whyTitle: 'ทำไม {title} ถึงเปลี่ยนทุกสิ่ง',
             analysis: 'การแนะนำตัวละครและความขัดแย้งใหม่ๆ เพิ่มมิติทางศีลธรรมให้กับแฟรนไชส์ ภาคนี้ขยายจักรวาลอย่างมีนัยสำคัญ ปูทางสู่ภาคต่อและเรื่องแยก',
             impact: 'ด้วยวิชวลเอฟเฟกต์ล้ำสมัยและเนื้อเรื่องที่ทรงพลัง {title} ยกระดับมาตรฐานภาพยนตร์บล็อกบัสเตอร์ ทุกรายละเอียดในทุกเฟรมสะท้อนความหลงใหลของทีมงาน'
         },
         'id-ID': {
+            storyTitle: '{title}: Kisah yang Terungkap',
             intro: 'Cerita berlanjut dengan liku-liku menarik, mendorong batas-batas penceritaan.',
             quote: '"Kau lari dari Woodsboro. Kau lari dari New York. Tapi kau tak bisa lari dariku." — Kalimat mengerikan ini menangkap esensi franchise: sejauh apapun kau pergi, teror akan selalu mengikutimu. {title} menjanjikan sisi lebih gelap dan psikologis, tetap mempertahankan sensasi klasik yang dicintai fans.',
             psychology: 'Kedalaman psikologis dan struktur naratif yang intens membuat installment ini menonjol. Fans akan menghargai referensi masa lalu sambil diperkenalkan pada elemen baru yang memperluas semesta.',
+            watchTitle: 'Tempat Menonton {title} Online',
             streaming: 'Mencari tempat menonton {title} online? Sementara platform streaming resmi akan mengumumkan tanggal setelah rilis bioskop, fans sudah mencari cara untuk menikmati film epik ini. Kami rekomendasikan:',
+            whyTitle: 'Mengapa {title} Mengubah Segalanya',
             analysis: 'Pengenalan karakter dan konflik baru menambah kompleksitas moral pada franchise. Installment ini memperluas semesta secara signifikan, mempersiapkan sekuel masa depan.',
             impact: 'Dengan efek visual mutakhir dan narasi menarik, {title} meningkatkan standar pembuatan film blockbuster. Setiap bingkai menunjukkan passion tim kreatif.'
         },
         'vi-VN': {
+            storyTitle: '{title}: Câu Chuyện Được Hé Lộ',
             intro: 'Câu chuyện tiếp tục với những tình tiết bất ngờ, đẩy ranh giới kể chuyện lên tầm cao mới.',
             quote: '"Mày đã chạy khỏi Woodsboro. Mày đã chạy khỏi New York. Nhưng mày không thể chạy khỏi tao." — Câu nói rùng rợn này nắm bắt bản chất của thương hiệu: dù bạn có đi xa đến đâu, nỗi kinh hoàng vẫn luôn tìm thấy bạn. {title} hứa hẹn một góc tối tăm và tâm lý hơn, đồng thời duy trì sự hồi hộp kinh điển mà người hâm mộ yêu thích.',
             psychology: 'Chiều sâu tâm lý và cấu trúc kể chuyện dữ dội khiến phần này trở nên nổi bật. Người hâm mộ sẽ trân trọng những liên hệ với quá khứ trong khi khám phá các yếu tố mới mở rộng vũ trụ điện ảnh.',
+            watchTitle: 'Xem {title} Ở Đâu Trực Tuyến',
             streaming: 'Tìm nơi xem {title} trực tuyến? Trong khi các nền tảng phát trực tuyến chính thức sẽ công bố ngày phát hành sau rạp, người hâm mộ đã bắt đầu tìm cách xem bộ phim hoành tráng này. Chúng tôi đề xuất:',
+            whyTitle: 'Tại Sao {title} Thay Đổi Mọi Thứ',
             analysis: 'Sự ra mắt của nhân vật và xung đột mới thêm phức tạp về đạo đức vào thương hiệu. Phần này mở rộng đáng kể vũ trụ, tạo tiền đề cho các phần tiếp theo.',
             impact: 'Với hiệu ứng hình ảnh đột phá và câu chuyện hấp dẫn, {title} nâng tầm tiêu chuẩn làm phim bom tấn. Mỗi khung hình đều thể hiện niềm đam mê của đội ngũ sáng tạo.'
         },
         'bg-BG': {
+            storyTitle: '{title}: Историята Разкрита',
             intro: 'Историята продължава с вълнуващи обрати, разширявайки границите на разказа.',
             quote: '"Избяга от Уудсбъро. Избяга от Ню Йорк. Но не можеш да избягаш от мен." — Тази смразяваща реплика улавя същността на франчайза: колкото и далеч да отидеш, ужасът винаги ще те намери. {title} обещава по-мрачен, психологически ръб, запазвайки класическия тръпки, които феновете обичат.',
             psychology: 'Психологическата дълбочина и интензивната наративна структура правят тази част забележителна. Феновете ще оценят връзките с миналото, докато се запознават с нови елементи, разширяващи вселената.',
+            watchTitle: 'Къде Да Гледате {title} Онлайн',
             streaming: 'Търсите къде да гледате {title} онлайн? Докато официалните стрийминг платформи обявят дати след кино премиерата, феновете вече търсят начини да гледат този епичен филм. Препоръчваме да проверите:',
+            whyTitle: 'Защо {title} Променя Всичко',
             analysis: 'Въвеждането на нови герои и конфликти добавя морална сложност към франчайза. Тази част значително разширява вселената, подготвяйки почвата за бъдещи продължения.',
             impact: 'С новаторски визуални ефекти и завладяващ разказ, {title} повишава летвата за блокбъстър киното. Всеки кадър показва страстта на творческия екип.'
         }
@@ -890,7 +909,7 @@
         // Ambil teks artikel sesuai bahasa
         const texts = articleTexts[lang] || articleTexts['en-US'];
         
-        // Link dinamis dengan ID (bukan slug!)
+        // Link dinamis dengan ID (bukan slug!) dan target _self
         const link1Url = baseLink ? `${baseLink}${movieId}` : '#';
         const link2Url = baseLink ? `${baseLink}${movieId}` : '#';
 
@@ -906,6 +925,8 @@
     <meta property="og:title" content="${seoTitle}">
     <meta property="og:image" content="${movie.poster_path ? IMG_BASE + movie.poster_path : ''}">
     <meta property="og:type" content="video.movie">
+    <meta property="og:url" content="${baseLink ? baseLink + movieId : '#'}">
+    <link rel="canonical" href="${baseLink ? baseLink + movieId : '#'}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -988,8 +1009,9 @@
                     </div>
                     <div class="overview">${movie.overview || 'No overview available.'}</div>
                     <div class="links">
-                        <a href="${link1Url}" class="link-btn" target="_blank" rel="nofollow"><i class="fas fa-play-circle"></i> ${link1Text}</a>
-                        <a href="${link2Url}" class="link-btn" style="background:#1d3a3a;" target="_blank" rel="nofollow"><i class="fas fa-download"></i> ${link2Text}</a>
+                        <!-- Link dengan target="_self" (tab yang sama) -->
+                        <a href="${link1Url}" class="link-btn" target="_self" rel="nofollow"><i class="fas fa-play-circle"></i> ${link1Text}</a>
+                        <a href="${link2Url}" class="link-btn" style="background:#1d3a3a;" target="_self" rel="nofollow"><i class="fas fa-download"></i> ${link2Text}</a>
                     </div>
                 </div>
             </div>
@@ -1017,7 +1039,7 @@
 
         <!-- ARTIKEL SEO 1 -->
         <div class="article">
-            <h2>${movie.title}: The Story Unveiled</h2>
+            <h2>${texts.storyTitle.replace(/{title}/g, movie.title)}</h2>
             <div class="article-meta"><i class="far fa-clock"></i> 15 min read · updated ${year}</div>
             <p>${movie.overview || 'The film brings new adventures and stunning visual effects.'} ${texts.intro}</p>
             <div class="article-quote">${texts.quote.replace(/{title}/g, movie.title)}</div>
@@ -1026,7 +1048,7 @@
 
         <!-- ARTIKEL SEO 2 -->
         <div class="article">
-            <h2>Where to Watch ${movie.title} Online</h2>
+            <h2>${texts.watchTitle.replace(/{title}/g, movie.title)}</h2>
             <div class="article-meta"><i class="fas fa-tag"></i> Legal sources · 4K UHD</div>
             <p>${texts.streaming.replace(/{title}/g, movie.title)}</p>
             <ul style="margin: 1rem 0 0 2rem; color: #cbd5e1;">
@@ -1039,7 +1061,7 @@
 
         <!-- ARTIKEL SEO 3 -->
         <div class="article">
-            <h2>Why ${movie.title} Changes Everything</h2>
+            <h2>${texts.whyTitle.replace(/{title}/g, movie.title)}</h2>
             <div class="article-meta"><i class="fas fa-chart-line"></i> Analysis · new characters</div>
             <p>${texts.analysis}</p>
             <div class="article-quote">${texts.impact.replace(/{title}/g, movie.title)}</div>
@@ -1093,7 +1115,7 @@
         generatedFiles = [];
         updateFilePreview();
 
-        log(`🚀 Generate ${uniqueIds.length} file dengan link button ke ID...`);
+        log(`🚀 Generate ${uniqueIds.length} file dengan link button ke ID (self target)...`);
         isGenerating = true;
         downloadBtn.disabled = true;
         downloadRssBtn.disabled = true;
@@ -1209,7 +1231,7 @@
         }
     });
 
-    log('✅ FINAL VERSION · Link Button ke ID · UI Premium · Smart Slug');
+    log('✅ FINAL VERSION · Auto Translate All Headers · Link Self Target');
 })();
 </script>
 </body>
