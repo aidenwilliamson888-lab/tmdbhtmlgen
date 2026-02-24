@@ -3,183 +3,571 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔥 TMDB GENERATOR FINAL · Smart Slug + TXT URLs</title>
+    <title>🎬 TMDB GENERATOR · Studio Final</title>
     <!-- Google Fonts + Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: #0a0f1e;
-            font-family: 'Inter', sans-serif;
-            color: #eef3fc;
-            padding: 2rem 1.5rem;
-        }
-        .container { max-width: 1400px; margin: 0 auto; }
         
-        h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(135deg, #a5d8ff, #ffffff);
+        body {
+            background: radial-gradient(circle at 20% 30%, #1a1f35, #0a0c1a);
+            font-family: 'Inter', sans-serif;
+            color: #f0f4ff;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Background decorative elements */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: float 25s infinite ease-in-out reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-5%, 5%) scale(1.05); }
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Header dengan efek glassmorphism */
+        .hero-header {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 2rem;
+            padding: 2.5rem 3rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2) inset;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            filter: blur(80px);
+            opacity: 0.2;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff, #a5d8ff, #93c5fd);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 1rem;
         }
-        .subtitle { color: #8ba3d9; margin-bottom: 2rem; font-size: 1.1rem; }
         
+        .hero-title i {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3rem;
+        }
+        
+        .hero-badge {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .badge {
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 100px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(4px);
+            color: #b5d0ff;
+        }
+        
+        .badge i { color: #3b82f6; }
+        
+        /* Control panel dengan efek 3D */
         .control-panel {
-            background: #131f33;
-            border-radius: 2rem;
-            padding: 2rem;
-            border: 1px solid #2d4068;
-            margin-bottom: 2rem;
+            background: rgba(18, 25, 45, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 2.5rem;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.2) inset;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            gap: 2rem;
+            position: relative;
+            overflow: hidden;
         }
         
-        .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .control-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+        
         .input-group label {
             color: #9bb5ff;
             font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
         }
-        .input-group input, .input-group select, .input-group textarea {
-            background: #0b1425;
-            border: 1px solid #2f4570;
-            border-radius: 12px;
-            padding: 0.8rem 1rem;
+        
+        .input-group label i {
+            color: #3b82f6;
+            font-size: 1rem;
+            background: rgba(59, 130, 246, 0.2);
+            padding: 0.4rem;
+            border-radius: 50%;
+        }
+        
+        .input-group input, 
+        .input-group select, 
+        .input-group textarea {
+            background: rgba(10, 15, 30, 0.7);
+            border: 1px solid #2a3a60;
+            border-radius: 1.2rem;
+            padding: 1rem 1.3rem;
+            font-size: 1rem;
             color: white;
             font-family: 'Inter', monospace;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
-        .input-group textarea { min-height: 100px; resize: vertical; }
+        
+        .input-group input:focus, 
+        .input-group select:focus, 
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3), 0 4px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .input-group textarea {
+            min-height: 120px;
+            resize: vertical;
+            line-height: 1.5;
+        }
         
         .file-import {
             grid-column: 1 / -1;
-            background: #0e1a2a;
-            border-radius: 1rem;
-            padding: 1rem;
+            background: rgba(20, 30, 55, 0.6);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
             border: 1px dashed #3b82f6;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s;
         }
+        
+        .file-import:hover {
+            border-color: #8b5cf6;
+            background: rgba(30, 40, 65, 0.7);
+        }
+        
         .file-import label {
             color: #9bb5ff;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
+            gap: 0.7rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
         }
         
-        .button-group { display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end; }
-        .btn {
-            background: #25344f;
+        .file-import input[type="file"] {
+            background: rgba(10, 15, 30, 0.7);
+            border: 1px solid #2a3a60;
+            border-radius: 1rem;
+            padding: 0.8rem 1rem;
+            color: white;
+            width: 100%;
+            cursor: pointer;
+        }
+        
+        .file-import input[type="file"]::file-selector-button {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
             border: none;
-            border-radius: 40px;
-            padding: 0.8rem 1.8rem;
+            border-radius: 2rem;
+            padding: 0.6rem 1.2rem;
+            color: white;
             font-weight: 600;
+            margin-right: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .file-import input[type="file"]::file-selector-button:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            grid-column: 1 / -1;
+            margin-top: 0.5rem;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #28344e, #1f2a40);
+            border: none;
+            border-radius: 3rem;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            font-size: 0.95rem;
             color: white;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
-            border: 1px solid #415e96;
-            transition: 0.2s;
+            gap: 0.8rem;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 15px -5px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
         }
-        .btn-primary { background: #1d4ed8; border-color: #3b82f6; }
-        .btn-success { background: #0f6e4a; border-color: #10b981; }
-        .btn-info { background: #7c3aed; border-color: #a78bfa; }
-        .btn-warning { background: #b45309; border-color: #f59e0b; }
-        .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 25px -8px rgba(0, 0, 0, 0.6);
+            border-color: #3b82f6;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+            border-color: #60a5fa;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #0f6e4a, #10b981);
+            border-color: #34d399;
+        }
+        
+        .btn-info {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            border-color: #c4b5fd;
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #b45309, #f59e0b);
+            border-color: #fbbf24;
+        }
         
         .progress-area {
-            background: #0f1a2c;
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border: 1px solid #364d7a;
+            background: rgba(18, 25, 45, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
         }
-        .progress-bar {
-            height: 8px;
-            background: #25385c;
-            border-radius: 10px;
+        
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            color: #b5d0ff;
+        }
+        
+        .progress-bar-container {
+            height: 12px;
+            background: rgba(10, 15, 30, 0.6);
+            border-radius: 30px;
             overflow: hidden;
+            border: 1px solid #2a3a60;
             margin: 1rem 0;
         }
+        
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #3b82f6, #8b5cf6);
             width: 0%;
-            transition: width 0.3s;
+            transition: width 0.4s ease;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            100% { left: 100%; }
+        }
+        
         .log-area {
-            background: #0a1220;
-            border-radius: 1rem;
-            padding: 1rem;
-            max-height: 200px;
+            background: rgba(8, 12, 25, 0.8);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            max-height: 220px;
             overflow-y: auto;
-            font-family: monospace;
+            font-family: 'JetBrains Mono', 'Inter', monospace;
             font-size: 0.9rem;
-            border: 1px solid #2e4270;
+            border: 1px solid #2a3a60;
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);
+            line-height: 1.6;
+        }
+        
+        .log-area div {
+            padding: 0.2rem 0;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0 1.2rem 0;
+        }
+        
+        .section-header h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #b5d0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-header i {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2rem;
         }
         
         .preview-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
             margin-top: 1rem;
-            max-height: 300px;
+            max-height: 350px;
             overflow-y: auto;
-            padding: 0.5rem;
+            padding: 0.5rem 0.3rem;
         }
+        
         .file-card {
-            background: #16243d;
-            border-radius: 1rem;
-            padding: 0.8rem;
-            border: 1px solid #3a5090;
-            font-size: 0.85rem;
+            background: rgba(22, 32, 55, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 1.2rem;
+            padding: 1rem 1.2rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 8px 15px -8px rgba(0,0,0,0.5);
         }
-        .file-card i { color: #10b981; margin-right: 0.3rem; }
+        
+        .file-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            border-color: #3b82f6;
+            background: rgba(32, 45, 75, 0.9);
+            box-shadow: 0 15px 25px -10px #000;
+        }
+        
+        .file-icon {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: white;
+            box-shadow: 0 5px 10px rgba(59,130,246,0.3);
+        }
+        
+        .file-info {
+            flex: 1;
+        }
+        
+        .file-name {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            color: white;
+        }
+        
+        .file-meta {
+            font-size: 0.75rem;
+            color: #8ba3d9;
+        }
         
         .title-templates {
             grid-column: 1 / -1;
-            background: #0e1a2a;
-            border-radius: 1rem;
-            padding: 1rem;
+            background: rgba(20, 30, 55, 0.6);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
             border: 1px solid #3d5a8c;
+            backdrop-filter: blur(4px);
         }
+        
         .example-box {
-            background: #1e2a45;
-            padding: 0.5rem 1rem;
-            border-radius: 30px;
+            background: rgba(30, 40, 65, 0.8);
+            border: 1px solid #3b82f6;
+            border-radius: 3rem;
+            padding: 0.8rem 1.5rem;
             color: #b5d0ff;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            display: inline-block;
+            backdrop-filter: blur(4px);
         }
-        .footer { margin-top: 3rem; text-align: center; color: #5f79b0; }
+        
+        .footer {
+            margin-top: 4rem;
+            text-align: center;
+            color: #6b83b0;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            font-size: 0.95rem;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 15, 30, 0.5);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1><i class="fas fa-layer-group" style="color:#3b82f6;"></i> TMDB GENERATOR FINAL</h1>
-    <div class="subtitle">✨ Smart Slug · TXT URLs · Multi Bahasa · RSS · Import TXT</div>
+    <!-- Hero Header -->
+    <div class="hero-header">
+        <div class="hero-title">
+            <i class="fas fa-film"></i> TMDB GENERATOR · STUDIO FINAL
+        </div>
+        <div class="hero-badge">
+            <span class="badge"><i class="fas fa-check-circle"></i> Link ke ID</span>
+            <span class="badge"><i class="fas fa-globe"></i> 6 Bahasa</span>
+            <span class="badge"><i class="fas fa-slug"></i> Smart Slug</span>
+            <span class="badge"><i class="fas fa-rss"></i> RSS Feed</span>
+            <span class="badge"><i class="fas fa-file-alt"></i> URLs TXT</span>
+        </div>
+    </div>
 
+    <!-- Control Panel -->
     <div class="control-panel">
         <div class="input-group">
             <label><i class="fas fa-key"></i> API Key</label>
-            <input type="text" id="apiKey" value="3a660b31f4af8da5f2bd6f2799c11e2e">
+            <input type="text" id="apiKey" value="3a660b31f4af8da5f2bd6f2799c11e2e" placeholder="TMDB API Key">
         </div>
         
         <div class="input-group">
-            <label><i class="fas fa-list"></i> ID TMDB</label>
+            <label><i class="fas fa-list"></i> ID TMDB (satu per baris)</label>
             <textarea id="movieIds" placeholder="76600&#10;157336&#10;299534">76600
 157336
 299534</textarea>
-            <small style="color: #8ba3d9;">Satu ID per baris (bisa paste dari file .txt)</small>
         </div>
 
         <div class="file-import">
@@ -189,9 +577,9 @@
         </div>
 
         <div class="input-group">
-            <label><i class="fas fa-link"></i> Base Link (opsional)</label>
+            <label><i class="fas fa-link"></i> Base Link</label>
             <input type="text" id="baseLink" value="https://inflix.pages.dev/" placeholder="https://domainmu.com/">
-            <small style="color: #8ba3d9;">Akan menjadi https://domainmu.com/{slug}</small>
+            <small style="color: #8ba3d9;">Button akan mengarah ke https://domainmu.com/{id}</small>
         </div>
 
         <div class="input-group">
@@ -216,7 +604,7 @@
         </div>
 
         <div class="title-templates">
-            <label><i class="fas fa-random"></i> Template Title</label>
+            <label><i class="fas fa-random"></i> Template Title (pisahkan dengan | )</label>
             <textarea id="titleTemplates" rows="2">{TITLE} (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒 Down𝗅oad 𝟩𝟤𝟢𝗉 on IBOMMA|✨ {TITLE} (2026) 4K HDR | Watch Online</textarea>
             <div class="example-box" id="templateExample">
                 <i class="fas fa-eye"></i> Contoh: "Avatar 3 (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒..."
@@ -232,20 +620,34 @@
         </div>
     </div>
 
+    <!-- Progress Area -->
     <div class="progress-area">
-        <div style="display: flex; justify-content: space-between;">
+        <div class="progress-stats">
             <span><i class="fas fa-chart-line"></i> Progress: <span id="progressPercent">0%</span></span>
             <span><i class="fas fa-film"></i> <span id="generatedCount">0</span> / <span id="totalCount">0</span> files</span>
         </div>
-        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-        <div class="log-area" id="logArea"><div>⏳ Siap generate...</div></div>
+        <div class="progress-bar-container">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="log-area" id="logArea">
+            <div>⏳ Siap generate...</div>
+        </div>
     </div>
 
-    <h3><i class="fas fa-file-code"></i> Generated Files (<span id="previewCount">0</span>)</h3>
-    <div class="preview-grid" id="filePreviewGrid"><div style="color: #6b83b0;">Belum ada file</div></div>
+    <!-- Generated Files Preview -->
+    <div class="section-header">
+        <i class="fas fa-file-code"></i>
+        <h3>Generated Files (<span id="previewCount">0</span>)</h3>
+    </div>
+    <div class="preview-grid" id="filePreviewGrid">
+        <div style="color: #6b83b0; text-align: center; padding: 2rem; grid-column: 1/-1;">
+            <i class="fas fa-folder-open" style="font-size: 3rem; opacity: 0.5; margin-bottom: 1rem;"></i>
+            <p>Belum ada file yang digenerate</p>
+        </div>
+    </div>
 
     <div class="footer">
-        <i class="fas fa-check-circle" style="color:#10b981;"></i> FINAL ULTIMATE · Smart Slug · TXT URLs · Multi Bahasa
+        <i class="fas fa-check-circle" style="color:#10b981;"></i> FINAL VERSION · Link Button ke ID · Smart Slug · Multi Bahasa · UI Premium
     </div>
 </div>
 
@@ -488,9 +890,9 @@
         // Ambil teks artikel sesuai bahasa
         const texts = articleTexts[lang] || articleTexts['en-US'];
         
-        // Link dinamis dengan slug
-        const link1Url = baseLink ? `${baseLink}${slug}` : '#';
-        const link2Url = baseLink ? `${baseLink}${slug}` : '#';
+        // Link dinamis dengan ID (bukan slug!)
+        const link1Url = baseLink ? `${baseLink}${movieId}` : '#';
+        const link2Url = baseLink ? `${baseLink}${movieId}` : '#';
 
         // ===== HTML TEMPLATE =====
         const html = `<!DOCTYPE html>
@@ -504,8 +906,6 @@
     <meta property="og:title" content="${seoTitle}">
     <meta property="og:image" content="${movie.poster_path ? IMG_BASE + movie.poster_path : ''}">
     <meta property="og:type" content="video.movie">
-    <meta property="og:url" content="${baseLink ? baseLink + slug : '#'}">
-    <link rel="canonical" href="${baseLink ? baseLink + slug : '#'}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -693,7 +1093,7 @@
         generatedFiles = [];
         updateFilePreview();
 
-        log(`🚀 Generate ${uniqueIds.length} file dengan smart slug...`);
+        log(`🚀 Generate ${uniqueIds.length} file dengan link button ke ID...`);
         isGenerating = true;
         downloadBtn.disabled = true;
         downloadRssBtn.disabled = true;
@@ -738,13 +1138,17 @@
     function updateFilePreview() {
         previewCountSpan.innerText = generatedFiles.length;
         if (!generatedFiles.length) {
-            filePreviewGrid.innerHTML = '<div style="color: #6b83b0;">Belum ada file</div>';
+            filePreviewGrid.innerHTML = '<div style="color: #6b83b0; text-align: center; padding: 2rem; grid-column: 1/-1;"><i class="fas fa-folder-open" style="font-size: 3rem; opacity: 0.5; margin-bottom: 1rem;"></i><p>Belum ada file yang digenerate</p></div>';
             return;
         }
+        
         filePreviewGrid.innerHTML = generatedFiles.map(f => `
             <div class="file-card">
-                <i class="fas fa-file-code"></i> ${f.filename.substring(0, 25)}...
-                <div style="font-size:0.7rem; color:#8ba3d9;">${f.title}</div>
+                <div class="file-icon"><i class="fas fa-file-code"></i></div>
+                <div class="file-info">
+                    <div class="file-name">${f.filename.substring(0, 25)}...</div>
+                    <div class="file-meta">${f.title.substring(0, 30)}</div>
+                </div>
             </div>
         `).join('');
     }
@@ -805,7 +1209,7 @@
         }
     });
 
-    log('✅ FINAL ULTIMATE · Smart Slug · TXT URLs · Multi Bahasa');
+    log('✅ FINAL VERSION · Link Button ke ID · UI Premium · Smart Slug');
 })();
 </script>
 </body>
