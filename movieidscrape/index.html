@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 TMDB Link to ID Scraper</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: radial-gradient(circle at 20% 30%, #1a1f35, #0a0c1a);
+            font-family: 'Inter', sans-serif;
+            color: #f0f4ff;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 2rem;
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #a5d8ff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .header h1 i {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #b5d0ff;
+            font-size: 1.1rem;
+        }
+        
+        .badge-container {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        .badge {
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 100px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(4px);
+            color: #b5d0ff;
+        }
+        
+        .badge i { color: #3b82f6; }
+        
+        /* Main Panel */
+        .panel {
+            background: rgba(18, 25, 45, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group label {
+            color: #9bb5ff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.7rem;
+        }
+        
+        .input-group label i {
+            color: #3b82f6;
+            background: rgba(59, 130, 246, 0.2);
+            padding: 0.4rem;
+            border-radius: 50%;
+        }
+        
+        .input-group textarea {
+            width: 100%;
+            background: rgba(10, 15, 30, 0.7);
+            border: 1px solid #2a3a60;
+            border-radius: 1.2rem;
+            padding: 1.2rem 1.5rem;
+            font-size: 1rem;
+            color: white;
+            font-family: 'Inter', monospace;
+            line-height: 1.6;
+            resize: vertical;
+            transition: all 0.3s;
+        }
+        
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        
+        .input-group textarea::placeholder {
+            color: #4a5a7a;
+        }
+        
+        .example-box {
+            background: rgba(30, 40, 65, 0.6);
+            border: 1px solid #3d5a8c;
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            margin-top: 0.8rem;
+            color: #b5d0ff;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        
+        .example-box i {
+            color: #fbbf24;
+        }
+        
+        .example-item {
+            background: rgba(59, 130, 246, 0.15);
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            font-family: monospace;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0 1rem;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #28344e, #1f2a40);
+            border: none;
+            border-radius: 3rem;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            transition: all 0.3s;
+            flex: 1 1 auto;
+            justify-content: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+            border-color: #60a5fa;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #0f6e4a, #10b981);
+            border-color: #34d399;
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #b45309, #f59e0b);
+            border-color: #fbbf24;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.1);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Results Area */
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .results-header h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #fff, #b5d0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stats {
+            background: rgba(59, 130, 246, 0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .results-grid {
+            background: rgba(10, 15, 30, 0.6);
+            border-radius: 1.5rem;
+            border: 1px solid #2a3a60;
+            overflow: hidden;
+        }
+        
+        .result-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 80px;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #2a3a60;
+            transition: background 0.2s;
+            align-items: center;
+        }
+        
+        .result-row:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .result-row:last-child {
+            border-bottom: none;
+        }
+        
+        .result-header {
+            background: rgba(20, 30, 55, 0.8);
+            font-weight: 600;
+            color: #b5d0ff;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .result-url {
+            color: #93c5fd;
+            word-break: break-all;
+            font-size: 0.9rem;
+            font-family: monospace;
+        }
+        
+        .result-id {
+            font-weight: 600;
+            color: #fbbf24;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+        
+        .result-type {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .type-movie {
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
+            border: 1px solid #3b82f6;
+        }
+        
+        .type-tv {
+            background: rgba(16, 185, 129, 0.2);
+            color: #6ee7b7;
+            border: 1px solid #10b981;
+        }
+        
+        .type-person {
+            background: rgba(139, 92, 246, 0.2);
+            color: #c4b5fd;
+            border: 1px solid #8b5cf6;
+        }
+        
+        .result-action {
+            text-align: center;
+        }
+        
+        .copy-btn {
+            background: rgba(59, 130, 246, 0.2);
+            border: none;
+            color: #93c5fd;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .copy-btn:hover {
+            background: #3b82f6;
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .empty-state {
+            padding: 3rem;
+            text-align: center;
+            color: #5a6a8a;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: #5a6a8a;
+            font-size: 0.9rem;
+        }
+        
+        .copy-all-container {
+            background: rgba(30, 40, 65, 0.6);
+            border-radius: 1rem;
+            padding: 1.2rem;
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-all-container input {
+            flex: 1;
+            background: rgba(10, 15, 30, 0.7);
+            border: 1px solid #2a3a60;
+            border-radius: 2rem;
+            padding: 0.8rem 1.2rem;
+            color: #fbbf24;
+            font-family: monospace;
+            font-weight: 600;
+        }
+        
+        .small-btn {
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid #3b82f6;
+            border-radius: 2rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .small-btn:hover {
+            background: #3b82f6;
+        }
+        
+        @media (max-width: 700px) {
+            .result-row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .result-header {
+                display: none;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>
+                <i class="fas fa-search"></i>
+                TMDB Link to ID Scraper
+            </h1>
+            <div class="subtitle">Extract ID dari berbagai format URL The Movie Database</div>
+            <div class="badge-container">
+                <span class="badge"><i class="fas fa-film"></i> Movie</span>
+                <span class="badge"><i class="fas fa-tv"></i> TV Show</span>
+                <span class="badge"><i class="fas fa-user"></i> Person</span>
+                <span class="badge"><i class="fas fa-link"></i> Multi Format</span>
+            </div>
+        </div>
+        
+        <!-- Main Panel -->
+        <div class="panel">
+            <div class="input-group">
+                <label><i class="fas fa-paste"></i> Paste URL / Links TMDB</label>
+                <textarea id="inputUrls" rows="6" placeholder="https://www.themoviedb.org/movie/76600-avatar-3
+https://www.themoviedb.org/tv/1396-breaking-bad
+https://www.themoviedb.org/person/6193-leonardo-dicaprio
+movie/76600
+76600
+tmdb/76600"></textarea>
+                <div class="example-box">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Supported formats:</span>
+                    <span class="example-item">76600</span>
+                    <span class="example-item">movie/76600</span>
+                    <span class="example-item">tv/1396</span>
+                    <span class="example-item">person/6193</span>
+                    <span class="example-item">tmdb/76600</span>
+                    <span class="example-item">themoviedb.org/movie/76600</span>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" id="scrapeBtn">
+                    <i class="fas fa-search"></i> Scrape IDs
+                </button>
+                <button class="btn btn-success" id="clearBtn">
+                    <i class="fas fa-broom"></i> Clear
+                </button>
+                <button class="btn btn-warning" id="downloadBtn">
+                    <i class="fas fa-download"></i> Download TXT
+                </button>
+            </div>
+            
+            <!-- Results -->
+            <div class="results-header">
+                <h3><i class="fas fa-list"></i> Scraped Results</h3>
+                <span class="stats" id="resultStats">0 items</span>
+            </div>
+            
+            <div class="results-grid" id="resultsGrid">
+                <div class="result-row result-header">
+                    <div>URL / Input</div>
+                    <div>ID</div>
+                    <div>Type</div>
+                    <div>Copy</div>
+                </div>
+                <div class="empty-state" id="emptyState">
+                    <i class="fas fa-link"></i>
+                    <p>Belum ada data. Paste link dan klik Scrape IDs</p>
+                </div>
+            </div>
+            
+            <!-- Copy All Section -->
+            <div class="copy-all-container" id="copyAllSection" style="display: none;">
+                <input type="text" id="allIdsInput" readonly placeholder="Semua ID">
+                <button class="small-btn" id="copyAllBtn">
+                    <i class="fas fa-copy"></i> Copy All
+                </button>
+                <button class="small-btn" id="copyAllCommaBtn">
+                    <i class="fas fa-copy"></i> Comma
+                </button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <i class="fas fa-code"></i> Support berbagai format URL TMDB · Extract ID otomatis
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // DOM elements
+            const inputUrls = document.getElementById('inputUrls');
+            const scrapeBtn = document.getElementById('scrapeBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const resultsGrid = document.getElementById('resultsGrid');
+            const emptyState = document.getElementById('emptyState');
+            const resultStats = document.getElementById('resultStats');
+            const copyAllSection = document.getElementById('copyAllSection');
+            const allIdsInput = document.getElementById('allIdsInput');
+            const copyAllBtn = document.getElementById('copyAllBtn');
+            const copyAllCommaBtn = document.getElementById('copyAllCommaBtn');
+            
+            // Store results
+            let scrapedResults = [];
+            
+            // ========== FUNGSI SCRAPE ID ==========
+            function scrapeIDs(text) {
+                // Split by new line, filter empty
+                const lines = text.split(/\r?\n/).map(line => line.trim()).filter(line => line);
+                const results = [];
+                
+                lines.forEach(line => {
+                    const original = line;
+                    let id = null;
+                    let type = 'unknown';
+                    
+                    // Pattern 1: Just number (raw ID)
+                    if (/^\d+$/.test(line)) {
+                        id = line;
+                        type = 'movie'; // default, tapi kita coba deteksi dari konteks nanti
+                    }
+                    
+                    // Pattern 2: movie/12345, tv/12345, person/12345
+                    else if (/^(movie|tv|person)\/(\d+)$/i.test(line)) {
+                        const match = line.match(/^(movie|tv|person)\/(\d+)$/i);
+                        type = match[1].toLowerCase();
+                        id = match[2];
+                    }
+                    
+                    // Pattern 3: tmdb/12345
+                    else if (/^tmdb\/(\d+)$/i.test(line)) {
+                        const match = line.match(/^tmdb\/(\d+)$/i);
+                        id = match[1];
+                        type = 'movie'; // default
+                    }
+                    
+                    // Pattern 4: themoviedb.org/movie/12345-anything
+                    else if (/themoviedb\.org\/(movie|tv|person)\/(\d+)/i.test(line)) {
+                        const match = line.match(/themoviedb\.org\/(movie|tv|person)\/(\d+)/i);
+                        type = match[1].toLowerCase();
+                        id = match[2];
+                    }
+                    
+                    // Pattern 5: themoviedb.org/m/12345 (mobile)
+                    else if (/themoviedb\.org\/[mt]\/(\d+)/i.test(line)) {
+                        const match = line.match(/themoviedb\.org\/[mt]\/(\d+)/i);
+                        id = match[1];
+                        type = 'movie'; // mobile biasanya movie
+                    }
+                    
+                    // Pattern 6: /movie/12345 or /tv/12345
+                    else if (/\/(movie|tv|person)\/(\d+)/i.test(line)) {
+                        const match = line.match(/\/(movie|tv|person)\/(\d+)/i);
+                        type = match[1].toLowerCase();
+                        id = match[2];
+                    }
+                    
+                    // Pattern 7: ?id=12345 (query parameter)
+                    else if (/[?&]id=(\d+)/i.test(line)) {
+                        const match = line.match(/[?&]id=(\d+)/i);
+                        id = match[1];
+                        type = 'movie'; // default
+                    }
+                    
+                    // Kalau ketemu ID, simpan
+                    if (id) {
+                        // Coba deteksi type dari URL jika ada keyword
+                        if (line.includes('/tv/') || line.includes('tvshow')) type = 'tv';
+                        if (line.includes('/person/') || line.includes('celebrity')) type = 'person';
+                        
+                        results.push({
+                            original,
+                            id,
+                            type,
+                            url: line
+                        });
+                    } else {
+                        // Jika tidak ketemu, simpan sebagai invalid
+                        results.push({
+                            original,
+                            id: null,
+                            type: 'invalid',
+                            url: line
+                        });
+                    }
+                });
+                
+                return results;
+            }
+            
+            // ========== RENDER RESULTS ==========
+            function renderResults(results) {
+                scrapedResults = results;
+                
+                // Clear grid except header
+                const header = resultsGrid.querySelector('.result-header');
+                resultsGrid.innerHTML = '';
+                if (header) resultsGrid.appendChild(header);
+                
+                if (results.length === 0) {
+                    resultsGrid.appendChild(emptyState);
+                    copyAllSection.style.display = 'none';
+                    resultStats.innerText = '0 items';
+                    return;
+                }
+                
+                // Hide empty state
+                if (emptyState.parentNode) emptyState.remove();
+                
+                // Filter valid IDs untuk stats
+                const validResults = results.filter(r => r.id);
+                resultStats.innerText = `${validResults.length} valid / ${results.length} total`;
+                
+                // Show copy all section if ada valid IDs
+                if (validResults.length > 0) {
+                    copyAllSection.style.display = 'flex';
+                    
+                    // Format IDs untuk copy all
+                    const allIds = validResults.map(r => r.id).join('\n');
+                    const allIdsComma = validResults.map(r => r.id).join(', ');
+                    allIdsInput.value = allIds;
+                    
+                    // Copy all buttons
+                    copyAllBtn.onclick = () => {
+                        navigator.clipboard.writeText(allIds).then(() => {
+                            alert('✅ Semua ID berhasil di-copy (format baris)');
+                        });
+                    };
+                    
+                    copyAllCommaBtn.onclick = () => {
+                        navigator.clipboard.writeText(allIdsComma).then(() => {
+                            alert('✅ Semua ID berhasil di-copy (format koma)');
+                        });
+                    };
+                } else {
+                    copyAllSection.style.display = 'none';
+                }
+                
+                // Render each result
+                results.forEach((result, index) => {
+                    const row = document.createElement('div');
+                    row.className = 'result-row';
+                    
+                    // Type badge class
+                    let typeClass = 'type-movie';
+                    let typeText = 'Movie';
+                    if (result.type === 'tv') {
+                        typeClass = 'type-tv';
+                        typeText = 'TV Show';
+                    } else if (result.type === 'person') {
+                        typeClass = 'type-person';
+                        typeText = 'Person';
+                    } else if (result.type === 'invalid') {
+                        typeClass = 'type-movie'; // fallback
+                        typeText = '❌ Invalid';
+                    }
+                    
+                    row.innerHTML = `
+                        <div class="result-url" title="${result.original}">${result.original.substring(0, 50)}${result.original.length > 50 ? '...' : ''}</div>
+                        <div class="result-id">${result.id || '-'}</div>
+                        <div><span class="result-type ${typeClass}">${typeText}</span></div>
+                        <div class="result-action">
+                            ${result.id ? `<button class="copy-btn" data-id="${result.id}" title="Copy ID"><i class="fas fa-copy"></i></button>` : '-'}
+                        </div>
+                    `;
+                    
+                    resultsGrid.appendChild(row);
+                });
+                
+                // Add copy event listeners
+                document.querySelectorAll('.copy-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const id = btn.dataset.id;
+                        navigator.clipboard.writeText(id).then(() => {
+                            // Visual feedback
+                            btn.style.background = '#10b981';
+                            btn.style.color = 'white';
+                            setTimeout(() => {
+                                btn.style.background = '';
+                                btn.style.color = '';
+                            }, 500);
+                        });
+                    });
+                });
+            }
+            
+            // ========== EVENT HANDLERS ==========
+            scrapeBtn.addEventListener('click', () => {
+                const text = inputUrls.value.trim();
+                if (!text) {
+                    alert('Masukkan URL TMDB terlebih dahulu!');
+                    return;
+                }
+                
+                const results = scrapeIDs(text);
+                renderResults(results);
+            });
+            
+            clearBtn.addEventListener('click', () => {
+                inputUrls.value = '';
+                renderResults([]);
+            });
+            
+            downloadBtn.addEventListener('click', () => {
+                if (scrapedResults.length === 0) {
+                    alert('Tidak ada data untuk di-download');
+                    return;
+                }
+                
+                const validResults = scrapedResults.filter(r => r.id);
+                if (validResults.length === 0) {
+                    alert('Tidak ada ID valid untuk di-download');
+                    return;
+                }
+                
+                // Format output: ID per baris
+                const content = validResults.map(r => r.id).join('\n');
+                
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `tmdb_ids_${new Date().getTime()}.txt`;
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+            
+            // Optional: Auto scrape from URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const preset = urlParams.get('urls');
+            if (preset) {
+                inputUrls.value = decodeURIComponent(preset);
+                setTimeout(() => scrapeBtn.click(), 100);
+            }
+        })();
+    </script>
+</body>
+</html>
