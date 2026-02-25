@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 TMDB GENERATOR · HTML STUDIO ( MOVIE BG )</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: radial-gradient(circle at 20% 30%, #1a1f35, #0a0c1a);
+            font-family: 'Inter', sans-serif;
+            color: #f0f4ff;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Background decorative elements */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: float 25s infinite ease-in-out reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-5%, 5%) scale(1.05); }
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Header dengan efek glassmorphism */
+        .hero-header {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 2rem;
+            padding: 2.5rem 3rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2) inset;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            filter: blur(80px);
+            opacity: 0.2;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff, #a5d8ff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .hero-title i {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3rem;
+        }
+        
+        .hero-badge {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .badge {
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 100px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(4px);
+            color: #b5d0ff;
+        }
+        
+        .badge i { color: #3b82f6; }
+        
+        /* Control panel dengan efek 3D */
+        .control-panel {
+            background: rgba(18, 25, 45, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 2.5rem;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.2) inset;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .control-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+        
+        .input-group label {
+            color: #9bb5ff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        
+        .input-group label i {
+            color: #3b82f6;
+            font-size: 1rem;
+            background: rgba(59, 130, 246, 0.2);
+            padding: 0.4rem;
+            border-radius: 50%;
+        }
+        
+        .input-group input, 
+        .input-group select, 
+        .input-group textarea {
+            background: rgba(10, 15, 30, 0.7);
+            border: 1px solid #2a3a60;
+            border-radius: 1.2rem;
+            padding: 1rem 1.3rem;
+            font-size: 1rem;
+            color: white;
+            font-family: 'Inter', monospace;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .input-group input:focus, 
+        .input-group select:focus, 
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3), 0 4px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .input-group textarea {
+            min-height: 120px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+        
+        .file-import {
+            grid-column: 1 / -1;
+            background: rgba(20, 30, 55, 0.6);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px dashed #3b82f6;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s;
+        }
+        
+        .file-import:hover {
+            border-color: #8b5cf6;
+            background: rgba(30, 40, 65, 0.7);
+        }
+        
+        .file-import label {
+            color: #9bb5ff;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+        
+        .file-import input[type="file"] {
+            background: rgba(10, 15, 30, 0.7);
+            border: 1px solid #2a3a60;
+            border-radius: 1rem;
+            padding: 0.8rem 1rem;
+            color: white;
+            width: 100%;
+            cursor: pointer;
+        }
+        
+        .file-import input[type="file"]::file-selector-button {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border: none;
+            border-radius: 2rem;
+            padding: 0.6rem 1.2rem;
+            color: white;
+            font-weight: 600;
+            margin-right: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .file-import input[type="file"]::file-selector-button:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            grid-column: 1 / -1;
+            margin-top: 0.5rem;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #28344e, #1f2a40);
+            border: none;
+            border-radius: 3rem;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: white;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 15px -5px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 25px -8px rgba(0, 0, 0, 0.6);
+            border-color: #3b82f6;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+            border-color: #60a5fa;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #0f6e4a, #10b981);
+            border-color: #34d399;
+        }
+        
+        .btn-info {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            border-color: #c4b5fd;
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #b45309, #f59e0b);
+            border-color: #fbbf24;
+        }
+        
+        .progress-area {
+            background: rgba(18, 25, 45, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            color: #b5d0ff;
+        }
+        
+        .progress-bar-container {
+            height: 12px;
+            background: rgba(10, 15, 30, 0.6);
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid #2a3a60;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            width: 0%;
+            transition: width 0.4s ease;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            100% { left: 100%; }
+        }
+        
+        .log-area {
+            background: rgba(8, 12, 25, 0.8);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            max-height: 220px;
+            overflow-y: auto;
+            font-family: 'JetBrains Mono', 'Inter', monospace;
+            font-size: 0.9rem;
+            border: 1px solid #2a3a60;
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);
+            line-height: 1.6;
+        }
+        
+        .log-area div {
+            padding: 0.2rem 0;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0 1.2rem 0;
+        }
+        
+        .section-header h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #b5d0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-header i {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2rem;
+        }
+        
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1rem;
+            max-height: 350px;
+            overflow-y: auto;
+            padding: 0.5rem 0.3rem;
+        }
+        
+        .file-card {
+            background: rgba(22, 32, 55, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 1.2rem;
+            padding: 1rem 1.2rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 8px 15px -8px rgba(0,0,0,0.5);
+        }
+        
+        .file-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            border-color: #3b82f6;
+            background: rgba(32, 45, 75, 0.9);
+            box-shadow: 0 15px 25px -10px #000;
+        }
+        
+        .file-icon {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: white;
+            box-shadow: 0 5px 10px rgba(59,130,246,0.3);
+        }
+        
+        .file-info {
+            flex: 1;
+        }
+        
+        .file-name {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            color: white;
+        }
+        
+        .file-meta {
+            font-size: 0.75rem;
+            color: #8ba3d9;
+        }
+        
+        .title-templates {
+            grid-column: 1 / -1;
+            background: rgba(20, 30, 55, 0.6);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #3d5a8c;
+            backdrop-filter: blur(4px);
+        }
+        
+        .example-box {
+            background: rgba(30, 40, 65, 0.8);
+            border: 1px solid #3b82f6;
+            border-radius: 3rem;
+            padding: 0.8rem 1.5rem;
+            color: #b5d0ff;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            display: inline-block;
+            backdrop-filter: blur(4px);
+        }
+        
+        .footer {
+            margin-top: 4rem;
+            text-align: center;
+            color: #6b83b0;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            font-size: 0.95rem;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 15, 30, 0.5);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Hero Header -->
+    <div class="hero-header">
+        <div class="hero-title">
+            <i class="fas fa-film"></i> TMDB GENERATOR · STUDIO FINAL
+        </div>
+        <div class="hero-badge">
+            <span class="badge"><i class="fas fa-check-circle"></i> Link ke ID</span>
+            <span class="badge"><i class="fas fa-globe"></i> 6 Bahasa</span>
+            <span class="badge"><i class="fas fa-slug"></i> Smart Slug</span>
+            <span class="badge"><i class="fas fa-rss"></i> RSS Feed</span>
+            <span class="badge"><i class="fas fa-file-alt"></i> URLs TXT</span>
+            <span class="badge"><i class="fas fa-link"></i> Self Target</span>
+        </div>
+    </div>
+
+    <!-- Control Panel -->
+    <div class="control-panel">
+        <div class="input-group">
+            <label><i class="fas fa-key"></i> API Key</label>
+            <input type="text" id="apiKey" value="3a660b31f4af8da5f2bd6f2799c11e2e" placeholder="TMDB API Key">
+        </div>
+        
+        <div class="input-group">
+            <label><i class="fas fa-list"></i> ID TMDB (satu per baris)</label>
+            <textarea id="movieIds" placeholder="76600&#10;157336&#10;299534">76600
+157336
+299534</textarea>
+        </div>
+
+        <div class="file-import">
+            <label><i class="fas fa-file-import"></i> Import dari file .txt</label>
+            <input type="file" id="txtFileInput" accept=".txt">
+            <small style="color: #8ba3d9; display: block; margin-top: 0.5rem;">File dengan satu ID per baris</small>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fas fa-link"></i> Base Link</label>
+            <input type="text" id="baseLink" value="https://inflix.pages.dev/" placeholder="https://domainmu.com/">
+            <small style="color: #8ba3d9;">Button akan mengarah ke https://domainmu.com/{id} (tab sama)</small>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fas fa-globe"></i> Bahasa</label>
+            <select id="bulkLang">
+                <option value="en-US">🇬🇧 English</option>
+                <option value="es-ES">🇪🇸 Español</option>
+                <option value="th-TH">🇹🇭 ไทย</option>
+                <option value="id-ID">🇮🇩 Indonesia</option>
+                <option value="vi-VN" selected>🇻🇳 Tiếng Việt</option>
+                <option value="bg-BG">🇧🇬 Български</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fas fa-link"></i> Teks Link 1</label>
+            <input type="text" id="bulkLink1Text" value="▶ Watch Movie HD">
+        </div>
+        <div class="input-group">
+            <label><i class="fas fa-download"></i> Teks Link 2</label>
+            <input type="text" id="bulkLink2Text" value="⬇️ Download (UHD)">
+        </div>
+
+        <div class="title-templates">
+            <label><i class="fas fa-random"></i> Template Title (pisahkan dengan | )</label>
+            <textarea id="titleTemplates" rows="2">{TITLE} (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒 Down𝗅oad 𝟩𝟤𝟢𝗉 on IBOMMA|✨ {TITLE} (2026) 4K HDR | Watch Online</textarea>
+            <div class="example-box" id="templateExample">
+                <i class="fas fa-eye"></i> Contoh: "Avatar 3 (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒..."
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-primary" id="generateBulkBtn"><i class="fas fa-cogs"></i> Generate HTML</button>
+            <button class="btn btn-success" id="downloadZipBtn" disabled><i class="fas fa-file-archive"></i> Download ZIP</button>
+            <button class="btn btn-info" id="downloadRssBtn" disabled><i class="fas fa-rss"></i> Download RSS</button>
+            <button class="btn btn-warning" id="downloadUrlsBtn" disabled><i class="fas fa-file-alt"></i> Download URLs TXT</button>
+            <button class="btn" id="clearLogsBtn"><i class="fas fa-broom"></i> Clear Logs</button>
+        </div>
+    </div>
+
+    <!-- Progress Area -->
+    <div class="progress-area">
+        <div class="progress-stats">
+            <span><i class="fas fa-chart-line"></i> Progress: <span id="progressPercent">0%</span></span>
+            <span><i class="fas fa-film"></i> <span id="generatedCount">0</span> / <span id="totalCount">0</span> files</span>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="log-area" id="logArea">
+            <div>⏳ Siap generate...</div>
+        </div>
+    </div>
+
+    <!-- Generated Files Preview -->
+    <div class="section-header">
+        <i class="fas fa-file-code"></i>
+        <h3>Generated Files (<span id="previewCount">0</span>)</h3>
+    </div>
+    <div class="preview-grid" id="filePreviewGrid">
+        <div style="color: #6b83b0; text-align: center; padding: 2rem; grid-column: 1/-1;">
+            <i class="fas fa-folder-open" style="font-size: 3rem; opacity: 0.5; margin-bottom: 1rem;"></i>
+            <p>Belum ada file yang digenerate</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <i class="fas fa-check-circle" style="color:#10b981;"></i> FINAL VERSION · Auto Translate All Text · Link Self Target · UI Premium
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+(function() {
+    // ========== KONFIGURASI ==========
+    const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
+    const BACKDROP_BASE = 'https://image.tmdb.org/t/p/original';
+    const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
+    const DOMAIN = 'exampledomain.com'; // Untuk RSS
+    
+    // Bahasa non-latin yang perlu slug khusus
+    const NON_LATIN_LANGS = ['th-TH', 'bg-BG', 'ja-JP', 'ko-KR', 'zh-CN', 'zh-TW', 'ar-SA', 'he-IL'];
+    
+    // ========== PARAGRAF MULTI BAHASA LENGKAP ==========
+    const articleTexts = {
+        'en-US': {
+            storyTitle: '{title}: The Story Unveiled',
+            intro: 'The story continues with exciting twists and turns, pushing the boundaries of storytelling.',
+            quote: '"You ran from Woodsboro. You ran from New York. But you can\'t run from me." — This chilling line captures the essence of the franchise: no matter how far you go, the terror follows. {title} promises a darker, more psychological edge while maintaining the classic thrills fans love.',
+            psychology: 'The psychological depth and intense narrative structure make this installment a standout. Fans will appreciate the callbacks while being introduced to fresh elements that expand the universe.',
+            watchTitle: 'Where to Watch {title} Online',
+            streaming: 'Looking for where to watch {title} online? While official streaming platforms will announce dates after theatrical release, fans are already searching for ways to experience this epic film. We recommend checking:',
+            whyTitle: 'Why {title} Changes Everything',
+            analysis: 'The introduction of new characters and conflicts adds moral complexity to the franchise. This installment expands the universe significantly, setting up potential for future sequels and spin-offs.',
+            impact: 'With groundbreaking visual effects and a compelling narrative, {title} raises the bar for blockbuster filmmaking. The world-building is meticulous, and the attention to detail in every frame showcases the passion of the creative team.'
+        },
+        'es-ES': {
+            storyTitle: '{title}: La Historia Revelada',
+            intro: 'La historia continúa con giros emocionantes y sorpresas, llevando la narración a nuevos límites.',
+            quote: '"Huiste de Woodsboro. Huiste de Nueva York. Pero no puedes huir de mí." — Esta escalofriante línea captura la esencia de la franquicia: no importa lo lejos que vayas, el terror te persigue. {title} promete un enfoque más oscuro y psicológico, manteniendo la emoción clásica que los fans aman.',
+            psychology: 'La profundidad psicológica y la intensa estructura narrativa hacen de esta entrega algo excepcional. Los fans apreciarán las referencias mientras descubren nuevos elementos que expanden el universo.',
+            watchTitle: 'Dónde Ver {title} Online',
+            streaming: '¿Buscas dónde ver {title} online? Mientras las plataformas oficiales anunciarán fechas después del estreno, los fans ya buscan formas de ver esta película épica. Recomendamos:',
+            whyTitle: 'Por Qué {title} Cambia Todo',
+            analysis: 'La introducción de nuevos personajes y conflictos añade complejidad moral a la franquicia. Esta entrega expande el universo significativamente, preparando el terreno para futuras secuelas.',
+            impact: 'Con efectos visuales innovadores y una narrativa convincente, {title} eleva el estándar del cine de gran presupuesto. Cada fotograma muestra la pasión del equipo creativo.'
+        },
+        'th-TH': {
+            storyTitle: '{title}: เปิดโปงเรื่องราว',
+            intro: 'เรื่องราวดำเนินต่อไปด้วยความตื่นเต้นและพลิกผัน ผลักดันขอบเขตของการเล่าเรื่อง',
+            quote: '"คุณหนีจากวูดสโบโร คุณหนีจากนิวยอร์ก แต่คุณหนีจากฉันไม่ได้" — ประโยคสุดสยองนี้สะท้อนแก่นแท้ของแฟรนไชส์: ไม่ว่าคุณจะไปไกลแค่ไหน ความสยองจะตามคุณไป {title} สัญญาว่าจะเข้มข้น ดาร์กขึ้น และแนวจิตวิทยามากขึ้น พร้อมความระทึกใจที่แฟนๆชื่นชอบ',
+            psychology: 'ความลึกซึ้งทางจิตวิทยาและโครงสร้างที่เข้มข้นทำให้ภาคนี้โดดเด่น แฟนๆจะซาบซึ้งกับการอ้างอิงถึงภาคก่อน ขณะเดียวกันก็ได้สัมผัสองค์ประกอบใหม่ที่ขยายจักรวาล',
+            watchTitle: 'ดู {title} ออนไลน์ได้ที่ไหน',
+            streaming: 'กำลังหาที่ดู {title} ออนไลน์อยู่ใช่ไหม? แม้แพลตฟอร์มสตรีมมิ่งจะประกาศวันฉายหลังโรงภาพยนตร์ แต่แฟนๆก็เริ่มหาวิธีดูหนังมหากาพย์เรื่องนี้แล้ว แนะนำให้ตรวจสอบ:',
+            whyTitle: 'ทำไม {title} ถึงเปลี่ยนทุกสิ่ง',
+            analysis: 'การแนะนำตัวละครและความขัดแย้งใหม่ๆ เพิ่มมิติทางศีลธรรมให้กับแฟรนไชส์ ภาคนี้ขยายจักรวาลอย่างมีนัยสำคัญ ปูทางสู่ภาคต่อและเรื่องแยก',
+            impact: 'ด้วยวิชวลเอฟเฟกต์ล้ำสมัยและเนื้อเรื่องที่ทรงพลัง {title} ยกระดับมาตรฐานภาพยนตร์บล็อกบัสเตอร์ ทุกรายละเอียดในทุกเฟรมสะท้อนความหลงใหลของทีมงาน'
+        },
+        'id-ID': {
+            storyTitle: '{title}: Kisah yang Terungkap',
+            intro: 'Cerita berlanjut dengan liku-liku menarik, mendorong batas-batas penceritaan.',
+            quote: '"Kau lari dari Woodsboro. Kau lari dari New York. Tapi kau tak bisa lari dariku." — Kalimat mengerikan ini menangkap esensi franchise: sejauh apapun kau pergi, teror akan selalu mengikutimu. {title} menjanjikan sisi lebih gelap dan psikologis, tetap mempertahankan sensasi klasik yang dicintai fans.',
+            psychology: 'Kedalaman psikologis dan struktur naratif yang intens membuat installment ini menonjol. Fans akan menghargai referensi masa lalu sambil diperkenalkan pada elemen baru yang memperluas semesta.',
+            watchTitle: 'Tempat Menonton {title} Online',
+            streaming: 'Mencari tempat menonton {title} online? Sementara platform streaming resmi akan mengumumkan tanggal setelah rilis bioskop, fans sudah mencari cara untuk menikmati film epik ini. Kami rekomendasikan:',
+            whyTitle: 'Mengapa {title} Mengubah Segalanya',
+            analysis: 'Pengenalan karakter dan konflik baru menambah kompleksitas moral pada franchise. Installment ini memperluas semesta secara signifikan, mempersiapkan sekuel masa depan.',
+            impact: 'Dengan efek visual mutakhir dan narasi menarik, {title} meningkatkan standar pembuatan film blockbuster. Setiap bingkai menunjukkan passion tim kreatif.'
+        },
+        'vi-VN': {
+            storyTitle: '{title}: Câu Chuyện Được Hé Lộ',
+            intro: 'Câu chuyện tiếp tục với những tình tiết bất ngờ, đẩy ranh giới kể chuyện lên tầm cao mới.',
+            quote: '"Mày đã chạy khỏi Woodsboro. Mày đã chạy khỏi New York. Nhưng mày không thể chạy khỏi tao." — Câu nói rùng rợn này nắm bắt bản chất của thương hiệu: dù bạn có đi xa đến đâu, nỗi kinh hoàng vẫn luôn tìm thấy bạn. {title} hứa hẹn một góc tối tăm và tâm lý hơn, đồng thời duy trì sự hồi hộp kinh điển mà người hâm mộ yêu thích.',
+            psychology: 'Chiều sâu tâm lý và cấu trúc kể chuyện dữ dội khiến phần này trở nên nổi bật. Người hâm mộ sẽ trân trọng những liên hệ với quá khứ trong khi khám phá các yếu tố mới mở rộng vũ trụ điện ảnh.',
+            watchTitle: 'Xem {title} Ở Đâu Trực Tuyến',
+            streaming: 'Tìm nơi xem {title} trực tuyến? Trong khi các nền tảng phát trực tuyến chính thức sẽ công bố ngày phát hành sau rạp, người hâm mộ đã bắt đầu tìm cách xem bộ phim hoành tráng này. Chúng tôi đề xuất:',
+            whyTitle: 'Tại Sao {title} Thay Đổi Mọi Thứ',
+            analysis: 'Sự ra mắt của nhân vật và xung đột mới thêm phức tạp về đạo đức vào thương hiệu. Phần này mở rộng đáng kể vũ trụ, tạo tiền đề cho các phần tiếp theo.',
+            impact: 'Với hiệu ứng hình ảnh đột phá và câu chuyện hấp dẫn, {title} nâng tầm tiêu chuẩn làm phim bom tấn. Mỗi khung hình đều thể hiện niềm đam mê của đội ngũ sáng tạo.'
+        },
+        'bg-BG': {
+            storyTitle: '{title}: Историята Разкрита',
+            intro: 'Историята продължава с вълнуващи обрати, разширявайки границите на разказа.',
+            quote: '"Избяга от Уудсбъро. Избяга от Ню Йорк. Но не можеш да избягаш от мен." — Тази смразяваща реплика улавя същността на франчайза: колкото и далеч да отидеш, ужасът винаги ще те намери. {title} обещава по-мрачен, психологически ръб, запазвайки класическия тръпки, които феновете обичат.',
+            psychology: 'Психологическата дълбочина и интензивната наративна структура правят тази част забележителна. Феновете ще оценят връзките с миналото, докато се запознават с нови елементи, разширяващи вселената.',
+            watchTitle: 'Къде Да Гледате {title} Онлайн',
+            streaming: 'Търсите къде да гледате {title} онлайн? Докато официалните стрийминг платформи обявят дати след кино премиерата, феновете вече търсят начини да гледат този епичен филм. Препоръчваме да проверите:',
+            whyTitle: 'Защо {title} Променя Всичко',
+            analysis: 'Въвеждането на нови герои и конфликти добавя морална сложност към франчайза. Тази част значително разширява вселената, подготвяйки почвата за бъдещи продължения.',
+            impact: 'С новаторски визуални ефекти и завладяващ разказ, {title} повишава летвата за блокбъстър киното. Всеки кадър показва страстта на творческия екип.'
+        }
+    };
+
+    // ========== ELEMEN DOM ==========
+    const apiKeyInput = document.getElementById('apiKey');
+    const movieIdsTextarea = document.getElementById('movieIds');
+    const bulkLang = document.getElementById('bulkLang');
+    const bulkLink1Text = document.getElementById('bulkLink1Text');
+    const bulkLink2Text = document.getElementById('bulkLink2Text');
+    const baseLinkInput = document.getElementById('baseLink');
+    const titleTemplatesArea = document.getElementById('titleTemplates');
+    const txtFileInput = document.getElementById('txtFileInput');
+    const generateBtn = document.getElementById('generateBulkBtn');
+    const downloadBtn = document.getElementById('downloadZipBtn');
+    const downloadRssBtn = document.getElementById('downloadRssBtn');
+    const downloadUrlsBtn = document.getElementById('downloadUrlsBtn');
+    const clearLogsBtn = document.getElementById('clearLogsBtn');
+    const logArea = document.getElementById('logArea');
+    const progressPercent = document.getElementById('progressPercent');
+    const progressFill = document.getElementById('progressFill');
+    const generatedCountSpan = document.getElementById('generatedCount');
+    const totalCountSpan = document.getElementById('totalCount');
+    const filePreviewGrid = document.getElementById('filePreviewGrid');
+    const previewCountSpan = document.getElementById('previewCount');
+
+    let generatedFiles = [];
+    let isGenerating = false;
+
+    // ========== FUNGSI BANTU ==========
+    function log(message, type = 'info') {
+        const entry = document.createElement('div');
+        entry.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}`;
+        entry.style.color = type === 'error' ? '#f87171' : type === 'success' ? '#4ade80' : '#a5d8ff';
+        logArea.appendChild(entry);
+        logArea.scrollTop = logArea.scrollHeight;
+    }
+
+    function clearLogs() { logArea.innerHTML = '<div>⏳ Log dibersihkan...</div>'; }
+
+    function getTitleTemplates() {
+        const text = titleTemplatesArea.value.trim();
+        return text ? text.split('|').map(t => t.trim()).filter(t => t.length) : ['{TITLE} (2026) Watch Online'];
+    }
+
+    function getRandomTitle(templates, movieTitle) {
+        if (!templates.length) return movieTitle;
+        return templates[Math.floor(Math.random() * templates.length)].replace(/{TITLE}/g, movieTitle);
+    }
+
+    // Generate kode unik random (5-8 karakter)
+    function generateUniqueCode() {
+        const length = Math.floor(Math.random() * 4) + 5; // 5-8
+        const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+
+    // Create slug berdasarkan bahasa
+    function createSlug(title, id, lang) {
+        const uniqueCode = generateUniqueCode();
+        
+        // Jika bahasa non-latin, return {kodeunik}.html
+        if (NON_LATIN_LANGS.includes(lang)) {
+            return `${uniqueCode}.html`;
+        }
+        
+        // Untuk bahasa latin: {kodeunik}-{title}.html
+        const slugTitle = title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-|-$/g, '');
+        
+        return `${uniqueCode}-${slugTitle}.html`;
+    }
+
+    // ========== IMPORT TXT ==========
+    txtFileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const content = e.target.result;
+            const ids = content.split(/\r?\n/)
+                .map(line => line.trim())
+                .filter(line => line && /^\d+$/.test(line));
+            
+            if (ids.length > 0) {
+                movieIdsTextarea.value = ids.join('\n');
+                log(`📄 Import ${ids.length} ID dari file ${file.name}`, 'success');
+            } else {
+                log('❌ Tidak ada ID valid dalam file', 'error');
+            }
+        };
+        reader.readAsText(file);
+    });
+
+    // ========== FETCH TMDB LENGKAP ==========
+    async function fetchMovieDetails(apiKey, movieId, language) {
+        const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${language}&append_to_response=videos,images,recommendations`;
+        try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return await res.json();
+        } catch (e) {
+            log(`❌ Gagal fetch ID ${movieId}: ${e.message}`, 'error');
+            return null;
+        }
+    }
+
+    // ========== GENERATE RSS FEED ==========
+    function generateRssFeed(movies, lang) {
+        const now = new Date().toUTCString();
+        const items = movies.map(m => {
+            const slug = createSlug(m.title, m.movieId, lang);
+            const url = `https://${DOMAIN}/${slug}`;
+            const description = m.overview ? m.overview.substring(0, 200) : 'Watch online';
+            
+            return `
+    <item>
+        <title>${m.title}</title>
+        <link>${url}</link>
+        <guid isPermaLink="false">${slug}</guid>
+        <pubDate>${now}</pubDate>
+        <description>${description.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</description>
+    </item>`;
+        }).join('');
+
+        return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>TMDB Movie Feed</title>
+        <link>https://${DOMAIN}/</link>
+        <description>Latest generated movies from TMDB</description>
+        <language>en-us</language>
+        <pubDate>${now}</pubDate>
+        <lastBuildDate>${now}</lastBuildDate>
+        <atom:link href="https://${DOMAIN}/feed.xml" rel="self" type="application/rss+xml"/>
+        ${items}
+    </channel>
+</rss>`;
+    }
+
+    // ========== GENERATE URLs TXT ==========
+    function generateUrlsTxt(movies, baseLink, lang) {
+        if (!baseLink) return 'No base link provided';
+        
+        return movies.map(m => {
+            const slug = createSlug(m.title, m.movieId, lang);
+            return `${baseLink}${slug}`;
+        }).join('\n');
+    }
+
+    // ========== GENERATE HTML PREMIUM ==========
+    async function generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates, baseLink) {
+        const movie = await fetchMovieDetails(apiKey, movieId, lang);
+        if (!movie) return null;
+
+        const seoTitle = getRandomTitle(titleTemplates, movie.title);
+        const year = movie.release_date ? movie.release_date.slice(0,4) : new Date().getFullYear();
+        const slug = createSlug(movie.title, movieId, lang);
+        
+        // Cari trailer YouTube
+        const trailer = movie.videos?.results?.find(v => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser'));
+        const trailerKey = trailer?.key || null;
+        
+        // Backdrop
+        const backdropUrl = movie.backdrop_path ? BACKDROP_BASE + movie.backdrop_path : null;
+        
+        // Rekomendasi (max 4)
+        const recommendations = movie.recommendations?.results?.slice(0, 4) || [];
+
+        // Ambil teks artikel sesuai bahasa
+        const texts = articleTexts[lang] || articleTexts['en-US'];
+        
+        // Link dinamis dengan ID (bukan slug!) dan target _self
+        const link1Url = baseLink ? `${baseLink}${movieId}` : '#';
+        const link2Url = baseLink ? `${baseLink}${movieId}` : '#';
+
+        // ===== HTML TEMPLATE =====
+        const html = `<!DOCTYPE html>
+<html lang="${lang}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${seoTitle}</title>
+    <meta name="description" content="${movie.overview ? movie.overview.substring(0, 160).replace(/"/g, '&quot;') : 'ดูออนไลน์'}">
+    <meta name="keywords" content="${movie.title}, ดูออนไลน์, คำบรรยายภาษาไทย, หนังเต็ม, ${year}, 4k, hd, สตรีมมิ่ง">
+    <meta name="apple-mobile-web-app-capable" content="yes"> 
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name='robots' content='index, follow' />
+    <meta name="allow-search" content="yes" />
+    <meta name="YahooSeeker" content="index,follow" />
+    <meta name="msnbot" content="index,follow" />
+    <meta name="expires" content="never" />
+    <meta name="rating" content="general">
+    <meta name="googlebot" content="index,follow" />
+    <meta name="supported-amp-formats" content="websites,stories,ads,email">
+    <meta property="og:title" content="${seoTitle}">
+    <meta property="og:image" content="${movie.poster_path ? IMG_BASE + movie.poster_path : ''}">
+    <meta property="og:type" content="video.movie">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0b0f1a; font-family: 'Inter', sans-serif; color: #eef3fc; }
+        .backdrop {
+            width: 100%; height: 400px; background-size: cover; background-position: center 20%;
+            position: relative; display: flex; align-items: flex-end; padding: 2rem;
+        }
+        .backdrop::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(0deg, #0b0f1a 0%, transparent 50%);
+        }
+        .backdrop-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; width: 100%; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .movie-card { background: #131f33; border-radius: 2rem; padding: 2rem; border: 1px solid #2d4068; margin-bottom: 2rem; }
+        .movie-hero { display: grid; grid-template-columns: 260px 1fr; gap: 2rem; }
+        .poster { border-radius: 1.5rem; overflow: hidden; background: #0b1425; aspect-ratio: 2/3; }
+        .poster img { width: 100%; height: 100%; object-fit: cover; }
+        h1 { font-size: 2.5rem; }
+        .meta { display: flex; gap: 1rem; margin: 1rem 0; flex-wrap: wrap; }
+        .meta span { background: #1b2848; padding: 0.4rem 1.2rem; border-radius: 30px; }
+        .overview { background: #0b1425b0; border-radius: 1.5rem; padding: 1.3rem; margin: 1.5rem 0; }
+        .links { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .link-btn {
+            background: #1f2c48; padding: 0.8rem 1.8rem; border-radius: 40px; color: white;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 0.6rem;
+            border: 1px solid #3f5b92; transition: 0.2s;
+        }
+        .link-btn:hover { background: #2d4070; transform: translateY(-2px); }
+        
+        .trailer-container {
+            margin: 2rem 0; border-radius: 1.5rem; overflow: hidden;
+            aspect-ratio: 16/9; background: #0b1425; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .trailer-container iframe { width: 100%; height: 100%; border: none; }
+        
+        .article {
+            background: #0f1a2b; border-radius: 1.8rem; padding: 1.6rem;
+            margin-top: 2rem; border: 1px solid #2f456e;
+        }
+        .article h2 { font-size: 1.8rem; margin-bottom: 1rem; }
+        .article-meta { color: #8099cf; margin-bottom: 1rem; }
+        .article-quote {
+            font-style: italic; border-left: 4px solid #3b82f6;
+            padding-left: 1.5rem; margin: 1.5rem 0; color: #b5d0ff;
+        }
+        
+        .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; margin-top: 2rem; }
+        .rec-item { background: #162035; border-radius: 1rem; overflow: hidden; transition: 0.2s; }
+        .rec-item:hover { transform: scale(1.02); }
+        .rec-item img { width: 100%; aspect-ratio: 2/3; object-fit: cover; }
+        .rec-item .rec-title { padding: 0.5rem; font-size: 0.85rem; }
+        
+        .footer { margin-top: 2rem; color: #5f79b0; text-align: center; }
+        @media (max-width: 700px) { .movie-hero { grid-template-columns: 1fr; } .backdrop { height: 250px; } }
+    </style>
+</head>
+<body>
+    ${backdropUrl ? `
+    <div class="backdrop" style="background-image: url('${backdropUrl}');">
+        <div class="backdrop-content"><h1 style="font-size: 3rem;">${movie.title}</h1></div>
+    </div>` : ''}
+
+    <div class="container">
+        <div class="movie-card">
+            <div class="movie-hero">
+                <div class="poster">
+                    ${movie.poster_path ? `<img src="${IMG_BASE}${movie.poster_path}" alt="${movie.title}">` : '<div style="display: flex; align-items: center; justify-content: center; height: 100%;"><i class="fas fa-film fa-3x"></i></div>'}
+                </div>
+                <div>
+                    <h1>${movie.title}</h1>
+                    <div style="color: #97b5f0;">${movie.original_title || ''}</div>
+                    <div class="meta">
+                        <span><i class="far fa-calendar"></i> ${year}</span>
+                        <span><i class="fas fa-clock"></i> ${movie.runtime || '?'} min</span>
+                        <span><i class="fas fa-star" style="color: gold;"></i> ${movie.vote_average?.toFixed(1) || '?'}</span>
+                    </div>
+                    <div class="overview">${movie.overview || 'No overview available.'}</div>
+                    <div class="links">
+                        <!-- Link dengan target="_self" (tab yang sama) -->
+                        <a href="${link1Url}" class="link-btn" target="_self" rel="nofollow"><i class="fas fa-play-circle"></i> ${link1Text}</a>
+                        <a href="${link2Url}" class="link-btn" style="background:#1d3a3a;" target="_self" rel="nofollow"><i class="fas fa-download"></i> ${link2Text}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRAILER SECTION -->
+        ${trailerKey ? `
+        <h2 style="margin-bottom: 1rem;"><i class="fab fa-youtube" style="color:#ff0000;"></i> Official Trailer</h2>
+        <div class="trailer-container">
+            <iframe src="https://www.youtube.com/embed/${trailerKey}?rel=0&modestbranding=1" 
+                    title="${movie.title} trailer" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    loading="lazy">
+            </iframe>
+        </div>
+        ` : backdropUrl ? `
+        <h2 style="margin-bottom: 1rem;"><i class="fas fa-image"></i> Featured Scene</h2>
+        <div style="aspect-ratio: 16/9; border-radius: 1.5rem; overflow: hidden; background-image: url('${backdropUrl}'); background-size: cover; background-position: center; margin: 2rem 0;">
+            <div style="width: 100%; height: 100%; background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, transparent 100%); display: flex; align-items: flex-end; padding: 2rem;">
+                <h3 style="color: white;">${movie.title}</h3>
+            </div>
+        </div>
+        ` : ''}
+
+        <!-- ARTIKEL SEO 1 -->
+        <div class="article">
+            <h2>${texts.storyTitle.replace(/{title}/g, movie.title)}</h2>
+            <div class="article-meta"><i class="far fa-clock"></i> 15 min read · updated ${year}</div>
+            <p>${movie.overview || 'The film brings new adventures and stunning visual effects.'} ${texts.intro}</p>
+            <div class="article-quote">${texts.quote.replace(/{title}/g, movie.title)}</div>
+            <p>${texts.psychology}</p>
+        </div>
+
+        <!-- ARTIKEL SEO 2 -->
+        <div class="article">
+            <h2>${texts.watchTitle.replace(/{title}/g, movie.title)}</h2>
+            <div class="article-meta"><i class="fas fa-tag"></i> Legal sources · 4K UHD</div>
+            <p>${texts.streaming.replace(/{title}/g, movie.title)}</p>
+            <ul style="margin: 1rem 0 0 2rem; color: #cbd5e1;">
+                <li>Disney+ Hotstar (expected release)</li>
+                <li>Netflix (regional availability)</li>
+                <li>Amazon Prime Video (rental/purchase)</li>
+                <li>Local streaming providers in your country</li>
+            </ul>
+        </div>
+
+        <!-- ARTIKEL SEO 3 -->
+        <div class="article">
+            <h2>${texts.whyTitle.replace(/{title}/g, movie.title)}</h2>
+            <div class="article-meta"><i class="fas fa-chart-line"></i> Analysis · new characters</div>
+            <p>${texts.analysis}</p>
+            <div class="article-quote">${texts.impact.replace(/{title}/g, movie.title)}</div>
+        </div>
+
+        <!-- REKOMENDASI -->
+        ${recommendations.length ? `
+        <h3 style="margin: 2rem 0 1rem;"><i class="fas fa-thumbs-up"></i> You may also like</h3>
+        <div class="rec-grid">
+            ${recommendations.map(m => `
+                <div class="rec-item">
+                    ${m.poster_path ? `<img src="${IMG_BASE}${m.poster_path}" alt="${m.title}" loading="lazy">` : '<div style="background:#1a2440; padding:1.5rem; text-align:center;"><i class="fas fa-image fa-2x"></i></div>'}
+                    <div class="rec-title">${m.title}</div>
+                </div>
+            `).join('')}
+        </div>
+        ` : ''}
+
+        <div class="footer">
+            <i class="fas fa-crown"></i> All rights reserved ID ${movieId} · 2026
+        </div>
+    </div>
+</body>
+</html>`;
+        return { html, title: movie.title, movieId, overview: movie.overview, slug };
+    }
+
+    // ========== BULK GENERATE ==========
+    async function bulkGenerate() {
+        if (isGenerating) { log('⏳ Masih dalam proses...', 'error'); return; }
+
+        const apiKey = apiKeyInput.value.trim() || DEFAULT_API;
+        const lang = bulkLang.value;
+        const link1Text = bulkLink1Text.value.trim() || '▶ Watch';
+        const link2Text = bulkLink2Text.value.trim() || '⬇️ Download';
+        const baseLink = baseLinkInput.value.trim();
+        const titleTemplates = getTitleTemplates();
+        
+        const idsText = movieIdsTextarea.value.trim();
+        const idMatches = idsText.split(/\r?\n/)
+            .map(line => line.trim())
+            .filter(line => line && /^\d+$/.test(line));
+            
+        if (!idMatches?.length) { log('❌ Tidak ada ID valid', 'error'); return; }
+
+        const uniqueIds = [...new Set(idMatches)];
+        totalCountSpan.innerText = uniqueIds.length;
+        generatedCountSpan.innerText = '0';
+        progressPercent.innerText = '0%';
+        progressFill.style.width = '0%';
+        generatedFiles = [];
+        updateFilePreview();
+
+        log(`🚀 Generate ${uniqueIds.length} file dengan link button ke ID (self target)...`);
+        isGenerating = true;
+        downloadBtn.disabled = true;
+        downloadRssBtn.disabled = true;
+        downloadUrlsBtn.disabled = true;
+
+        let successCount = 0;
+        for (let i = 0; i < uniqueIds.length; i++) {
+            const movieId = uniqueIds[i];
+            log(`⏳ [${i+1}/${uniqueIds.length}] ID ${movieId}...`);
+
+            const result = await generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates, baseLink);
+            
+            if (result) {
+                generatedFiles.push({
+                    filename: result.slug,
+                    content: result.html,
+                    movieId,
+                    title: result.title,
+                    overview: result.overview,
+                    slug: result.slug
+                });
+                successCount++;
+                log(`✅ ID ${movieId} (${result.title}) -> ${result.slug}`, 'success');
+            }
+
+            const percent = Math.round(((i + 1) / uniqueIds.length) * 100);
+            progressPercent.innerText = `${percent}%`;
+            progressFill.style.width = `${percent}%`;
+            generatedCountSpan.innerText = successCount;
+            updateFilePreview();
+        }
+
+        log(`🎉 Selesai! ${successCount} file`, 'success');
+        isGenerating = false;
+        if (successCount > 0) {
+            downloadBtn.disabled = false;
+            downloadRssBtn.disabled = false;
+            downloadUrlsBtn.disabled = false;
+        }
+    }
+
+    function updateFilePreview() {
+        previewCountSpan.innerText = generatedFiles.length;
+        if (!generatedFiles.length) {
+            filePreviewGrid.innerHTML = '<div style="color: #6b83b0; text-align: center; padding: 2rem; grid-column: 1/-1;"><i class="fas fa-folder-open" style="font-size: 3rem; opacity: 0.5; margin-bottom: 1rem;"></i><p>Belum ada file yang digenerate</p></div>';
+            return;
+        }
+        
+        filePreviewGrid.innerHTML = generatedFiles.map(f => `
+            <div class="file-card">
+                <div class="file-icon"><i class="fas fa-file-code"></i></div>
+                <div class="file-info">
+                    <div class="file-name">${f.filename.substring(0, 25)}...</div>
+                    <div class="file-meta">${f.title.substring(0, 30)}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function downloadZip() {
+        if (!generatedFiles.length) return;
+        const zip = new JSZip();
+        generatedFiles.forEach(f => zip.file(f.filename, f.content));
+        zip.generateAsync({ type: 'blob' }).then(blob => {
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `tmdb_movies_${Date.now()}.zip`;
+            link.click();
+            log('📦 ZIP berhasil didownload', 'success');
+        });
+    }
+
+    function downloadRss() {
+        if (!generatedFiles.length) return;
+        const rssContent = generateRssFeed(generatedFiles, bulkLang.value);
+        const blob = new Blob([rssContent], { type: 'application/rss+xml' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'feed.xml';
+        link.click();
+        log('📡 RSS feed berhasil didownload', 'success');
+    }
+
+    function downloadUrls() {
+        if (!generatedFiles.length) return;
+        const baseLink = baseLinkInput.value.trim();
+        if (!baseLink) {
+            log('❌ Base link tidak diisi', 'error');
+            return;
+        }
+        
+        const urlsContent = generateUrlsTxt(generatedFiles, baseLink, bulkLang.value);
+        const blob = new Blob([urlsContent], { type: 'text/plain' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'urls.txt';
+        link.click();
+        log('📄 URLs TXT berhasil didownload', 'success');
+    }
+
+    // ========== EVENT ==========
+    generateBtn.addEventListener('click', bulkGenerate);
+    downloadBtn.addEventListener('click', downloadZip);
+    downloadRssBtn.addEventListener('click', downloadRss);
+    downloadUrlsBtn.addEventListener('click', downloadUrls);
+    clearLogsBtn.addEventListener('click', clearLogs);
+
+    titleTemplatesArea.addEventListener('input', () => {
+        const templates = getTitleTemplates();
+        if (templates.length) {
+            document.getElementById('templateExample').innerHTML = 
+                `<i class="fas fa-eye"></i> Contoh: "${templates[0].replace(/{TITLE}/g, 'Avatar 3').substring(0, 60)}..."`;
+        }
+    });
+
+    log('✅ FINAL VERSION · Auto Translate All Headers · Link Self Target');
+})();
+</script>
+</body>
+</html> 
