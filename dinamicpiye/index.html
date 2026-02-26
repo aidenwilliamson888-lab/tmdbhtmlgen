@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 Movie Template Generator · Dynamic SEO</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: radial-gradient(circle at 20% 30%, #1a1f35, #0a0c1a);
+            font-family: 'Inter', sans-serif;
+            color: #f0f4ff;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        
+        .hero-header {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 2rem;
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #a5d8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .badge-container {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .badge {
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 100px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .control-panel {
+            background: rgba(18, 25, 45, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .input-group label {
+            color: #9bb5ff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .input-group input, .input-group select, .input-group textarea {
+            background: rgba(10, 15, 30, 0.7);
+            border: 1px solid #2a3a60;
+            border-radius: 1rem;
+            padding: 0.8rem 1rem;
+            color: white;
+            font-family: 'Inter', monospace;
+        }
+        .input-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            grid-column: 1 / -1;
+        }
+        .btn {
+            background: linear-gradient(135deg, #28344e, #1f2a40);
+            border: none;
+            border-radius: 3rem;
+            padding: 0.8rem 1.8rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            transition: 0.2s;
+        }
+        .btn-primary { background: linear-gradient(135deg, #1d4ed8, #3b82f6); }
+        .btn-success { background: linear-gradient(135deg, #0f6e4a, #10b981); }
+        .btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
+        
+        .preview-area {
+            background: rgba(18, 25, 45, 0.8);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border: 1px solid #3b82f6;
+        }
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .preview-url {
+            background: #0b1425;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #fbbf24;
+        }
+        .preview-box {
+            background: #0b1425;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid #2a3a60;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .preview-box pre {
+            color: #b5d0ff;
+            font-family: monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+        }
+        
+        .footer { margin-top: 3rem; text-align: center; color: #5f79b0; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero-header">
+        <div class="hero-title">
+            <i class="fas fa-file-code"></i> Movie Template Generator · Dynamic SEO
+        </div>
+        <div class="badge-container">
+            <span class="badge"><i class="fas fa-id-card"></i> Dynamic Title per ID</span>
+            <span class="badge"><i class="fab fa-youtube"></i> Trailer Auto</span>
+            <span class="badge"><i class="fas fa-rocket"></i> 1 File untuk Semua</span>
+        </div>
+    </div>
+
+    <div class="control-panel">
+        <div class="input-group">
+            <label><i class="fas fa-key"></i> TMDB API Key</label>
+            <input type="text" id="apiKey" value="3a660b31f4af8da5f2bd6f2799c11e2e">
+        </div>
+        
+        <div class="input-group">
+            <label><i class="fas fa-globe"></i> Base URL (domain hosting)</label>
+            <input type="text" id="baseUrl" value="https://movieverse.pages.dev" placeholder="https://domainmu.com">
+            <small style="color: #8ba3d9;">Domain tempat file template diupload</small>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fas fa-language"></i> Default Language</label>
+            <select id="defaultLang">
+                <option value="en-US">🇬🇧 English</option>
+                <option value="es-ES">🇪🇸 Español</option>
+                <option value="th-TH">🇹🇭 ไทย</option>
+                <option value="id-ID">🇮🇩 Indonesia</option>
+                <option value="vi-VN" selected>🇻🇳 Tiếng Việt</option>
+                <option value="bg-BG">🇧🇬 Български</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fas fa-link"></i> Teks Link 1</label>
+            <input type="text" id="link1Text" value="▶ Watch Movie HD">
+        </div>
+        <div class="input-group">
+            <label><i class="fas fa-download"></i> Teks Link 2</label>
+            <input type="text" id="link2Text" value="⬇️ Download (UHD)">
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-primary" id="generateBtn"><i class="fas fa-magic"></i> Generate Template HTML</button>
+            <button class="btn btn-success" id="downloadBtn"><i class="fas fa-download"></i> Download HTML</button>
+            <button class="btn" id="copyPreviewBtn"><i class="fas fa-copy"></i> Copy to Clipboard</button>
+        </div>
+    </div>
+
+    <!-- Preview -->
+    <div class="preview-area">
+        <div class="preview-header">
+            <h3><i class="fas fa-eye"></i> Preview Template</h3>
+            <span class="preview-url" id="previewUrl">/movie?id=76600</span>
+        </div>
+        <div class="preview-box" id="previewBox">
+            <pre id="previewCode">Loading template preview...</pre>
+        </div>
+    </div>
+
+    <div class="footer">
+        <i class="fas fa-check-circle" style="color:#10b981;"></i> Dynamic Template · Load data via TMDB API · SEO Title berubah per ID
+    </div>
+</div>
+
+<script>
+(function() {
+    // ========== KONFIGURASI ==========
+    const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
+    const BACKDROP_BASE = 'https://image.tmdb.org/t/p/original';
+    const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
+    
+    // ========== DOM ELEMENTS ==========
+    const apiKeyInput = document.getElementById('apiKey');
+    const baseUrlInput = document.getElementById('baseUrl');
+    const defaultLangSelect = document.getElementById('defaultLang');
+    const link1TextInput = document.getElementById('link1Text');
+    const link2TextInput = document.getElementById('link2Text');
+    const generateBtn = document.getElementById('generateBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const copyPreviewBtn = document.getElementById('copyPreviewBtn');
+    const previewBox = document.getElementById('previewBox');
+    const previewCode = document.getElementById('previewCode');
+    const previewUrl = document.getElementById('previewUrl');
+
+    let currentHtml = '';
+
+    // ========== GENERATE TEMPLATE HTML ==========
+    function generateTemplate() {
+        const apiKey = apiKeyInput.value.trim() || DEFAULT_API;
+        const baseUrl = baseUrlInput.value.trim() || 'https://movieverse.pages.dev';
+        const defaultLang = defaultLangSelect.value;
+        const link1Text = link1TextInput.value.trim() || '▶ Watch Movie HD';
+        const link2Text = link2TextInput.value.trim() || '⬇️ Download (UHD)';
+
+        // Template HTML yang akan dihasilkan
+        const template = `<!DOCTYPE html>
+<html lang="${defaultLang}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- DYNAMIC SEO TAGS - BERUBAH OTOMATIS PER ID -->
+    <title id="siteTitle">Loading movie...</title>
+    <meta name="description" id="siteDescription" content="Loading movie details...">
+    <meta name="keywords" id="siteKeywords" content="movie, watch online">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" id="ogTitle" content="Loading...">
+    <meta property="og:description" id="ogDescription" content="Watch online">
+    <meta property="og:image" id="ogImage" content="">
+    <meta property="og:url" id="ogUrl" content="">
+    <meta property="og:type" content="video.movie">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" id="canonicalLink" href="">
+    
+    <!-- Fonts & CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0b0f1a; font-family: 'Inter', sans-serif; color: #eef3fc; }
+        
+        .backdrop {
+            width: 100%; height: 400px; background-size: cover; background-position: center 20%;
+            position: relative; display: flex; align-items: flex-end; padding: 2rem;
+        }
+        .backdrop::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(0deg, #0b0f1a 0%, transparent 50%);
+        }
+        .backdrop-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; width: 100%; }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .movie-card { background: #131f33; border-radius: 2rem; padding: 2rem; border: 1px solid #2d4068; margin-bottom: 2rem; }
+        .movie-hero { display: grid; grid-template-columns: 260px 1fr; gap: 2rem; }
+        .poster { border-radius: 1.5rem; overflow: hidden; background: #0b1425; aspect-ratio: 2/3; }
+        .poster img { width: 100%; height: 100%; object-fit: cover; }
+        h1 { font-size: 2.5rem; }
+        .meta { display: flex; gap: 1rem; margin: 1rem 0; flex-wrap: wrap; }
+        .meta span { background: #1b2848; padding: 0.4rem 1.2rem; border-radius: 30px; }
+        .overview { background: #0b1425b0; border-radius: 1.5rem; padding: 1.3rem; margin: 1.5rem 0; }
+        .links { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .link-btn {
+            background: #1f2c48; padding: 0.8rem 1.8rem; border-radius: 40px; color: white;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 0.6rem;
+            border: 1px solid #3f5b92; transition: 0.2s;
+        }
+        .link-btn:hover { background: #2d4070; transform: translateY(-2px); }
+        
+        .trailer-container {
+            margin: 2rem 0; border-radius: 1.5rem; overflow: hidden;
+            aspect-ratio: 16/9; background: #0b1425;
+        }
+        .trailer-container iframe { width: 100%; height: 100%; border: none; }
+        
+        .article {
+            background: #0f1a2b; border-radius: 1.8rem; padding: 1.6rem;
+            margin-top: 2rem; border: 1px solid #2f456e;
+        }
+        .article h2 { font-size: 1.8rem; margin-bottom: 1rem; }
+        .article-meta { color: #8099cf; margin-bottom: 1rem; }
+        
+        .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; margin-top: 2rem; }
+        .rec-item { background: #162035; border-radius: 1rem; overflow: hidden; transition: 0.2s; }
+        .rec-item:hover { transform: scale(1.02); }
+        .rec-item img { width: 100%; aspect-ratio: 2/3; object-fit: cover; }
+        .rec-item .rec-title { padding: 0.5rem; font-size: 0.85rem; }
+        
+        .loading { text-align: center; padding: 3rem; }
+        .loading i { font-size: 3rem; color: #3b82f6; animation: spin 2s infinite linear; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .footer { margin-top: 2rem; color: #5f79b0; text-align: center; }
+        @media (max-width: 700px) { .movie-hero { grid-template-columns: 1fr; } .backdrop { height: 250px; } }
+    </style>
+</head>
+<body>
+    <!-- BACKDROP SECTION (akan diisi JS) -->
+    <div id="backdropSection" style="display: none;"></div>
+
+    <div class="container">
+        <!-- LOADING STATE -->
+        <div id="loading" class="loading">
+            <i class="fas fa-spinner"></i>
+            <p style="margin-top: 1rem;">Loading movie details...</p>
+        </div>
+
+        <!-- CONTENT (akan muncul setelah data loaded) -->
+        <div id="content" style="display: none;">
+            <!-- MAIN CARD -->
+            <div class="movie-card" id="movieCard">
+                <div class="movie-hero">
+                    <div class="poster" id="posterContainer">
+                        <!-- poster akan diisi JS -->
+                    </div>
+                    <div>
+                        <h1 id="movieTitle"></h1>
+                        <div style="color: #97b5f0;" id="originalTitle"></div>
+                        <div class="meta" id="metaContainer"></div>
+                        <div class="overview" id="overview"></div>
+                        <div class="links" id="linksContainer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRAILER SECTION -->
+            <div id="trailerSection" style="display: none;">
+                <h2 style="margin-bottom: 1rem;"><i class="fab fa-youtube" style="color:#ff0000;"></i> Official Trailer</h2>
+                <div class="trailer-container" id="trailerContainer"></div>
+            </div>
+
+            <!-- ARTICLES -->
+            <div class="article" id="article1">
+                <h2 id="article1Title"></h2>
+                <div class="article-meta" id="article1Meta"></div>
+                <p id="article1Content"></p>
+            </div>
+
+            <div class="article" id="article2">
+                <h2 id="article2Title"></h2>
+                <div class="article-meta" id="article2Meta"></div>
+                <p id="article2Content"></p>
+            </div>
+
+            <div class="article" id="article3">
+                <h2 id="article3Title"></h2>
+                <div class="article-meta" id="article3Meta"></div>
+                <p id="article3Content"></p>
+            </div>
+
+            <!-- RECOMMENDATIONS -->
+            <div id="recommendationsSection">
+                <h3 style="margin: 2rem 0 1rem;"><i class="fas fa-thumbs-up"></i> You may also like</h3>
+                <div class="rec-grid" id="recGrid"></div>
+            </div>
+
+            <div class="footer" id="footer"></div>
+        </div>
+    </div>
+
+    <script>
+        // ========== CONFIG ==========
+        const API_KEY = '${apiKey}';
+        const IMG_BASE = '${IMG_BASE}';
+        const BACKDROP_BASE = '${BACKDROP_BASE}';
+        const DEFAULT_LANG = '${defaultLang}';
+        const BASE_URL = '${baseUrl}';
+        const LINK1_TEXT = '${link1Text}';
+        const LINK2_TEXT = '${link2Text}';
+
+        // ========== GET ID FROM URL ==========
+        function getMovieId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        // ========== FETCH MOVIE DETAILS ==========
+        async function fetchMovieDetails(movieId) {
+            try {
+                const url = \`https://api.themoviedb.org/3/movie/\${movieId}?api_key=\${API_KEY}&language=\${DEFAULT_LANG}&append_to_response=videos,images,recommendations\`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error('Movie not found');
+                return await res.json();
+            } catch (e) {
+                console.error('Error fetching movie:', e);
+                return null;
+            }
+        }
+
+        // ========== UPDATE SEO TAGS ==========
+        function updateSeoTags(movie) {
+            const year = movie.release_date ? movie.release_date.slice(0,4) : '';
+            const title = \`\${movie.title} (\${year}) Watch Online HD\`;
+            const description = movie.overview ? movie.overview.substring(0, 160) : 'Watch online full movie';
+            const keywords = \`\${movie.title}, watch online, download, \${year}, 4k, hd\`;
+            const image = movie.poster_path ? IMG_BASE + movie.poster_path : '';
+            const url = BASE_URL + '/?id=' + movie.id;
+
+            // Update title (langsung terlihat di Google)
+            document.getElementById('siteTitle').innerText = title;
+            document.getElementById('siteDescription').setAttribute('content', description);
+            document.getElementById('siteKeywords').setAttribute('content', keywords);
+            document.getElementById('ogTitle').setAttribute('content', title);
+            document.getElementById('ogDescription').setAttribute('content', description);
+            document.getElementById('ogImage').setAttribute('content', image);
+            document.getElementById('ogUrl').setAttribute('content', url);
+            document.getElementById('canonicalLink').setAttribute('href', url);
+
+            // Juga update h1 untuk konsistensi
+            document.getElementById('movieTitle').innerText = movie.title;
+        }
+
+        // ========== RENDER MOVIE ==========
+        function renderMovie(movie) {
+            // Hide loading, show content
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+
+            const year = movie.release_date ? movie.release_date.slice(0,4) : '';
+
+            // Backdrop
+            if (movie.backdrop_path) {
+                document.getElementById('backdropSection').innerHTML = \`
+                    <div class="backdrop" style="background-image: url('\${BACKDROP_BASE}\${movie.backdrop_path}');">
+                        <div class="backdrop-content"><h1 style="font-size: 3rem;">\${movie.title}</h1></div>
+                    </div>
+                \`;
+                document.getElementById('backdropSection').style.display = 'block';
+            }
+
+            // Poster
+            if (movie.poster_path) {
+                document.getElementById('posterContainer').innerHTML = \`<img src="\${IMG_BASE}\${movie.poster_path}" alt="\${movie.title}">\`;
+            } else {
+                document.getElementById('posterContainer').innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%;"><i class="fas fa-film fa-3x"></i></div>';
+            }
+
+            // Meta info
+            document.getElementById('movieTitle').innerText = movie.title;
+            document.getElementById('originalTitle').innerText = movie.original_title || '';
+            
+            let genres = '';
+            if (movie.genres && movie.genres.length) {
+                genres = movie.genres.slice(0,3).map(g => g.name).join(', ');
+            }
+            
+            document.getElementById('metaContainer').innerHTML = \`
+                <span><i class="far fa-calendar"></i> \${year}</span>
+                <span><i class="fas fa-clock"></i> \${movie.runtime || '?'} min</span>
+                <span><i class="fas fa-star" style="color: gold;"></i> \${movie.vote_average ? movie.vote_average.toFixed(1) : '?'}</span>
+                <span><i class="fas fa-tag"></i> \${genres}</span>
+            \`;
+
+            document.getElementById('overview').innerText = movie.overview || 'No overview available.';
+
+            // Links
+            document.getElementById('linksContainer').innerHTML = \`
+                <a href="\${BASE_URL}/?id=\${movie.id}" class="link-btn"><i class="fas fa-play-circle"></i> \${LINK1_TEXT}</a>
+                <a href="\${BASE_URL}/?id=\${movie.id}" class="link-btn" style="background:#1d3a3a;"><i class="fas fa-download"></i> \${LINK2_TEXT}</a>
+            \`;
+
+            // Trailer
+            const trailer = movie.videos?.results?.find(v => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser'));
+            if (trailer) {
+                document.getElementById('trailerContainer').innerHTML = \`
+                    <iframe src="https://www.youtube.com/embed/\${trailer.key}?rel=0&modestbranding=1" 
+                            title="\${movie.title} trailer" allowfullscreen loading="lazy"></iframe>
+                \`;
+                document.getElementById('trailerSection').style.display = 'block';
+            }
+
+            // Articles
+            document.getElementById('article1Title').innerText = \`\${movie.title}: The Story Unveiled\`;
+            document.getElementById('article1Meta').innerHTML = \`<i class="far fa-clock"></i> 15 min read · updated \${year}\`;
+            document.getElementById('article1Content').innerText = movie.overview || 'The story continues with exciting twists and turns.';
+
+            document.getElementById('article2Title').innerText = \`Where to Watch \${movie.title} Online\`;
+            document.getElementById('article2Meta').innerHTML = \`<i class="fas fa-tag"></i> Legal sources · 4K UHD\`;
+            document.getElementById('article2Content').innerHTML = \`
+                Looking for where to watch \${movie.title} online? While official streaming platforms will announce dates after theatrical release, fans are already searching for ways to experience this epic film. We recommend checking:
+                <ul style="margin: 1rem 0 0 2rem; color: #cbd5e1;">
+                    <li>Disney+ Hotstar (expected release)</li>
+                    <li>Netflix (regional availability)</li>
+                    <li>Amazon Prime Video (rental/purchase)</li>
+                    <li>Local streaming providers in your country</li>
+                </ul>
+            \`;
+
+            document.getElementById('article3Title').innerText = \`Why \${movie.title} Changes Everything\`;
+            document.getElementById('article3Meta').innerHTML = \`<i class="fas fa-chart-line"></i> Analysis · new characters\`;
+            document.getElementById('article3Content').innerText = \`
+                The introduction of new characters and conflicts adds moral complexity to the franchise. This installment expands the universe significantly, setting up potential for future sequels and spin-offs. With groundbreaking visual effects and a compelling narrative, \${movie.title} raises the bar for blockbuster filmmaking.
+            \`;
+
+            // Recommendations
+            if (movie.recommendations?.results?.length) {
+                const recs = movie.recommendations.results.slice(0, 4);
+                let recHtml = '';
+                recs.forEach(r => {
+                    if (r.poster_path) {
+                        recHtml += \`
+                            <div class="rec-item">
+                                <img src="\${IMG_BASE}\${r.poster_path}" alt="\${r.title}" loading="lazy">
+                                <div class="rec-title">\${r.title}</div>
+                            </div>
+                        \`;
+                    }
+                });
+                document.getElementById('recGrid').innerHTML = recHtml;
+            }
+
+            // Footer
+            document.getElementById('footer').innerHTML = \`<i class="fas fa-crown"></i> ID \${movie.id} · \${year}\`;
+        }
+
+        // ========== INIT ==========
+        async function init() {
+            const movieId = getMovieId();
+            
+            if (!movieId) {
+                document.getElementById('loading').innerHTML = \`
+                    <i class="fas fa-exclamation-triangle" style="color: #fbbf24;"></i>
+                    <p>No movie ID provided. Please add ?id=YOUR_MOVIE_ID to the URL.</p>
+                \`;
+                return;
+            }
+
+            const movie = await fetchMovieDetails(movieId);
+            
+            if (!movie) {
+                document.getElementById('loading').innerHTML = \`
+                    <i class="fas fa-exclamation-circle" style="color: #f87171;"></i>
+                    <p>Movie not found or API error. Please check the ID.</p>
+                \`;
+                return;
+            }
+
+            // Update SEO tags FIRST (biar Google langsung baca)
+            updateSeoTags(movie);
+            
+            // Render the page
+            renderMovie(movie);
+        }
+
+        // Start when DOM ready
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>`;
+
+        return template;
+    }
+
+    // ========== UPDATE PREVIEW ==========
+    function updatePreview() {
+        const baseUrl = baseUrlInput.value.trim() || 'https://movieverse.pages.dev';
+        const html = generateTemplate();
+        currentHtml = html;
+        
+        // Tampilkan preview
+        previewCode.innerText = html;
+        previewUrl.innerText = `${baseUrl}/?id=76600 (contoh)`;
+    }
+
+    // ========== DOWNLOAD HTML ==========
+    function downloadHtml() {
+        if (!currentHtml) {
+            currentHtml = generateTemplate();
+        }
+        
+        const blob = new Blob([currentHtml], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'movie-template.html';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    // ========== COPY TO CLIPBOARD ==========
+    function copyToClipboard() {
+        if (!currentHtml) {
+            currentHtml = generateTemplate();
+        }
+        
+        navigator.clipboard.writeText(currentHtml).then(() => {
+            alert('✅ Template copied to clipboard!');
+        });
+    }
+
+    // ========== EVENT LISTENERS ==========
+    generateBtn.addEventListener('click', updatePreview);
+    downloadBtn.addEventListener('click', downloadHtml);
+    copyPreviewBtn.addEventListener('click', copyToClipboard);
+
+    // Initial preview
+    updatePreview();
+
+    // Update preview when inputs change
+    ['apiKey', 'baseUrl', 'defaultLang', 'link1Text', 'link2Text'].forEach(id => {
+        document.getElementById(id).addEventListener('input', updatePreview);
+    });
+    defaultLangSelect.addEventListener('change', updatePreview);
+})();
+</script>
+</body>
+</html>
