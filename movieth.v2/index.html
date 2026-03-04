@@ -3,481 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🇹🇭 THAILAND MOVIE GENERATOR · FIXED</title>
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+    <title>🇹🇭 THAILAND MOVIE GENERATOR · SIMPLE VERSION</title>
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, 'Segoe UI', sans-serif; }
         body {
-            background: linear-gradient(145deg, #0b1120 0%, #1a263a 100%);
-            font-family: 'Inter', sans-serif;
-            color: #eef2ff;
+            background: linear-gradient(145deg, #0b1120, #1a263a);
+            color: white;
+            padding: 20px;
             min-height: 100vh;
-            padding: 2rem 1rem;
         }
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-        .head-card {
-            background: rgba(18, 25, 45, 0.7);
-            backdrop-filter: blur(8px);
+        .container { max-width: 1300px; margin: 0 auto; }
+        .header {
+            background: #1e293b;
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 30px;
             border: 1px solid #334155;
-            border-radius: 2rem;
-            padding: 2rem 2.2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 20px 35px -8px #02061780;
         }
-        .head-title {
+        .header h1 {
             font-size: 2.5rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            background: linear-gradient(120deg, #fff, #94a3b8);
+            background: linear-gradient(135deg, #f97316, #facc15);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .head-title i {
-            font-size: 2.2rem;
-            color: #f97316;
-            -webkit-text-fill-color: initial;
-            background: none;
-        }
-        .badge-container {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-        .badge {
-            background: #1e2c48;
-            padding: 0.4rem 1.3rem;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            border: 1px solid #3b4e77;
-        }
-        .generator-panel {
+        .grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.9fr;
-            gap: 1.8rem;
-            margin-bottom: 2rem;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 30px;
         }
-        @media (max-width: 900px) {
-            .generator-panel {
-                grid-template-columns: 1fr;
-            }
-        }
+        @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
         .card {
-            background: rgba(12, 20, 35, 0.8);
-            backdrop-filter: blur(8px);
-            border: 1px solid #2d3e5f;
-            border-radius: 2rem;
-            padding: 2rem 1.8rem;
-            box-shadow: 0 15px 30px -10px #030712;
+            background: #1e293b;
+            border-radius: 30px;
+            padding: 30px;
+            border: 1px solid #334155;
         }
         .card h2 {
+            border-bottom: 1px solid #f97316;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            font-size: 1.6rem;
-            font-weight: 600;
-            margin-bottom: 1.8rem;
-            color: #d9e2ff;
-            border-bottom: 1px solid #334155;
-            padding-bottom: 0.8rem;
+            gap: 10px;
         }
         .input-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 20px;
         }
         .input-group label {
             display: block;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-            color: #9fb3e0;
-            margin-bottom: 0.5rem;
+            color: #94a3b8;
+            margin-bottom: 8px;
             font-weight: 600;
         }
-        .input-group label i {
-            margin-right: 0.5rem;
-            color: #f59e0b;
-        }
-        .input-group input,
-        .input-group textarea,
-        .input-group select {
+        .input-group input, .input-group textarea, .input-group select {
             width: 100%;
             background: #0f172a;
-            border: 1px solid #344767;
-            border-radius: 1.2rem;
-            padding: 1rem 1.4rem;
-            font-size: 1rem;
-            color: #fff;
-            font-family: 'Inter', monospace;
-            transition: 0.2s;
-        }
-        .input-group input:focus,
-        .input-group textarea:focus,
-        .input-group select:focus {
-            outline: none;
-            border-color: #f97316;
-            box-shadow: 0 0 0 3px #f9731640;
-        }
-        .input-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        .file-zone {
-            background: #111d33;
-            border-radius: 1.5rem;
-            padding: 1.2rem 1.5rem;
-            border: 1px dashed #fb923c;
-            margin-bottom: 1.8rem;
-        }
-        .file-zone input[type="file"] {
-            background: #0f172a;
-            border-radius: 3rem;
-            padding: 0.7rem 1rem;
-            width: 100%;
-            border: 1px solid #3c4d6e;
-            color: #cbd5e1;
-        }
-        .file-zone input[type="file"]::file-selector-button {
-            background: #f97316;
-            border: none;
-            border-radius: 2rem;
-            padding: 0.5rem 1.2rem;
-            font-weight: 600;
-            color: #0b0f1a;
-            margin-right: 1rem;
-            cursor: pointer;
-            transition: 0.2s;
-            border: 1px solid #facc15;
-        }
-        .file-zone input[type="file"]::file-selector-button:hover {
-            background: #fb923c;
-            transform: scale(1.02);
-        }
-        .btn {
-            background: #28344e;
-            border: 1px solid #475c82;
-            border-radius: 3rem;
-            padding: 1rem 2rem;
-            font-weight: 600;
+            border: 1px solid #334155;
+            border-radius: 15px;
+            padding: 15px;
             color: white;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            transition: 0.2s;
-            width: 100%;
             font-size: 1rem;
         }
-        .btn-primary {
-            background: linear-gradient(145deg, #ea580c, #c2410c);
-            border-color: #f9a84d;
+        .input-group textarea { min-height: 150px; }
+        button {
+            background: linear-gradient(135deg, #f97316, #c2410c);
+            border: none;
+            border-radius: 40px;
+            padding: 15px 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
         }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px -6px #c2410c;
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .progress {
+            background: #0f172a;
+            border-radius: 50px;
+            height: 10px;
+            margin: 20px 0;
         }
-        .btn-success {
-            background: #0f6e4a;
-            border-color: #34d399;
-        }
-        .btn-success:hover {
-            background: #0b7e55;
-        }
-        .action-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .progress-area {
-            background: #0b1423e0;
-            border-radius: 2rem;
-            padding: 1.8rem;
-            margin: 2rem 0 1.5rem;
-            border: 1px solid #2a4060;
-        }
-        .stat-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            color: #b3c7ff;
-        }
-        .bar-bg {
-            height: 12px;
-            background: #1e2a44;
-            border-radius: 30px;
-            overflow: hidden;
-        }
-        .bar-fill {
-            height: 100%;
+        .progress-bar {
             background: linear-gradient(90deg, #f97316, #facc15);
+            height: 10px;
+            border-radius: 50px;
             width: 0%;
-            transition: width 0.3s;
+            transition: 0.3s;
         }
-        .log-box {
-            background: #020617d0;
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            font-size: 0.9rem;
+        .log {
+            background: #0f172a;
+            border-radius: 20px;
+            padding: 20px;
             max-height: 200px;
             overflow-y: auto;
-            border: 1px solid #2a3f60;
             font-family: monospace;
-            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            border: 1px solid #334155;
+            margin: 20px 0;
         }
-        .log-box div {
-            border-bottom: 1px dashed #1f324b;
-            padding: 0.2rem 0;
-        }
-        .preview-grid {
+        .file-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 0.8rem;
-            margin-top: 1.2rem;
-            max-height: 280px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+            max-height: 300px;
             overflow-y: auto;
-            padding: 0.2rem;
         }
-        .preview-item {
-            background: #111f33;
-            border-radius: 1.2rem;
-            padding: 0.8rem 1rem;
-            border: 1px solid #31507c;
+        .file-item {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 15px;
+            padding: 15px;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-        }
-        .preview-icon {
-            background: #ea580c;
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            gap: 10px;
         }
         .footer {
             text-align: center;
-            margin-top: 3rem;
-            color: #6f8abf;
-            font-size: 0.9rem;
+            margin-top: 40px;
+            color: #64748b;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- header -->
-        <div class="head-card">
-            <div class="head-title">
-                <i class="fas fa-film"></i> 
-                <span>THAILAND MOVIE GENERATOR · FIXED VERSION</span>
-            </div>
-            <div class="badge-container">
-                <span class="badge"><i class="fas fa-check-circle" style="color:#22c55e;"></i> เทมเพลตไทย</span>
-                <span class="badge"><i class="fas fa-language"></i> ภาษาไทย</span>
-                <span class="badge"><i class="fas fa-link"></i> ลิงก์ ID</span>
-                <span class="badge"><i class="fas fa-download"></i> ดาวน์โหลด ZIP</span>
+        <div class="header">
+            <h1><i class="fas fa-film" style="color: #f97316; margin-right: 15px;"></i>THAILAND MOVIE GENERATOR · SIMPLE VERSION</h1>
+            <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                <span style="background: #2d3a5e; padding: 8px 20px; border-radius: 40px;"><i class="fas fa-check-circle" style="color: #22c55e;"></i> เทมเพลตไทยแท้</span>
+                <span style="background: #2d3a5e; padding: 8px 20px; border-radius: 40px;"><i class="fas fa-link"></i> ลิงก์ ID</span>
+                <span style="background: #2d3a5e; padding: 8px 20px; border-radius: 40px;"><i class="fas fa-download"></i> ZIP</span>
             </div>
         </div>
 
-        <!-- panel utama -->
-        <div class="generator-panel">
-            <!-- kiri: input -->
+        <div class="grid">
+            <!-- LEFT PANEL -->
             <div class="card">
-                <h2><i class="fas fa-keyboard"></i> ข้อมูลสำหรับสร้าง</h2>
+                <h2><i class="fas fa-keyboard" style="color: #f97316;"></i> ตั้งค่า</h2>
                 
                 <div class="input-group">
-                    <label><i class="fas fa-key"></i> TMDB API KEY</label>
-                    <input type="text" id="apiKey" value="3a660b31f4af8da5f2bd6f2799c11e2e" placeholder="API Key">
+                    <label>🔑 TMDB API KEY</label>
+                    <input type="text" id="apiKey" value="3a660b31f4af8da5f2bd6f2799c11e2e">
                 </div>
 
                 <div class="input-group">
-                    <label><i class="fas fa-list-ol"></i> รหัสหนัง (ID) หนึ่งบรรทัดต่อหนึ่ง ID</label>
+                    <label>🎬 รหัสหนัง (ID) บรรทัดละ 1 ID</label>
                     <textarea id="movieIds" placeholder="76600&#10;157336&#10;299534">76600
 157336
 299534</textarea>
                 </div>
 
-                <div class="file-zone">
-                    <label style="margin-bottom:0.8rem; display:block;"><i class="fas fa-file-import"></i> หรือโหลดไฟล์ .txt</label>
-                    <input type="file" id="txtFile" accept=".txt">
+                <div class="input-group">
+                    <label>🌐 Base URL</label>
+                    <input type="text" id="baseLink" value="https://moviethai.com/">
                 </div>
 
                 <div class="input-group">
-                    <label><i class="fas fa-link"></i> Base URL (ลิงก์ที่จะนำไปใช้)</label>
-                    <input type="text" id="baseLink" value="https://moviethai.com/" placeholder="https://yourdomain.com/">
-                    <small style="color:#94a3b8;">ปุ่มจะลิงก์ไปยัง base + ID เช่น https://moviethai.com/12345</small>
-                </div>
-
-                <div class="input-group">
-                    <label><i class="fas fa-tag"></i> ข้อความปุ่มที่ 1</label>
+                    <label>📌 ข้อความปุ่ม 1</label>
                     <input type="text" id="btn1Text" value="▶ ดูหนัง HD">
                 </div>
+
                 <div class="input-group">
-                    <label><i class="fas fa-download"></i> ข้อความปุ่มที่ 2</label>
+                    <label>📌 ข้อความปุ่ม 2</label>
                     <input type="text" id="btn2Text" value="⬇️ ดาวน์โหลด (4K)">
                 </div>
 
-                <div class="action-buttons">
-                    <button class="btn btn-primary" id="generateBtn"><i class="fas fa-cog"></i> สร้าง HTML</button>
-                    <button class="btn btn-success" id="downloadZipBtn" disabled><i class="fas fa-file-archive"></i> ZIP</button>
-                </div>
-                <div style="display: flex; gap:0.8rem; margin-top:0.8rem;">
-                    <button class="btn" id="clearLogsBtn" style="background:#333f5e;"><i class="fas fa-broom"></i> ล้าง log</button>
-                </div>
+                <button id="generateBtn"><i class="fas fa-cog"></i> สร้าง HTML</button>
+                <button id="downloadZipBtn" disabled><i class="fas fa-file-archive"></i> ดาวน์โหลด ZIP</button>
+                <button id="clearLogsBtn" style="background: #475569;"><i class="fas fa-broom"></i> ล้าง Log</button>
             </div>
 
-            <!-- kanan: preview & log -->
+            <!-- RIGHT PANEL -->
             <div class="card">
-                <h2><i class="fas fa-chart-simple"></i> สถานะ</h2>
-                <div class="stat-row">
-                    <span><i class="fas fa-file"></i> ไฟล์ที่สร้าง: <span id="countSuccess">0</span>/<span id="countTotal">0</span></span>
-                    <span><i class="fas fa-percent"></i> <span id="percentVal">0</span>%</span>
+                <h2><i class="fas fa-chart-line" style="color: #f97316;"></i> สถานะ</h2>
+                
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span>ไฟล์ที่สร้าง: <span id="countSuccess">0</span>/<span id="countTotal">0</span></span>
+                    <span><span id="percentVal">0</span>%</span>
                 </div>
-                <div class="bar-bg">
-                    <div class="bar-fill" id="progressFill"></div>
-                </div>
-
-                <div class="log-box" id="logArea">
-                    <div>✅ พร้อมทำงาน... รอรับ ID</div>
+                <div class="progress">
+                    <div class="progress-bar" id="progressFill"></div>
                 </div>
 
-                <h3 style="margin:1.2rem 0 0.5rem;"><i class="fas fa-eye"></i> ตัวอย่างไฟล์ที่สร้าง</h3>
-                <div class="preview-grid" id="previewContainer">
-                    <div style="color:#7486b0; grid-column:1/-1; text-align:center;">ยังไม่มีไฟล์</div>
+                <div class="log" id="logArea">
+                    <div>✅ พร้อมทำงาน...</div>
+                </div>
+
+                <h3 style="margin-top: 20px;">📁 ตัวอย่างไฟล์ที่สร้าง</h3>
+                <div class="file-list" id="previewList">
+                    <div style="color: #94a3b8; grid-column: 1/-1; text-align: center;">ยังไม่มีไฟล์</div>
                 </div>
             </div>
         </div>
 
         <div class="footer">
-            <i class="fas fa-check-circle" style="color:#22c55e;"></i> FIXED VERSION · ใช้เทมเพลตภาษาไทยแท้ · ดึงข้อมูลจาก TMDB · ทุกปุ่ม target="_self"
+            <i class="fas fa-check-circle" style="color: #22c55e;"></i> FIXED · ใช้ template thailand.html ดั้งเดิม
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script>
-        (function() {
-            "use strict";
-            
-            // ---------- CONFIG ----------
-            const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
-            const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
+        // ********** ตรงนี้สำคัญมาก **********
+        // ผมจะใช้วิธีเก็บ template HTML ไว้ในตัวแปรแบบ string ธรรมดา
+        // แล้วค่อยแทนที่ค่าทีหลัง ป้องกันปัญหา backtick ซ้อนกัน
+        
+        const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
+        const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
 
-            // DOM elements
-            const apiKeyInp = document.getElementById('apiKey');
-            const movieIdsTa = document.getElementById('movieIds');
-            const txtFileInp = document.getElementById('txtFile');
-            const baseLinkInp = document.getElementById('baseLink');
-            const btn1TextInp = document.getElementById('btn1Text');
-            const btn2TextInp = document.getElementById('btn2Text');
-            const generateBtn = document.getElementById('generateBtn');
-            const zipBtn = document.getElementById('downloadZipBtn');
-            const clearLogs = document.getElementById('clearLogsBtn');
-            const logArea = document.getElementById('logArea');
-            const countSuccessSpan = document.getElementById('countSuccess');
-            const countTotalSpan = document.getElementById('countTotal');
-            const percentVal = document.getElementById('percentVal');
-            const progressFill = document.getElementById('progressFill');
-            const previewContainer = document.getElementById('previewContainer');
+        // DOM elements
+        const apiKeyInp = document.getElementById('apiKey');
+        const movieIdsTa = document.getElementById('movieIds');
+        const baseLinkInp = document.getElementById('baseLink');
+        const btn1TextInp = document.getElementById('btn1Text');
+        const btn2TextInp = document.getElementById('btn2Text');
+        const generateBtn = document.getElementById('generateBtn');
+        const zipBtn = document.getElementById('downloadZipBtn');
+        const clearLogsBtn = document.getElementById('clearLogsBtn');
+        const logArea = document.getElementById('logArea');
+        const countSuccessSpan = document.getElementById('countSuccess');
+        const countTotalSpan = document.getElementById('countTotal');
+        const percentVal = document.getElementById('percentVal');
+        const progressFill = document.getElementById('progressFill');
+        const previewList = document.getElementById('previewList');
 
-            // state
-            let generatedFiles = [];
-            let isGenerating = false;
+        let generatedFiles = [];
+        let isGenerating = false;
 
-            // ---------- helpers ----------
-            function log(msg, type = 'info') {
-                const div = document.createElement('div');
-                div.innerHTML = '[' + new Date().toLocaleTimeString() + '] ' + msg;
-                div.style.color = type === 'error' ? '#f87171' : type === 'success' ? '#4ade80' : '#b3c7ff';
-                logArea.appendChild(div);
-                logArea.scrollTop = logArea.scrollHeight;
+        function log(msg, type = 'info') {
+            const div = document.createElement('div');
+            div.innerHTML = '[' + new Date().toLocaleTimeString() + '] ' + msg;
+            div.style.color = type === 'error' ? '#f87171' : type === 'success' ? '#4ade80' : '#94a3b8';
+            logArea.appendChild(div);
+            logArea.scrollTop = logArea.scrollHeight;
+        }
+
+        function clearLogs() {
+            logArea.innerHTML = '<div>✅ ล้าง log แล้ว</div>';
+        }
+
+        function parseIds() {
+            return movieIdsTa.value.trim().split('\n')
+                .map(l => l.trim())
+                .filter(l => l && /^\d+$/.test(l));
+        }
+
+        function randomStr() {
+            return Math.random().toString(36).substring(2, 8) + '.html';
+        }
+
+        // fetch movie
+        async function fetchMovie(apiKey, id) {
+            try {
+                const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=th-TH`);
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return await res.json();
+            } catch (err) {
+                log('❌ ID ' + id + ' error: ' + err.message, 'error');
+                return null;
             }
+        }
 
-            function clearLogsFunc() {
-                logArea.innerHTML = '<div>✅ ล้าง log แล้ว</div>';
-            }
+        // ********** TEMPLATE HTML **********
+        // อันนี้คือ template จากไฟล์ thailand.html ที่คุณให้มา 
+        // แต่แปลงให้เป็น string ที่ JavaScript เข้าใจง่ายๆ
+        function generateHTML(movie, movieId, btn1, btn2, baseLink) {
+            const title = movie.title || 'ไม่พบชื่อ';
+            const year = movie.release_date ? movie.release_date.slice(0,4) : '2026';
+            const overview = movie.overview || 'ไม่มีรายละเอียด';
+            const poster = movie.poster_path ? IMG_BASE + movie.poster_path : '';
+            const link1 = baseLink ? baseLink + movieId : '#';
+            const link2 = baseLink ? baseLink + movieId : '#';
 
-            function generateRandomCode() {
-                const len = Math.floor(Math.random() * 4) + 5;
-                const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-                let res = '';
-                for (let i = 0; i < len; i++) {
-                    res += chars.charAt(Math.floor(Math.random() * chars.length));
-                }
-                return res;
-            }
-
-            function generateFilename() {
-                return generateRandomCode() + '.html';
-            }
-
-            function parseIds() {
-                const text = movieIdsTa.value.trim();
-                const lines = text.split(/\r?\n/).map(function(l) { return l.trim(); }).filter(function(l) { return l && /^\d+$/.test(l); });
-                return [...new Set(lines)];
-            }
-
-            // ---------- import txt file ----------
-            txtFileInp.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = function(ev) {
-                    const content = ev.target.result;
-                    const lines = content.split(/\r?\n/).map(function(l) { return l.trim(); }).filter(function(l) { return l && /^\d+$/.test(l); });
-                    if (lines.length) {
-                        movieIdsTa.value = lines.join('\n');
-                        log('📂 โหลด ID จากไฟล์ ' + lines.length + ' รายการ', 'success');
-                    } else {
-                        log('❌ ไม่พบ ID ที่ถูกต้อง', 'error');
-                    }
-                    txtFileInp.value = '';
-                };
-                reader.readAsText(file);
-            });
-
-            // ---------- fetch movie from TMDB ----------
-            async function fetchMovie(apiKey, id) {
-                const url = 'https://api.themoviedb.org/3/movie/' + id + '?api_key=' + apiKey + '&language=th-TH';
-                try {
-                    const resp = await fetch(url);
-                    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-                    return await resp.json();
-                } catch (err) {
-                    log('❌ ID ' + id + ' error: ' + err.message, 'error');
-                    return null;
-                }
-            }
-
-            // ---------- generate HTML  ----------
-            function renderHTML(movie, movieId, link1Text, link2Text, baseLink) {
-                const title = movie.title || 'ไม่พบชื่อ';
-                const year = movie.release_date ? movie.release_date.slice(0,4) : '2026';
-                const overview = movie.overview || 'ไม่มีรายละเอียด';
-                const poster = movie.poster_path ? IMG_BASE + movie.poster_path : '';
-                const link1Url = baseLink ? baseLink + movieId : '#';
-                const link2Url = baseLink ? baseLink + movieId : '#';
-                
-                return '<!DOCTYPE html>\n' +
+            // สร้าง HTML โดยใช้เครื่องหมาย + ต่อ string ป้องกัน error
+            return '<!DOCTYPE html>\n' +
                 '<html lang="th">\n' +
                 '<head>\n' +
                 '  <meta charset="UTF-8">\n' +
                 '  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n' +
                 '  <title>' + title + ' (' + year + ') ดูหนังใหม่ HD</title>\n' +
-                '  <meta name="description" content="' + (overview.length > 160 ? overview.substring(0, 160).replace(/"/g, '&quot;') : overview.replace(/"/g, '&quot;')) + '">\n' +
+                '  <meta name="description" content="' + (overview.length > 160 ? overview.substring(0, 160) : overview).replace(/"/g, '&quot;') + '">\n' +
                 '  <meta name="apple-mobile-web-app-capable" content="yes">\n' +
                 '  <meta name="mobile-web-app-capable" content="yes">\n' +
                 '  <meta name="robots" content="index, follow">\n' +
@@ -492,255 +299,145 @@
                 '  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>\n' +
                 '  <style>\n' +
                 '    *{box-sizing:border-box}\n' +
-                '    body{\n' +
-                '      margin:0;\n' +
-                '      font-family:Arial,Helvetica,sans-serif;\n' +
-                '      background:linear-gradient(180deg,#eef2ff,#f8fafc);\n' +
-                '      color:#1f2937;\n' +
-                '      line-height:1.5\n' +
-                '    }\n' +
+                '    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#eef2ff,#f8fafc);color:#1f2937;line-height:1.5}\n' +
                 '    .wrap{max-width:760px;margin:auto;padding:24px 16px}\n' +
-                '    .hero{\n' +
-                '      background:linear-gradient(135deg,#ffffff,#f1f5ff);\n' +
-                '      border-radius:16px;\n' +
-                '      padding:30px 22px;\n' +
-                '      text-align:center;\n' +
-                '      box-shadow:0 14px 34px rgba(37,99,235,.15)\n' +
-                '    }\n' +
-                '    .badge{\n' +
-                '      display:inline-block;\n' +
-                '      background:linear-gradient(135deg,#22c55e,#16a34a);\n' +
-                '      color:#fff;\n' +
-                '      padding:6px 14px;\n' +
-                '      border-radius:999px;\n' +
-                '      font-size:.75rem;\n' +
-                '      font-weight:700;\n' +
-                '      margin-bottom:14px;\n' +
-                '      box-shadow:0 6px 14px rgba(34,197,94,.35)\n' +
-                '    }\n' +
-                '    img{\n' +
-                '      max-width:190px;\n' +
-                '      border-radius:10px;\n' +
-                '      display:block;\n' +
-                '      margin:0 auto 16px;\n' +
-                '      box-shadow:0 18px 36px rgba(0,0,0,.25)\n' +
-                '    }\n' +
-                '    h1{\n' +
-                '      font-size:1.8rem;\n' +
-                '      margin:.4em 0;\n' +
-                '      color:#1e3a8a\n' +
-                '    }\n' +
-                '    h2{\n' +
-                '      font-size:1rem;\n' +
-                '      font-weight:500;\n' +
-                '      color:#475569;\n' +
-                '      margin:0\n' +
-                '    }\n' +
-                '    .stars{\n' +
-                '      font-size:1.15rem;\n' +
-                '      font-weight:800;\n' +
-                '      background:linear-gradient(135deg,#fde047,#f59e0b,#f97316);\n' +
-                '      -webkit-background-clip:text;\n' +
-                '      -webkit-text-fill-color:transparent\n' +
-                '    }\n' +
-                '    .rating{\n' +
-                '      margin:14px 0;\n' +
-                '      font-size:.95rem;\n' +
-                '      color:#475569\n' +
-                '    }\n' +
+                '    .hero{background:linear-gradient(135deg,#ffffff,#f1f5ff);border-radius:16px;padding:30px 22px;text-align:center;box-shadow:0 14px 34px rgba(37,99,235,.15)}\n' +
+                '    .badge{display:inline-block;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;padding:6px 14px;border-radius:999px;font-size:.75rem;font-weight:700;margin-bottom:14px;box-shadow:0 6px 14px rgba(34,197,94,.35)}\n' +
+                '    img{max-width:190px;border-radius:10px;display:block;margin:0 auto 16px;box-shadow:0 18px 36px rgba(0,0,0,.25)}\n' +
+                '    h1{font-size:1.8rem;margin:.4em 0;color:#1e3a8a}\n' +
+                '    h2{font-size:1rem;font-weight:500;color:#475569;margin:0}\n' +
+                '    .stars{font-size:1.15rem;font-weight:800;background:linear-gradient(135deg,#fde047,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent}\n' +
+                '    .rating{margin:14px 0;font-size:.95rem;color:#475569}\n' +
                 '    .rating strong{color:#1e3a8a}\n' +
                 '    p{font-size:.95rem;color:#475569}\n' +
-                '    .cta{\n' +
-                '      display:block;\n' +
-                '      margin-top:20px;\n' +
-                '      padding:15px;\n' +
-                '      border-radius:12px;\n' +
-                '      background:linear-gradient(135deg,#2563eb,#1e40af);\n' +
-                '      color:#fff;\n' +
-                '      font-weight:800;\n' +
-                '      text-decoration:none;\n' +
-                '      box-shadow:0 14px 30px rgba(37,99,235,.45)\n' +
-                '    }\n' +
-                '    .features{\n' +
-                '      display:grid;\n' +
-                '      grid-template-columns:1fr;\n' +
-                '      gap:14px;\n' +
-                '      margin:30px 0\n' +
-                '    }\n' +
-                '    .feature{\n' +
-                '      background:#ffffff;\n' +
-                '      padding:18px;\n' +
-                '      border-radius:14px;\n' +
-                '      box-shadow:0 10px 22px rgba(0,0,0,.08);\n' +
-                '      border-left:4px solid #2563eb\n' +
-                '    }\n' +
+                '    .cta{display:block;margin-top:20px;padding:15px;border-radius:12px;background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;font-weight:800;text-decoration:none;box-shadow:0 14px 30px rgba(37,99,235,.45)}\n' +
+                '    .features{display:grid;grid-template-columns:1fr;gap:14px;margin:30px 0}\n' +
+                '    .feature{background:#ffffff;padding:18px;border-radius:14px;box-shadow:0 10px 22px rgba(0,0,0,.08);border-left:4px solid #2563eb}\n' +
                 '    .reviews h3{text-align:center;margin-bottom:10px;color:#1e3a8a}\n' +
-                '    .review{\n' +
-                '      background:#ffffff;\n' +
-                '      padding:16px;\n' +
-                '      border-radius:14px;\n' +
-                '      box-shadow:0 10px 22px rgba(0,0,0,.08);\n' +
-                '      margin-bottom:14px;\n' +
-                '      border-left:4px solid #f59e0b\n' +
-                '    }\n' +
-                '    footer{\n' +
-                '      font-size:.75rem;\n' +
-                '      text-align:center;\n' +
-                '      color:#64748b;\n' +
-                '      margin-top:34px\n' +
-                '    }\n' +
+                '    .review{background:#ffffff;padding:16px;border-radius:14px;box-shadow:0 10px 22px rgba(0,0,0,.08);margin-bottom:14px;border-left:4px solid #f59e0b}\n' +
+                '    footer{font-size:.75rem;text-align:center;color:#64748b;margin-top:34px}\n' +
                 '  </style>\n' +
                 '</head>\n' +
                 '<body>\n' +
-                '\n' +
                 '<div class="wrap">\n' +
-                '\n' +
                 '  <section class="hero">\n' +
                 '    <span class="badge">กำลังเล่นอยู่</span>\n' +
-                '\n' +
-                '    <img id="Poster" src="' + poster + '" alt="' + title + '" loading="eager" decoding="async">\n' +
-                '\n' +
-                '    <h1 id="movieTitle">' + title + ' ' + year + '</h1>\n' +
-                '    <h2 id="movieQuality">คุณภาพ HD • BluRay • WEB-DL</h2>\n' +
-                '\n' +
+                '    <img src="' + poster + '" alt="' + title + '" loading="eager">\n' +
+                '    <h1>' + title + ' ' + year + '</h1>\n' +
+                '    <h2>คุณภาพ HD • BluRay • WEB-DL</h2>\n' +
                 '    <div class="rating">\n' +
                 '      <span class="stars">★★★★★</span>\n' +
                 '      <div><strong>4.8/5</strong> • <strong>10,000+</strong> ดาวน์โหลด</div>\n' +
                 '    </div>\n' +
-                '\n' +
                 '    <p>' + overview + '</p>\n' +
-                '\n' +
-                '    <a class="cta" id="downloadLink" href="' + link1Url + '" target="_self">' + link1Text + '</a>\n' +
+                '    <a class="cta" href="' + link1 + '" target="_self">' + btn1 + '</a>\n' +
                 '  </section>\n' +
-                '\n' +
                 '  <section class="features">\n' +
                 '    <div class="feature">🎥 ' + title + ' ' + year + '</div>\n' +
                 '    <div class="feature">⭐ มีให้เลือกทั้ง HD, 1080p, 4K</div>\n' +
                 '    <div class="feature">📝 พร้อมซับไทย</div>\n' +
                 '  </section>\n' +
-                '\n' +
                 '  <section class="reviews">\n' +
                 '    <h3>รีวิวจากผู้ใช้</h3>\n' +
                 '    <div class="review">★★★★★ "รวมหนังครบมาก!" — สมชาย</div>\n' +
                 '    <div class="review">★★★★★ "ภาพคมชัด เสียงคมชัด" — วิชัย</div>\n' +
                 '    <div class="review">★★★★★ "โหลดเร็ว ซับตรง" — อรอนงค์</div>\n' +
                 '  </section>\n' +
-                '\n' +
                 '  <section id="download" class="hero" style="margin-top:24px">\n' +
                 '    <h2>ดาวน์โหลดหนังฟรี</h2>\n' +
                 '    <p>คลิกปุ่มด้านล่างเพื่อดาวน์โหลดหนังที่คุณเลือกโดยตรง เซิร์ฟเวอร์เร็วและปลอดภัย</p>\n' +
-                '    <a class="cta" href="' + link2Url + '" target="_self">ดาวน์โหลดผ่าน Server 1 (เร็ว)</a>\n' +
-                '    <a class="cta" href="' + link2Url + '" style="background:linear-gradient(135deg,#16a34a,#15803d); margin-top:10px;" target="_self">ดาวน์โหลดผ่าน Server 2 (Mirror)</a>\n' +
+                '    <a class="cta" href="' + link2 + '" target="_self">ดาวน์โหลดผ่าน Server 1 (เร็ว)</a>\n' +
+                '    <a class="cta" href="' + link2 + '" style="background:linear-gradient(135deg,#16a34a,#15803d); margin-top:10px;" target="_self">ดาวน์โหลดผ่าน Server 2 (Mirror)</a>\n' +
                 '  </section>\n' +
-                '\n' +
                 '  <footer>© All rights reserved ID ' + movieId + ' · 2026</footer>\n' +
-                '\n' +
                 '</div>\n' +
                 '</body>\n' +
                 '</html>';
+        }
+
+        async function generateAll() {
+            if (isGenerating) return;
+            
+            const apiKey = apiKeyInp.value.trim() || DEFAULT_API;
+            const ids = parseIds();
+            if (!ids.length) {
+                log('❌ ไม่มี ID', 'error');
+                return;
             }
 
-            // ---------- proses generate ----------
-            async function generateAll() {
-                if (isGenerating) {
-                    log('⏳ กำลังสร้างอยู่ กรุณารอ...', 'error');
-                    return;
+            const btn1 = btn1TextInp.value.trim() || '▶ ดูหนัง HD';
+            const btn2 = btn2TextInp.value.trim() || '⬇️ ดาวน์โหลด (4K)';
+            const base = baseLinkInp.value.trim() || 'https://moviethai.com/';
+
+            generatedFiles = [];
+            isGenerating = true;
+            zipBtn.disabled = true;
+            countSuccessSpan.innerText = '0';
+            countTotalSpan.innerText = ids.length;
+            percentVal.innerText = '0';
+            progressFill.style.width = '0%';
+            previewList.innerHTML = '<div style="color:#94a3b8; text-align:center;">กำลังสร้าง...</div>';
+
+            log('🚀 เริ่มสร้าง ' + ids.length + ' ไฟล์');
+
+            let success = 0;
+            for (let i = 0; i < ids.length; i++) {
+                const id = ids[i];
+                log('⏳ [' + (i+1) + '/' + ids.length + '] ID ' + id);
+                
+                const movie = await fetchMovie(apiKey, id);
+                if (movie) {
+                    const html = generateHTML(movie, id, btn1, btn2, base);
+                    const filename = randomStr();
+                    generatedFiles.push({
+                        filename: filename,
+                        content: html,
+                        title: movie.title
+                    });
+                    success++;
+                    log('✅ ' + id + ' -> ' + filename, 'success');
                 }
 
-                const apiKey = apiKeyInp.value.trim() || DEFAULT_API;
-                const ids = parseIds();
-                if (!ids.length) {
-                    log('❌ ไม่มี ID ที่ถูกต้อง', 'error');
-                    return;
+                const percent = Math.round(((i+1)/ids.length)*100);
+                percentVal.innerText = percent;
+                progressFill.style.width = percent + '%';
+                countSuccessSpan.innerText = success;
+
+                // preview
+                let previewHtml = '';
+                for (let j = 0; j < Math.min(generatedFiles.length, 6); j++) {
+                    previewHtml += '<div class="file-item"><i class="fas fa-file-code" style="color:#f97316;"></i> ' + generatedFiles[j].filename + '</div>';
                 }
-
-                const link1 = btn1TextInp.value.trim() || '▶ ดูหนัง HD';
-                const link2 = btn2TextInp.value.trim() || '⬇️ ดาวน์โหลด (4K)';
-                const baseLink = baseLinkInp.value.trim() || 'https://moviethai.com/';
-
-                generatedFiles = [];
-                isGenerating = true;
-                zipBtn.disabled = true;
-                countSuccessSpan.innerText = '0';
-                countTotalSpan.innerText = ids.length;
-                percentVal.innerText = '0';
-                progressFill.style.width = '0%';
-                updatePreview();
-
-                log('🚀 เริ่มสร้าง ' + ids.length + ' ไฟล์...');
-
-                let success = 0;
-                for (let i = 0; i < ids.length; i++) {
-                    const id = ids[i];
-                    log('⏳ [' + (i+1) + '/' + ids.length + '] กำลังโหลด ID ' + id + '...');
-                    
-                    const movie = await fetchMovie(apiKey, id);
-                    if (movie) {
-                        const htmlContent = renderHTML(movie, id, link1, link2, baseLink);
-                        const filename = generateFilename();
-                        generatedFiles.push({
-                            filename: filename,
-                            content: htmlContent,
-                            title: movie.title || id,
-                            movieId: id
-                        });
-                        success++;
-                        log('✅ ID ' + id + ' : ' + (movie.title || 'ไม่ทราบชื่อ') + ' -> ' + filename, 'success');
-                    }
-
-                    const percent = Math.round(((i+1)/ids.length)*100);
-                    percentVal.innerText = percent;
-                    progressFill.style.width = percent + '%';
-                    countSuccessSpan.innerText = success;
-                    updatePreview();
+                if (generatedFiles.length > 6) {
+                    previewHtml += '<div style="grid-column:1/-1; text-align:center;">+' + (generatedFiles.length-6) + ' รายการ</div>';
                 }
-
-                log('🎉 เสร็จสิ้น! สร้างสำเร็จ ' + success + ' ไฟล์', 'success');
-                isGenerating = false;
-                if (success > 0) zipBtn.disabled = false;
+                previewList.innerHTML = previewHtml || '<div style="color:#94a3b8; text-align:center;">ยังไม่มีไฟล์</div>';
             }
 
-            function updatePreview() {
-                if (!generatedFiles.length) {
-                    previewContainer.innerHTML = '<div style="color:#7486b0; grid-column:1/-1; text-align:center;">ยังไม่มีไฟล์</div>';
-                    return;
-                }
-                let html = '';
-                for (let i = 0; i < Math.min(generatedFiles.length, 8); i++) {
-                    const f = generatedFiles[i];
-                    html += '<div class="preview-item">' +
-                        '<div class="preview-icon"><i class="fas fa-file-code"></i></div>' +
-                        '<div style="overflow:hidden; text-overflow:ellipsis;">' + f.filename + '</div>' +
-                        '</div>';
-                }
-                if (generatedFiles.length > 8) {
-                    html += '<div style="grid-column:1/-1; text-align:center;">+' + (generatedFiles.length-8) + ' รายการ</div>';
-                }
-                previewContainer.innerHTML = html;
-            }
+            log('🎉 เสร็จสิ้น ' + success + ' ไฟล์', 'success');
+            isGenerating = false;
+            if (success > 0) zipBtn.disabled = false;
+        }
 
-            function downloadZip() {
-                if (!generatedFiles.length) return;
-                const zip = new JSZip();
-                for (let i = 0; i < generatedFiles.length; i++) {
-                    zip.file(generatedFiles[i].filename, generatedFiles[i].content);
-                }
-                zip.generateAsync({ type: 'blob' }).then(function(blob) {
-                    const a = document.createElement('a');
-                    a.href = URL.createObjectURL(blob);
-                    a.download = 'thai_movies_' + Date.now() + '.zip';
-                    a.click();
-                    log('📦 ดาวน์โหลด ZIP สำเร็จ', 'success');
-                });
-            }
+        function downloadZip() {
+            if (!generatedFiles.length) return;
+            const zip = new JSZip();
+            generatedFiles.forEach(f => zip.file(f.filename, f.content));
+            zip.generateAsync({ type: 'blob' }).then(blob => {
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'thai_movies_' + Date.now() + '.zip';
+                a.click();
+                log('📦 ดาวน์โหลด ZIP แล้ว', 'success');
+            });
+        }
 
-            // event listeners
-            generateBtn.addEventListener('click', generateAll);
-            zipBtn.addEventListener('click', downloadZip);
-            clearLogs.addEventListener('click', clearLogsFunc);
+        // events
+        generateBtn.addEventListener('click', generateAll);
+        zipBtn.addEventListener('click', downloadZip);
+        clearLogsBtn.addEventListener('click', clearLogs);
 
-            log('✅ พร้อมใช้งาน (เวอร์ชันที่แก้ไขแล้ว)');
-        })();
+        log('✅ พร้อมใช้งาน (ใช้ template thailand.html ดั้งเดิม)');
     </script>
 </body>
 </html>
