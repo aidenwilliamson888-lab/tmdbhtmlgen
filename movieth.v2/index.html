@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🇹🇭 MOVIE GENERATOR THAILAND · TMDB</title>
+    <title>🇹🇭 THAILAND MOVIE GENERATOR · FIXED VERSION</title>
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: linear-gradient(145deg, #0b1120 0%, #1a263a 100%);
             font-family: 'Inter', sans-serif;
@@ -22,10 +18,7 @@
             min-height: 100vh;
             padding: 2rem 1rem;
         }
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1300px; margin: 0 auto; }
         /* header */
         .head-card {
             background: rgba(18, 25, 45, 0.7);
@@ -73,9 +66,7 @@
             margin-bottom: 2rem;
         }
         @media (max-width: 900px) {
-            .generator-panel {
-                grid-template-columns: 1fr;
-            }
+            .generator-panel { grid-template-columns: 1fr; }
         }
         .card {
             background: rgba(12, 20, 35, 0.8);
@@ -96,9 +87,7 @@
             border-bottom: 1px solid #334155;
             padding-bottom: 0.8rem;
         }
-        .input-group {
-            margin-bottom: 1.5rem;
-        }
+        .input-group { margin-bottom: 1.5rem; }
         .input-group label {
             display: block;
             font-size: 0.85rem;
@@ -108,10 +97,7 @@
             margin-bottom: 0.5rem;
             font-weight: 600;
         }
-        .input-group label i {
-            margin-right: 0.5rem;
-            color: #f59e0b;
-        }
+        .input-group label i { margin-right: 0.5rem; color: #f59e0b; }
         .input-group input,
         .input-group textarea,
         .input-group select {
@@ -132,10 +118,7 @@
             border-color: #f97316;
             box-shadow: 0 0 0 3px #f9731640;
         }
-        .input-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
+        .input-group textarea { min-height: 150px; resize: vertical; }
         .file-zone {
             background: #111d33;
             border-radius: 1.5rem;
@@ -195,9 +178,7 @@
             background: #0f6e4a;
             border-color: #34d399;
         }
-        .btn-success:hover {
-            background: #0b7e55;
-        }
+        .btn-success:hover { background: #0b7e55; }
         .action-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -240,10 +221,7 @@
             font-family: monospace;
             margin: 1.5rem 0;
         }
-        .log-box div {
-            border-bottom: 1px dashed #1f324b;
-            padding: 0.2rem 0;
-        }
+        .log-box div { border-bottom: 1px dashed #1f324b; padding: 0.2rem 0; }
         .preview-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -285,7 +263,7 @@
         <div class="head-card">
             <div class="head-title">
                 <i class="fas fa-film"></i> 
-                <span>THAILAND MOVIE GENERATOR · TMDB</span>
+                <span>THAILAND MOVIE GENERATOR · FIXED</span>
             </div>
             <div class="badge-container">
                 <span class="badge"><i class="fas fa-check-circle" style="color:#22c55e;"></i> เทมเพลตไทย</span>
@@ -365,7 +343,7 @@
         </div>
 
         <div class="footer">
-            <i class="fas fa-check-circle" style="color:#22c55e;"></i> ใช้เทมเพลตภาษาไทยแท้ · ดึงข้อมูลจาก TMDB · ทุกปุ่ม target="_self"
+            <i class="fas fa-check-circle" style="color:#22c55e;"></i> FIXED VERSION · ใช้เทมเพลตภาษาไทยแท้ · ดึงข้อมูลจาก TMDB · ทุกปุ่ม target="_self"
         </div>
     </div>
 
@@ -418,7 +396,7 @@
                 return res;
             }
 
-            // สร้างชื่อไฟล์: สำหรับภาษาไทย ใช้แค่รหัส.html (ตาม template)
+            // สร้างชื่อไฟล์: สำหรับภาษาไทย ใช้แค่รหัส.html
             function generateFilename() {
                 return generateRandomCode() + '.html';
             }
@@ -462,7 +440,7 @@
                 }
             }
 
-            // ---------- generate HTML menggunakan template thailand.html ----------
+            // ---------- generate HTML โดยใช้ template thailand.html ----------
             function renderHTML(movie, movieId, link1Text, link2Text, baseLink) {
                 const title = movie.title || 'ไม่พบชื่อ';
                 const year = movie.release_date ? movie.release_date.slice(0,4) : '2026';
@@ -471,7 +449,7 @@
                 const link1Url = baseLink ? baseLink + movieId : '#';
                 const link2Url = baseLink ? baseLink + movieId : '#';
                 
-                // template persis dari thailand.html (ปรับเล็กน้อยให้เป็น string)
+                // template ตาม thailand.html ที่ให้มา
                 return `<!DOCTYPE html>
 <html lang="th">
 <head>
@@ -679,7 +657,7 @@
                     const movie = await fetchMovie(apiKey, id);
                     if (movie) {
                         const htmlContent = renderHTML(movie, id, link1, link2, baseLink);
-                        const filename = generateFilename();  // เช่น a3f9k.html
+                        const filename = generateFilename();
                         generatedFiles.push({
                             filename,
                             content: htmlContent,
@@ -739,7 +717,7 @@
             zipBtn.addEventListener('click', downloadZip);
             clearLogs.addEventListener('click', clearLogsFunc);
 
-            log('✅ พร้อมใช้งาน เทมเพลตประเทศไทย');
+            log('✅ พร้อมใช้งาน (เวอร์ชันที่แก้ไขแล้ว)');
         })();
     </script>
 </body>
