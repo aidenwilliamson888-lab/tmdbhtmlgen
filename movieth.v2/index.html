@@ -3,841 +3,482 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎬 THAILAND TEMPLATE · TMDB GENERATOR ( FINAL )</title>
-    <!-- Google Fonts + Font Awesome -->
+    <title>🇹🇭 MOVIE GENERATOR THAILAND · TMDB</title>
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            background: radial-gradient(circle at 20% 30%, #1a1f35, #0a0c1a);
+            background: linear-gradient(145deg, #0b1120 0%, #1a263a 100%);
             font-family: 'Inter', sans-serif;
-            color: #f0f4ff;
-            padding: 2rem 1.5rem;
+            color: #eef2ff;
             min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
+            padding: 2rem 1rem;
         }
-        
-        /* Background decorative elements */
-        body::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            z-index: -1;
-            animation: float 20s infinite ease-in-out;
-        }
-        
-        body::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
-            border-radius: 50%;
-            z-index: -1;
-            animation: float 25s infinite ease-in-out reverse;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-5%, 5%) scale(1.05); }
-        }
-        
         .container {
-            max-width: 1600px;
+            max-width: 1300px;
             margin: 0 auto;
-            position: relative;
-            z-index: 2;
         }
-        
-        /* Header dengan efek glassmorphism */
-        .hero-header {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(59, 130, 246, 0.3);
+        /* header */
+        .head-card {
+            background: rgba(18, 25, 45, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid #334155;
             border-radius: 2rem;
-            padding: 2.5rem 3rem;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2) inset;
-            position: relative;
-            overflow: hidden;
+            padding: 2rem 2.2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 35px -8px #02061780;
         }
-        
-        .hero-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -20%;
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            filter: blur(80px);
-            opacity: 0.2;
-            border-radius: 50%;
-            z-index: -1;
-        }
-        
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #fff, #a5d8ff, #93c5fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
+        .head-title {
+            font-size: 2.5rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 1rem;
-        }
-        
-        .hero-title i {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            gap: 0.8rem;
+            background: linear-gradient(120deg, #fff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-size: 3rem;
         }
-        
-        .hero-badge {
+        .head-title i {
+            font-size: 2.2rem;
+            color: #f97316;
+            -webkit-text-fill-color: initial;
+            background: none;
+        }
+        .badge-container {
             display: flex;
             gap: 1rem;
-            flex-wrap: wrap;
             margin-top: 1rem;
+            flex-wrap: wrap;
         }
-        
         .badge {
-            background: rgba(59, 130, 246, 0.2);
-            border: 1px solid rgba(59, 130, 246, 0.4);
-            border-radius: 100px;
-            padding: 0.5rem 1.2rem;
+            background: #1e2c48;
+            padding: 0.4rem 1.3rem;
+            border-radius: 40px;
             font-size: 0.85rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            backdrop-filter: blur(4px);
-            color: #b5d0ff;
+            border: 1px solid #3b4e77;
         }
-        
-        .badge i { color: #3b82f6; }
-        
-        /* Control panel dengan efek 3D */
-        .control-panel {
-            background: rgba(18, 25, 45, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(59, 130, 246, 0.25);
-            border-radius: 2.5rem;
-            padding: 2.5rem;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.2) inset;
+        /* main grid */
+        .generator-panel {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            position: relative;
-            overflow: hidden;
+            grid-template-columns: 1.2fr 0.9fr;
+            gap: 1.8rem;
+            margin-bottom: 2rem;
         }
-        
-        .control-panel::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            z-index: -1;
+        @media (max-width: 900px) {
+            .generator-panel {
+                grid-template-columns: 1fr;
+            }
         }
-        
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.7rem;
+        .card {
+            background: rgba(12, 20, 35, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid #2d3e5f;
+            border-radius: 2rem;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 15px 30px -10px #030712;
         }
-        
-        .input-group label {
-            color: #9bb5ff;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        .card h2 {
             display: flex;
             align-items: center;
             gap: 0.6rem;
-        }
-        
-        .input-group label i {
-            color: #3b82f6;
-            font-size: 1rem;
-            background: rgba(59, 130, 246, 0.2);
-            padding: 0.4rem;
-            border-radius: 50%;
-        }
-        
-        .input-group input, 
-        .input-group select, 
-        .input-group textarea {
-            background: rgba(10, 15, 30, 0.7);
-            border: 1px solid #2a3a60;
-            border-radius: 1.2rem;
-            padding: 1rem 1.3rem;
-            font-size: 1rem;
-            color: white;
-            font-family: 'Inter', monospace;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(4px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .input-group input:focus, 
-        .input-group select:focus, 
-        .input-group textarea:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3), 0 4px 15px rgba(0, 0, 0, 0.3);
-            transform: translateY(-2px);
-        }
-        
-        .input-group textarea {
-            min-height: 120px;
-            resize: vertical;
-            line-height: 1.5;
-        }
-        
-        .file-import {
-            grid-column: 1 / -1;
-            background: rgba(20, 30, 55, 0.6);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            border: 1px dashed #3b82f6;
-            backdrop-filter: blur(4px);
-            transition: all 0.3s;
-        }
-        
-        .file-import:hover {
-            border-color: #8b5cf6;
-            background: rgba(30, 40, 65, 0.7);
-        }
-        
-        .file-import label {
-            color: #9bb5ff;
+            font-size: 1.6rem;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            margin-bottom: 0.8rem;
-            font-size: 1.1rem;
+            margin-bottom: 1.8rem;
+            color: #d9e2ff;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 0.8rem;
         }
-        
-        .file-import input[type="file"] {
-            background: rgba(10, 15, 30, 0.7);
-            border: 1px solid #2a3a60;
-            border-radius: 1rem;
-            padding: 0.8rem 1rem;
-            color: white;
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        .input-group label {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: #9fb3e0;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .input-group label i {
+            margin-right: 0.5rem;
+            color: #f59e0b;
+        }
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
             width: 100%;
-            cursor: pointer;
+            background: #0f172a;
+            border: 1px solid #344767;
+            border-radius: 1.2rem;
+            padding: 1rem 1.4rem;
+            font-size: 1rem;
+            color: #fff;
+            font-family: 'Inter', monospace;
+            transition: 0.2s;
         }
-        
-        .file-import input[type="file"]::file-selector-button {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        .input-group input:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #f97316;
+            box-shadow: 0 0 0 3px #f9731640;
+        }
+        .input-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .file-zone {
+            background: #111d33;
+            border-radius: 1.5rem;
+            padding: 1.2rem 1.5rem;
+            border: 1px dashed #fb923c;
+            margin-bottom: 1.8rem;
+        }
+        .file-zone input[type="file"] {
+            background: #0f172a;
+            border-radius: 3rem;
+            padding: 0.7rem 1rem;
+            width: 100%;
+            border: 1px solid #3c4d6e;
+            color: #cbd5e1;
+        }
+        .file-zone input[type="file"]::file-selector-button {
+            background: #f97316;
             border: none;
             border-radius: 2rem;
-            padding: 0.6rem 1.2rem;
-            color: white;
+            padding: 0.5rem 1.2rem;
             font-weight: 600;
+            color: #0b0f1a;
             margin-right: 1rem;
             cursor: pointer;
-            transition: 0.3s;
-            border: 1px solid rgba(255,255,255,0.2);
+            transition: 0.2s;
+            border: 1px solid #facc15;
         }
-        
-        .file-import input[type="file"]::file-selector-button:hover {
-            transform: scale(1.05);
-            filter: brightness(1.1);
+        .file-zone input[type="file"]::file-selector-button:hover {
+            background: #fb923c;
+            transform: scale(1.02);
         }
-        
-        .button-group {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            align-items: flex-end;
-            grid-column: 1 / -1;
-            margin-top: 0.5rem;
-        }
-        
         .btn {
-            background: linear-gradient(135deg, #28344e, #1f2a40);
-            border: none;
+            background: #28344e;
+            border: 1px solid #475c82;
             border-radius: 3rem;
             padding: 1rem 2rem;
             font-weight: 600;
-            font-size: 0.95rem;
             color: white;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.8rem;
-            border: 1px solid rgba(59, 130, 246, 0.4);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 8px 15px -5px rgba(0, 0, 0, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+            transition: 0.2s;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
+            font-size: 1rem;
         }
-        
-        .btn:hover::before {
-            left: 100%;
-        }
-        
-        .btn:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 15px 25px -8px rgba(0, 0, 0, 0.6);
-            border-color: #3b82f6;
-        }
-        
         .btn-primary {
-            background: linear-gradient(135deg, #1d4ed8, #3b82f6);
-            border-color: #60a5fa;
+            background: linear-gradient(145deg, #ea580c, #c2410c);
+            border-color: #f9a84d;
         }
-        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -6px #c2410c;
+        }
         .btn-success {
-            background: linear-gradient(135deg, #0f6e4a, #10b981);
+            background: #0f6e4a;
             border-color: #34d399;
         }
-        
-        .btn-info {
-            background: linear-gradient(135deg, #7c3aed, #a78bfa);
-            border-color: #c4b5fd;
+        .btn-success:hover {
+            background: #0b7e55;
         }
-        
-        .btn-warning {
-            background: linear-gradient(135deg, #b45309, #f59e0b);
-            border-color: #fbbf24;
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
         }
-        
         .progress-area {
-            background: rgba(18, 25, 45, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(59, 130, 246, 0.25);
+            background: #0b1423e0;
             border-radius: 2rem;
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+            padding: 1.8rem;
+            margin: 2rem 0 1.5rem;
+            border: 1px solid #2a4060;
         }
-        
-        .progress-stats {
+        .stat-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.2rem;
-            font-size: 1.1rem;
-            color: #b5d0ff;
+            margin-bottom: 1rem;
+            color: #b3c7ff;
         }
-        
-        .progress-bar-container {
+        .bar-bg {
             height: 12px;
-            background: rgba(10, 15, 30, 0.6);
+            background: #1e2a44;
             border-radius: 30px;
             overflow: hidden;
-            border: 1px solid #2a3a60;
-            margin: 1rem 0;
         }
-        
-        .progress-fill {
+        .bar-fill {
             height: 100%;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            background: linear-gradient(90deg, #f97316, #facc15);
             width: 0%;
-            transition: width 0.4s ease;
-            border-radius: 30px;
-            position: relative;
-            overflow: hidden;
+            transition: width 0.3s;
         }
-        
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-        
-        @keyframes shimmer {
-            100% { left: 100%; }
-        }
-        
-        .log-area {
-            background: rgba(8, 12, 25, 0.8);
+        .log-box {
+            background: #020617d0;
             border-radius: 1.5rem;
             padding: 1.5rem;
-            max-height: 220px;
-            overflow-y: auto;
-            font-family: 'JetBrains Mono', 'Inter', monospace;
             font-size: 0.9rem;
-            border: 1px solid #2a3a60;
-            box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);
-            line-height: 1.6;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #2a3f60;
+            font-family: monospace;
+            margin: 1.5rem 0;
         }
-        
-        .log-area div {
+        .log-box div {
+            border-bottom: 1px dashed #1f324b;
             padding: 0.2rem 0;
-            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
         }
-        
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 2rem 0 1.2rem 0;
-        }
-        
-        .section-header h3 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff, #b5d0ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .section-header i {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 2rem;
-        }
-        
         .preview-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.2rem;
-            margin-top: 1rem;
-            max-height: 350px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+            max-height: 280px;
             overflow-y: auto;
-            padding: 0.5rem 0.3rem;
+            padding: 0.2rem;
         }
-        
-        .file-card {
-            background: rgba(22, 32, 55, 0.8);
-            backdrop-filter: blur(8px);
+        .preview-item {
+            background: #111f33;
             border-radius: 1.2rem;
-            padding: 1rem 1.2rem;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            transition: all 0.3s;
+            padding: 0.8rem 1rem;
+            border: 1px solid #31507c;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            box-shadow: 0 8px 15px -8px rgba(0,0,0,0.5);
+            gap: 0.8rem;
         }
-        
-        .file-card:hover {
-            transform: translateY(-4px) scale(1.02);
-            border-color: #3b82f6;
-            background: rgba(32, 45, 75, 0.9);
-            box-shadow: 0 15px 25px -10px #000;
-        }
-        
-        .file-icon {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
+        .preview-icon {
+            background: #ea580c;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
-            color: white;
-            box-shadow: 0 5px 10px rgba(59,130,246,0.3);
         }
-        
-        .file-info {
-            flex: 1;
-        }
-        
-        .file-name {
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-            color: white;
-        }
-        
-        .file-meta {
-            font-size: 0.75rem;
-            color: #8ba3d9;
-        }
-        
-        .title-templates {
-            grid-column: 1 / -1;
-            background: rgba(20, 30, 55, 0.6);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            border: 1px solid #3d5a8c;
-            backdrop-filter: blur(4px);
-        }
-        
-        .example-box {
-            background: rgba(30, 40, 65, 0.8);
-            border: 1px solid #3b82f6;
-            border-radius: 3rem;
-            padding: 0.8rem 1.5rem;
-            color: #b5d0ff;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-            display: inline-block;
-            backdrop-filter: blur(4px);
-        }
-        
         .footer {
-            margin-top: 4rem;
             text-align: center;
-            color: #6b83b0;
-            padding: 2rem 0;
-            border-top: 1px solid rgba(59, 130, 246, 0.2);
-            font-size: 0.95rem;
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(10, 15, 30, 0.5);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            margin-top: 3rem;
+            color: #6f8abf;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <!-- Hero Header -->
-    <div class="hero-header">
-        <div class="hero-title">
-            <i class="fas fa-film"></i> THAILAND TEMPLATE · GENERATOR
-        </div>
-        <div class="hero-badge">
-            <span class="badge"><i class="fas fa-check-circle"></i> Template Baru Thailand</span>
-            <span class="badge"><i class="fas fa-globe"></i> 6 Bahasa</span>
-            <span class="badge"><i class="fas fa-slug"></i> Smart Slug</span>
-            <span class="badge"><i class="fas fa-rss"></i> RSS Feed</span>
-            <span class="badge"><i class="fas fa-file-alt"></i> URLs TXT</span>
-            <span class="badge"><i class="fas fa-link"></i> Self Target</span>
-        </div>
-    </div>
-
-    <!-- Control Panel -->
-    <div class="control-panel">
-        <div class="input-group">
-            <label><i class="fas fa-key"></i> API Key</label>
-            <input type="text" id="apiKey" value="3a660b31f4af8da5f2bd6f2799c11e2e" placeholder="TMDB API Key">
-        </div>
-        
-        <div class="input-group">
-            <label><i class="fas fa-list"></i> ID TMDB (satu per baris)</label>
-            <textarea id="movieIds" placeholder="76600&#10;157336&#10;299534">76600
-157336
-299534</textarea>
-        </div>
-
-        <div class="file-import">
-            <label><i class="fas fa-file-import"></i> Import dari file .txt</label>
-            <input type="file" id="txtFileInput" accept=".txt">
-            <small style="color: #8ba3d9; display: block; margin-top: 0.5rem;">File dengan satu ID per baris</small>
-        </div>
-
-        <div class="input-group">
-            <label><i class="fas fa-link"></i> Base Link</label>
-            <input type="text" id="baseLink" value="https://inflix.pages.dev/" placeholder="https://domainmu.com/">
-            <small style="color: #8ba3d9;">Button akan mengarah ke base + ID (contoh: domain.com/12345)</small>
-        </div>
-
-        <div class="input-group">
-            <label><i class="fas fa-globe"></i> Bahasa</label>
-            <select id="bulkLang">
-                <option value="en-US">🇬🇧 English</option>
-                <option value="es-ES">🇪🇸 Español</option>
-                <option value="th-TH" selected>🇹🇭 ไทย (Thailand)</option>
-                <option value="id-ID">🇮🇩 Indonesia</option>
-                <option value="vi-VN">🇻🇳 Tiếng Việt</option>
-                <option value="bg-BG">🇧🇬 Български</option>
-            </select>
-        </div>
-
-        <div class="input-group">
-            <label><i class="fas fa-link"></i> Teks Link 1</label>
-            <input type="text" id="bulkLink1Text" value="▶ ดูหนัง HD">
-        </div>
-        <div class="input-group">
-            <label><i class="fas fa-download"></i> Teks Link 2</label>
-            <input type="text" id="bulkLink2Text" value="⬇️ ดาวน์โหลด (4K)">
-        </div>
-
-        <div class="title-templates">
-            <label><i class="fas fa-random"></i> Template Title (pisahkan dengan | )</label>
-            <textarea id="titleTemplates" rows="2">{TITLE} (.2026.) ดูหนังใหม่ HD พากย์ไทย|✨ {TITLE} (2026) เต็มเรื่อง ซับไทย|⭐ {TITLE} 4K HDR ดาวน์โหลดฟรี</textarea>
-            <div class="example-box" id="templateExample">
-                <i class="fas fa-eye"></i> Contoh: "Avatar 3 (.2026.) ดูหนังใหม่ HD พากย์ไทย"
+    <div class="container">
+        <!-- header -->
+        <div class="head-card">
+            <div class="head-title">
+                <i class="fas fa-film"></i> 
+                <span>THAILAND MOVIE GENERATOR · TMDB</span>
+            </div>
+            <div class="badge-container">
+                <span class="badge"><i class="fas fa-check-circle" style="color:#22c55e;"></i> เทมเพลตไทย</span>
+                <span class="badge"><i class="fas fa-language"></i> ภาษาไทย</span>
+                <span class="badge"><i class="fas fa-link"></i> ลิงก์ ID</span>
+                <span class="badge"><i class="fas fa-download"></i> ดาวน์โหลด ZIP</span>
             </div>
         </div>
 
-        <div class="button-group">
-            <button class="btn btn-primary" id="generateBulkBtn"><i class="fas fa-cogs"></i> Generate HTML (Thailand Template)</button>
-            <button class="btn btn-success" id="downloadZipBtn" disabled><i class="fas fa-file-archive"></i> Download ZIP</button>
-            <button class="btn btn-info" id="downloadRssBtn" disabled><i class="fas fa-rss"></i> Download RSS</button>
-            <button class="btn btn-warning" id="downloadUrlsBtn" disabled><i class="fas fa-file-alt"></i> Download URLs TXT</button>
-            <button class="btn" id="clearLogsBtn"><i class="fas fa-broom"></i> Clear Logs</button>
+        <!-- panel utama -->
+        <div class="generator-panel">
+            <!-- kiri: input -->
+            <div class="card">
+                <h2><i class="fas fa-keyboard"></i> ข้อมูลสำหรับสร้าง</h2>
+                
+                <div class="input-group">
+                    <label><i class="fas fa-key"></i> TMDB API KEY</label>
+                    <input type="text" id="apiKey" value="3a660b31f4af8da5f2bd6f2799c11e2e" placeholder="API Key">
+                </div>
+
+                <div class="input-group">
+                    <label><i class="fas fa-list-ol"></i> รหัสหนัง (ID) หนึ่งบรรทัดต่อหนึ่ง ID</label>
+                    <textarea id="movieIds" placeholder="76600&#10;157336&#10;299534">76600
+157336
+299534</textarea>
+                </div>
+
+                <div class="file-zone">
+                    <label style="margin-bottom:0.8rem; display:block;"><i class="fas fa-file-import"></i> หรือโหลดไฟล์ .txt</label>
+                    <input type="file" id="txtFile" accept=".txt">
+                </div>
+
+                <div class="input-group">
+                    <label><i class="fas fa-link"></i> Base URL (ลิงก์ที่จะนำไปใช้)</label>
+                    <input type="text" id="baseLink" value="https://moviethai.com/" placeholder="https://yourdomain.com/">
+                    <small style="color:#94a3b8;">ปุ่มจะลิงก์ไปยัง base + ID เช่น https://moviethai.com/12345</small>
+                </div>
+
+                <div class="input-group">
+                    <label><i class="fas fa-tag"></i> ข้อความปุ่มที่ 1</label>
+                    <input type="text" id="btn1Text" value="▶ ดูหนัง HD">
+                </div>
+                <div class="input-group">
+                    <label><i class="fas fa-download"></i> ข้อความปุ่มที่ 2</label>
+                    <input type="text" id="btn2Text" value="⬇️ ดาวน์โหลด (4K)">
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="generateBtn"><i class="fas fa-cog"></i> สร้าง HTML</button>
+                    <button class="btn btn-success" id="downloadZipBtn" disabled><i class="fas fa-file-archive"></i> ZIP</button>
+                </div>
+                <div style="display: flex; gap:0.8rem; margin-top:0.8rem;">
+                    <button class="btn" id="clearLogsBtn" style="background:#333f5e;"><i class="fas fa-broom"></i> ล้าง log</button>
+                </div>
+            </div>
+
+            <!-- kanan: preview & log -->
+            <div class="card">
+                <h2><i class="fas fa-chart-simple"></i> สถานะ</h2>
+                <div class="stat-row">
+                    <span><i class="fas fa-file"></i> ไฟล์ที่สร้าง: <span id="countSuccess">0</span>/<span id="countTotal">0</span></span>
+                    <span><i class="fas fa-percent"></i> <span id="percentVal">0</span>%</span>
+                </div>
+                <div class="bar-bg">
+                    <div class="bar-fill" id="progressFill"></div>
+                </div>
+
+                <div class="log-box" id="logArea">
+                    <div>✅ พร้อมทำงาน... รอรับ ID</div>
+                </div>
+
+                <h3 style="margin:1.2rem 0 0.5rem;"><i class="fas fa-eye"></i> ตัวอย่างไฟล์ที่สร้าง</h3>
+                <div class="preview-grid" id="previewContainer">
+                    <div style="color:#7486b0; grid-column:1/-1; text-align:center;">ยังไม่มีไฟล์</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <i class="fas fa-check-circle" style="color:#22c55e;"></i> ใช้เทมเพลตภาษาไทยแท้ · ดึงข้อมูลจาก TMDB · ทุกปุ่ม target="_self"
         </div>
     </div>
 
-    <!-- Progress Area -->
-    <div class="progress-area">
-        <div class="progress-stats">
-            <span><i class="fas fa-chart-line"></i> Progress: <span id="progressPercent">0%</span></span>
-            <span><i class="fas fa-film"></i> <span id="generatedCount">0</span> / <span id="totalCount">0</span> files</span>
-        </div>
-        <div class="progress-bar-container">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <div class="log-area" id="logArea">
-            <div>⏳ พร้อมสร้างไฟล์ HTML แบบไทย...</div>
-        </div>
-    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script>
+        (function() {
+            // ---------- CONFIG ----------
+            const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
+            const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
 
-    <!-- Generated Files Preview -->
-    <div class="section-header">
-        <i class="fas fa-file-code"></i>
-        <h3>Generated Files (<span id="previewCount">0</span>)</h3>
-    </div>
-    <div class="preview-grid" id="filePreviewGrid">
-        <div style="color: #6b83b0; text-align: center; padding: 2rem; grid-column: 1/-1;">
-            <i class="fas fa-folder-open" style="font-size: 3rem; opacity: 0.5; margin-bottom: 1rem;"></i>
-            <p>ยังไม่มีไฟล์ที่สร้าง</p>
-        </div>
-    </div>
+            // DOM elements
+            const apiKeyInp = document.getElementById('apiKey');
+            const movieIdsTa = document.getElementById('movieIds');
+            const txtFileInp = document.getElementById('txtFile');
+            const baseLinkInp = document.getElementById('baseLink');
+            const btn1TextInp = document.getElementById('btn1Text');
+            const btn2TextInp = document.getElementById('btn2Text');
+            const generateBtn = document.getElementById('generateBtn');
+            const zipBtn = document.getElementById('downloadZipBtn');
+            const clearLogs = document.getElementById('clearLogsBtn');
+            const logArea = document.getElementById('logArea');
+            const countSuccessSpan = document.getElementById('countSuccess');
+            const countTotalSpan = document.getElementById('countTotal');
+            const percentVal = document.getElementById('percentVal');
+            const progressFill = document.getElementById('progressFill');
+            const previewContainer = document.getElementById('previewContainer');
 
-    <div class="footer">
-        <i class="fas fa-check-circle" style="color:#10b981;"></i> FINAL VERSION · Thailand Template · All Buttons Self Target
-    </div>
-</div>
+            // state
+            let generatedFiles = [];        // { filename, content, title, movieId }
+            let isGenerating = false;
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script>
-(function() {
-    // ========== KONFIGURASI ==========
-    const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
-    const BACKDROP_BASE = 'https://image.tmdb.org/t/p/original';
-    const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
-    const DOMAIN = 'exampledomain.com'; // Untuk RSS
-    
-    // Bahasa non-latin yang perlu slug khusus
-    const NON_LATIN_LANGS = ['th-TH', 'bg-BG', 'ja-JP', 'ko-KR', 'zh-CN', 'zh-TW', 'ar-SA', 'he-IL'];
-
-    // ========== ELEMEN DOM ==========
-    const apiKeyInput = document.getElementById('apiKey');
-    const movieIdsTextarea = document.getElementById('movieIds');
-    const bulkLang = document.getElementById('bulkLang');
-    const bulkLink1Text = document.getElementById('bulkLink1Text');
-    const bulkLink2Text = document.getElementById('bulkLink2Text');
-    const baseLinkInput = document.getElementById('baseLink');
-    const titleTemplatesArea = document.getElementById('titleTemplates');
-    const txtFileInput = document.getElementById('txtFileInput');
-    const generateBtn = document.getElementById('generateBulkBtn');
-    const downloadBtn = document.getElementById('downloadZipBtn');
-    const downloadRssBtn = document.getElementById('downloadRssBtn');
-    const downloadUrlsBtn = document.getElementById('downloadUrlsBtn');
-    const clearLogsBtn = document.getElementById('clearLogsBtn');
-    const logArea = document.getElementById('logArea');
-    const progressPercent = document.getElementById('progressPercent');
-    const progressFill = document.getElementById('progressFill');
-    const generatedCountSpan = document.getElementById('generatedCount');
-    const totalCountSpan = document.getElementById('totalCount');
-    const filePreviewGrid = document.getElementById('filePreviewGrid');
-    const previewCountSpan = document.getElementById('previewCount');
-
-    let generatedFiles = [];
-    let isGenerating = false;
-
-    // ========== FUNGSI BANTU ==========
-    function log(message, type = 'info') {
-        const entry = document.createElement('div');
-        entry.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}`;
-        entry.style.color = type === 'error' ? '#f87171' : type === 'success' ? '#4ade80' : '#a5d8ff';
-        logArea.appendChild(entry);
-        logArea.scrollTop = logArea.scrollHeight;
-    }
-
-    function clearLogs() { logArea.innerHTML = '<div>⏳ Log dibersihkan...</div>'; }
-
-    function getTitleTemplates() {
-        const text = titleTemplatesArea.value.trim();
-        return text ? text.split('|').map(t => t.trim()).filter(t => t.length) : ['{TITLE} ดูหนังใหม่ HD'];
-    }
-
-    function getRandomTitle(templates, movieTitle) {
-        if (!templates.length) return movieTitle;
-        return templates[Math.floor(Math.random() * templates.length)].replace(/{TITLE}/g, movieTitle);
-    }
-
-    // Generate kode unik random (5-8 karakter)
-    function generateUniqueCode() {
-        const length = Math.floor(Math.random() * 4) + 5; // 5-8
-        const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-        let result = '';
-        for (let i = 0; i < length; i++) {
-            result += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return result;
-    }
-
-    // Create slug berdasarkan bahasa
-    function createSlug(title, id, lang) {
-        const uniqueCode = generateUniqueCode();
-        
-        // Jika bahasa non-latin, return {kodeunik}.html
-        if (NON_LATIN_LANGS.includes(lang)) {
-            return `${uniqueCode}.html`;
-        }
-        
-        // Untuk bahasa latin: {kodeunik}-{title}.html
-        const slugTitle = title
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/^-|-$/g, '');
-        
-        return `${uniqueCode}-${slugTitle}.html`;
-    }
-
-    // ========== IMPORT TXT ==========
-    txtFileInput.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const content = e.target.result;
-            const ids = content.split(/\r?\n/)
-                .map(line => line.trim())
-                .filter(line => line && /^\d+$/.test(line));
-            
-            if (ids.length > 0) {
-                movieIdsTextarea.value = ids.join('\n');
-                log(`📄 นำเข้า ${ids.length} ID จากไฟล์ ${file.name}`, 'success');
-            } else {
-                log('❌ ไม่มี ID ที่ถูกต้องในไฟล์', 'error');
+            // ---------- helpers ----------
+            function log(msg, type = 'info') {
+                const div = document.createElement('div');
+                div.innerHTML = `[${new Date().toLocaleTimeString()}] ${msg}`;
+                div.style.color = type === 'error' ? '#f87171' : type === 'success' ? '#4ade80' : '#b3c7ff';
+                logArea.appendChild(div);
+                logArea.scrollTop = logArea.scrollHeight;
             }
-        };
-        reader.readAsText(file);
-    });
 
-    // ========== FETCH TMDB ==========
-    async function fetchMovieDetails(apiKey, movieId, language) {
-        const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${language}`;
-        try {
-            const res = await fetch(url);
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            return await res.json();
-        } catch (e) {
-            log(`❌ ไม่สามารถดึงข้อมูล ID ${movieId}: ${e.message}`, 'error');
-            return null;
-        }
-    }
+            function clearLogsFunc() {
+                logArea.innerHTML = '<div>✅ ล้าง log แล้ว</div>';
+            }
 
-    // ========== GENERATE RSS FEED ==========
-    function generateRssFeed(movies, lang) {
-        const now = new Date().toUTCString();
-        const items = movies.map(m => {
-            const slug = createSlug(m.title, m.movieId, lang);
-            const url = `https://${DOMAIN}/${slug}`;
-            const description = m.overview ? m.overview.substring(0, 200) : 'Watch online';
-            
-            return `
-    <item>
-        <title>${m.title}</title>
-        <link>${url}</link>
-        <guid isPermaLink="false">${slug}</guid>
-        <pubDate>${now}</pubDate>
-        <description>${description.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</description>
-    </item>`;
-        }).join('');
+            function generateRandomCode() {
+                const len = Math.floor(Math.random() * 4) + 5; // 5-8
+                const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                let res = '';
+                for (let i = 0; i < len; i++) res += chars[Math.floor(Math.random() * chars.length)];
+                return res;
+            }
 
-        return `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>TMDB Movie Feed</title>
-        <link>https://${DOMAIN}/</link>
-        <description>Latest generated movies from TMDB</description>
-        <language>en-us</language>
-        <pubDate>${now}</pubDate>
-        <lastBuildDate>${now}</lastBuildDate>
-        <atom:link href="https://${DOMAIN}/feed.xml" rel="self" type="application/rss+xml"/>
-        ${items}
-    </channel>
-</rss>`;
-    }
+            // สร้างชื่อไฟล์: สำหรับภาษาไทย ใช้แค่รหัส.html (ตาม template)
+            function generateFilename() {
+                return generateRandomCode() + '.html';
+            }
 
-    // ========== GENERATE URLs TXT ==========
-    function generateUrlsTxt(movies, baseLink, lang) {
-        if (!baseLink) return 'No base link provided';
-        
-        return movies.map(m => {
-            const slug = createSlug(m.title, m.movieId, lang);
-            return `${baseLink}${slug}`;
-        }).join('\n');
-    }
+            // อ่าน ID จาก textarea
+            function parseIds() {
+                const text = movieIdsTa.value.trim();
+                const lines = text.split(/\r?\n/).map(l => l.trim()).filter(l => l && /^\d+$/.test(l));
+                return [...new Set(lines)];  // unique
+            }
 
-    // ========== GENERATE HTML DENGAN TEMPLATE THAILAND ==========
-    async function generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates, baseLink) {
-        const movie = await fetchMovieDetails(apiKey, movieId, lang);
-        if (!movie) return null;
+            // ---------- import txt file ----------
+            txtFileInp.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    const content = ev.target.result;
+                    const lines = content.split(/\r?\n/).map(l => l.trim()).filter(l => l && /^\d+$/.test(l));
+                    if (lines.length) {
+                        movieIdsTa.value = lines.join('\n');
+                        log(`📂 โหลด ID จากไฟล์ ${lines.length} รายการ`, 'success');
+                    } else {
+                        log('❌ ไม่พบ ID ที่ถูกต้อง', 'error');
+                    }
+                    txtFileInp.value = ''; // reset
+                };
+                reader.readAsText(file);
+            });
 
-        const seoTitle = getRandomTitle(titleTemplates, movie.title);
-        const year = movie.release_date ? movie.release_date.slice(0,4) : new Date().getFullYear();
-        const slug = createSlug(movie.title, movieId, lang);
-        
-        // Link dinamis dengan ID (bukan slug!) dan target _self
-        const link1Url = baseLink ? `${baseLink}${movieId}` : '#';
-        const link2Url = baseLink ? `${baseLink}${movieId}` : '#';
+            // ---------- fetch movie from TMDB ----------
+            async function fetchMovie(apiKey, id) {
+                const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=th-TH`;
+                try {
+                    const resp = await fetch(url);
+                    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+                    return await resp.json();
+                } catch (err) {
+                    log(`❌ ID ${id} error: ${err.message}`, 'error');
+                    return null;
+                }
+            }
 
-        // ===== HTML TEMPLATE (จากไฟล์ thailand.html ที่ให้มา) =====
-        const html = `<!DOCTYPE html>
+            // ---------- generate HTML menggunakan template thailand.html ----------
+            function renderHTML(movie, movieId, link1Text, link2Text, baseLink) {
+                const title = movie.title || 'ไม่พบชื่อ';
+                const year = movie.release_date ? movie.release_date.slice(0,4) : '2026';
+                const overview = movie.overview || 'ไม่มีรายละเอียด';
+                const poster = movie.poster_path ? IMG_BASE + movie.poster_path : '';
+                const link1Url = baseLink ? baseLink + movieId : '#';
+                const link2Url = baseLink ? baseLink + movieId : '#';
+                
+                // template persis dari thailand.html (ปรับเล็กน้อยให้เป็น string)
+                return `<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>${seoTitle}</title>
-  <meta name="description" content="${movie.overview ? movie.overview.substring(0, 160).replace(/"/g, '&quot;') : 'Watch online'}">
+  <title>${title} (${year}) ดูหนังใหม่ HD</title>
+  <meta name="description" content="${overview.substring(0, 160).replace(/"/g, '&quot;')}">
   <meta name="apple-mobile-web-app-capable" content="yes"> 
   <meta name="mobile-web-app-capable" content="yes">
   <meta name='robots' content='index, follow' />
@@ -850,7 +491,6 @@
   <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js">
   <script async src="https://cdn.ampproject.org/v0.js"></script>
   <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-  <!-- AMP-style: critical CSS only -->
   <style>
     *{box-sizing:border-box}
     body{
@@ -959,9 +599,9 @@
   <section class="hero">
     <span class="badge">กำลังเล่นอยู่</span>
 
-    <img id="Poster" src="${IMG_BASE}${movie.poster_path}" alt="${movie.title}" loading="eager" decoding="async">
+    <img id="Poster" src="${poster}" alt="${title}" loading="eager" decoding="async">
 
-    <h1 id="movieTitle">${movie.title} ${year}</h1>
+    <h1 id="movieTitle">${title} ${year}</h1>
     <h2 id="movieQuality">คุณภาพ HD • BluRay • WEB-DL</h2>
 
     <div class="rating">
@@ -969,13 +609,13 @@
       <div><strong>4.8/5</strong> • <strong>10,000+</strong> ดาวน์โหลด</div>
     </div>
 
-    <p>${movie.overview || 'No overview available.'}</p>
+    <p>${overview}</p>
 
     <a class="cta" id="downloadLink" href="${link1Url}" target="_self">${link1Text}</a>
   </section>
 
   <section class="features">
-    <div class="feature">🎥 ${movie.title} ${year}</div>
+    <div class="feature">🎥 ${title} ${year}</div>
     <div class="feature">⭐ มีให้เลือกทั้ง HD, 1080p, 4K</div>
     <div class="feature">📝 พร้อมซับไทย</div>
   </section>
@@ -999,153 +639,108 @@
 </div>
 </body>
 </html>`;
-        return { html, title: movie.title, movieId, overview: movie.overview, slug };
-    }
-
-    // ========== BULK GENERATE ==========
-    async function bulkGenerate() {
-        if (isGenerating) { log('⏳ กำลังสร้าง... กรุณารอ', 'error'); return; }
-
-        const apiKey = apiKeyInput.value.trim() || DEFAULT_API;
-        const lang = bulkLang.value;
-        const link1Text = bulkLink1Text.value.trim() || '▶ ดูหนัง HD';
-        const link2Text = bulkLink2Text.value.trim() || '⬇️ ดาวน์โหลด';
-        const baseLink = baseLinkInput.value.trim();
-        const titleTemplates = getTitleTemplates();
-        
-        const idsText = movieIdsTextarea.value.trim();
-        const idMatches = idsText.split(/\r?\n/)
-            .map(line => line.trim())
-            .filter(line => line && /^\d+$/.test(line));
-            
-        if (!idMatches?.length) { log('❌ ไม่มี ID ที่ถูกต้อง', 'error'); return; }
-
-        const uniqueIds = [...new Set(idMatches)];
-        totalCountSpan.innerText = uniqueIds.length;
-        generatedCountSpan.innerText = '0';
-        progressPercent.innerText = '0%';
-        progressFill.style.width = '0%';
-        generatedFiles = [];
-        updateFilePreview();
-
-        log(`🚀 กำลังสร้าง ${uniqueIds.length} ไฟล์ด้วยเทมเพลตประเทศไทย...`);
-        isGenerating = true;
-        downloadBtn.disabled = true;
-        downloadRssBtn.disabled = true;
-        downloadUrlsBtn.disabled = true;
-
-        let successCount = 0;
-        for (let i = 0; i < uniqueIds.length; i++) {
-            const movieId = uniqueIds[i];
-            log(`⏳ [${i+1}/${uniqueIds.length}] ID ${movieId}...`);
-
-            const result = await generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates, baseLink);
-            
-            if (result) {
-                generatedFiles.push({
-                    filename: result.slug,
-                    content: result.html,
-                    movieId,
-                    title: result.title,
-                    overview: result.overview,
-                    slug: result.slug
-                });
-                successCount++;
-                log(`✅ ID ${movieId} (${result.title}) -> ${result.slug}`, 'success');
             }
 
-            const percent = Math.round(((i + 1) / uniqueIds.length) * 100);
-            progressPercent.innerText = `${percent}%`;
-            progressFill.style.width = `${percent}%`;
-            generatedCountSpan.innerText = successCount;
-            updateFilePreview();
-        }
+            // ---------- proses generate ----------
+            async function generateAll() {
+                if (isGenerating) {
+                    log('⏳ กำลังสร้างอยู่ กรุณารอ...', 'error');
+                    return;
+                }
 
-        log(`🎉 เสร็จสิ้น! สร้าง ${successCount} ไฟล์`, 'success');
-        isGenerating = false;
-        if (successCount > 0) {
-            downloadBtn.disabled = false;
-            downloadRssBtn.disabled = false;
-            downloadUrlsBtn.disabled = false;
-        }
-    }
+                const apiKey = apiKeyInp.value.trim() || DEFAULT_API;
+                const ids = parseIds();
+                if (!ids.length) {
+                    log('❌ ไม่มี ID ที่ถูกต้อง', 'error');
+                    return;
+                }
 
-    function updateFilePreview() {
-        previewCountSpan.innerText = generatedFiles.length;
-        if (!generatedFiles.length) {
-            filePreviewGrid.innerHTML = '<div style="color: #6b83b0; text-align: center; padding: 2rem; grid-column: 1/-1;"><i class="fas fa-folder-open" style="font-size: 3rem; opacity: 0.5; margin-bottom: 1rem;"></i><p>ยังไม่มีไฟล์ที่สร้าง</p></div>';
-            return;
-        }
-        
-        filePreviewGrid.innerHTML = generatedFiles.map(f => `
-            <div class="file-card">
-                <div class="file-icon"><i class="fas fa-file-code"></i></div>
-                <div class="file-info">
-                    <div class="file-name">${f.filename.substring(0, 25)}...</div>
-                    <div class="file-meta">${f.title.substring(0, 30)}</div>
-                </div>
-            </div>
-        `).join('');
-    }
+                const link1 = btn1TextInp.value.trim() || '▶ ดูหนัง HD';
+                const link2 = btn2TextInp.value.trim() || '⬇️ ดาวน์โหลด (4K)';
+                const baseLink = baseLinkInp.value.trim() || 'https://moviethai.com/';
 
-    function downloadZip() {
-        if (!generatedFiles.length) return;
-        const zip = new JSZip();
-        generatedFiles.forEach(f => zip.file(f.filename, f.content));
-        zip.generateAsync({ type: 'blob' }).then(blob => {
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = `thailand_movies_${Date.now()}.zip`;
-            link.click();
-            log('📦 ZIP ดาวน์โหลดสำเร็จ', 'success');
-        });
-    }
+                // reset
+                generatedFiles = [];
+                isGenerating = true;
+                zipBtn.disabled = true;
+                countSuccessSpan.innerText = '0';
+                countTotalSpan.innerText = ids.length;
+                percentVal.innerText = '0';
+                progressFill.style.width = '0%';
+                updatePreview();
 
-    function downloadRss() {
-        if (!generatedFiles.length) return;
-        const rssContent = generateRssFeed(generatedFiles, bulkLang.value);
-        const blob = new Blob([rssContent], { type: 'application/rss+xml' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'feed.xml';
-        link.click();
-        log('📡 RSS feed ดาวน์โหลดสำเร็จ', 'success');
-    }
+                log(`🚀 เริ่มสร้าง ${ids.length} ไฟล์...`);
 
-    function downloadUrls() {
-        if (!generatedFiles.length) return;
-        const baseLink = baseLinkInput.value.trim();
-        if (!baseLink) {
-            log('❌ กรุณากรอก Base Link', 'error');
-            return;
-        }
-        
-        const urlsContent = generateUrlsTxt(generatedFiles, baseLink, bulkLang.value);
-        const blob = new Blob([urlsContent], { type: 'text/plain' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'urls.txt';
-        link.click();
-        log('📄 URLs TXT ดาวน์โหลดสำเร็จ', 'success');
-    }
+                let success = 0;
+                for (let i = 0; i < ids.length; i++) {
+                    const id = ids[i];
+                    log(`⏳ [${i+1}/${ids.length}] กำลังโหลด ID ${id}...`);
+                    
+                    const movie = await fetchMovie(apiKey, id);
+                    if (movie) {
+                        const htmlContent = renderHTML(movie, id, link1, link2, baseLink);
+                        const filename = generateFilename();  // เช่น a3f9k.html
+                        generatedFiles.push({
+                            filename,
+                            content: htmlContent,
+                            title: movie.title || id,
+                            movieId: id
+                        });
+                        success++;
+                        log(`✅ ID ${id} : ${movie.title || 'ไม่ทราบชื่อ'} -> ${filename}`, 'success');
+                    }
 
-    // ========== EVENT ==========
-    generateBtn.addEventListener('click', bulkGenerate);
-    downloadBtn.addEventListener('click', downloadZip);
-    downloadRssBtn.addEventListener('click', downloadRss);
-    downloadUrlsBtn.addEventListener('click', downloadUrls);
-    clearLogsBtn.addEventListener('click', clearLogs);
+                    // update progress
+                    const percent = Math.round(((i+1)/ids.length)*100);
+                    percentVal.innerText = percent;
+                    progressFill.style.width = percent + '%';
+                    countSuccessSpan.innerText = success;
+                    updatePreview();
+                }
 
-    titleTemplatesArea.addEventListener('input', () => {
-        const templates = getTitleTemplates();
-        if (templates.length) {
-            document.getElementById('templateExample').innerHTML = 
-                `<i class="fas fa-eye"></i> Contoh: "${templates[0].replace(/{TITLE}/g, 'Avatar 3').substring(0, 60)}..."`;
-        }
-    });
+                log(`🎉 เสร็จสิ้น! สร้างสำเร็จ ${success} ไฟล์`, 'success');
+                isGenerating = false;
+                if (success > 0) zipBtn.disabled = false;
+            }
 
-    log('✅ FINAL VERSION · Thailand Template · All Buttons Self Target');
-})();
-</script>
+            // preview
+            function updatePreview() {
+                if (!generatedFiles.length) {
+                    previewContainer.innerHTML = '<div style="color:#7486b0; grid-column:1/-1; text-align:center;">ยังไม่มีไฟล์</div>';
+                    return;
+                }
+                let html = '';
+                generatedFiles.slice(0, 8).forEach(f => {
+                    html += `<div class="preview-item">
+                        <div class="preview-icon"><i class="fas fa-file-code"></i></div>
+                        <div style="overflow:hidden; text-overflow:ellipsis;">${f.filename}</div>
+                    </div>`;
+                });
+                if (generatedFiles.length > 8) html += `<div style="grid-column:1/-1; text-align:center;">+${generatedFiles.length-8} รายการ</div>`;
+                previewContainer.innerHTML = html;
+            }
+
+            // download zip
+            function downloadZip() {
+                if (!generatedFiles.length) return;
+                const zip = new JSZip();
+                generatedFiles.forEach(f => zip.file(f.filename, f.content));
+                zip.generateAsync({ type: 'blob' }).then(blob => {
+                    const a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    a.download = `thai_movies_${Date.now()}.zip`;
+                    a.click();
+                    log('📦 ดาวน์โหลด ZIP สำเร็จ', 'success');
+                });
+            }
+
+            // event listeners
+            generateBtn.addEventListener('click', generateAll);
+            zipBtn.addEventListener('click', downloadZip);
+            clearLogs.addEventListener('click', clearLogsFunc);
+
+            log('✅ พร้อมใช้งาน เทมเพลตประเทศไทย');
+        })();
+    </script>
 </body>
 </html>
