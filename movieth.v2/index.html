@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎬 TMDB GENERATOR · Studio Final</title>
+    <title>🎬 THAILAND TEMPLATE · TMDB GENERATOR ( FINAL )</title>
     <!-- Google Fonts + Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -545,10 +545,10 @@
     <!-- Hero Header -->
     <div class="hero-header">
         <div class="hero-title">
-            <i class="fas fa-film"></i> TMDB GENERATOR · STUDIO FINAL
+            <i class="fas fa-film"></i> THAILAND TEMPLATE · GENERATOR
         </div>
         <div class="hero-badge">
-            <span class="badge"><i class="fas fa-check-circle"></i> Link ke ID</span>
+            <span class="badge"><i class="fas fa-check-circle"></i> Template Baru Thailand</span>
             <span class="badge"><i class="fas fa-globe"></i> 6 Bahasa</span>
             <span class="badge"><i class="fas fa-slug"></i> Smart Slug</span>
             <span class="badge"><i class="fas fa-rss"></i> RSS Feed</span>
@@ -580,7 +580,7 @@
         <div class="input-group">
             <label><i class="fas fa-link"></i> Base Link</label>
             <input type="text" id="baseLink" value="https://inflix.pages.dev/" placeholder="https://domainmu.com/">
-            <small style="color: #8ba3d9;">Button akan mengarah ke https://domainmu.com/{id} (tab sama)</small>
+            <small style="color: #8ba3d9;">Button akan mengarah ke base + ID (contoh: domain.com/12345)</small>
         </div>
 
         <div class="input-group">
@@ -588,32 +588,32 @@
             <select id="bulkLang">
                 <option value="en-US">🇬🇧 English</option>
                 <option value="es-ES">🇪🇸 Español</option>
-                <option value="th-TH">🇹🇭 ไทย</option>
+                <option value="th-TH" selected>🇹🇭 ไทย (Thailand)</option>
                 <option value="id-ID">🇮🇩 Indonesia</option>
-                <option value="vi-VN" selected>🇻🇳 Tiếng Việt</option>
+                <option value="vi-VN">🇻🇳 Tiếng Việt</option>
                 <option value="bg-BG">🇧🇬 Български</option>
             </select>
         </div>
 
         <div class="input-group">
             <label><i class="fas fa-link"></i> Teks Link 1</label>
-            <input type="text" id="bulkLink1Text" value="▶ Watch Movie HD">
+            <input type="text" id="bulkLink1Text" value="▶ ดูหนัง HD">
         </div>
         <div class="input-group">
             <label><i class="fas fa-download"></i> Teks Link 2</label>
-            <input type="text" id="bulkLink2Text" value="⬇️ Download (UHD)">
+            <input type="text" id="bulkLink2Text" value="⬇️ ดาวน์โหลด (4K)">
         </div>
 
         <div class="title-templates">
             <label><i class="fas fa-random"></i> Template Title (pisahkan dengan | )</label>
-            <textarea id="titleTemplates" rows="2">{TITLE} (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒 Down𝗅oad 𝟩𝟤𝟢𝗉 on IBOMMA|✨ {TITLE} (2026) 4K HDR | Watch Online</textarea>
+            <textarea id="titleTemplates" rows="2">{TITLE} (.2026.) ดูหนังใหม่ HD พากย์ไทย|✨ {TITLE} (2026) เต็มเรื่อง ซับไทย|⭐ {TITLE} 4K HDR ดาวน์โหลดฟรี</textarea>
             <div class="example-box" id="templateExample">
-                <i class="fas fa-eye"></i> Contoh: "Avatar 3 (.2026.) FullMov𝑖𝑒 +! A𝑣a𝑖l𝑎bl𝑒..."
+                <i class="fas fa-eye"></i> Contoh: "Avatar 3 (.2026.) ดูหนังใหม่ HD พากย์ไทย"
             </div>
         </div>
 
         <div class="button-group">
-            <button class="btn btn-primary" id="generateBulkBtn"><i class="fas fa-cogs"></i> Generate HTML</button>
+            <button class="btn btn-primary" id="generateBulkBtn"><i class="fas fa-cogs"></i> Generate HTML (Thailand Template)</button>
             <button class="btn btn-success" id="downloadZipBtn" disabled><i class="fas fa-file-archive"></i> Download ZIP</button>
             <button class="btn btn-info" id="downloadRssBtn" disabled><i class="fas fa-rss"></i> Download RSS</button>
             <button class="btn btn-warning" id="downloadUrlsBtn" disabled><i class="fas fa-file-alt"></i> Download URLs TXT</button>
@@ -631,7 +631,7 @@
             <div class="progress-fill" id="progressFill"></div>
         </div>
         <div class="log-area" id="logArea">
-            <div>⏳ Siap generate...</div>
+            <div>⏳ พร้อมสร้างไฟล์ HTML แบบไทย...</div>
         </div>
     </div>
 
@@ -643,12 +643,12 @@
     <div class="preview-grid" id="filePreviewGrid">
         <div style="color: #6b83b0; text-align: center; padding: 2rem; grid-column: 1/-1;">
             <i class="fas fa-folder-open" style="font-size: 3rem; opacity: 0.5; margin-bottom: 1rem;"></i>
-            <p>Belum ada file yang digenerate</p>
+            <p>ยังไม่มีไฟล์ที่สร้าง</p>
         </div>
     </div>
 
     <div class="footer">
-        <i class="fas fa-check-circle" style="color:#10b981;"></i> FINAL VERSION · Auto Translate All Text · Link Self Target · UI Premium
+        <i class="fas fa-check-circle" style="color:#10b981;"></i> FINAL VERSION · Thailand Template · All Buttons Self Target
     </div>
 </div>
 
@@ -663,76 +663,6 @@
     
     // Bahasa non-latin yang perlu slug khusus
     const NON_LATIN_LANGS = ['th-TH', 'bg-BG', 'ja-JP', 'ko-KR', 'zh-CN', 'zh-TW', 'ar-SA', 'he-IL'];
-    
-    // ========== PARAGRAF MULTI BAHASA LENGKAP ==========
-    const articleTexts = {
-        'en-US': {
-            storyTitle: '{title}: The Story Unveiled',
-            intro: 'The story continues with exciting twists and turns, pushing the boundaries of storytelling.',
-            quote: '"You ran from Woodsboro. You ran from New York. But you can\'t run from me." — This chilling line captures the essence of the franchise: no matter how far you go, the terror follows. {title} promises a darker, more psychological edge while maintaining the classic thrills fans love.',
-            psychology: 'The psychological depth and intense narrative structure make this installment a standout. Fans will appreciate the callbacks while being introduced to fresh elements that expand the universe.',
-            watchTitle: 'Where to Watch {title} Online',
-            streaming: 'Looking for where to watch {title} online? While official streaming platforms will announce dates after theatrical release, fans are already searching for ways to experience this epic film. We recommend checking:',
-            whyTitle: 'Why {title} Changes Everything',
-            analysis: 'The introduction of new characters and conflicts adds moral complexity to the franchise. This installment expands the universe significantly, setting up potential for future sequels and spin-offs.',
-            impact: 'With groundbreaking visual effects and a compelling narrative, {title} raises the bar for blockbuster filmmaking. The world-building is meticulous, and the attention to detail in every frame showcases the passion of the creative team.'
-        },
-        'es-ES': {
-            storyTitle: '{title}: La Historia Revelada',
-            intro: 'La historia continúa con giros emocionantes y sorpresas, llevando la narración a nuevos límites.',
-            quote: '"Huiste de Woodsboro. Huiste de Nueva York. Pero no puedes huir de mí." — Esta escalofriante línea captura la esencia de la franquicia: no importa lo lejos que vayas, el terror te persigue. {title} promete un enfoque más oscuro y psicológico, manteniendo la emoción clásica que los fans aman.',
-            psychology: 'La profundidad psicológica y la intensa estructura narrativa hacen de esta entrega algo excepcional. Los fans apreciarán las referencias mientras descubren nuevos elementos que expanden el universo.',
-            watchTitle: 'Dónde Ver {title} Online',
-            streaming: '¿Buscas dónde ver {title} online? Mientras las plataformas oficiales anunciarán fechas después del estreno, los fans ya buscan formas de ver esta película épica. Recomendamos:',
-            whyTitle: 'Por Qué {title} Cambia Todo',
-            analysis: 'La introducción de nuevos personajes y conflictos añade complejidad moral a la franquicia. Esta entrega expande el universo significativamente, preparando el terreno para futuras secuelas.',
-            impact: 'Con efectos visuales innovadores y una narrativa convincente, {title} eleva el estándar del cine de gran presupuesto. Cada fotograma muestra la pasión del equipo creativo.'
-        },
-        'th-TH': {
-            storyTitle: '{title}: เปิดโปงเรื่องราว',
-            intro: 'เรื่องราวดำเนินต่อไปด้วยความตื่นเต้นและพลิกผัน ผลักดันขอบเขตของการเล่าเรื่อง',
-            quote: '"คุณหนีจากวูดสโบโร คุณหนีจากนิวยอร์ก แต่คุณหนีจากฉันไม่ได้" — ประโยคสุดสยองนี้สะท้อนแก่นแท้ของแฟรนไชส์: ไม่ว่าคุณจะไปไกลแค่ไหน ความสยองจะตามคุณไป {title} สัญญาว่าจะเข้มข้น ดาร์กขึ้น และแนวจิตวิทยามากขึ้น พร้อมความระทึกใจที่แฟนๆชื่นชอบ',
-            psychology: 'ความลึกซึ้งทางจิตวิทยาและโครงสร้างที่เข้มข้นทำให้ภาคนี้โดดเด่น แฟนๆจะซาบซึ้งกับการอ้างอิงถึงภาคก่อน ขณะเดียวกันก็ได้สัมผัสองค์ประกอบใหม่ที่ขยายจักรวาล',
-            watchTitle: 'ดู {title} ออนไลน์ได้ที่ไหน',
-            streaming: 'กำลังหาที่ดู {title} ออนไลน์อยู่ใช่ไหม? แม้แพลตฟอร์มสตรีมมิ่งจะประกาศวันฉายหลังโรงภาพยนตร์ แต่แฟนๆก็เริ่มหาวิธีดูหนังมหากาพย์เรื่องนี้แล้ว แนะนำให้ตรวจสอบ:',
-            whyTitle: 'ทำไม {title} ถึงเปลี่ยนทุกสิ่ง',
-            analysis: 'การแนะนำตัวละครและความขัดแย้งใหม่ๆ เพิ่มมิติทางศีลธรรมให้กับแฟรนไชส์ ภาคนี้ขยายจักรวาลอย่างมีนัยสำคัญ ปูทางสู่ภาคต่อและเรื่องแยก',
-            impact: 'ด้วยวิชวลเอฟเฟกต์ล้ำสมัยและเนื้อเรื่องที่ทรงพลัง {title} ยกระดับมาตรฐานภาพยนตร์บล็อกบัสเตอร์ ทุกรายละเอียดในทุกเฟรมสะท้อนความหลงใหลของทีมงาน'
-        },
-        'id-ID': {
-            storyTitle: '{title}: Kisah yang Terungkap',
-            intro: 'Cerita berlanjut dengan liku-liku menarik, mendorong batas-batas penceritaan.',
-            quote: '"Kau lari dari Woodsboro. Kau lari dari New York. Tapi kau tak bisa lari dariku." — Kalimat mengerikan ini menangkap esensi franchise: sejauh apapun kau pergi, teror akan selalu mengikutimu. {title} menjanjikan sisi lebih gelap dan psikologis, tetap mempertahankan sensasi klasik yang dicintai fans.',
-            psychology: 'Kedalaman psikologis dan struktur naratif yang intens membuat installment ini menonjol. Fans akan menghargai referensi masa lalu sambil diperkenalkan pada elemen baru yang memperluas semesta.',
-            watchTitle: 'Tempat Menonton {title} Online',
-            streaming: 'Mencari tempat menonton {title} online? Sementara platform streaming resmi akan mengumumkan tanggal setelah rilis bioskop, fans sudah mencari cara untuk menikmati film epik ini. Kami rekomendasikan:',
-            whyTitle: 'Mengapa {title} Mengubah Segalanya',
-            analysis: 'Pengenalan karakter dan konflik baru menambah kompleksitas moral pada franchise. Installment ini memperluas semesta secara signifikan, mempersiapkan sekuel masa depan.',
-            impact: 'Dengan efek visual mutakhir dan narasi menarik, {title} meningkatkan standar pembuatan film blockbuster. Setiap bingkai menunjukkan passion tim kreatif.'
-        },
-        'vi-VN': {
-            storyTitle: '{title}: Câu Chuyện Được Hé Lộ',
-            intro: 'Câu chuyện tiếp tục với những tình tiết bất ngờ, đẩy ranh giới kể chuyện lên tầm cao mới.',
-            quote: '"Mày đã chạy khỏi Woodsboro. Mày đã chạy khỏi New York. Nhưng mày không thể chạy khỏi tao." — Câu nói rùng rợn này nắm bắt bản chất của thương hiệu: dù bạn có đi xa đến đâu, nỗi kinh hoàng vẫn luôn tìm thấy bạn. {title} hứa hẹn một góc tối tăm và tâm lý hơn, đồng thời duy trì sự hồi hộp kinh điển mà người hâm mộ yêu thích.',
-            psychology: 'Chiều sâu tâm lý và cấu trúc kể chuyện dữ dội khiến phần này trở nên nổi bật. Người hâm mộ sẽ trân trọng những liên hệ với quá khứ trong khi khám phá các yếu tố mới mở rộng vũ trụ điện ảnh.',
-            watchTitle: 'Xem {title} Ở Đâu Trực Tuyến',
-            streaming: 'Tìm nơi xem {title} trực tuyến? Trong khi các nền tảng phát trực tuyến chính thức sẽ công bố ngày phát hành sau rạp, người hâm mộ đã bắt đầu tìm cách xem bộ phim hoành tráng này. Chúng tôi đề xuất:',
-            whyTitle: 'Tại Sao {title} Thay Đổi Mọi Thứ',
-            analysis: 'Sự ra mắt của nhân vật và xung đột mới thêm phức tạp về đạo đức vào thương hiệu. Phần này mở rộng đáng kể vũ trụ, tạo tiền đề cho các phần tiếp theo.',
-            impact: 'Với hiệu ứng hình ảnh đột phá và câu chuyện hấp dẫn, {title} nâng tầm tiêu chuẩn làm phim bom tấn. Mỗi khung hình đều thể hiện niềm đam mê của đội ngũ sáng tạo.'
-        },
-        'bg-BG': {
-            storyTitle: '{title}: Историята Разкрита',
-            intro: 'Историята продължава с вълнуващи обрати, разширявайки границите на разказа.',
-            quote: '"Избяга от Уудсбъро. Избяга от Ню Йорк. Но не можеш да избягаш от мен." — Тази смразяваща реплика улавя същността на франчайза: колкото и далеч да отидеш, ужасът винаги ще те намери. {title} обещава по-мрачен, психологически ръб, запазвайки класическия тръпки, които феновете обичат.',
-            psychology: 'Психологическата дълбочина и интензивната наративна структура правят тази част забележителна. Феновете ще оценят връзките с миналото, докато се запознават с нови елементи, разширяващи вселената.',
-            watchTitle: 'Къде Да Гледате {title} Онлайн',
-            streaming: 'Търсите къде да гледате {title} онлайн? Докато официалните стрийминг платформи обявят дати след кино премиерата, феновете вече търсят начини да гледат този епичен филм. Препоръчваме да проверите:',
-            whyTitle: 'Защо {title} Променя Всичко',
-            analysis: 'Въвеждането на нови герои и конфликти добавя морална сложност към франчайза. Тази част значително разширява вселената, подготвяйки почвата за бъдещи продължения.',
-            impact: 'С новаторски визуални ефекти и завладяващ разказ, {title} повишава летвата за блокбъстър киното. Всеки кадър показва страстта на творческия екип.'
-        }
-    };
 
     // ========== ELEMEN DOM ==========
     const apiKeyInput = document.getElementById('apiKey');
@@ -772,7 +702,7 @@
 
     function getTitleTemplates() {
         const text = titleTemplatesArea.value.trim();
-        return text ? text.split('|').map(t => t.trim()).filter(t => t.length) : ['{TITLE} (2026) Watch Online'];
+        return text ? text.split('|').map(t => t.trim()).filter(t => t.length) : ['{TITLE} ดูหนังใหม่ HD'];
     }
 
     function getRandomTitle(templates, movieTitle) {
@@ -823,23 +753,23 @@
             
             if (ids.length > 0) {
                 movieIdsTextarea.value = ids.join('\n');
-                log(`📄 Import ${ids.length} ID dari file ${file.name}`, 'success');
+                log(`📄 นำเข้า ${ids.length} ID จากไฟล์ ${file.name}`, 'success');
             } else {
-                log('❌ Tidak ada ID valid dalam file', 'error');
+                log('❌ ไม่มี ID ที่ถูกต้องในไฟล์', 'error');
             }
         };
         reader.readAsText(file);
     });
 
-    // ========== FETCH TMDB LENGKAP ==========
+    // ========== FETCH TMDB ==========
     async function fetchMovieDetails(apiKey, movieId, language) {
-        const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${language}&append_to_response=videos,images,recommendations`;
+        const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${language}`;
         try {
             const res = await fetch(url);
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             return await res.json();
         } catch (e) {
-            log(`❌ Gagal fetch ID ${movieId}: ${e.message}`, 'error');
+            log(`❌ ไม่สามารถดึงข้อมูล ID ${movieId}: ${e.message}`, 'error');
             return null;
         }
     }
@@ -887,7 +817,7 @@
         }).join('\n');
     }
 
-    // ========== GENERATE HTML PREMIUM ==========
+    // ========== GENERATE HTML DENGAN TEMPLATE THAILAND ==========
     async function generateMovieHTML(apiKey, movieId, lang, link1Text, link2Text, titleTemplates, baseLink) {
         const movie = await fetchMovieDetails(apiKey, movieId, lang);
         if (!movie) return null;
@@ -896,26 +826,13 @@
         const year = movie.release_date ? movie.release_date.slice(0,4) : new Date().getFullYear();
         const slug = createSlug(movie.title, movieId, lang);
         
-        // Cari trailer YouTube
-        const trailer = movie.videos?.results?.find(v => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser'));
-        const trailerKey = trailer?.key || null;
-        
-        // Backdrop
-        const backdropUrl = movie.backdrop_path ? BACKDROP_BASE + movie.backdrop_path : null;
-        
-        // Rekomendasi (max 4)
-        const recommendations = movie.recommendations?.results?.slice(0, 4) || [];
-
-        // Ambil teks artikel sesuai bahasa
-        const texts = articleTexts[lang] || articleTexts['en-US'];
-        
         // Link dinamis dengan ID (bukan slug!) dan target _self
         const link1Url = baseLink ? `${baseLink}${movieId}` : '#';
         const link2Url = baseLink ? `${baseLink}${movieId}` : '#';
 
-        // ===== HTML TEMPLATE =====
+        // ===== HTML TEMPLATE (จากไฟล์ thailand.html ที่ให้มา) =====
         const html = `<!DOCTYPE html>
-<html lang="${lang}">
+<html lang="th">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -932,8 +849,7 @@
   <meta property="og:type" content="WebPage" />
   <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js">
   <script async src="https://cdn.ampproject.org/v0.js"></script>
-  <style amp-boilerplate>
-
+  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
   <!-- AMP-style: critical CSS only -->
   <style>
     *{box-sizing:border-box}
@@ -1055,7 +971,7 @@
 
     <p>${movie.overview || 'No overview available.'}</p>
 
-    <a class="cta" id="downloadLink" href="${link1Url}">${link1Text}</a>
+    <a class="cta" id="downloadLink" href="${link1Url}" target="_self">${link1Text}</a>
   </section>
 
   <section class="features">
@@ -1074,8 +990,8 @@
   <section id="download" class="hero" style="margin-top:24px">
     <h2>ดาวน์โหลดหนังฟรี</h2>
     <p>คลิกปุ่มด้านล่างเพื่อดาวน์โหลดหนังที่คุณเลือกโดยตรง เซิร์ฟเวอร์เร็วและปลอดภัย</p>
-    <a class="cta" href="${link2Url}">ดาวน์โหลดผ่าน Server 1 (เร็ว)</a>
-    <a class="cta" href="${link2Url}" style="background:linear-gradient(135deg,#16a34a,#15803d); margin-top:10px;">ดาวน์โหลดผ่าน Server 2 (Mirror)</a>
+    <a class="cta" href="${link2Url}" target="_self">ดาวน์โหลดผ่าน Server 1 (เร็ว)</a>
+    <a class="cta" href="${link2Url}" style="background:linear-gradient(135deg,#16a34a,#15803d); margin-top:10px;" target="_self">ดาวน์โหลดผ่าน Server 2 (Mirror)</a>
   </section>
 
   <footer>© All rights reserved ID ${movieId} · 2026</footer>
@@ -1088,12 +1004,12 @@
 
     // ========== BULK GENERATE ==========
     async function bulkGenerate() {
-        if (isGenerating) { log('⏳ Masih dalam proses...', 'error'); return; }
+        if (isGenerating) { log('⏳ กำลังสร้าง... กรุณารอ', 'error'); return; }
 
         const apiKey = apiKeyInput.value.trim() || DEFAULT_API;
         const lang = bulkLang.value;
-        const link1Text = bulkLink1Text.value.trim() || '▶ Watch';
-        const link2Text = bulkLink2Text.value.trim() || '⬇️ Download';
+        const link1Text = bulkLink1Text.value.trim() || '▶ ดูหนัง HD';
+        const link2Text = bulkLink2Text.value.trim() || '⬇️ ดาวน์โหลด';
         const baseLink = baseLinkInput.value.trim();
         const titleTemplates = getTitleTemplates();
         
@@ -1102,7 +1018,7 @@
             .map(line => line.trim())
             .filter(line => line && /^\d+$/.test(line));
             
-        if (!idMatches?.length) { log('❌ Tidak ada ID valid', 'error'); return; }
+        if (!idMatches?.length) { log('❌ ไม่มี ID ที่ถูกต้อง', 'error'); return; }
 
         const uniqueIds = [...new Set(idMatches)];
         totalCountSpan.innerText = uniqueIds.length;
@@ -1112,7 +1028,7 @@
         generatedFiles = [];
         updateFilePreview();
 
-        log(`🚀 Generate ${uniqueIds.length} file dengan link button ke ID (self target)...`);
+        log(`🚀 กำลังสร้าง ${uniqueIds.length} ไฟล์ด้วยเทมเพลตประเทศไทย...`);
         isGenerating = true;
         downloadBtn.disabled = true;
         downloadRssBtn.disabled = true;
@@ -1145,7 +1061,7 @@
             updateFilePreview();
         }
 
-        log(`🎉 Selesai! ${successCount} file`, 'success');
+        log(`🎉 เสร็จสิ้น! สร้าง ${successCount} ไฟล์`, 'success');
         isGenerating = false;
         if (successCount > 0) {
             downloadBtn.disabled = false;
@@ -1157,7 +1073,7 @@
     function updateFilePreview() {
         previewCountSpan.innerText = generatedFiles.length;
         if (!generatedFiles.length) {
-            filePreviewGrid.innerHTML = '<div style="color: #6b83b0; text-align: center; padding: 2rem; grid-column: 1/-1;"><i class="fas fa-folder-open" style="font-size: 3rem; opacity: 0.5; margin-bottom: 1rem;"></i><p>Belum ada file yang digenerate</p></div>';
+            filePreviewGrid.innerHTML = '<div style="color: #6b83b0; text-align: center; padding: 2rem; grid-column: 1/-1;"><i class="fas fa-folder-open" style="font-size: 3rem; opacity: 0.5; margin-bottom: 1rem;"></i><p>ยังไม่มีไฟล์ที่สร้าง</p></div>';
             return;
         }
         
@@ -1179,9 +1095,9 @@
         zip.generateAsync({ type: 'blob' }).then(blob => {
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = `tmdb_movies_${Date.now()}.zip`;
+            link.download = `thailand_movies_${Date.now()}.zip`;
             link.click();
-            log('📦 ZIP berhasil didownload', 'success');
+            log('📦 ZIP ดาวน์โหลดสำเร็จ', 'success');
         });
     }
 
@@ -1193,14 +1109,14 @@
         link.href = URL.createObjectURL(blob);
         link.download = 'feed.xml';
         link.click();
-        log('📡 RSS feed berhasil didownload', 'success');
+        log('📡 RSS feed ดาวน์โหลดสำเร็จ', 'success');
     }
 
     function downloadUrls() {
         if (!generatedFiles.length) return;
         const baseLink = baseLinkInput.value.trim();
         if (!baseLink) {
-            log('❌ Base link tidak diisi', 'error');
+            log('❌ กรุณากรอก Base Link', 'error');
             return;
         }
         
@@ -1210,7 +1126,7 @@
         link.href = URL.createObjectURL(blob);
         link.download = 'urls.txt';
         link.click();
-        log('📄 URLs TXT berhasil didownload', 'success');
+        log('📄 URLs TXT ดาวน์โหลดสำเร็จ', 'success');
     }
 
     // ========== EVENT ==========
@@ -1228,7 +1144,7 @@
         }
     });
 
-    log('✅ FINAL VERSION · Auto Translate All Headers · Link Self Target');
+    log('✅ FINAL VERSION · Thailand Template · All Buttons Self Target');
 })();
 </script>
 </body>
