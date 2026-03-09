@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Book - Petualangan di Dunia Maya</title>
+    <title>Book Download Page · OpenLibrary</title>
     <!-- Font Awesome 6 (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -11,63 +11,63 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         body {
-            background: linear-gradient(145deg, #f0f4fa 0%, #e6ecf3 100%);
+            background: #f4f7fb;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem 1.5rem;
+            padding: 2rem 1rem;
         }
         .card {
-            max-width: 1200px;
+            max-width: 1280px;
             width: 100%;
-            background: rgba(255,255,255,0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 48px 48px 40px 40px;
-            box-shadow: 0 30px 60px -20px rgba(0,20,40,0.35), 0 8px 20px rgba(255,255,255,0.6) inset;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 48px;
+            box-shadow: 0 30px 50px -30px #0f2a40, 0 0 0 1px rgba(255,255,255,0.7) inset;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.6);
+            transition: all 0.2s ease;
         }
         .hero {
-            background: linear-gradient(112deg, #1e2b3a 0%, #14222e 100%);
+            background: linear-gradient(105deg, #1e3b4f 0%, #122b38 100%);
             color: white;
-            padding: 2.8rem 3rem 2.5rem 3rem;
+            padding: 3rem 3.5rem;
             position: relative;
-            border-bottom: 4px solid #ffb347;
+            border-bottom: 4px solid #f5b342;
         }
         .hero::after {
-            content: "📖";
-            font-size: 140px;
+            content: "📚";
+            font-size: 150px;
             opacity: 0.08;
             position: absolute;
-            bottom: -20px;
-            right: 30px;
-            transform: rotate(8deg);
+            bottom: -30px;
+            right: 40px;
+            transform: rotate(5deg);
             pointer-events: none;
         }
         .badge {
-            background: #ffb347;
-            color: #1e2b3a;
-            padding: 0.3rem 1.2rem;
-            border-radius: 60px;
+            background: #f5b342;
+            color: #0b202b;
+            padding: 0.4rem 1.4rem;
+            border-radius: 40px;
             font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
             display: inline-block;
             margin-bottom: 1.2rem;
-            border: 1px solid #ffcf8a;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            border: 1px solid #ffdb9f;
+            box-shadow: 0 6px 0 #8f621b;
         }
         h1 {
-            font-size: 3.2rem;
+            font-size: 3.5rem;
             font-weight: 800;
             line-height: 1.2;
-            max-width: 800px;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            max-width: 850px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         .subhead {
             font-size: 1.3rem;
@@ -76,12 +76,12 @@
             font-weight: 300;
             max-width: 650px;
         }
-        .book-detail-panel {
+        .main-panel {
             display: flex;
             flex-wrap: wrap;
-            gap: 2.5rem;
-            padding: 2.8rem 3rem;
-            background: #ffffffd9;
+            gap: 2.8rem;
+            padding: 3rem 3.5rem;
+            background: #ffffffda;
             backdrop-filter: blur(4px);
         }
         .cover-col {
@@ -90,10 +90,10 @@
         .cover-image {
             width: 100%;
             border-radius: 28px;
-            box-shadow: 0 25px 35px -10px rgba(0,0,0,0.35);
-            border: 2px solid white;
+            box-shadow: 0 30px 35px -18px #0c1e2b;
+            border: 3px solid white;
             transition: transform 0.25s ease;
-            background: #eaeef2;
+            background: #d6e2ed;
             aspect-ratio: 2/3;
             object-fit: cover;
         }
@@ -102,332 +102,351 @@
         }
         .info-col {
             flex: 1;
-            min-width: 280px;
+            min-width: 300px;
         }
-        .meta-tags {
+        .meta-strip {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.6rem 1.2rem;
-            margin-bottom: 1.6rem;
+            gap: 0.7rem 1.5rem;
+            margin-bottom: 1.8rem;
         }
-        .meta-tag {
-            background: white;
-            padding: 0.3rem 1.2rem;
+        .meta-item {
+            background: #f0f5fa;
+            padding: 0.5rem 1.4rem;
             border-radius: 60px;
             font-weight: 600;
-            font-size: 0.9rem;
-            color: #14222e;
-            box-shadow: 0 3px 8px #00000010;
-            border: 1px solid #cddbe8;
+            font-size: 0.95rem;
+            color: #103247;
+            box-shadow: 0 3px 8px #0000000d;
+            border: 1px solid #bdd3e8;
         }
-        .meta-tag i {
-            color: #ff9f1c;
-            margin-right: 6px;
+        .meta-item i {
+            color: #f09b1e;
+            margin-right: 8px;
         }
         h2 {
-            font-size: 2.3rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            color: #0f1a24;
+            color: #0c2636;
             line-height: 1.3;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
         }
         .author {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 400;
-            color: #2e4055;
-            margin-bottom: 1.4rem;
-            border-left: 5px solid #ffb347;
-            padding-left: 1rem;
+            color: #2d4d66;
+            margin-bottom: 1.6rem;
+            border-left: 6px solid #f5b342;
+            padding-left: 1.2rem;
         }
         .description {
             font-size: 1.05rem;
-            line-height: 1.6;
-            color: #1f2d3a;
-            background: #f8fbfe;
-            padding: 1.6rem;
+            line-height: 1.7;
+            color: #1f3542;
+            background: #f2f8ff;
+            padding: 1.8rem;
             border-radius: 28px;
-            margin: 1.8rem 0 2rem 0;
-            border: 1px solid #cbdae7;
-            box-shadow: inset 0 1px 5px #ffffff, 0 8px 14px -8px #9fb1c4;
+            margin: 1.8rem 0 2.2rem 0;
+            border: 1px solid #bfd8f0;
+            box-shadow: inset 0 1px 6px white, 0 10px 15px -15px #1c3f57;
         }
-        .dl-section {
-            background: #edf4fa;
+        .download-area {
+            background: #e7f0f9;
             border-radius: 40px;
-            padding: 2rem 2rem 2.2rem 2rem;
-            margin-top: 2rem;
-            border: 1px solid #ffffff;
-            box-shadow: 0 12px 18px -15px #1d2e3f;
+            padding: 2.2rem 2.2rem 2.5rem 2.2rem;
+            border: 1px solid white;
+            box-shadow: 0 15px 20px -20px #0c2a3a;
         }
-        .dl-header {
+        .download-header {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 1.7rem;
+            font-size: 1.9rem;
             font-weight: 700;
-            color: #12212e;
+            color: #0d2b3b;
             margin-bottom: 1.5rem;
         }
-        .dl-header i {
-            background: #1e2b3a;
+        .download-header i {
+            background: #1e3b4f;
             color: white;
-            padding: 12px;
+            padding: 14px;
             border-radius: 60px;
-            font-size: 1.3rem;
-            box-shadow: 0 6px 0 #0f1a24;
+            font-size: 1.4rem;
+            box-shadow: 0 6px 0 #0f2633;
         }
-        .dl-grid {
+        .button-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 18px;
-            margin-bottom: 28px;
+            margin-bottom: 20px;
         }
-        .dl-btn {
+        .dl-button {
             background: white;
-            border: 2px solid #1e2b3a;
-            padding: 0.9rem 1.8rem;
-            border-radius: 100px;
+            border: 2px solid #1e3b4f;
+            padding: 0.9rem 2rem;
+            border-radius: 60px;
             font-weight: 700;
             font-size: 1.2rem;
-            color: #1e2b3a;
+            color: #1e3b4f;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 12px;
             transition: 0.2s;
-            box-shadow: 0 7px 0 #0f1a24;
+            box-shadow: 0 7px 0 #0f2633;
             flex: 0 1 auto;
         }
-        .dl-btn i {
+        .dl-button i {
             font-size: 1.5rem;
-            color: #ff9f1c;
+            color: #f09b1e;
         }
-        .dl-btn:hover {
-            background: #f5cba0;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 0 #0f1a24;
+        .dl-button:hover {
+            background: #fae2bf;
+            transform: translateY(-4px);
+            box-shadow: 0 11px 0 #0f2633;
         }
-        .dl-btn:active {
-            transform: translateY(5px);
-            box-shadow: 0 2px 0 #0f1a24;
+        .dl-button:active {
+            transform: translateY(4px);
+            box-shadow: 0 3px 0 #0f2633;
         }
-        .format-note {
+        .format-hint {
             font-size: 0.95rem;
-            color: #2b4a6b;
-            margin-top: 12px;
-            display: flex;
+            color: #1a4d6b;
+            background: #ffffffb3;
+            padding: 8px 20px;
+            border-radius: 60px;
+            display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: #ffffffaa;
-            padding: 8px 18px;
-            border-radius: 60px;
-            width: fit-content;
-            border: 1px dashed #1e2b3a;
+            border: 1px dashed #1e3b4f;
         }
-        .footer-note {
-            padding: 1.2rem 3rem;
-            background: #d3e0ec;
+        .footer-links {
+            padding: 1.3rem 3.5rem;
+            background: #ccddee;
             font-size: 0.95rem;
-            color: #1a2938;
+            color: #142f41;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
             border-top: 2px solid white;
         }
-        .footer-note a {
-            color: #0b1c2c;
+        .footer-links a {
+            color: #0a2636;
             font-weight: 600;
             text-decoration: none;
-            border-bottom: 2px solid #ffb347;
+            border-bottom: 2px solid #f5b342;
         }
         .loading, .error {
-            padding: 3rem;
+            padding: 5rem;
             text-align: center;
-            font-size: 1.6rem;
-            background: #fff;
+            background: white;
         }
         .loading i, .error i {
-            font-size: 3rem;
+            font-size: 3.5rem;
+            color: #f5b342;
             margin-bottom: 1rem;
-            color: #ff9f1c;
+        }
+        .error button {
+            background: #1e3b4f;
+            color: white;
+            border: none;
+            padding: 0.8rem 2.2rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            cursor: pointer;
+            border-bottom: 4px solid #f5b342;
         }
         @media (max-width: 700px) {
-            h1 { font-size: 2.3rem; }
+            h1 { font-size: 2.4rem; }
             .hero { padding: 2rem 1.8rem; }
-            .book-detail-panel { padding: 2rem 1.5rem; }
+            .main-panel { padding: 2rem 1.5rem; }
             .cover-col { flex: 0 0 200px; }
-            .dl-btn { width: 100%; justify-content: center; }
+            .dl-button { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-<div class="card" id="bookCard">
-    <!-- Akan diisi oleh JavaScript -->
-    <div class="loading" style="padding: 5rem; text-align: center;">
-        <i class="fas fa-spinner fa-pulse fa-3x"></i>
-        <h3>Memuat buku dari OpenLibrary...</h3>
+<div class="card" id="root">
+    <!-- dynamic content injected by js -->
+    <div class="loading">
+        <i class="fas fa-spinner fa-pulse"></i>
+        <h3>Loading book from OpenLibrary...</h3>
+        <p style="color: #2d4b66;">please wait</p>
     </div>
 </div>
 
 <script>
     (function() {
-        // --- KONFIGURASI ---
-        // Menggunakan API OpenLibrary yang stabil
-        const WORK_ID = 'OL27448W';   // "The Lord of the Rings" sebagai contoh ikonik, ganti sesuai keinginan
-        // Atau bisa juga gunakan ISBN (lebih stabil untuk edisi tertentu): const ISBN = '9780544003415'; (The Fellowship)
-        // Untuk demo ini kita gunakan work populer
-        
-        // Fungsi fetch data dari OpenLibrary
-        async function loadBookData() {
-            const container = document.getElementById('bookCard');
-            
+        const container = document.getElementById('root');
+
+        // --- STEP 1: extract WORK_ID from URL path ---
+        // examples: domainsaya.com/OL27448W  or  domainsaya.com/OL15626917W
+        let workId = null;
+        const path = window.location.pathname;  // e.g. "/OL27448W" or "/works/OL27448W" or just "/"
+        const match = path.match(/\/(OL\d+[A-Z]?)/);  // simple pattern for OpenLibrary IDs like OL12345W, OL12345A
+        if (match && match[1]) {
+            workId = match[1];
+        } else {
+            // fallback – show a default popular book (Lord of the Rings) if no ID in URL
+            console.warn('No valid WORK_ID found in URL path, using default OL27448W');
+            workId = 'OL27448W';   // default: The Lord of the Rings
+            // you can change this default to any book you like
+        }
+
+        // --- STEP 2: fetch data from OpenLibrary (English) ---
+        async function fetchBookData() {
             try {
-                // 1. Ambil data Work (detail utama)
-                const workRes = await fetch(`https://openlibrary.org/works/${WORK_ID}.json`);
-                if (!workRes.ok) throw new Error(`Gagal ambil work (${workRes.status})`);
+                // 2a. fetch work metadata
+                const workRes = await fetch(`https://openlibrary.org/works/${workId}.json`);
+                if (!workRes.ok) throw new Error(`OpenLibrary work fetch failed (${workRes.status})`);
                 const work = await workRes.json();
-                
-                // 2. Ambil edisi pertama yang punya sampul (atau ambil dari work)
-                let edition = null;
+
+                // 2b. try to get cover & extra details via search (better cover coverage)
                 let coverId = null;
                 let isbn = null;
-                
-                // Coba cari edisi dengan cover via search (lebih kompleks, kita sederhanakan)
-                // Alternatif: pakai /search?q= dan limit=1 dengan field covers
-                const searchRes = await fetch(`https://openlibrary.org/search.json?title=${encodeURIComponent(work.title)}&author=${work.authors?.[0]?.author?.key?.replace('/authors/', '') || ''}&fields=key,title,author_name,cover_i,isbn,first_publish_year&limit=3`);
+                let firstPublishYear = work.first_publish_year || work.created?.value?.slice(0,4) || 'unknown';
+
+                const searchRes = await fetch(`https://openlibrary.org/search.json?title=${encodeURIComponent(work.title)}&fields=key,title,author_name,cover_i,isbn,first_publish_year&limit=3`);
                 if (searchRes.ok) {
                     const searchData = await searchRes.json();
                     const docWithCover = searchData.docs.find(d => d.cover_i) || searchData.docs[0];
                     if (docWithCover) {
                         coverId = docWithCover.cover_i;
                         isbn = docWithCover.isbn?.[0];
+                        if (docWithCover.first_publish_year) firstPublishYear = docWithCover.first_publish_year;
                     }
                 }
-                
-                // 3. Jika tidak dapat cover, gunakan cover default / placeholder
+
+                // fallback cover if still none
                 const coverUrl = coverId 
                     ? `https://covers.openlibrary.org/b/id/${coverId}-L.jpg` 
-                    : 'https://covers.openlibrary.org/b/id/12389591-L.jpg'; // fallback iconic
+                    : 'https://covers.openlibrary.org/b/id/12389591-L.jpg';  // nice default
 
-                // 4. Siapkan data untuk tampilan
-                const title = work.title || 'Petualangan di Dunia Maya';
-                // Ambil author dari work (mungkin perlu fetch author terpisah, sederhanakan)
-                let authorName = 'J.R.R. Tolkien'; // fallback
+                // 2c. author name (with optional fetch)
+                let authorName = 'unknown author';
                 if (work.authors && work.authors[0]?.author?.key) {
                     try {
                         const authorRes = await fetch(`https://openlibrary.org${work.authors[0].author.key}.json`);
                         const authorData = await authorRes.json();
-                        authorName = authorData.name || 'Tidak diketahui';
+                        authorName = authorData.name || work.authors[0].name || 'various';
                     } catch {
-                        authorName = work.authors[0].name || 'Penulis terkenal';
+                        authorName = work.authors[0].name || 'multiple contributors';
                     }
                 }
+
+                // 2d. description (English)
+                let description = work.description || 'No description available.';
+                if (typeof description !== 'string') {
+                    description = description.value || 'A classic work from the OpenLibrary collection.';
+                }
+
+                // 2e. subjects / tags
+                const subjects = work.subjects ? work.subjects.slice(0, 4) : ['literature', 'fiction', 'classic'];
                 
-                const description = typeof work.description === 'string' 
-                    ? work.description 
-                    : (work.description?.value || 'Sebuah epik luar biasa tentang petualangan, persahabatan, dan kekuatan imajinasi. Buku ini telah memikat jutaan pembaca di seluruh dunia dan kini tersedia untuk diunduh dalam berbagai format. Nikmati kisah tak terlupakan ini kapan saja, di mana saja.');
-                
-                const firstPublish = work.first_publish_date || work.created?.value?.slice(0,4) || '1954';
-                const pages = work.number_of_pages || '384';
-                const subjects = work.subjects?.slice(0, 3) || ['Fantasi', 'Petualangan', 'Fiksi'];
-                
-                // 5. Bangun HTML
+                // 2f. pages (try to find)
+                let pages = work.number_of_pages || 'N/A';
+                if (pages === 'N/A' && isbn) {
+                    // could try more detailed edition fetch but keep simple
+                }
+
+                // --- STEP 3: render HTML with all english text ---
                 container.innerHTML = `
                     <div class="hero">
-                        <span class="badge"><i class="fas fa-crown" style="margin-right: 6px;"></i> BESTSELLER INTERNASIONAL</span>
-                        <h1>${title}</h1>
-                        <div class="subhead">Edisi Kolektor • Terjemahan Resmi • Bonus Konten</div>
+                        <span class="badge"><i class="fas fa-globe"></i> OPENLIBRARY EDITION</span>
+                        <h1>${work.title}</h1>
+                        <div class="subhead">free digital edition · public domain / sample</div>
                     </div>
                     
-                    <div class="book-detail-panel">
+                    <div class="main-panel">
                         <div class="cover-col">
-                            <img src="${coverUrl}" alt="Sampul Buku" class="cover-image" onerror="this.src='https://covers.openlibrary.org/b/id/12389591-L.jpg'">
+                            <img src="${coverUrl}" alt="Book cover: ${work.title}" class="cover-image" onerror="this.src='https://covers.openlibrary.org/b/id/12389591-L.jpg'">
                         </div>
                         <div class="info-col">
-                            <div class="meta-tags">
-                                <span class="meta-tag"><i class="fas fa-calendar-alt"></i> ${firstPublish}</span>
-                                <span class="meta-tag"><i class="fas fa-book-open"></i> ${pages} hlm</span>
-                                <span class="meta-tag"><i class="fas fa-tags"></i> ${subjects.join(', ')}</span>
-                                <span class="meta-tag"><i class="fas fa-language"></i> Indonesia</span>
+                            <div class="meta-strip">
+                                <span class="meta-item"><i class="fas fa-calendar-alt"></i> ${firstPublishYear}</span>
+                                <span class="meta-item"><i class="fas fa-book-open"></i> ${pages} pages</span>
+                                <span class="meta-item"><i class="fas fa-tags"></i> ${subjects.join(', ')}</span>
+                                <span class="meta-item"><i class="fas fa-flag"></i> English</span>
                             </div>
                             
-                            <h2>${title}</h2>
-                            <div class="author">✍️ ${authorName}</div>
+                            <h2>${work.title}</h2>
+                            <div class="author">by ${authorName}</div>
                             
                             <div class="description">
-                                <i class="fas fa-quote-left" style="color: #ffb347; opacity: 0.6; margin-right: 8px;"></i>
+                                <i class="fas fa-quote-left" style="color: #f5b342; margin-right: 10px;"></i>
                                 ${description}
                             </div>
                             
-                            <div class="dl-section">
-                                <div class="dl-header">
-                                    <i class="fas fa-download"></i> Unduh Gratis
+                            <div class="download-area">
+                                <div class="download-header">
+                                    <i class="fas fa-download"></i> Download for free
                                 </div>
-                                <div class="dl-grid">
-                                    <a href="#" class="dl-btn" id="downloadEPUB"><i class="fas fa-file-pdf"></i> EPUB (3.2 MB)</a>
-                                    <a href="#" class="dl-btn" id="downloadMOBI"><i class="fas fa-file-lines"></i> MOBI (2.9 MB)</a>
-                                    <a href="#" class="dl-btn" id="downloadPDF"><i class="fas fa-file-pdf"></i> PDF (5.1 MB)</a>
-                                    <a href="#" class="dl-btn" id="downloadTXT"><i class="fas fa-file-lines"></i> TXT (1.4 MB)</a>
+                                <div class="button-grid">
+                                    <a href="#" class="dl-button" id="dlEPUB"><i class="fas fa-file-pdf"></i> EPUB (sample)</a>
+                                    <a href="#" class="dl-button" id="dlMOBI"><i class="fas fa-file-lines"></i> MOBI (sample)</a>
+                                    <a href="#" class="dl-button" id="dlPDF"><i class="fas fa-file-pdf"></i> PDF (sample)</a>
+                                    <a href="#" class="dl-button" id="dlTXT"><i class="fas fa-file-lines"></i> TXT (sample)</a>
                                 </div>
-                                <div class="format-note">
-                                    <i class="fas fa-shield-alt"></i> Semua file aman, bebas DRM, dan kompatibel dengan e-reader favoritmu.
+                                <div class="format-hint">
+                                    <i class="fas fa-shield-heart"></i> DRM-free · compatible with all readers
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="footer-note">
-                        <span><i class="fas fa-dragon"></i> Data dari OpenLibrary (domain publik / sampel)</span>
-                        <span>🔍 <a href="https://openlibrary.org/works/${WORK_ID}" target="_blank">Lihat di OpenLibrary <i class="fas fa-external-link-alt"></i></a></span>
+                    <div class="footer-links">
+                        <span><i class="fas fa-open-library"></i> Data provided by OpenLibrary</span>
+                        <span>🔗 <a href="https://openlibrary.org/works/${workId}" target="_blank">View on OpenLibrary <i class="fas fa-external-link-alt"></i></a></span>
                     </div>
                 `;
 
-                // 6. Tambahkan event listener untuk tombol download (simulasi / redirect ke file)
-                // Sebagai contoh, arahkan ke file dummy (ganti dengan link asli jika ada)
-                document.getElementById('downloadEPUB').addEventListener('click', (e) => {
+                // attach event listeners to download buttons (demo)
+                document.getElementById('dlEPUB').addEventListener('click', (e) => {
                     e.preventDefault();
-                    alert('🔗 Demo: file unduhan akan muncul di sini. (koneksi ke OpenLibrary)');
-                    window.open('https://openlibrary.org/works/' + WORK_ID, '_blank');
+                    alert('📥 Demo: EPUB download. In a real implementation you would link to actual files.\n\nVisit OpenLibrary to explore available editions.');
+                    window.open(`https://openlibrary.org/works/${workId}`, '_blank');
                 });
-                document.getElementById('downloadMOBI').addEventListener('click', (e) => {
+                document.getElementById('dlMOBI').addEventListener('click', (e) => {
                     e.preventDefault();
-                    alert('📘 MOBI (demo) – Silakan kunjungi OpenLibrary untuk edisi gratis.');
-                    window.open('https://openlibrary.org/works/' + WORK_ID, '_blank');
+                    alert('📥 Demo: MOBI download. Please check OpenLibrary for available formats.');
+                    window.open(`https://openlibrary.org/works/${workId}`, '_blank');
                 });
-                document.getElementById('downloadPDF').addEventListener('click', (e) => {
+                document.getElementById('dlPDF').addEventListener('click', (e) => {
                     e.preventDefault();
-                    alert('📕 PDF (demo) – kunjungi OpenLibrary untuk akses ke edisi digital.');
-                    window.open('https://openlibrary.org/works/' + WORK_ID, '_blank');
+                    alert('📥 Demo: PDF download. Most books can be read online at OpenLibrary.');
+                    window.open(`https://openlibrary.org/works/${workId}`, '_blank');
                 });
-                document.getElementById('downloadTXT').addEventListener('click', (e) => {
+                document.getElementById('dlTXT').addEventListener('click', (e) => {
                     e.preventDefault();
-                    alert('📃 TXT (demo) – tersedia di OpenLibrary dalam format teks.');
-                    window.open('https://openlibrary.org/works/' + WORK_ID, '_blank');
+                    alert('📥 Demo: TXT download. OpenLibrary provides various digital editions.');
+                    window.open(`https://openlibrary.org/works/${workId}`, '_blank');
                 });
 
-            } catch (err) {
-                console.error(err);
+            } catch (error) {
+                console.error('Fetch error:', error);
                 container.innerHTML = `
-                    <div class="error" style="padding: 4rem; text-align: center;">
-                        <i class="fas fa-exclamation-triangle" style="font-size: 4rem; color: #c04040;"></i>
-                        <h2>Gagal memuat data buku</h2>
-                        <p style="margin-top: 1rem;">${err.message}. Coba refresh atau gunakan buku contoh.</p>
-                        <button onclick="location.reload()" style="padding: 0.8rem 2rem; margin-top: 2rem; background: #1e2b3a; color: white; border: none; border-radius: 60px;">🔄 Muat Ulang</button>
+                    <div class="error">
+                        <i class="fas fa-circle-exclamation"></i>
+                        <h2>Unable to load book</h2>
+                        <p>${error.message}. The work ID <strong>${workId}</strong> might be invalid.</p>
+                        <button onclick="window.location.href='/';">← back to start</button>
                     </div>
                 `;
             }
         }
 
-        // Jalankan
-        loadBookData();
+        // run
+        fetchBookData();
     })();
 </script>
 
-<!-- Catatan: kode ini menggunakan work "The Lord of the Rings" (OL27448W) sebagai sampel buku populer.
-     Anda dapat mengganti WORK_ID dengan ID buku favorit dari OpenLibrary, misalnya:
-     - OL15626917W (Gulliver's Travels)
-     - OL18417W (The Wonderful Wizard of Oz)
-     - Atau gunakan ISBN: '9780451524935' (1984) dengan modifikasi endpoint -->
+<!-- how to use: 
+     just host this file as index.html on your server.
+     then visit: https://domainsaya.com/OL27448W   (replace with any valid OpenLibrary work ID)
+-->
 </body>
 </html>
