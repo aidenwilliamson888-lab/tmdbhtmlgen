@@ -406,7 +406,7 @@
     
     const NON_LATIN_LANGS = ['th-TH', 'bg-BG', 'ja-JP', 'ko-KR', 'zh-CN', 'zh-TW'];
     
-    // ========== TEKS MULTI BAHASA LENGKAP (dengan semua heading) ==========
+    // ========== TEKS MULTI BAHASA LENGKAP ==========
     const articleTexts = {
         'en-US': {
             synopsis: '📖 Synopsis',
@@ -794,6 +794,11 @@
             md += `</div>\n\n`;
         }
         
+        // ========== TITLE MOVIE + YEAR (bukan SEO title) ==========
+        md += `<div align="center">\n\n`;
+        md += `<h2>${movie.title} (${year})</h2>\n\n`;
+        md += `</div>\n\n`;
+        
         // Rating Table
         md += `<div align="center">\n\n`;
         md += `| **⭐ Rating** | **🎬 Runtime** | **📅 Release** | **🔥 Popularity** |\n`;
@@ -803,7 +808,7 @@
         
         md += `---\n\n`;
         
-        // ========== SYNOPSIS (multi bahasa) ==========
+        // ========== SYNOPSIS ==========
         md += `## ${texts.synopsis}\n\n`;
         md += `<div style="background: #f0fdf4; padding: 16px; border-radius: 12px; color: #14532d;">\n\n`;
         md += `${movie.overview || 'No overview available.'}\n\n`;
@@ -811,7 +816,7 @@
         
         md += `---\n\n`;
         
-        // ========== DETAIL FILM (multi bahasa) ==========
+        // ========== DETAIL FILM ==========
         md += `## ${texts.details}\n\n`;
         md += `| Attribute | Information |\n`;
         md += `|:---|:---|\n`;
@@ -825,7 +830,7 @@
         
         md += `---\n\n`;
         
-        // ========== WATCH NOW (multi bahasa) ==========
+        // ========== WATCH NOW ==========
         md += `## ${texts.watchNow}\n\n`;
         md += `<div align="center">\n\n`;
         md += `<a href="${watchUrl}" target="_blank">\n`;
@@ -872,7 +877,7 @@
         md += `${texts.impact.replace(/{title}/g, movie.title)}\n\n`;
         md += `---\n\n`;
         
-        // ========== TOP CAST (multi bahasa) ==========
+        // ========== TOP CAST ==========
         if (movie.credits?.cast?.slice(0, 5).length) {
             md += `## ${texts.topCast}\n\n`;
             md += `<div align="center">\n\n`;
@@ -909,7 +914,7 @@
         md += faqHtml;
         md += `---\n\n`;
         
-        // ========== QUICK ACCESS (multi bahasa) ==========
+        // ========== QUICK ACCESS ==========
         md += `## ${texts.quickAccess}\n\n`;
         md += `<div align="center">\n\n`;
         md += `| **TMDB ID** | **IMDB ID** | **Language** |\n`;
@@ -917,7 +922,7 @@
         md += `| ${movie.id} | ${movie.imdb_id || '-'} | ${lang} |\n\n`;
         md += `</div>\n\n`;
         
-        // ========== FOOTER (tanpa tanggal, hanya keyword) ==========
+        // ========== FOOTER (tanpa tanggal) ==========
         md += `---\n\n`;
         md += `<div align="center">\n\n`;
         md += `**${texts.credit.replace(/{title}/g, movie.title)}**\n\n`;
@@ -1055,7 +1060,7 @@
     clearLogsBtn.addEventListener('click', clearLogs);
 
     log('✅ TMDB GENERATOR · STUDIO FINAL (Markdown Only) siap digunakan!');
-    log('🎨 Fitur: Random Title SEO, Heading multi bahasa, FAQ 8 pertanyaan (tampil langsung), User Reviews 3 ulasan');
+    log('🎨 Fitur: Random Title SEO, Heading multi bahasa, Judul Movie + Tahun di bawah poster');
     log('🌍 Semua heading (Sinopsis, Detail Film, Watch Now, Top Cast, Quick Access) menggunakan bahasa yang dipilih');
     log('📅 Footer tanpa tanggal, hanya keyword SEO');
 })();
