@@ -4,24 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎬 TMDB GENERATOR · STUDIO FINAL (Markdown + FAQ + Reviews)</title>
-    <!-- Google Fonts + Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
             background: radial-gradient(circle at 20% 30%, #1a1f35, #0a0c1a);
             font-family: 'Inter', sans-serif;
             color: #f0f4ff;
             padding: 2rem 1.5rem;
             min-height: 100vh;
-            position: relative;
             overflow-x: hidden;
         }
-        
         body::before {
             content: '';
             position: absolute;
@@ -34,7 +30,6 @@
             z-index: -1;
             animation: float 20s infinite ease-in-out;
         }
-        
         body::after {
             content: '';
             position: absolute;
@@ -47,31 +42,20 @@
             z-index: -1;
             animation: float 25s infinite ease-in-out reverse;
         }
-        
         @keyframes float {
             0%, 100% { transform: translate(0, 0) scale(1); }
             50% { transform: translate(-5%, 5%) scale(1.05); }
         }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-        
+        .container { max-width: 1400px; margin: 0 auto; position: relative; z-index: 2; }
         .hero-header {
             background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(59, 130, 246, 0.3);
             border-radius: 2rem;
             padding: 2rem 2.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
             text-align: center;
         }
-        
         .hero-title {
             font-size: 2.8rem;
             font-weight: 800;
@@ -84,14 +68,12 @@
             gap: 1rem;
             flex-wrap: wrap;
         }
-        
         .hero-title i {
             background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-size: 2.5rem;
         }
-        
         .hero-badge {
             display: flex;
             gap: 1rem;
@@ -99,7 +81,6 @@
             justify-content: center;
             margin-top: 1rem;
         }
-        
         .badge {
             background: rgba(59, 130, 246, 0.2);
             border: 1px solid rgba(59, 130, 246, 0.4);
@@ -113,9 +94,7 @@
             backdrop-filter: blur(4px);
             color: #b5d0ff;
         }
-        
         .badge i { color: #3b82f6; }
-        
         .control-panel {
             background: rgba(18, 25, 45, 0.8);
             backdrop-filter: blur(12px);
@@ -127,13 +106,11 @@
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 1.5rem;
         }
-        
         .input-group {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
         }
-        
         .input-group label {
             color: #9bb5ff;
             font-weight: 600;
@@ -144,14 +121,8 @@
             align-items: center;
             gap: 0.5rem;
         }
-        
-        .input-group label i {
-            color: #3b82f6;
-        }
-        
-        .input-group input, 
-        .input-group select, 
-        .input-group textarea {
+        .input-group label i { color: #3b82f6; }
+        .input-group input, .input-group select, .input-group textarea {
             background: rgba(10, 15, 30, 0.7);
             border: 1px solid #2a3a60;
             border-radius: 1rem;
@@ -161,20 +132,12 @@
             font-family: 'Inter', monospace;
             transition: all 0.3s ease;
         }
-        
-        .input-group input:focus, 
-        .input-group select:focus, 
-        .input-group textarea:focus {
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
             outline: none;
             border-color: #3b82f6;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         }
-        
-        .input-group textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-        
+        .input-group textarea { min-height: 80px; resize: vertical; }
         .title-templates {
             grid-column: 1 / -1;
             background: rgba(20, 30, 55, 0.6);
@@ -182,7 +145,6 @@
             padding: 1.2rem;
             border: 1px solid #3d5a8c;
         }
-        
         .title-templates label {
             color: #9bb5ff;
             font-weight: 600;
@@ -191,7 +153,6 @@
             gap: 0.7rem;
             margin-bottom: 0.5rem;
         }
-        
         .file-import {
             grid-column: 1 / -1;
             background: rgba(20, 30, 55, 0.6);
@@ -199,12 +160,7 @@
             padding: 1.2rem;
             border: 1px dashed #3b82f6;
         }
-        
-        .file-import:hover {
-            border-color: #8b5cf6;
-            background: rgba(30, 40, 65, 0.7);
-        }
-        
+        .file-import:hover { border-color: #8b5cf6; background: rgba(30, 40, 65, 0.7); }
         .file-import label {
             color: #9bb5ff;
             font-weight: 600;
@@ -213,7 +169,6 @@
             gap: 0.7rem;
             margin-bottom: 0.5rem;
         }
-        
         .file-import input[type="file"] {
             background: rgba(10, 15, 30, 0.7);
             border: 1px solid #2a3a60;
@@ -222,7 +177,6 @@
             color: white;
             width: 100%;
         }
-        
         .file-import input[type="file"]::file-selector-button {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             border: none;
@@ -232,7 +186,6 @@
             font-weight: 600;
             cursor: pointer;
         }
-        
         .button-group {
             display: flex;
             gap: 1rem;
@@ -240,7 +193,6 @@
             grid-column: 1 / -1;
             margin-top: 0.5rem;
         }
-        
         .btn {
             background: linear-gradient(135deg, #28344e, #1f2a40);
             border: none;
@@ -256,28 +208,10 @@
             border: 1px solid rgba(59, 130, 246, 0.4);
             transition: all 0.3s ease;
         }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            border-color: #3b82f6;
-            box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.5);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #1d4ed8, #3b82f6);
-            border-color: #60a5fa;
-        }
-        
-        .btn-success {
-            background: linear-gradient(135deg, #0f6e4a, #10b981);
-            border-color: #34d399;
-        }
-        
-        .btn-warning {
-            background: linear-gradient(135deg, #b45309, #f59e0b);
-            border-color: #fbbf24;
-        }
-        
+        .btn:hover { transform: translateY(-2px); border-color: #3b82f6; box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.5); }
+        .btn-primary { background: linear-gradient(135deg, #1d4ed8, #3b82f6); border-color: #60a5fa; }
+        .btn-success { background: linear-gradient(135deg, #0f6e4a, #10b981); border-color: #34d399; }
+        .btn-warning { background: linear-gradient(135deg, #b45309, #f59e0b); border-color: #fbbf24; }
         .progress-area {
             background: rgba(18, 25, 45, 0.8);
             backdrop-filter: blur(12px);
@@ -286,7 +220,6 @@
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
-        
         .progress-stats {
             display: flex;
             justify-content: space-between;
@@ -295,21 +228,18 @@
             font-size: 0.9rem;
             color: #b5d0ff;
         }
-        
         .progress-bar-container {
             height: 8px;
             background: rgba(10, 15, 30, 0.6);
             border-radius: 30px;
             overflow: hidden;
         }
-        
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #3b82f6, #8b5cf6);
             width: 0%;
             transition: width 0.4s ease;
         }
-        
         .log-area {
             background: rgba(8, 12, 25, 0.8);
             border-radius: 1rem;
@@ -321,12 +251,7 @@
             border: 1px solid #2a3a60;
             margin-top: 1rem;
         }
-        
-        .log-area div {
-            padding: 0.2rem 0;
-            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
-        }
-        
+        .log-area div { padding: 0.2rem 0; border-bottom: 1px solid rgba(59, 130, 246, 0.1); }
         .preview-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -335,7 +260,6 @@
             max-height: 300px;
             overflow-y: auto;
         }
-        
         .file-card {
             background: rgba(22, 32, 55, 0.8);
             border-radius: 1rem;
@@ -345,7 +269,6 @@
             align-items: center;
             gap: 0.8rem;
         }
-        
         .file-icon {
             background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             width: 40px;
@@ -356,21 +279,9 @@
             justify-content: center;
             font-size: 1.2rem;
         }
-        
-        .file-info {
-            flex: 1;
-        }
-        
-        .file-name {
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-        
-        .file-meta {
-            font-size: 0.7rem;
-            color: #8ba3d9;
-        }
-        
+        .file-info { flex: 1; }
+        .file-name { font-weight: 600; font-size: 0.85rem; }
+        .file-meta { font-size: 0.7rem; color: #8ba3d9; }
         .example-box {
             background: rgba(30, 40, 65, 0.8);
             border: 1px solid #3b82f6;
@@ -380,7 +291,6 @@
             font-size: 0.8rem;
             margin-top: 0.5rem;
         }
-        
         .footer {
             margin-top: 2rem;
             text-align: center;
@@ -389,20 +299,9 @@
             font-size: 0.85rem;
             border-top: 1px solid rgba(59, 130, 246, 0.2);
         }
-        
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(10, 15, 30, 0.5);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: #3b82f6;
-            border-radius: 10px;
-        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(10, 15, 30, 0.5); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -507,7 +406,7 @@
     
     const NON_LATIN_LANGS = ['th-TH', 'bg-BG', 'ja-JP', 'ko-KR', 'zh-CN', 'zh-TW'];
     
-    // ========== TEKS MULTI BAHASA LENGKAP ==========
+    // ========== TEKS MULTI BAHASA ==========
     const articleTexts = {
         'en-US': {
             storyTitle: '{title}: The Story Unveiled',
@@ -643,6 +542,70 @@
         }
     };
 
+    // ========== FAQ MULTI BAHASA (Tampil Langsung, Tanpa Dropdown) ==========
+    const faqData = {
+        'en-US': [
+            { q: '❓ Is this movie free to watch?', a: 'Yes, you can watch {title} for free directly through the link provided above. No registration required.' },
+            { q: '❓ What quality options are available?', a: 'Available qualities: 480p, 720p HD, 1080p Full HD, and 4K UHD. You can choose according to your internet connection.' },
+            { q: '❓ Are subtitles available?', a: 'Yes, subtitles are available in multiple languages including English, Spanish, Indonesian, Vietnamese, Thai, and more.' },
+            { q: '❓ Do I need to register to watch?', a: 'No registration needed! Just click the button above and start watching immediately.' },
+            { q: '❓ Is this movie legal to watch?', a: 'We only provide streaming links. Please comply with the laws in your country regarding online streaming.' },
+            { q: '❓ Can I download this movie?', a: 'Yes, download links are available for offline viewing. Click the download button above.' },
+            { q: '❓ How long is this movie?', a: 'The runtime is approximately {runtime} minutes. Perfect for an evening watch!' },
+            { q: '❓ Is this the full movie?', a: 'Yes, this is the complete full-length movie, not a trailer or preview.' }
+        ],
+        'es-ES': [
+            { q: '❓ ¿Es gratis ver esta película?', a: 'Sí, puedes ver {title} gratis directamente a través del enlace proporcionado arriba. No es necesario registrarse.' },
+            { q: '❓ ¿Qué calidades de video están disponibles?', a: 'Calidades disponibles: 480p, 720p HD, 1080p Full HD y 4K UHD. Puedes elegir según tu conexión a internet.' },
+            { q: '❓ ¿Hay subtítulos disponibles?', a: 'Sí, hay subtítulos disponibles en múltiples idiomas como español, inglés, indonesio, vietnamita, tailandés y más.' },
+            { q: '❓ ¿Necesito registrarme para ver?', a: '¡No necesitas registrarte! Solo haz clic en el botón de arriba y comienza a ver inmediatamente.' },
+            { q: '❓ ¿Es legal ver esta película?', a: 'Solo proporcionamos enlaces de streaming. Cumple con las leyes de tu país sobre streaming en línea.' },
+            { q: '❓ ¿Puedo descargar esta película?', a: 'Sí, hay enlaces de descarga disponibles para ver sin conexión. Haz clic en el botón de descarga.' },
+            { q: '❓ ¿Cuánto dura esta película?', a: 'La duración es de aproximadamente {runtime} minutos. ¡Perfecta para ver por la noche!' },
+            { q: '❓ ¿Es esta la película completa?', a: 'Sí, esta es la película completa, no un avance o vista previa.' }
+        ],
+        'th-TH': [
+            { q: '❓ ดูหนังเรื่องนี้ฟรีไหม?', a: 'ได้ คุณสามารถดู {title} ได้ฟรีผ่านลิงก์ที่ให้ไว้ด้านบน ไม่ต้องสมัครสมาชิก' },
+            { q: '❓ มีคุณภาพความคมชัดอะไรบ้าง?', a: 'คุณภาพที่มี: 480p, 720p HD, 1080p Full HD และ 4K UHD เลือกตามอินเทอร์เน็ตของคุณ' },
+            { q: '❓ มีคำบรรยายไหม?', a: 'มี คำบรรยายหลายภาษา เช่น ไทย อังกฤษ อินโดนีเซีย เวียดนาม สเปน และอื่นๆ' },
+            { q: '❓ ต้องสมัครสมาชิกเพื่อดูไหม?', a: 'ไม่ต้องสมัคร! คลิกปุ่มด้านบนและเริ่มดูได้ทันที' },
+            { q: '❓ การดูหนังนี้ถูกกฎหมายไหม?', a: 'เราให้แค่ลิงก์สตรีมมิ่ง โปรดปฏิบัติตามกฎหมายในประเทศของคุณเกี่ยวกับการสตรีมออนไลน์' },
+            { q: '❓ ดาวน์โหลดหนังนี้ได้ไหม?', a: 'ได้ มีลิงก์ดาวน์โหลดสำหรับดูแบบออฟไลน์ คลิกปุ่มดาวน์โหลดด้านบน' },
+            { q: '❓ หนังยาวกี่นาที?', a: 'ความยาวประมาณ {runtime} นาที เหมาะสำหรับดูยามเย็น!' },
+            { q: '❓ นี่คือหนังเต็มเรื่องไหม?', a: 'ใช่ นี่คือหนังเต็มเรื่อง ไม่ใช่ตัวอย่างหรือตัวอย่างหนัง' }
+        ],
+        'id-ID': [
+            { q: '❓ Apakah film ini gratis untuk ditonton?', a: 'Ya, Anda dapat menonton {title} secara gratis melalui link yang tersedia di atas. Tidak perlu registrasi.' },
+            { q: '❓ Kualitas apa saja yang tersedia?', a: 'Kualitas tersedia: 480p, 720p HD, 1080p Full HD, dan 4K UHD. Pilih sesuai koneksi internet Anda.' },
+            { q: '❓ Apakah tersedia subtitle?', a: 'Ya, tersedia subtitle dalam berbagai bahasa seperti Indonesia, Inggris, Spanyol, Vietnam, Thai, dan lainnya.' },
+            { q: '❓ Apakah perlu registrasi untuk menonton?', a: 'Tidak perlu registrasi! Cukup klik tombol di atas dan tonton segera.' },
+            { q: '❓ Apakah film ini legal untuk ditonton?', a: 'Kami hanya menyediakan link streaming. Patuhi hukum yang berlaku di negara Anda tentang streaming online.' },
+            { q: '❓ Bisakah saya mendownload film ini?', a: 'Ya, link download tersedia untuk ditonton secara offline. Klik tombol download di atas.' },
+            { q: '❓ Berapa durasi film ini?', a: 'Durasi sekitar {runtime} menit. Sempurna untuk ditonton di malam hari!' },
+            { q: '❓ Apakah ini film lengkap?', a: 'Ya, ini adalah film lengkap, bukan trailer atau cuplikan.' }
+        ],
+        'vi-VN': [
+            { q: '❓ Xem phim này có miễn phí không?', a: 'Có, bạn có thể xem {title} miễn phí trực tiếp qua liên kết được cung cấp ở trên. Không cần đăng ký.' },
+            { q: '❓ Có những chất lượng nào?', a: 'Chất lượng có sẵn: 480p, 720p HD, 1080p Full HD và 4K UHD. Chọn theo kết nối internet của bạn.' },
+            { q: '❓ Có phụ đề không?', a: 'Có, phụ đề có sẵn bằng nhiều ngôn ngữ như Việt, Anh, Indonesia, Tây Ban Nha, Thái và nhiều hơn nữa.' },
+            { q: '❓ Tôi có cần đăng ký để xem không?', a: 'Không cần đăng ký! Chỉ cần nhấp vào nút bên trên và bắt đầu xem ngay lập tức.' },
+            { q: '❓ Xem phim này có hợp pháp không?', a: 'Chúng tôi chỉ cung cấp liên kết phát trực tuyến. Vui lòng tuân thủ luật pháp tại quốc gia của bạn về phát trực tuyến trực tuyến.' },
+            { q: '❓ Tôi có thể tải phim này không?', a: 'Có, liên kết tải xuống có sẵn để xem ngoại tuyến. Nhấp vào nút tải xuống ở trên.' },
+            { q: '❓ Phim này dài bao lâu?', a: 'Thời lượng khoảng {runtime} phút. Hoàn hảo để xem vào buổi tối!' },
+            { q: '❓ Đây có phải là phim đầy đủ không?', a: 'Có, đây là phim dài đầy đủ, không phải trailer hay xem trước.' }
+        ],
+        'bg-BG': [
+            { q: '❓ Безплатен ли е този филм за гледане?', a: 'Да, можете да гледате {title} безплатно директно чрез линка по-горе. Не е необходима регистрация.' },
+            { q: '❓ Какви качества са налични?', a: 'Налични качества: 480p, 720p HD, 1080p Full HD и 4K UHD. Изберете според вашата интернет връзка.' },
+            { q: '❓ Има ли субтитри?', a: 'Да, субтитрите са налични на множество езици, включително български, английски, испански, индонезийски, виетнамски, тайландски и други.' },
+            { q: '❓ Нужна ли ми е регистрация за гледане?', a: 'Не е необходима регистрация! Просто кликнете върху бутона по-горе и започнете да гледате веднага.' },
+            { q: '❓ Легално ли е да гледам този филм?', a: 'Ние предоставяме само линкове за стрийминг. Моля, спазвайте законите във вашата страна относно онлайн стрийминга.' },
+            { q: '❓ Мога ли да изтегля този филм?', a: 'Да, налични са линкове за изтегляне за офлайн гледане. Кликнете върху бутона за изтегляне по-горе.' },
+            { q: '❓ Колко дълъг е филмът?', a: 'Продължителността е приблизително {runtime} минути. Перфектен за вечерно гледане!' },
+            { q: '❓ Това пълният филм ли е?', a: 'Да, това е пълният филм, а не трейлър или преглед.' }
+        ]
+    };
+
     // DOM Elements
     const apiKeyInput = document.getElementById('apiKey');
     const movieIdsTextarea = document.getElementById('movieIds');
@@ -722,6 +685,24 @@
         return stars;
     }
 
+    // ========== Fungsi generate FAQ (tampil langsung) ==========
+    function generateFAQ(lang, movieTitle, runtime) {
+        const faqs = faqData[lang] || faqData['en-US'];
+        let faqHtml = '';
+        
+        faqs.forEach(faq => {
+            let question = faq.q;
+            let answer = faq.a.replace(/{title}/g, movieTitle).replace(/{runtime}/g, runtime || '120');
+            
+            faqHtml += `<div style="background: #0f172a; padding: 16px; border-radius: 12px; margin: 12px 0; border-left: 4px solid #3b82f6;">\n\n`;
+            faqHtml += `**${question}**\n\n`;
+            faqHtml += `${answer}\n\n`;
+            faqHtml += `</div>\n\n`;
+        });
+        
+        return faqHtml;
+    }
+
     txtFileInput.addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (!file) return;
@@ -758,6 +739,10 @@
         const watchUrl = baseUrlInput ? `${baseUrlInput}${movie.id}` : '#';
         const rating = movie.vote_average?.toFixed(1) || '?';
         const ratingStars = getRatingStars(rating);
+        const runtime = movie.runtime || '120';
+        
+        // Generate FAQ untuk bahasa yang dipilih
+        const faqHtml = generateFAQ(lang, movie.title, runtime);
         
         let md = '';
         
@@ -783,7 +768,7 @@
         md += `<div align="center">\n\n`;
         md += `| **⭐ Rating** | **🎬 Runtime** | **📅 Release** | **🔥 Popularity** |\n`;
         md += `|:---:|:---:|:---:|:---:|\n`;
-        md += `| **${rating}/10** <br> ${ratingStars} | **${movie.runtime || '?'} min** | **${movie.release_date || '-'}** | **${movie.popularity?.toFixed(0) || '-'}** |\n\n`;
+        md += `| **${rating}/10** <br> ${ratingStars} | **${runtime} min** | **${movie.release_date || '-'}** | **${movie.popularity?.toFixed(0) || '-'}** |\n\n`;
         md += `</div>\n\n`;
         
         md += `---\n\n`;
@@ -889,33 +874,9 @@
         
         md += `---\n\n`;
         
-        // ========== FAQ ==========
+        // ========== FAQ (TAMPIL LANGSUNG, TIDAK DITUTUP) ==========
         md += `## ${texts.faqTitle}\n\n`;
-        md += `<details>\n`;
-        md += `<summary><strong>❓ Apakah film ini gratis untuk ditonton?</strong></summary>\n\n`;
-        md += `Ya, film ${movie.title} dapat ditonton secara gratis melalui link yang tersedia di atas.\n\n`;
-        md += `</details>\n\n`;
-        
-        md += `<details>\n`;
-        md += `<summary><strong>❓ Apakah subtitle tersedia?</strong></summary>\n\n`;
-        md += `Ya, tersedia subtitle dalam berbagai bahasa termasuk Inggris, Indonesia, dan bahasa lainnya.\n\n`;
-        md += `</details>\n\n`;
-        
-        md += `<details>\n`;
-        md += `<summary><strong>❓ Berapa kualitas video yang tersedia?</strong></summary>\n\n`;
-        md += `Tersedia kualitas 480p, 720p HD, 1080p Full HD, dan 4K UHD.\n\n`;
-        md += `</details>\n\n`;
-        
-        md += `<details>\n`;
-        md += `<summary><strong>❓ Apakah perlu registrasi untuk menonton?</strong></summary>\n\n`;
-        md += `Tidak perlu registrasi. Klik tombol di atas untuk langsung menonton.\n\n`;
-        md += `</details>\n\n`;
-        
-        md += `<details>\n`;
-        md += `<summary><strong>❓ Apakah film ini legal?</strong></summary>\n\n`;
-        md += `Kami hanya menyediakan link untuk streaming. Pastikan untuk mematuhi hukum yang berlaku di negara Anda.\n\n`;
-        md += `</details>\n\n`;
-        
+        md += faqHtml;
         md += `---\n\n`;
         
         // Quick Info
@@ -989,7 +950,7 @@
         generatedFiles = [];
         updatePreview();
 
-        log(`🚀 Generate ${uniqueIds.length} file Markdown (.md) dengan SEO Title Random + FAQ + Reviews...`);
+        log(`🚀 Generate ${uniqueIds.length} file Markdown (.md) dengan SEO Title Random + FAQ (Tampil Langsung) + Reviews...`);
         log(`📝 ${titleTemplates.length} template title tersedia`);
         isGenerating = true;
         downloadZipBtn.disabled = true;
@@ -1065,8 +1026,8 @@
     clearLogsBtn.addEventListener('click', clearLogs);
 
     log('✅ TMDB GENERATOR · STUDIO FINAL (Markdown Only) siap digunakan!');
-    log('🎨 Fitur baru: Random Title SEO, FAQ 5 pertanyaan, User Reviews 3 ulasan');
-    log('🌍 Semua teks dinamis sesuai bahasa yang dipilih');
+    log('🎨 Fitur: Random Title SEO, FAQ 8 pertanyaan (tampil langsung), User Reviews 3 ulasan');
+    log('🌍 FAQ menggunakan bahasa yang dipilih, jawaban langsung terlihat tanpa klik');
 })();
 </script>
 </body>
