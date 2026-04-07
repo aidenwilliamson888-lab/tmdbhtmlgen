@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎬 TMDB GENERATOR · STUDIO FINAL (Markdown Only)</title>
+    <title>🎬 TMDB GENERATOR · STUDIO FINAL (Markdown + FAQ + Reviews)</title>
     <!-- Google Fonts + Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -171,8 +171,25 @@
         }
         
         .input-group textarea {
-            min-height: 100px;
+            min-height: 80px;
             resize: vertical;
+        }
+        
+        .title-templates {
+            grid-column: 1 / -1;
+            background: rgba(20, 30, 55, 0.6);
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border: 1px solid #3d5a8c;
+        }
+        
+        .title-templates label {
+            color: #9bb5ff;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 0.5rem;
         }
         
         .file-import {
@@ -354,6 +371,16 @@
             color: #8ba3d9;
         }
         
+        .example-box {
+            background: rgba(30, 40, 65, 0.8);
+            border: 1px solid #3b82f6;
+            border-radius: 2rem;
+            padding: 0.5rem 1rem;
+            color: #b5d0ff;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        
         .footer {
             margin-top: 2rem;
             text-align: center;
@@ -387,8 +414,8 @@
         <div class="hero-badge">
             <span class="badge"><i class="fab fa-markdown"></i> Markdown Only</span>
             <span class="badge"><i class="fas fa-globe"></i> 6 Languages</span>
-            <span class="badge"><i class="fas fa-slug"></i> Smart Slug</span>
-            <span class="badge"><i class="fas fa-chart-line"></i> SEO Ready</span>
+            <span class="badge"><i class="fas fa-random"></i> Random Title SEO</span>
+            <span class="badge"><i class="fas fa-question-circle"></i> FAQ + Reviews</span>
             <span class="badge"><i class="fas fa-image"></i> Button Image</span>
         </div>
     </div>
@@ -404,6 +431,14 @@
             <textarea id="movieIds" placeholder="76600&#10;157336&#10;299534">76600
 157336
 299534</textarea>
+        </div>
+
+        <div class="title-templates">
+            <label><i class="fas fa-random"></i> Template Title SEO (pisahkan dengan | )</label>
+            <textarea id="titleTemplates" rows="2">WATCH {TITLE} {YEAR} FULLMOVIE Available Now Online Streaming|{TITLE} {YEAR} FULLMOVIE Available Now Online HD|✨ {TITLE} ({YEAR}) 4K HDR Watch Online Free|🎬 {TITLE} {YEAR} Full Movie Streaming Download|🔥 {TITLE} {YEAR} Watch Online Free 1080p</textarea>
+            <div class="example-box" id="templateExample">
+                <i class="fas fa-eye"></i> Contoh: "WATCH Avatar 3 2026 FULLMOVIE Available Now Online Streaming"
+            </div>
         </div>
 
         <div class="file-import">
@@ -446,7 +481,7 @@
             <div class="progress-fill" id="progressFill"></div>
         </div>
         <div class="log-area" id="logArea">
-            <div>⏳ Siap generate file Markdown (.md)...</div>
+            <div>⏳ Siap generate file Markdown (.md) dengan SEO Title Random + FAQ + Reviews...</div>
         </div>
     </div>
 
@@ -458,7 +493,7 @@
     </div>
 
     <div class="footer">
-        <i class="fas fa-film" style="color:#3b82f6;"></i> TMDB GENERATOR · STUDIO FINAL | Markdown Only | Button Image 40%
+        <i class="fas fa-film" style="color:#3b82f6;"></i> TMDB GENERATOR · STUDIO FINAL | Markdown Only | Random Title SEO | FAQ + Reviews | Button Image 40%
     </div>
 </div>
 
@@ -486,7 +521,15 @@
             impact: 'With groundbreaking visual effects and a compelling narrative, {title} raises the bar for blockbuster filmmaking.',
             note: '⚠️ Note: Click the link above to watch or download this movie.',
             trailerClick: '🎥 Click the image to watch the trailer',
-            credit: 'Watch {title} Online Free HD | {title} Full Movie Streaming | Download {title} 4K UHD'
+            credit: 'Watch {title} Online Free HD | {title} Full Movie Streaming | Download {title} 4K UHD',
+            faqTitle: '❓ Frequently Asked Questions',
+            reviewsTitle: '⭐ User Reviews',
+            review1Name: 'Michael R.',
+            review1Text: 'Absolutely incredible movie! The visual effects are stunning and the story keeps you engaged from start to finish. A must watch!',
+            review2Name: 'Sarah J.',
+            review2Text: 'One of the best movies I have seen this year. Great acting, amazing cinematography, and a powerful storyline.',
+            review3Name: 'James C.',
+            review3Text: 'Worth every minute! The action sequences are mind-blowing and the emotional depth is surprising. Highly recommended!'
         },
         'es-ES': {
             storyTitle: '{title}: La Historia Revelada',
@@ -500,7 +543,15 @@
             impact: 'Con efectos visuales innovadores, {title} eleva el estándar del cine.',
             note: '⚠️ Nota: Haz clic en el enlace de arriba para ver o descargar esta película.',
             trailerClick: '🎥 Haz clic en la imagen para ver el tráiler',
-            credit: 'Ver {title} Online Gratis HD | {title} Película Completa en Streaming | Descargar {title} 4K UHD'
+            credit: 'Ver {title} Online Gratis HD | {title} Película Completa en Streaming | Descargar {title} 4K UHD',
+            faqTitle: '❓ Preguntas Frecuentes',
+            reviewsTitle: '⭐ Reseñas de Usuarios',
+            review1Name: 'Miguel R.',
+            review1Text: '¡Absolutamente increíble! Los efectos visuales son impresionantes y la historia te mantiene enganchado.',
+            review2Name: 'Sara J.',
+            review2Text: 'Una de las mejores películas que he visto este año. Gran actuación y cinematografía increíble.',
+            review3Name: 'Jaime C.',
+            review3Text: 'Vale cada minuto! Las secuencias de acción son alucinantes. ¡Muy recomendable!'
         },
         'th-TH': {
             storyTitle: '{title}: เปิดโปงเรื่องราว',
@@ -514,7 +565,15 @@
             impact: '{title} ยกระดับมาตรฐานภาพยนตร์บล็อกบัสเตอร์',
             note: '⚠️ หมายเหตุ: คลิกลิงก์ด้านบนเพื่อดูหรือดาวน์โหลดภาพยนตร์เรื่องนี้',
             trailerClick: '🎥 คลิกที่รูปเพื่อดูตัวอย่างภาพยนตร์',
-            credit: 'ดู {title} ออนไลน์ฟรี HD | {title} หนังเต็มสตรีมมิ่ง | ดาวน์โหลด {title} 4K UHD'
+            credit: 'ดู {title} ออนไลน์ฟรี HD | {title} หนังเต็มสตรีมมิ่ง | ดาวน์โหลด {title} 4K UHD',
+            faqTitle: '❓ คำถามที่พบบ่อย',
+            reviewsTitle: '⭐ รีวิวจากผู้ชม',
+            review1Name: 'ไมเคิล อาร์.',
+            review1Text: 'ยอดเยี่ยมมาก! เอฟเฟกต์ภาพสวยงามและเรื่องราวทำให้คุณติดตามตั้งแต่ต้นจนจบ',
+            review2Name: 'ซาร่า เจ.',
+            review2Text: 'หนึ่งในหนังที่ดีที่สุดที่ฉันดูในปีนี้ การแสดงยอดเยี่ยม ภาพยนตร์ทรงพลัง',
+            review3Name: 'เจมส์ ซี.',
+            review3Text: 'คุ้มค่าทุกนาที! ฉากแอ็คชั่นสุดอลังการ แนะนำอย่างยิ่ง!'
         },
         'id-ID': {
             storyTitle: '{title}: Kisah yang Terungkap',
@@ -528,7 +587,15 @@
             impact: '{title} meningkatkan standar pembuatan film blockbuster',
             note: '⚠️ Catatan: Klik tautan di atas untuk menonton atau mengunduh film ini.',
             trailerClick: '🎥 Klik gambar untuk menonton trailer',
-            credit: 'Nonton {title} Online Gratis HD | {title} Full Movie Streaming | Download {title} 4K UHD'
+            credit: 'Nonton {title} Online Gratis HD | {title} Full Movie Streaming | Download {title} 4K UHD',
+            faqTitle: '❓ Pertanyaan Umum',
+            reviewsTitle: '⭐ Ulasan Pengguna',
+            review1Name: 'Michael R.',
+            review1Text: 'Film yang sangat luar biasa! Efek visualnya memukau dan ceritanya membuat Anda terpaku dari awal hingga akhir.',
+            review2Name: 'Sarah J.',
+            review2Text: 'Salah satu film terbaik tahun ini. Akting bagus, sinematografi luar biasa.',
+            review3Name: 'James C.',
+            review3Text: 'Seimbang setiap menitnya! Adegan aksinya luar biasa. Sangat direkomendasikan!'
         },
         'vi-VN': {
             storyTitle: '{title}: Câu Chuyện Được Hé Lộ',
@@ -542,7 +609,15 @@
             impact: '{title} nâng tầm tiêu chuẩn làm phim bom tấn',
             note: '⚠️ Lưu ý: Nhấp vào liên kết bên trên để xem hoặc tải phim này.',
             trailerClick: '🎥 Nhấp vào hình ảnh để xem trailer',
-            credit: 'Xem {title} Online Miễn Phí HD | {title} Full Movie Streaming | Tải {title} 4K UHD'
+            credit: 'Xem {title} Online Miễn Phí HD | {title} Full Movie Streaming | Tải {title} 4K UHD',
+            faqTitle: '❓ Câu Hỏi Thường Gặp',
+            reviewsTitle: '⭐ Đánh Giá Người Dùng',
+            review1Name: 'Michael R.',
+            review1Text: 'Bộ phim cực kỳ tuyệt vời! Hiệu ứng hình ảnh đẹp và câu chuyện cuốn hút từ đầu đến cuối.',
+            review2Name: 'Sarah J.',
+            review2Text: 'Một trong những bộ phim hay nhất tôi xem năm nay. Diễn xuất tuyệt vời, hình ảnh đẹp.',
+            review3Name: 'James C.',
+            review3Text: 'Đáng từng phút! Các pha hành động mãn nhãn. Rất được khuyến khích!'
         },
         'bg-BG': {
             storyTitle: '{title}: Историята Разкрита',
@@ -556,7 +631,15 @@
             impact: '{title} повишава летвата за блокбъстър киното',
             note: '⚠️ Забележка: Кликнете върху връзката по-горе, за да гледате или изтеглите този филм.',
             trailerClick: '🎥 Кликнете върху изображението, за да гледате трейлъра',
-            credit: 'Гледайте {title} Онлайн Безплатно HD | {title} Пълен Филм Стрийминг | Изтеглете {title} 4K UHD'
+            credit: 'Гледайте {title} Онлайн Безплатно HD | {title} Пълен Филм Стрийминг | Изтеглете {title} 4K UHD',
+            faqTitle: '❓ Често Задавани Въпроси',
+            reviewsTitle: '⭐ Потребителски Отзиви',
+            review1Name: 'Майкъл Р.',
+            review1Text: 'Абсолютно невероятен филм! Визуалните ефекти са зашеметяващи.',
+            review2Name: 'Сара Дж.',
+            review2Text: 'Един от най-добрите филми, които съм гледал тази година.',
+            review3Name: 'Джеймс К.',
+            review3Text: 'Струва си всяка минута! Екшън сцените са невероятни. Силно препоръчително!'
         }
     };
 
@@ -565,6 +648,7 @@
     const movieIdsTextarea = document.getElementById('movieIds');
     const bulkLang = document.getElementById('bulkLang');
     const baseUrl = document.getElementById('baseUrl');
+    const titleTemplatesArea = document.getElementById('titleTemplates');
     const txtFileInput = document.getElementById('txtFileInput');
     const generateBtn = document.getElementById('generateBtn');
     const downloadZipBtn = document.getElementById('downloadZipBtn');
@@ -589,6 +673,18 @@
 
     function clearLogs() { 
         logArea.innerHTML = '<div>⏳ Log dibersihkan...</div>'; 
+    }
+
+    function getTitleTemplates() {
+        const text = titleTemplatesArea.value.trim();
+        if (!text) return ['WATCH {TITLE} {YEAR} FULLMOVIE Available Now Online Streaming'];
+        return text.split('|').map(t => t.trim()).filter(t => t.length);
+    }
+
+    function getRandomTitle(templates, movieTitle, year) {
+        if (!templates.length) return `${movieTitle} (${year}) Watch Online`;
+        const selected = templates[Math.floor(Math.random() * templates.length)];
+        return selected.replace(/{TITLE}/g, movieTitle).replace(/{YEAR}/g, year);
     }
 
     function generateUniqueCode() {
@@ -657,7 +753,7 @@
         }
     }
 
-    function generateMarkdown(movie, lang, baseUrlInput, year, trailerKey, texts) {
+    function generateMarkdown(movie, lang, baseUrlInput, year, trailerKey, texts, seoTitle) {
         const posterUrl = movie.poster_path ? `${IMG_BASE}${movie.poster_path}` : '';
         const watchUrl = baseUrlInput ? `${baseUrlInput}${movie.id}` : '#';
         const rating = movie.vote_average?.toFixed(1) || '?';
@@ -673,8 +769,8 @@
         md += `╚═══════════════════════════════════════╝\n`;
         md += `-->\n\n`;
         
-        // Title
-        md += `# ${movie.title} (${year})\n\n`;
+        // Title (SEO Random)
+        md += `# ${seoTitle}\n\n`;
         
         // Poster Center
         if (posterUrl) {
@@ -774,6 +870,54 @@
             md += `---\n\n`;
         }
         
+        // ========== USER REVIEWS ==========
+        md += `## ${texts.reviewsTitle}\n\n`;
+        md += `<div style="background: #1e293b; padding: 16px; border-radius: 12px; margin: 10px 0;">\n\n`;
+        md += `**${texts.review1Name}** ⭐⭐⭐⭐⭐\n\n`;
+        md += `> "${texts.review1Text}"\n\n`;
+        md += `</div>\n\n`;
+        
+        md += `<div style="background: #1e293b; padding: 16px; border-radius: 12px; margin: 10px 0;">\n\n`;
+        md += `**${texts.review2Name}** ⭐⭐⭐⭐½\n\n`;
+        md += `> "${texts.review2Text}"\n\n`;
+        md += `</div>\n\n`;
+        
+        md += `<div style="background: #1e293b; padding: 16px; border-radius: 12px; margin: 10px 0;">\n\n`;
+        md += `**${texts.review3Name}** ⭐⭐⭐⭐⭐\n\n`;
+        md += `> "${texts.review3Text}"\n\n`;
+        md += `</div>\n\n`;
+        
+        md += `---\n\n`;
+        
+        // ========== FAQ ==========
+        md += `## ${texts.faqTitle}\n\n`;
+        md += `<details>\n`;
+        md += `<summary><strong>❓ Apakah film ini gratis untuk ditonton?</strong></summary>\n\n`;
+        md += `Ya, film ${movie.title} dapat ditonton secara gratis melalui link yang tersedia di atas.\n\n`;
+        md += `</details>\n\n`;
+        
+        md += `<details>\n`;
+        md += `<summary><strong>❓ Apakah subtitle tersedia?</strong></summary>\n\n`;
+        md += `Ya, tersedia subtitle dalam berbagai bahasa termasuk Inggris, Indonesia, dan bahasa lainnya.\n\n`;
+        md += `</details>\n\n`;
+        
+        md += `<details>\n`;
+        md += `<summary><strong>❓ Berapa kualitas video yang tersedia?</strong></summary>\n\n`;
+        md += `Tersedia kualitas 480p, 720p HD, 1080p Full HD, dan 4K UHD.\n\n`;
+        md += `</details>\n\n`;
+        
+        md += `<details>\n`;
+        md += `<summary><strong>❓ Apakah perlu registrasi untuk menonton?</strong></summary>\n\n`;
+        md += `Tidak perlu registrasi. Klik tombol di atas untuk langsung menonton.\n\n`;
+        md += `</details>\n\n`;
+        
+        md += `<details>\n`;
+        md += `<summary><strong>❓ Apakah film ini legal?</strong></summary>\n\n`;
+        md += `Kami hanya menyediakan link untuk streaming. Pastikan untuk mematuhi hukum yang berlaku di negara Anda.\n\n`;
+        md += `</details>\n\n`;
+        
+        md += `---\n\n`;
+        
         // Quick Info
         md += `## 🔗 Quick Access\n\n`;
         md += `<div align="center">\n\n`;
@@ -792,7 +936,7 @@
         return md;
     }
 
-    async function generateMarkdownFile(movieId, apiKey, lang, baseUrlInput) {
+    async function generateMarkdownFile(movieId, apiKey, lang, baseUrlInput, titleTemplates) {
         const movie = await fetchMovieDetails(apiKey, movieId, lang);
         if (!movie) return null;
         
@@ -802,13 +946,17 @@
         const trailerKey = trailer?.key || null;
         const texts = articleTexts[lang] || articleTexts['en-US'];
         
-        const markdown = generateMarkdown(movie, lang, baseUrlInput, year, trailerKey, texts);
+        // Generate SEO title random dari template
+        const seoTitle = getRandomTitle(titleTemplates, movie.title, year);
+        
+        const markdown = generateMarkdown(movie, lang, baseUrlInput, year, trailerKey, texts, seoTitle);
         
         return {
             filename: `${slug}.md`,
             content: markdown,
             title: movie.title,
-            movieId: movieId
+            movieId: movieId,
+            seoTitle: seoTitle
         };
     }
 
@@ -821,6 +969,7 @@
         const apiKey = apiKeyInput.value.trim() || DEFAULT_API;
         const lang = bulkLang.value;
         const baseUrlInput = baseUrl.value.trim();
+        const titleTemplates = getTitleTemplates();
         
         const idsText = movieIdsTextarea.value.trim();
         const idMatches = idsText.split(/\r?\n/)
@@ -840,7 +989,8 @@
         generatedFiles = [];
         updatePreview();
 
-        log(`🚀 Generate ${uniqueIds.length} file Markdown (.md)...`);
+        log(`🚀 Generate ${uniqueIds.length} file Markdown (.md) dengan SEO Title Random + FAQ + Reviews...`);
+        log(`📝 ${titleTemplates.length} template title tersedia`);
         isGenerating = true;
         downloadZipBtn.disabled = true;
 
@@ -849,12 +999,12 @@
             const movieId = uniqueIds[i];
             log(`⏳ [${i+1}/${uniqueIds.length}] ID ${movieId}...`);
 
-            const result = await generateMarkdownFile(movieId, apiKey, lang, baseUrlInput);
+            const result = await generateMarkdownFile(movieId, apiKey, lang, baseUrlInput, titleTemplates);
             
             if (result) {
                 generatedFiles.push(result);
                 successCount++;
-                log(`✅ ID ${movieId} (${result.title}) -> ${result.filename}`, 'success');
+                log(`✅ ID ${movieId} (${result.title}) -> ${result.filename} | SEO: ${result.seoTitle.substring(0, 50)}...`, 'success');
             }
 
             const percent = Math.round(((i + 1) / uniqueIds.length) * 100);
@@ -882,7 +1032,7 @@
                 <div class="file-icon"><i class="fab fa-markdown"></i></div>
                 <div class="file-info">
                     <div class="file-name">${f.filename.substring(0, 35)}${f.filename.length > 35 ? '...' : ''}</div>
-                    <div class="file-meta">${f.title.substring(0, 35)} · ID: ${f.movieId}</div>
+                    <div class="file-meta">${f.title.substring(0, 30)} · SEO: ${f.seoTitle.substring(0, 25)}...</div>
                 </div>
             </div>
         `).join('');
@@ -901,12 +1051,21 @@
         });
     }
 
+    // Event listener untuk preview template
+    titleTemplatesArea.addEventListener('input', () => {
+        const templates = getTitleTemplates();
+        if (templates.length) {
+            const example = templates[0].replace(/{TITLE}/g, 'Avatar 3').replace(/{YEAR}/g, '2026');
+            document.getElementById('templateExample').innerHTML = `<i class="fas fa-eye"></i> Contoh: "${example.substring(0, 70)}..."`;
+        }
+    });
+
     generateBtn.addEventListener('click', bulkGenerate);
     downloadZipBtn.addEventListener('click', downloadZip);
     clearLogsBtn.addEventListener('click', clearLogs);
 
     log('✅ TMDB GENERATOR · STUDIO FINAL (Markdown Only) siap digunakan!');
-    log('🎨 Button menggunakan gambar dengan lebar 40%');
+    log('🎨 Fitur baru: Random Title SEO, FAQ 5 pertanyaan, User Reviews 3 ulasan');
     log('🌍 Semua teks dinamis sesuai bahasa yang dipilih');
 })();
 </script>
