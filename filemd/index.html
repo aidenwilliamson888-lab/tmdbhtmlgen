@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎬 TMDB MARKDOWN GENERATOR · Studio Final</title>
+    <title>🎬 TMDB GENERATOR · STUDIO FINAL (Markdown Only)</title>
     <!-- Google Fonts + Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,7 +86,7 @@
         }
         
         .hero-title i {
-            background: linear-gradient(135deg, #10b981, #34d399);
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-size: 2.5rem;
@@ -114,7 +114,7 @@
             color: #b5d0ff;
         }
         
-        .badge i { color: #10b981; }
+        .badge i { color: #3b82f6; }
         
         .control-panel {
             background: rgba(18, 25, 45, 0.8);
@@ -146,7 +146,7 @@
         }
         
         .input-group label i {
-            color: #10b981;
+            color: #3b82f6;
         }
         
         .input-group input, 
@@ -166,8 +166,8 @@
         .input-group select:focus, 
         .input-group textarea:focus {
             outline: none;
-            border-color: #10b981;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         }
         
         .input-group textarea {
@@ -180,11 +180,11 @@
             background: rgba(20, 30, 55, 0.6);
             border-radius: 1.2rem;
             padding: 1.2rem;
-            border: 1px dashed #10b981;
+            border: 1px dashed #3b82f6;
         }
         
         .file-import:hover {
-            border-color: #34d399;
+            border-color: #8b5cf6;
             background: rgba(30, 40, 65, 0.7);
         }
         
@@ -207,35 +207,13 @@
         }
         
         .file-import input[type="file"]::file-selector-button {
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
             border: none;
             border-radius: 2rem;
             padding: 0.4rem 1rem;
             color: white;
             font-weight: 600;
             cursor: pointer;
-        }
-        
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .checkbox-group label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            color: #b5d0ff;
-        }
-        
-        .checkbox-group input {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-            accent-color: #10b981;
         }
         
         .button-group {
@@ -258,24 +236,24 @@
             display: inline-flex;
             align-items: center;
             gap: 0.6rem;
-            border: 1px solid rgba(16, 185, 129, 0.4);
+            border: 1px solid rgba(59, 130, 246, 0.4);
             transition: all 0.3s ease;
         }
         
         .btn:hover {
             transform: translateY(-2px);
-            border-color: #10b981;
+            border-color: #3b82f6;
             box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.5);
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #059669, #10b981);
-            border-color: #34d399;
+            background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+            border-color: #60a5fa;
         }
         
         .btn-success {
-            background: linear-gradient(135deg, #1d4ed8, #3b82f6);
-            border-color: #60a5fa;
+            background: linear-gradient(135deg, #0f6e4a, #10b981);
+            border-color: #34d399;
         }
         
         .btn-warning {
@@ -286,7 +264,7 @@
         .progress-area {
             background: rgba(18, 25, 45, 0.8);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(16, 185, 129, 0.25);
+            border: 1px solid rgba(59, 130, 246, 0.25);
             border-radius: 1.5rem;
             padding: 1.5rem;
             margin: 1.5rem 0;
@@ -310,7 +288,7 @@
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #10b981, #34d399);
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
             width: 0%;
             transition: width 0.4s ease;
         }
@@ -329,7 +307,7 @@
         
         .log-area div {
             padding: 0.2rem 0;
-            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
         }
         
         .preview-grid {
@@ -345,14 +323,14 @@
             background: rgba(22, 32, 55, 0.8);
             border-radius: 1rem;
             padding: 0.8rem 1rem;
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.3);
             display: flex;
             align-items: center;
             gap: 0.8rem;
         }
         
         .file-icon {
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             width: 40px;
             height: 40px;
             border-radius: 10px;
@@ -382,7 +360,7 @@
             color: #6b83b0;
             padding: 1.5rem;
             font-size: 0.85rem;
-            border-top: 1px solid rgba(16, 185, 129, 0.2);
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
         }
         
         ::-webkit-scrollbar {
@@ -395,7 +373,7 @@
         }
         
         ::-webkit-scrollbar-thumb {
-            background: #10b981;
+            background: #3b82f6;
             border-radius: 10px;
         }
     </style>
@@ -404,14 +382,14 @@
 <div class="container">
     <div class="hero-header">
         <div class="hero-title">
-            <i class="fab fa-markdown"></i> TMDB MARKDOWN GENERATOR
+            <i class="fas fa-film"></i> TMDB GENERATOR · STUDIO FINAL
         </div>
         <div class="hero-badge">
-            <span class="badge"><i class="fas fa-check-circle"></i> Only .md Files</span>
+            <span class="badge"><i class="fab fa-markdown"></i> Markdown Only</span>
             <span class="badge"><i class="fas fa-globe"></i> 6 Languages</span>
             <span class="badge"><i class="fas fa-slug"></i> Smart Slug</span>
             <span class="badge"><i class="fas fa-chart-line"></i> SEO Ready</span>
-            <span class="badge"><i class="fas fa-table"></i> Tabel Rapi</span>
+            <span class="badge"><i class="fas fa-image"></i> Button Image</span>
         </div>
     </div>
 
@@ -444,16 +422,6 @@
                 <option value="vi-VN" selected>🇻🇳 Tiếng Việt</option>
                 <option value="bg-BG">🇧🇬 Български</option>
             </select>
-        </div>
-
-        <div class="input-group">
-            <label><i class="fas fa-link"></i> Teks Link 1</label>
-            <input type="text" id="link1Text" value="▶ Watch Movie HD">
-        </div>
-
-        <div class="input-group">
-            <label><i class="fas fa-download"></i> Teks Link 2</label>
-            <input type="text" id="link2Text" value="⬇️ Download (UHD)">
         </div>
 
         <div class="input-group">
@@ -490,7 +458,7 @@
     </div>
 
     <div class="footer">
-        <i class="fab fa-markdown" style="color:#10b981;"></i> TMDB MARKDOWN GENERATOR · Auto Translate · Tabel Rapi · CTA Bold Center · SEO Ready
+        <i class="fas fa-film" style="color:#3b82f6;"></i> TMDB GENERATOR · STUDIO FINAL | Markdown Only | Button Image 40%
     </div>
 </div>
 
@@ -500,9 +468,11 @@
     const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
     const BACKDROP_BASE = 'https://image.tmdb.org/t/p/original';
     const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
+    const BUTTON_IMG = 'https://imagdb.pages.dev/button1.jpg';
     
     const NON_LATIN_LANGS = ['th-TH', 'bg-BG', 'ja-JP', 'ko-KR', 'zh-CN', 'zh-TW'];
     
+    // ========== TEKS MULTI BAHASA LENGKAP ==========
     const articleTexts = {
         'en-US': {
             storyTitle: '{title}: The Story Unveiled',
@@ -513,7 +483,10 @@
             streaming: 'Looking for where to watch {title} online? Official streaming platforms will announce dates after theatrical release.',
             whyTitle: 'Why {title} Changes Everything',
             analysis: 'The introduction of new characters and conflicts adds moral complexity to the franchise. This installment expands the universe significantly.',
-            impact: 'With groundbreaking visual effects and a compelling narrative, {title} raises the bar for blockbuster filmmaking.'
+            impact: 'With groundbreaking visual effects and a compelling narrative, {title} raises the bar for blockbuster filmmaking.',
+            note: '⚠️ Note: Click the link above to watch or download this movie.',
+            trailerClick: '🎥 Click the image to watch the trailer',
+            credit: 'Watch {title} Online Free HD | {title} Full Movie Streaming | Download {title} 4K UHD'
         },
         'es-ES': {
             storyTitle: '{title}: La Historia Revelada',
@@ -524,7 +497,10 @@
             streaming: '¿Buscas dónde ver {title} online? Las plataformas oficiales anunciarán fechas después del estreno.',
             whyTitle: 'Por Qué {title} Cambia Todo',
             analysis: 'La introducción de nuevos personajes y conflictos añade complejidad moral a la franquicia.',
-            impact: 'Con efectos visuales innovadores, {title} eleva el estándar del cine.'
+            impact: 'Con efectos visuales innovadores, {title} eleva el estándar del cine.',
+            note: '⚠️ Nota: Haz clic en el enlace de arriba para ver o descargar esta película.',
+            trailerClick: '🎥 Haz clic en la imagen para ver el tráiler',
+            credit: 'Ver {title} Online Gratis HD | {title} Película Completa en Streaming | Descargar {title} 4K UHD'
         },
         'th-TH': {
             storyTitle: '{title}: เปิดโปงเรื่องราว',
@@ -535,7 +511,10 @@
             streaming: 'กำลังหาที่ดู {title} ออนไลน์อยู่ใช่ไหม?',
             whyTitle: 'ทำไม {title} ถึงเปลี่ยนทุกสิ่ง',
             analysis: 'การแนะนำตัวละครและความขัดแย้งใหม่ๆ เพิ่มมิติทางศีลธรรม',
-            impact: '{title} ยกระดับมาตรฐานภาพยนตร์บล็อกบัสเตอร์'
+            impact: '{title} ยกระดับมาตรฐานภาพยนตร์บล็อกบัสเตอร์',
+            note: '⚠️ หมายเหตุ: คลิกลิงก์ด้านบนเพื่อดูหรือดาวน์โหลดภาพยนตร์เรื่องนี้',
+            trailerClick: '🎥 คลิกที่รูปเพื่อดูตัวอย่างภาพยนตร์',
+            credit: 'ดู {title} ออนไลน์ฟรี HD | {title} หนังเต็มสตรีมมิ่ง | ดาวน์โหลด {title} 4K UHD'
         },
         'id-ID': {
             storyTitle: '{title}: Kisah yang Terungkap',
@@ -546,7 +525,10 @@
             streaming: 'Mencari tempat menonton {title} online?',
             whyTitle: 'Mengapa {title} Mengubah Segalanya',
             analysis: 'Pengenalan karakter dan konflik baru menambah kompleksitas moral',
-            impact: '{title} meningkatkan standar pembuatan film blockbuster'
+            impact: '{title} meningkatkan standar pembuatan film blockbuster',
+            note: '⚠️ Catatan: Klik tautan di atas untuk menonton atau mengunduh film ini.',
+            trailerClick: '🎥 Klik gambar untuk menonton trailer',
+            credit: 'Nonton {title} Online Gratis HD | {title} Full Movie Streaming | Download {title} 4K UHD'
         },
         'vi-VN': {
             storyTitle: '{title}: Câu Chuyện Được Hé Lộ',
@@ -557,7 +539,10 @@
             streaming: 'Tìm nơi xem {title} trực tuyến?',
             whyTitle: 'Tại Sao {title} Thay Đổi Mọi Thứ',
             analysis: 'Sự ra mắt của nhân vật và xung đột mới thêm phức tạp về đạo đức',
-            impact: '{title} nâng tầm tiêu chuẩn làm phim bom tấn'
+            impact: '{title} nâng tầm tiêu chuẩn làm phim bom tấn',
+            note: '⚠️ Lưu ý: Nhấp vào liên kết bên trên để xem hoặc tải phim này.',
+            trailerClick: '🎥 Nhấp vào hình ảnh để xem trailer',
+            credit: 'Xem {title} Online Miễn Phí HD | {title} Full Movie Streaming | Tải {title} 4K UHD'
         },
         'bg-BG': {
             storyTitle: '{title}: Историята Разкрита',
@@ -568,7 +553,10 @@
             streaming: 'Търсите къде да гледате {title} онлайн?',
             whyTitle: 'Защо {title} Променя Всичко',
             analysis: 'Въвеждането на нови герои добавя морална сложност',
-            impact: '{title} повишава летвата за блокбъстър киното'
+            impact: '{title} повишава летвата за блокбъстър киното',
+            note: '⚠️ Забележка: Кликнете върху връзката по-горе, за да гледате или изтеглите този филм.',
+            trailerClick: '🎥 Кликнете върху изображението, за да гледате трейлъра',
+            credit: 'Гледайте {title} Онлайн Безплатно HD | {title} Пълен Филм Стрийминг | Изтеглете {title} 4K UHD'
         }
     };
 
@@ -576,8 +564,6 @@
     const apiKeyInput = document.getElementById('apiKey');
     const movieIdsTextarea = document.getElementById('movieIds');
     const bulkLang = document.getElementById('bulkLang');
-    const link1Text = document.getElementById('link1Text');
-    const link2Text = document.getElementById('link2Text');
     const baseUrl = document.getElementById('baseUrl');
     const txtFileInput = document.getElementById('txtFileInput');
     const generateBtn = document.getElementById('generateBtn');
@@ -671,7 +657,7 @@
         }
     }
 
-    function generateMarkdown(movie, lang, link1Txt, link2Txt, baseUrlInput, year, trailerKey, texts) {
+    function generateMarkdown(movie, lang, baseUrlInput, year, trailerKey, texts) {
         const posterUrl = movie.poster_path ? `${IMG_BASE}${movie.poster_path}` : '';
         const watchUrl = baseUrlInput ? `${baseUrlInput}${movie.id}` : '#';
         const rating = movie.vote_average?.toFixed(1) || '?';
@@ -682,7 +668,7 @@
         // Header ASCII
         md += `<!--\n`;
         md += `╔═══════════════════════════════════════╗\n`;
-        md += `║     🎬 TMDB MARKDOWN GENERATOR        ║\n`;
+        md += `║     🎬 TMDB GENERATOR · STUDIO FINAL   ║\n`;
         md += `║     ${movie.title.substring(0, 35)}${movie.title.length > 35 ? '...' : ''}\n`;
         md += `╚═══════════════════════════════════════╝\n`;
         md += `-->\n\n`;
@@ -728,14 +714,14 @@
         
         md += `---\n\n`;
         
-        // CTA Button Bold Center
+        // CTA BUTTON IMAGE (width 40%)
         md += `## 🎬 Watch Now\n\n`;
         md += `<div align="center">\n\n`;
-        md += `| | |\n`;
-        md += `|:---:|:---:|\n`;
-        md += `| [**▶ ${link1Txt}**](${watchUrl}) | [**⬇️ ${link2Txt}**](${watchUrl}) |\n\n`;
+        md += `<a href="${watchUrl}" target="_blank">\n`;
+        md += `<img src="${BUTTON_IMG}" alt="Watch Now" width="40%" style="border-radius: 12px;">\n`;
+        md += `</a>\n\n`;
         md += `</div>\n\n`;
-        md += `> **⚠️ Note:** Klik link di atas untuk menonton atau download film ini.\n\n`;
+        md += `> ${texts.note}\n\n`;
         
         md += `---\n\n`;
         
@@ -743,8 +729,10 @@
         if (trailerKey) {
             md += `## 📺 Official Trailer\n\n`;
             md += `<div align="center">\n\n`;
-            md += `[![Watch Trailer](https://img.youtube.com/vi/${trailerKey}/maxresdefault.jpg)](${watchUrl})\n\n`;
-            md += `*🎥 Klik gambar untuk menonton trailer*\n\n`;
+            md += `<a href="${watchUrl}" target="_blank">\n`;
+            md += `<img src="https://img.youtube.com/vi/${trailerKey}/maxresdefault.jpg" alt="Trailer" width="80%" style="border-radius: 12px;">\n`;
+            md += `</a>\n\n`;
+            md += `*${texts.trailerClick}*\n\n`;
             md += `</div>\n\n`;
             md += `---\n\n`;
         }
@@ -794,18 +782,17 @@
         md += `| ${movie.id} | ${movie.imdb_id || '-'} | ${lang} |\n\n`;
         md += `</div>\n\n`;
         
-        // Footer
+        // Footer dengan keyword SEO
         md += `---\n\n`;
         md += `<div align="center">\n\n`;
-        md += `**🎬 ${movie.title} (${year})**\n\n`;
-        md += `*Generated by TMDB Markdown Generator · Studio Final*\n\n`;
+        md += `**${texts.credit.replace(/{title}/g, movie.title)}**\n\n`;
         md += `📅 ${new Date().toISOString().split('T')[0]}\n\n`;
         md += `</div>\n`;
         
         return md;
     }
 
-    async function generateMarkdownFile(movieId, apiKey, lang, link1Txt, link2Txt, baseUrlInput) {
+    async function generateMarkdownFile(movieId, apiKey, lang, baseUrlInput) {
         const movie = await fetchMovieDetails(apiKey, movieId, lang);
         if (!movie) return null;
         
@@ -815,7 +802,7 @@
         const trailerKey = trailer?.key || null;
         const texts = articleTexts[lang] || articleTexts['en-US'];
         
-        const markdown = generateMarkdown(movie, lang, link1Txt, link2Txt, baseUrlInput, year, trailerKey, texts);
+        const markdown = generateMarkdown(movie, lang, baseUrlInput, year, trailerKey, texts);
         
         return {
             filename: `${slug}.md`,
@@ -833,8 +820,6 @@
 
         const apiKey = apiKeyInput.value.trim() || DEFAULT_API;
         const lang = bulkLang.value;
-        const link1Txt = link1Text.value.trim() || '▶ Watch Movie HD';
-        const link2Txt = link2Text.value.trim() || '⬇️ Download (UHD)';
         const baseUrlInput = baseUrl.value.trim();
         
         const idsText = movieIdsTextarea.value.trim();
@@ -864,7 +849,7 @@
             const movieId = uniqueIds[i];
             log(`⏳ [${i+1}/${uniqueIds.length}] ID ${movieId}...`);
 
-            const result = await generateMarkdownFile(movieId, apiKey, lang, link1Txt, link2Txt, baseUrlInput);
+            const result = await generateMarkdownFile(movieId, apiKey, lang, baseUrlInput);
             
             if (result) {
                 generatedFiles.push(result);
@@ -920,7 +905,9 @@
     downloadZipBtn.addEventListener('click', downloadZip);
     clearLogsBtn.addEventListener('click', clearLogs);
 
-    log('✅ TMDB MARKDOWN GENERATOR siap digunakan! Generate file .md dengan tampilan rapi + CTA bold center.');
+    log('✅ TMDB GENERATOR · STUDIO FINAL (Markdown Only) siap digunakan!');
+    log('🎨 Button menggunakan gambar dengan lebar 40%');
+    log('🌍 Semua teks dinamis sesuai bahasa yang dipilih');
 })();
 </script>
 </body>
