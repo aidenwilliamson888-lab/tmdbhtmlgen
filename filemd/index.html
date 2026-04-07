@@ -406,9 +406,14 @@
     
     const NON_LATIN_LANGS = ['th-TH', 'bg-BG', 'ja-JP', 'ko-KR', 'zh-CN', 'zh-TW'];
     
-    // ========== TEKS MULTI BAHASA ==========
+    // ========== TEKS MULTI BAHASA LENGKAP (dengan semua heading) ==========
     const articleTexts = {
         'en-US': {
+            synopsis: '📖 Synopsis',
+            details: '🎯 Movie Details',
+            watchNow: '🎬 Watch Now',
+            topCast: '🎭 Top Cast',
+            quickAccess: '🔗 Quick Access',
             storyTitle: '{title}: The Story Unveiled',
             intro: 'The story continues with exciting twists and turns, pushing the boundaries of storytelling.',
             quote: 'This chilling line captures the essence of the franchise: no matter how far you go, the terror follows. {title} promises a darker, more psychological edge.',
@@ -431,6 +436,11 @@
             review3Text: 'Worth every minute! The action sequences are mind-blowing and the emotional depth is surprising. Highly recommended!'
         },
         'es-ES': {
+            synopsis: '📖 Sinopsis',
+            details: '🎯 Detalles de la Película',
+            watchNow: '🎬 Ver Ahora',
+            topCast: '🎭 Reparto Principal',
+            quickAccess: '🔗 Acceso Rápido',
             storyTitle: '{title}: La Historia Revelada',
             intro: 'La historia continúa con giros emocionantes y sorpresas.',
             quote: 'Esta escalofriante línea captura la esencia de la franquicia: no importa lo lejos que vayas, el terror te persigue.',
@@ -453,6 +463,11 @@
             review3Text: 'Vale cada minuto! Las secuencias de acción son alucinantes. ¡Muy recomendable!'
         },
         'th-TH': {
+            synopsis: '📖 เรื่องย่อ',
+            details: '🎯 รายละเอียดภาพยนตร์',
+            watchNow: '🎬 ดูเลย',
+            topCast: '🎭 นักแสดงนำ',
+            quickAccess: '🔗 เข้าถึงด่วน',
             storyTitle: '{title}: เปิดโปงเรื่องราว',
             intro: 'เรื่องราวดำเนินต่อไปด้วยความตื่นเต้นและพลิกผัน',
             quote: 'ประโยคสุดสยองนี้สะท้อนแก่นแท้ของแฟรนไชส์: ไม่ว่าคุณจะไปไกลแค่ไหน ความสยองจะตามคุณไป',
@@ -475,6 +490,11 @@
             review3Text: 'คุ้มค่าทุกนาที! ฉากแอ็คชั่นสุดอลังการ แนะนำอย่างยิ่ง!'
         },
         'id-ID': {
+            synopsis: '📖 Sinopsis',
+            details: '🎯 Detail Film',
+            watchNow: '🎬 Tonton Sekarang',
+            topCast: '🎭 Pemeran Utama',
+            quickAccess: '🔗 Akses Cepat',
             storyTitle: '{title}: Kisah yang Terungkap',
             intro: 'Cerita berlanjut dengan liku-liku menarik',
             quote: 'Kalimat mengerikan ini menangkap esensi franchise: sejauh apapun kau pergi, teror akan selalu mengikutimu',
@@ -497,6 +517,11 @@
             review3Text: 'Seimbang setiap menitnya! Adegan aksinya luar biasa. Sangat direkomendasikan!'
         },
         'vi-VN': {
+            synopsis: '📖 Tóm tắt',
+            details: '🎯 Chi Tiết Phim',
+            watchNow: '🎬 Xem Ngay',
+            topCast: '🎭 Diễn Viên Chính',
+            quickAccess: '🔗 Truy Cập Nhanh',
             storyTitle: '{title}: Câu Chuyện Được Hé Lộ',
             intro: 'Câu chuyện tiếp tục với những tình tiết bất ngờ',
             quote: 'Câu nói rùng rợn này nắm bắt bản chất của thương hiệu: dù bạn có đi xa đến đâu, nỗi kinh hoàng vẫn luôn tìm thấy bạn',
@@ -519,6 +544,11 @@
             review3Text: 'Đáng từng phút! Các pha hành động mãn nhãn. Rất được khuyến khích!'
         },
         'bg-BG': {
+            synopsis: '📖 Резюме',
+            details: '🎯 Детайли за Филма',
+            watchNow: '🎬 Гледай Сега',
+            topCast: '🎭 Главен Актьорски Състав',
+            quickAccess: '🔗 Бърз Достъп',
             storyTitle: '{title}: Историята Разкрита',
             intro: 'Историята продължава с вълнуващи обрати',
             quote: 'Тази смразяваща реплика улавя същността на франчайза',
@@ -542,7 +572,7 @@
         }
     };
 
-    // ========== FAQ MULTI BAHASA (Tampil Langsung, Tanpa Dropdown) ==========
+    // ========== FAQ MULTI BAHASA ==========
     const faqData = {
         'en-US': [
             { q: '❓ Is this movie free to watch?', a: 'Yes, you can watch {title} for free directly through the link provided above. No registration required.' },
@@ -685,7 +715,7 @@
         return stars;
     }
 
-    // ========== Fungsi generate FAQ (tampil langsung) ==========
+    // Fungsi generate FAQ (tampil langsung)
     function generateFAQ(lang, movieTitle, runtime) {
         const faqs = faqData[lang] || faqData['en-US'];
         let faqHtml = '';
@@ -773,16 +803,16 @@
         
         md += `---\n\n`;
         
-        // Sinopsis
-        md += `## 📖 Sinopsis\n\n`;
+        // ========== SYNOPSIS (multi bahasa) ==========
+        md += `## ${texts.synopsis}\n\n`;
         md += `<div style="background: #f0fdf4; padding: 16px; border-radius: 12px; color: #14532d;">\n\n`;
         md += `${movie.overview || 'No overview available.'}\n\n`;
         md += `</div>\n\n`;
         
         md += `---\n\n`;
         
-        // Detail Film
-        md += `## 🎯 Detail Film\n\n`;
+        // ========== DETAIL FILM (multi bahasa) ==========
+        md += `## ${texts.details}\n\n`;
         md += `| Attribute | Information |\n`;
         md += `|:---|:---|\n`;
         md += `| **Original Title** | ${movie.original_title || '-'} |\n`;
@@ -795,8 +825,8 @@
         
         md += `---\n\n`;
         
-        // CTA BUTTON IMAGE (width 40%)
-        md += `## 🎬 Watch Now\n\n`;
+        // ========== WATCH NOW (multi bahasa) ==========
+        md += `## ${texts.watchNow}\n\n`;
         md += `<div align="center">\n\n`;
         md += `<a href="${watchUrl}" target="_blank">\n`;
         md += `<img src="${BUTTON_IMG}" alt="Watch Now" width="40%" style="border-radius: 12px;">\n`;
@@ -842,9 +872,9 @@
         md += `${texts.impact.replace(/{title}/g, movie.title)}\n\n`;
         md += `---\n\n`;
         
-        // Cast
+        // ========== TOP CAST (multi bahasa) ==========
         if (movie.credits?.cast?.slice(0, 5).length) {
-            md += `## 🎭 Top Cast\n\n`;
+            md += `## ${texts.topCast}\n\n`;
             md += `<div align="center">\n\n`;
             md += `| Actor | Character |\n`;
             md += `|:---|:---|\n`;
@@ -855,7 +885,7 @@
             md += `---\n\n`;
         }
         
-        // ========== USER REVIEWS ==========
+        // User Reviews
         md += `## ${texts.reviewsTitle}\n\n`;
         md += `<div style="background: #1e293b; padding: 16px; border-radius: 12px; margin: 10px 0;">\n\n`;
         md += `**${texts.review1Name}** ⭐⭐⭐⭐⭐\n\n`;
@@ -874,24 +904,23 @@
         
         md += `---\n\n`;
         
-        // ========== FAQ (TAMPIL LANGSUNG, TIDAK DITUTUP) ==========
+        // FAQ
         md += `## ${texts.faqTitle}\n\n`;
         md += faqHtml;
         md += `---\n\n`;
         
-        // Quick Info
-        md += `## 🔗 Quick Access\n\n`;
+        // ========== QUICK ACCESS (multi bahasa) ==========
+        md += `## ${texts.quickAccess}\n\n`;
         md += `<div align="center">\n\n`;
         md += `| **TMDB ID** | **IMDB ID** | **Language** |\n`;
         md += `|:---:|:---:|:---:|\n`;
         md += `| ${movie.id} | ${movie.imdb_id || '-'} | ${lang} |\n\n`;
         md += `</div>\n\n`;
         
-        // Footer dengan keyword SEO
+        // ========== FOOTER (tanpa tanggal, hanya keyword) ==========
         md += `---\n\n`;
         md += `<div align="center">\n\n`;
         md += `**${texts.credit.replace(/{title}/g, movie.title)}**\n\n`;
-        md += `📅 ${new Date().toISOString().split('T')[0]}\n\n`;
         md += `</div>\n`;
         
         return md;
@@ -1026,8 +1055,9 @@
     clearLogsBtn.addEventListener('click', clearLogs);
 
     log('✅ TMDB GENERATOR · STUDIO FINAL (Markdown Only) siap digunakan!');
-    log('🎨 Fitur: Random Title SEO, FAQ 8 pertanyaan (tampil langsung), User Reviews 3 ulasan');
-    log('🌍 FAQ menggunakan bahasa yang dipilih, jawaban langsung terlihat tanpa klik');
+    log('🎨 Fitur: Random Title SEO, Heading multi bahasa, FAQ 8 pertanyaan (tampil langsung), User Reviews 3 ulasan');
+    log('🌍 Semua heading (Sinopsis, Detail Film, Watch Now, Top Cast, Quick Access) menggunakan bahasa yang dipilih');
+    log('📅 Footer tanpa tanggal, hanya keyword SEO');
 })();
 </script>
 </body>
