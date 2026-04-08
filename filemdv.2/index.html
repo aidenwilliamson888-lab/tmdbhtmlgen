@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 TMDB GENERATOR · STUDIO FINAL (Markdown + FAQ + Reviews)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: radial-gradient(circle at 20% 30%, #1a1f35, #0a0c1a);
+            font-family: 'Inter', sans-serif;
+            color: #f0f4ff;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: float 20s infinite ease-in-out;
+        }
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: float 25s infinite ease-in-out reverse;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-5%, 5%) scale(1.05); }
+        }
+        .container { max-width: 1400px; margin: 0 auto; position: relative; z-index: 2; }
+        .hero-header {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 2rem;
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #a5d8ff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .hero-title i {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+        }
+        .hero-badge {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .badge {
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 100px;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(4px);
+            color: #b5d0ff;
+        }
+        .badge i { color: #3b82f6; }
+        .control-panel {
+            background: rgba(18, 25, 45, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .input-group label {
+            color: #9bb5ff;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .input-group label i { color: #3b82f6; }
+        .input-group input, .input-group select, .input-group textarea {
+            background: rgba(10, 15, 30, 0.7);
+            border: 1px solid #2a3a60;
+            border-radius: 1rem;
+            padding: 0.8rem 1.2rem;
+            font-size: 0.95rem;
+            color: white;
+            font-family: 'Inter', monospace;
+            transition: all 0.3s ease;
+        }
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        .input-group textarea { min-height: 80px; resize: vertical; }
+        .title-templates {
+            grid-column: 1 / -1;
+            background: rgba(20, 30, 55, 0.6);
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border: 1px solid #3d5a8c;
+        }
+        .title-templates label {
+            color: #9bb5ff;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+        .file-import {
+            grid-column: 1 / -1;
+            background: rgba(20, 30, 55, 0.6);
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border: 1px dashed #3b82f6;
+        }
+        .file-import:hover { border-color: #8b5cf6; background: rgba(30, 40, 65, 0.7); }
+        .file-import label {
+            color: #9bb5ff;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+        .file-import input[type="file"] {
+            background: rgba(10, 15, 30, 0.7);
+            border: 1px solid #2a3a60;
+            border-radius: 0.8rem;
+            padding: 0.5rem 1rem;
+            color: white;
+            width: 100%;
+        }
+        .file-import input[type="file"]::file-selector-button {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border: none;
+            border-radius: 2rem;
+            padding: 0.4rem 1rem;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            grid-column: 1 / -1;
+            margin-top: 0.5rem;
+        }
+        .btn {
+            background: linear-gradient(135deg, #28344e, #1f2a40);
+            border: none;
+            border-radius: 2.5rem;
+            padding: 0.8rem 1.8rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: white;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn:hover { transform: translateY(-2px); border-color: #3b82f6; box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.5); }
+        .btn-primary { background: linear-gradient(135deg, #1d4ed8, #3b82f6); border-color: #60a5fa; }
+        .btn-success { background: linear-gradient(135deg, #0f6e4a, #10b981); border-color: #34d399; }
+        .btn-warning { background: linear-gradient(135deg, #b45309, #f59e0b); border-color: #fbbf24; }
+        .progress-area {
+            background: rgba(18, 25, 45, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #b5d0ff;
+        }
+        .progress-bar-container {
+            height: 8px;
+            background: rgba(10, 15, 30, 0.6);
+            border-radius: 30px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+        .log-area {
+            background: rgba(8, 12, 25, 0.8);
+            border-radius: 1rem;
+            padding: 1rem;
+            max-height: 180px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.8rem;
+            border: 1px solid #2a3a60;
+            margin-top: 1rem;
+        }
+        .log-area div { padding: 0.2rem 0; border-bottom: 1px solid rgba(59, 130, 246, 0.1); }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .file-card {
+            background: rgba(22, 32, 55, 0.8);
+            border-radius: 1rem;
+            padding: 0.8rem 1rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .file-icon {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .file-info { flex: 1; }
+        .file-name { font-weight: 600; font-size: 0.85rem; }
+        .file-meta { font-size: 0.7rem; color: #8ba3d9; }
+        .example-box {
+            background: rgba(30, 40, 65, 0.8);
+            border: 1px solid #3b82f6;
+            border-radius: 2rem;
+            padding: 0.5rem 1rem;
+            color: #b5d0ff;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: #6b83b0;
+            padding: 1.5rem;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(10, 15, 30, 0.5); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero-header">
+        <div class="hero-title">
+            <i class="fas fa-film"></i> TMDB GENERATOR · STUDIO FINAL
+        </div>
+        <div class="hero-badge">
+            <span class="badge"><i class="fab fa-markdown"></i> Markdown Only</span>
+            <span class="badge"><i class="fas fa-globe"></i> 8 Languages</span>
+            <span class="badge"><i class="fas fa-random"></i> Random Title SEO</span>
+            <span class="badge"><i class="fas fa-question-circle"></i> FAQ + Reviews</span>
+            <span class="badge"><i class="fas fa-image"></i> Button Image</span>
+        </div>
+    </div>
+
+    <div class="control-panel">
+        <div class="input-group">
+            <label><i class="fas fa-key"></i> TMDB API Key</label>
+            <input type="text" id="apiKey" value="3a660b31f4af8da5f2bd6f2799c11e2e" placeholder="Masukkan API Key">
+        </div>
+        
+        <div class="input-group">
+            <label><i class="fas fa-list"></i> ID TMDB (satu per baris)</label>
+            <textarea id="movieIds" placeholder="76600&#10;157336&#10;299534">76600
+157336
+299534</textarea>
+        </div>
+
+        <div class="title-templates">
+            <label><i class="fas fa-random"></i> Template Title SEO (pisahkan dengan | )</label>
+            <textarea id="titleTemplates" rows="2">WATCH {TITLE} {YEAR} FULLMOVIE Available Now Online Streaming|{TITLE} {YEAR} FULLMOVIE Available Now Online HD|✨ {TITLE} ({YEAR}) 4K HDR Watch Online Free|🎬 {TITLE} {YEAR} Full Movie Streaming Download|🔥 {TITLE} {YEAR} Watch Online Free 1080p</textarea>
+            <div class="example-box" id="templateExample">
+                <i class="fas fa-eye"></i> Contoh: "WATCH Avatar 3 2026 FULLMOVIE Available Now Online Streaming"
+            </div>
+        </div>
+
+        <div class="file-import">
+            <label><i class="fas fa-file-import"></i> Import dari file .txt</label>
+            <input type="file" id="txtFileInput" accept=".txt">
+            <small style="color: #8ba3d9;">File dengan satu ID per baris</small>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fas fa-globe"></i> Bahasa</label>
+            <select id="bulkLang">
+                <option value="en-US">🇬🇧 English</option>
+                <option value="es-ES">🇪🇸 Español</option>
+                <option value="th-TH">🇹🇭 ไทย</option>
+                <option value="id-ID">🇮🇩 Indonesia</option>
+                <option value="vi-VN" selected>🇻🇳 Tiếng Việt</option>
+                <option value="bg-BG">🇧🇬 Български</option>
+                <option value="zh-TW">🇹🇼 中文 (繁體)</option>
+                <option value="ko-KR">🇰🇷 한국어</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fas fa-link"></i> Base URL (opsional)</label>
+            <input type="text" id="baseUrl" value="https://inflix.pages.dev/" placeholder="https://domainmu.com/id">
+            <small style="color: #8ba3d9;">Link watch akan mengarah ke BaseURL + ID</small>
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-primary" id="generateBtn"><i class="fab fa-markdown"></i> Generate .md Files</button>
+            <button class="btn btn-success" id="downloadZipBtn" disabled><i class="fas fa-file-archive"></i> Download ZIP (.md)</button>
+            <button class="btn btn-warning" id="clearLogsBtn"><i class="fas fa-broom"></i> Clear Logs</button>
+        </div>
+    </div>
+
+    <div class="progress-area">
+        <div class="progress-stats">
+            <span><i class="fas fa-chart-line"></i> Progress: <span id="progressPercent">0%</span></span>
+            <span><i class="fab fa-markdown"></i> <span id="generatedCount">0</span> / <span id="totalCount">0</span> files</span>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="log-area" id="logArea">
+            <div>⏳ Siap generate file Markdown (.md) dengan SEO Title Random + FAQ + Reviews...</div>
+        </div>
+    </div>
+
+    <div class="preview-grid" id="previewGrid">
+        <div style="color: #6b83b0; text-align: center; padding: 2rem; grid-column: 1/-1;">
+            <i class="fab fa-markdown" style="font-size: 3rem; opacity: 0.5;"></i>
+            <p>Belum ada file yang digenerate</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <i class="fas fa-film" style="color:#3b82f6;"></i> TMDB GENERATOR · STUDIO FINAL | Markdown Only | 8 Languages | Random Title SEO | FAQ + Reviews | Button Image 40%
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+(function() {
+    const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
+    const BACKDROP_BASE = 'https://image.tmdb.org/t/p/original';
+    const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
+    const BUTTON_IMG = 'https://imagdb.pages.dev/button1.jpg';
+    
+    const NON_LATIN_LANGS = ['th-TH', 'bg-BG', 'ja-JP', 'ko-KR', 'zh-CN', 'zh-TW', 'ar-SA', 'he-IL'];
+    
+    // ========== TEKS MULTI BAHASA LENGKAP (8 BAHASA) ==========
+    const articleTexts = {
+        'en-US': {
+            synopsis: '📖 Synopsis',
+            details: '🎯 Movie Details',
+            watchNow: '🎬 Watch Now',
+            topCast: '🎭 Top Cast',
+            quickAccess: '🔗 Quick Access',
+            storyTitle: '{title}: The Story Unveiled',
+            intro: 'The story continues with exciting twists and turns, pushing the boundaries of storytelling.',
+            quote: 'This chilling line captures the essence of the franchise: no matter how far you go, the terror follows. {title} promises a darker, more psychological edge.',
+            psychology: 'The psychological depth and intense narrative structure make this installment a standout. Fans will appreciate the callbacks while being introduced to fresh elements.',
+            watchTitle: 'Where to Watch {title} Online',
+            streaming: 'Looking for where to watch {title} online? Official streaming platforms will announce dates after theatrical release.',
+            whyTitle: 'Why {title} Changes Everything',
+            analysis: 'The introduction of new characters and conflicts adds moral complexity to the franchise. This installment expands the universe significantly.',
+            impact: 'With groundbreaking visual effects and a compelling narrative, {title} raises the bar for blockbuster filmmaking.',
+            note: '⚠️ Note: Click the link above to watch or download this movie.',
+            trailerClick: '🎥 Click the image to watch the trailer',
+            credit: 'Watch {title} Online Free HD | {title} Full Movie Streaming | Download {title} 4K UHD',
+            faqTitle: '❓ Frequently Asked Questions',
+            reviewsTitle: '⭐ User Reviews',
+            review1Name: 'Michael R.',
+            review1Text: 'Absolutely incredible movie! The visual effects are stunning and the story keeps you engaged from start to finish. A must watch!',
+            review2Name: 'Sarah J.',
+            review2Text: 'One of the best movies I have seen this year. Great acting, amazing cinematography, and a powerful storyline.',
+            review3Name: 'James C.',
+            review3Text: 'Worth every minute! The action sequences are mind-blowing and the emotional depth is surprising. Highly recommended!'
+        },
+        'es-ES': {
+            synopsis: '📖 Sinopsis',
+            details: '🎯 Detalles de la Película',
+            watchNow: '🎬 Ver Ahora',
+            topCast: '🎭 Reparto Principal',
+            quickAccess: '🔗 Acceso Rápido',
+            storyTitle: '{title}: La Historia Revelada',
+            intro: 'La historia continúa con giros emocionantes y sorpresas.',
+            quote: 'Esta escalofriante línea captura la esencia de la franquicia: no importa lo lejos que vayas, el terror te persigue.',
+            psychology: 'La profundidad psicológica y la intensa estructura narrativa hacen de esta entrega algo excepcional.',
+            watchTitle: 'Dónde Ver {title} Online',
+            streaming: '¿Buscas dónde ver {title} online? Las plataformas oficiales anunciarán fechas después del estreno.',
+            whyTitle: 'Por Qué {title} Cambia Todo',
+            analysis: 'La introducción de nuevos personajes y conflictos añade complejidad moral a la franquicia.',
+            impact: 'Con efectos visuales innovadores, {title} eleva el estándar del cine.',
+            note: '⚠️ Nota: Haz clic en el enlace de arriba para ver o descargar esta película.',
+            trailerClick: '🎥 Haz clic en la imagen para ver el tráiler',
+            credit: 'Ver {title} Online Gratis HD | {title} Película Completa en Streaming | Descargar {title} 4K UHD',
+            faqTitle: '❓ Preguntas Frecuentes',
+            reviewsTitle: '⭐ Reseñas de Usuarios',
+            review1Name: 'Miguel R.',
+            review1Text: '¡Absolutamente increíble! Los efectos visuales son impresionantes y la historia te mantiene enganchado.',
+            review2Name: 'Sara J.',
+            review2Text: 'Una de las mejores películas que he visto este año. Gran actuación y cinematografía increíble.',
+            review3Name: 'Jaime C.',
+            review3Text: 'Vale cada minuto! Las secuencias de acción son alucinantes. ¡Muy recomendable!'
+        },
+        'th-TH': {
+            synopsis: '📖 เรื่องย่อ',
+            details: '🎯 รายละเอียดภาพยนตร์',
+            watchNow: '🎬 ดูเลย',
+            topCast: '🎭 นักแสดงนำ',
+            quickAccess: '🔗 เข้าถึงด่วน',
+            storyTitle: '{title}: เปิดโปงเรื่องราว',
+            intro: 'เรื่องราวดำเนินต่อไปด้วยความตื่นเต้นและพลิกผัน',
+            quote: 'ประโยคสุดสยองนี้สะท้อนแก่นแท้ของแฟรนไชส์: ไม่ว่าคุณจะไปไกลแค่ไหน ความสยองจะตามคุณไป',
+            psychology: 'ความลึกซึ้งทางจิตวิทยาและโครงสร้างที่เข้มข้นทำให้ภาคนี้โดดเด่น',
+            watchTitle: 'ดู {title} ออนไลน์ได้ที่ไหน',
+            streaming: 'กำลังหาที่ดู {title} ออนไลน์อยู่ใช่ไหม?',
+            whyTitle: 'ทำไม {title} ถึงเปลี่ยนทุกสิ่ง',
+            analysis: 'การแนะนำตัวละครและความขัดแย้งใหม่ๆ เพิ่มมิติทางศีลธรรม',
+            impact: '{title} ยกระดับมาตรฐานภาพยนตร์บล็อกบัสเตอร์',
+            note: '⚠️ หมายเหตุ: คลิกลิงก์ด้านบนเพื่อดูหรือดาวน์โหลดภาพยนตร์เรื่องนี้',
+            trailerClick: '🎥 คลิกที่รูปเพื่อดูตัวอย่างภาพยนตร์',
+            credit: 'ดู {title} ออนไลน์ฟรี HD | {title} หนังเต็มสตรีมมิ่ง | ดาวน์โหลด {title} 4K UHD',
+            faqTitle: '❓ คำถามที่พบบ่อย',
+            reviewsTitle: '⭐ รีวิวจากผู้ชม',
+            review1Name: 'ไมเคิล อาร์.',
+            review1Text: 'ยอดเยี่ยมมาก! เอฟเฟกต์ภาพสวยงามและเรื่องราวทำให้คุณติดตามตั้งแต่ต้นจนจบ',
+            review2Name: 'ซาร่า เจ.',
+            review2Text: 'หนึ่งในหนังที่ดีที่สุดที่ฉันดูในปีนี้ การแสดงยอดเยี่ยม ภาพยนตร์ทรงพลัง',
+            review3Name: 'เจมส์ ซี.',
+            review3Text: 'คุ้มค่าทุกนาที! ฉากแอ็คชั่นสุดอลังการ แนะนำอย่างยิ่ง!'
+        },
+        'id-ID': {
+            synopsis: '📖 Sinopsis',
+            details: '🎯 Detail Film',
+            watchNow: '🎬 Tonton Sekarang',
+            topCast: '🎭 Pemeran Utama',
+            quickAccess: '🔗 Akses Cepat',
+            storyTitle: '{title}: Kisah yang Terungkap',
+            intro: 'Cerita berlanjut dengan liku-liku menarik',
+            quote: 'Kalimat mengerikan ini menangkap esensi franchise: sejauh apapun kau pergi, teror akan selalu mengikutimu',
+            psychology: 'Kedalaman psikologis dan struktur naratif yang intens membuat installment ini menonjol',
+            watchTitle: 'Tempat Menonton {title} Online',
+            streaming: 'Mencari tempat menonton {title} online?',
+            whyTitle: 'Mengapa {title} Mengubah Segalanya',
+            analysis: 'Pengenalan karakter dan konflik baru menambah kompleksitas moral',
+            impact: '{title} meningkatkan standar pembuatan film blockbuster',
+            note: '⚠️ Catatan: Klik tautan di atas untuk menonton atau mengunduh film ini.',
+            trailerClick: '🎥 Klik gambar untuk menonton trailer',
+            credit: 'Nonton {title} Online Gratis HD | {title} Full Movie Streaming | Download {title} 4K UHD',
+            faqTitle: '❓ Pertanyaan Umum',
+            reviewsTitle: '⭐ Ulasan Pengguna',
+            review1Name: 'Michael R.',
+            review1Text: 'Film yang sangat luar biasa! Efek visualnya memukau dan ceritanya membuat Anda terpaku dari awal hingga akhir.',
+            review2Name: 'Sarah J.',
+            review2Text: 'Salah satu film terbaik tahun ini. Akting bagus, sinematografi luar biasa.',
+            review3Name: 'James C.',
+            review3Text: 'Seimbang setiap menitnya! Adegan aksinya luar biasa. Sangat direkomendasikan!'
+        },
+        'vi-VN': {
+            synopsis: '📖 Tóm tắt',
+            details: '🎯 Chi Tiết Phim',
+            watchNow: '🎬 Xem Ngay',
+            topCast: '🎭 Diễn Viên Chính',
+            quickAccess: '🔗 Truy Cập Nhanh',
+            storyTitle: '{title}: Câu Chuyện Được Hé Lộ',
+            intro: 'Câu chuyện tiếp tục với những tình tiết bất ngờ',
+            quote: 'Câu nói rùng rợn này nắm bắt bản chất của thương hiệu: dù bạn có đi xa đến đâu, nỗi kinh hoàng vẫn luôn tìm thấy bạn',
+            psychology: 'Chiều sâu tâm lý và cấu trúc kể chuyện dữ dội khiến phần này trở nên nổi bật',
+            watchTitle: 'Xem {title} Ở Đâu Trực Tuyến',
+            streaming: 'Tìm nơi xem {title} trực tuyến?',
+            whyTitle: 'Tại Sao {title} Thay Đổi Mọi Thứ',
+            analysis: 'Sự ra mắt của nhân vật và xung đột mới thêm phức tạp về đạo đức',
+            impact: '{title} nâng tầm tiêu chuẩn làm phim bom tấn',
+            note: '⚠️ Lưu ý: Nhấp vào liên kết bên trên để xem hoặc tải phim này.',
+            trailerClick: '🎥 Nhấp vào hình ảnh để xem trailer',
+            credit: 'Xem {title} Online Miễn Phí HD | {title} Full Movie Streaming | Tải {title} 4K UHD',
+            faqTitle: '❓ Câu Hỏi Thường Gặp',
+            reviewsTitle: '⭐ Đánh Giá Người Dùng',
+            review1Name: 'Michael R.',
+            review1Text: 'Bộ phim cực kỳ tuyệt vời! Hiệu ứng hình ảnh đẹp và câu chuyện cuốn hút từ đầu đến cuối.',
+            review2Name: 'Sarah J.',
+            review2Text: 'Một trong những bộ phim hay nhất tôi xem năm nay. Diễn xuất tuyệt vời, hình ảnh đẹp.',
+            review3Name: 'James C.',
+            review3Text: 'Đáng từng phút! Các pha hành động mãn nhãn. Rất được khuyến khích!'
+        },
+        'bg-BG': {
+            synopsis: '📖 Резюме',
+            details: '🎯 Детайли за Филма',
+            watchNow: '🎬 Гледай Сега',
+            topCast: '🎭 Главен Актьорски Състав',
+            quickAccess: '🔗 Бърз Достъп',
+            storyTitle: '{title}: Историята Разкрита',
+            intro: 'Историята продължава с вълнуващи обрати',
+            quote: 'Тази смразяваща реплика улавя същността на франчайза',
+            psychology: 'Психологическата дълбочина прави тази част забележителна',
+            watchTitle: 'Къде Да Гледате {title} Онлайн',
+            streaming: 'Търсите къде да гледате {title} онлайн?',
+            whyTitle: 'Защо {title} Променя Всичко',
+            analysis: 'Въвеждането на нови герои добавя морална сложност',
+            impact: '{title} повишава летвата за блокбъстър киното',
+            note: '⚠️ Забележка: Кликнете върху връзката по-горе, за да гледате или изтеглите този филм.',
+            trailerClick: '🎥 Кликнете върху изображението, за да гледате трейлъра',
+            credit: 'Гледайте {title} Онлайн Безплатно HD | {title} Пълен Филм Стрийминг | Изтеглете {title} 4K UHD',
+            faqTitle: '❓ Често Задавани Въпроси',
+            reviewsTitle: '⭐ Потребителски Отзиви',
+            review1Name: 'Майкъл Р.',
+            review1Text: 'Абсолютно невероятен филм! Визуалните ефекти са зашеметяващи.',
+            review2Name: 'Сара Дж.',
+            review2Text: 'Един от най-добрите филми, които съм гледал тази година.',
+            review3Name: 'Джеймс К.',
+            review3Text: 'Струва си всяка минута! Екшън сцените са невероятни. Силно препоръчително!'
+        },
+        // ========== BAHASA BARU: ZH-TW (中文繁體) ==========
+        'zh-TW': {
+            synopsis: '📖 劇情簡介',
+            details: '🎯 電影詳細資訊',
+            watchNow: '🎬 立即觀看',
+            topCast: '🎭 主要演員',
+            quickAccess: '🔗 快速連結',
+            storyTitle: '{title}: 故事揭曉',
+            intro: '故事繼續以令人興奮的曲折和轉折，推動敘事的界限。',
+            quote: '這句令人不寒而慄的台詞捕捉了系列的精髓：無論你走多遠，恐怖都會跟隨你。{title} 承諾更黑暗、更心理的邊緣。',
+            psychology: '心理深度和強烈的敘事結構使這部作品脫穎而出。粉絲們將欣賞回顧，同時被引入擴展宇宙的新元素。',
+            watchTitle: '在哪裡在線觀看 {title}',
+            streaming: '正在尋找在哪裡在線觀看 {title}？官方串流平台將在影院上映後公佈日期。',
+            whyTitle: '為什麼 {title} 改變一切',
+            analysis: '新角色和衝突的引入為系列增添了道德複雜性。這部作品顯著擴展了宇宙。',
+            impact: '憑藉突破性的視覺效果和引人入勝的敘事，{title} 提高了大片電影製作的標準。',
+            note: '⚠️ 注意：點擊上面的連結觀看或下載這部電影。',
+            trailerClick: '🎥 點擊圖片觀看預告片',
+            credit: '在線免費觀看 {title} HD | {title} 完整電影串流 | 下載 {title} 4K UHD',
+            faqTitle: '❓ 常見問題',
+            reviewsTitle: '⭐ 用戶評論',
+            review1Name: 'Michael R.',
+            review1Text: '絕對令人難以置信的電影！視覺效果令人驚嘆，故事從頭到尾都讓你投入。必看！',
+            review2Name: 'Sarah J.',
+            review2Text: '這是我今年看過最好的電影之一。出色的表演，驚人的攝影，以及強大的故事情節。',
+            review3Name: 'James C.',
+            review3Text: '每一分鐘都值得！動作場面令人驚嘆，情感深度令人驚訝。強烈推薦！'
+        },
+        // ========== BAHASA BARU: KO-KR (한국어) ==========
+        'ko-KR': {
+            synopsis: '📖 시놉시스',
+            details: '🎯 영화 상세정보',
+            watchNow: '🎬 지금 시청하기',
+            topCast: '🎭 주요 출연진',
+            quickAccess: '🔗 빠른 접근',
+            storyTitle: '{title}: 공개된 이야기',
+            intro: '이야기는 흥미진진한 반전과 함께 계속되며 스토리텔링의 경계를 넓힙니다.',
+            quote: '이 소름 끼치는 대사는 프랜차이즈의 본질을 포착합니다: 아무리 멀리 가도 공포는 따라옵니다. {title}은 더 어둡고 심리적인 가장자리를 약속합니다.',
+            psychology: '심리적 깊이와 강렬한 내러티브 구조는 이 작품을 돋보이게 만듭니다. 팬들은 우주를 확장하는 새로운 요소를 소개받으면서 콜백을 감상할 수 있습니다.',
+            watchTitle: '{title} 온라인 시청처',
+            streaming: '{title}을(를) 어디서 온라인으로 시청할 수 있는지 찾고 계신가요? 공식 스트리밍 플랫폼은 극장 개봉 후 날짜를 발표할 예정입니다.',
+            whyTitle: '{title}이(가) 모든 것을 바꾸는 이유',
+            analysis: '새로운 캐릭터와 갈등의 도입은 프랜차이즈에 도덕적 복잡성을 더합니다. 이 작품은 우주를 크게 확장합니다.',
+            impact: '획기적인 시각 효과와 매력적인 내러티브를 통해 {title}은(는) 블록버스터 영화 제작의 기준을 높입니다.',
+            note: '⚠️ 참고: 위의 링크를 클릭하여 이 영화를 시청하거나 다운로드하세요.',
+            trailerClick: '🎥 이미지를 클릭하여 예고편을 시청하세요',
+            credit: '{title} 온라인 무료 HD 시청 | {title} 전체 영화 스트리밍 | {title} 4K UHD 다운로드',
+            faqTitle: '❓ 자주 묻는 질문',
+            reviewsTitle: '⭐ 사용자 리뷰',
+            review1Name: 'Michael R.',
+            review1Text: '정말 믿을 수 없을 정도로 훌륭한 영화입니다! 시각 효과는 놀랍고 이야기는 처음부터 끝까지 당신을 사로잡습니다. 꼭 봐야 할 영화!',
+            review2Name: 'Sarah J.',
+            review2Text: '올해 본 영화 중 최고 중 하나입니다. 훌륭한 연기, 놀라운 촬영 기법, 강력한 스토리라인.',
+            review3Name: 'James C.',
+            review3Text: '모든 순간이 가치 있습니다! 액션 장면은 정말 멋지고 감정적 깊이가 놀랍습니다. 강력 추천합니다!'
+        }
+    };
+
+    // ========== FAQ MULTI BAHASA (termasuk zh-TW & ko-KR) ==========
+    const faqData = {
+        'en-US': [
+            { q: '❓ Is this movie free to watch?', a: 'Yes, you can watch {title} for free directly through the link provided above. No registration required.' },
+            { q: '❓ What quality options are available?', a: 'Available qualities: 480p, 720p HD, 1080p Full HD, and 4K UHD. You can choose according to your internet connection.' },
+            { q: '❓ Are subtitles available?', a: 'Yes, subtitles are available in multiple languages including English, Spanish, Indonesian, Vietnamese, Thai, and more.' },
+            { q: '❓ Do I need to register to watch?', a: 'No registration needed! Just click the button above and start watching immediately.' },
+            { q: '❓ Is this movie legal to watch?', a: 'We only provide streaming links. Please comply with the laws in your country regarding online streaming.' },
+            { q: '❓ Can I download this movie?', a: 'Yes, download links are available for offline viewing. Click the download button above.' },
+            { q: '❓ How long is this movie?', a: 'The runtime is approximately {runtime} minutes. Perfect for an evening watch!' },
+            { q: '❓ Is this the full movie?', a: 'Yes, this is the complete full-length movie, not a trailer or preview.' }
+        ],
+        'es-ES': [
+            { q: '❓ ¿Es gratis ver esta película?', a: 'Sí, puedes ver {title} gratis directamente a través del enlace proporcionado arriba. No es necesario registrarse.' },
+            { q: '❓ ¿Qué calidades de video están disponibles?', a: 'Calidades disponibles: 480p, 720p HD, 1080p Full HD y 4K UHD. Puedes elegir según tu conexión a internet.' },
+            { q: '❓ ¿Hay subtítulos disponibles?', a: 'Sí, hay subtítulos disponibles en múltiples idiomas como español, inglés, indonesio, vietnamita, tailandés y más.' },
+            { q: '❓ ¿Necesito registrarme para ver?', a: '¡No necesitas registrarte! Solo haz clic en el botón de arriba y comienza a ver inmediatamente.' },
+            { q: '❓ ¿Es legal ver esta película?', a: 'Solo proporcionamos enlaces de streaming. Cumple con las leyes de tu país sobre streaming en línea.' },
+            { q: '❓ ¿Puedo descargar esta película?', a: 'Sí, hay enlaces de descarga disponibles para ver sin conexión. Haz clic en el botón de descarga.' },
+            { q: '❓ ¿Cuánto dura esta película?', a: 'La duración es de aproximadamente {runtime} minutos. ¡Perfecta para ver por la noche!' },
+            { q: '❓ ¿Es esta la película completa?', a: 'Sí, esta es la película completa, no un avance o vista previa.' }
+        ],
+        'th-TH': [
+            { q: '❓ ดูหนังเรื่องนี้ฟรีไหม?', a: 'ได้ คุณสามารถดู {title} ได้ฟรีผ่านลิงก์ที่ให้ไว้ด้านบน ไม่ต้องสมัครสมาชิก' },
+            { q: '❓ มีคุณภาพความคมชัดอะไรบ้าง?', a: 'คุณภาพที่มี: 480p, 720p HD, 1080p Full HD และ 4K UHD เลือกตามอินเทอร์เน็ตของคุณ' },
+            { q: '❓ มีคำบรรยายไหม?', a: 'มี คำบรรยายหลายภาษา เช่น ไทย อังกฤษ อินโดนีเซีย เวียดนาม สเปน และอื่นๆ' },
+            { q: '❓ ต้องสมัครสมาชิกเพื่อดูไหม?', a: 'ไม่ต้องสมัคร! คลิกปุ่มด้านบนและเริ่มดูได้ทันที' },
+            { q: '❓ การดูหนังนี้ถูกกฎหมายไหม?', a: 'เราให้แค่ลิงก์สตรีมมิ่ง โปรดปฏิบัติตามกฎหมายในประเทศของคุณเกี่ยวกับการสตรีมออนไลน์' },
+            { q: '❓ ดาวน์โหลดหนังนี้ได้ไหม?', a: 'ได้ มีลิงก์ดาวน์โหลดสำหรับดูแบบออฟไลน์ คลิกปุ่มดาวน์โหลดด้านบน' },
+            { q: '❓ หนังยาวกี่นาที?', a: 'ความยาวประมาณ {runtime} นาที เหมาะสำหรับดูยามเย็น!' },
+            { q: '❓ นี่คือหนังเต็มเรื่องไหม?', a: 'ใช่ นี่คือหนังเต็มเรื่อง ไม่ใช่ตัวอย่างหรือตัวอย่างหนัง' }
+        ],
+        'id-ID': [
+            { q: '❓ Apakah film ini gratis untuk ditonton?', a: 'Ya, Anda dapat menonton {title} secara gratis melalui link yang tersedia di atas. Tidak perlu registrasi.' },
+            { q: '❓ Kualitas apa saja yang tersedia?', a: 'Kualitas tersedia: 480p, 720p HD, 1080p Full HD, dan 4K UHD. Pilih sesuai koneksi internet Anda.' },
+            { q: '❓ Apakah tersedia subtitle?', a: 'Ya, tersedia subtitle dalam berbagai bahasa seperti Indonesia, Inggris, Spanyol, Vietnam, Thai, dan lainnya.' },
+            { q: '❓ Apakah perlu registrasi untuk menonton?', a: 'Tidak perlu registrasi! Cukup klik tombol di atas dan tonton segera.' },
+            { q: '❓ Apakah film ini legal untuk ditonton?', a: 'Kami hanya menyediakan link streaming. Patuhi hukum yang berlaku di negara Anda tentang streaming online.' },
+            { q: '❓ Bisakah saya mendownload film ini?', a: 'Ya, link download tersedia untuk ditonton secara offline. Klik tombol download di atas.' },
+            { q: '❓ Berapa durasi film ini?', a: 'Durasi sekitar {runtime} menit. Sempurna untuk ditonton di malam hari!' },
+            { q: '❓ Apakah ini film lengkap?', a: 'Ya, ini adalah film lengkap, bukan trailer atau cuplikan.' }
+        ],
+        'vi-VN': [
+            { q: '❓ Xem phim này có miễn phí không?', a: 'Có, bạn có thể xem {title} miễn phí trực tiếp qua liên kết được cung cấp ở trên. Không cần đăng ký.' },
+            { q: '❓ Có những chất lượng nào?', a: 'Chất lượng có sẵn: 480p, 720p HD, 1080p Full HD và 4K UHD. Chọn theo kết nối internet của bạn.' },
+            { q: '❓ Có phụ đề không?', a: 'Có, phụ đề có sẵn bằng nhiều ngôn ngữ như Việt, Anh, Indonesia, Tây Ban Nha, Thái và nhiều hơn nữa.' },
+            { q: '❓ Tôi có cần đăng ký để xem không?', a: 'Không cần đăng ký! Chỉ cần nhấp vào nút bên trên và bắt đầu xem ngay lập tức.' },
+            { q: '❓ Xem phim này có hợp pháp không?', a: 'Chúng tôi chỉ cung cấp liên kết phát trực tuyến. Vui lòng tuân thủ luật pháp tại quốc gia của bạn về phát trực tuyến trực tuyến.' },
+            { q: '❓ Tôi có thể tải phim này không?', a: 'Có, liên kết tải xuống có sẵn để xem ngoại tuyến. Nhấp vào nút tải xuống ở trên.' },
+            { q: '❓ Phim này dài bao lâu?', a: 'Thời lượng khoảng {runtime} phút. Hoàn hảo để xem vào buổi tối!' },
+            { q: '❓ Đây có phải là phim đầy đủ không?', a: 'Có, đây là phim dài đầy đủ, không phải trailer hay xem trước.' }
+        ],
+        'bg-BG': [
+            { q: '❓ Безплатен ли е този филм за гледане?', a: 'Да, можете да гледате {title} безплатно директно чрез линка по-горе. Не е необходима регистрация.' },
+            { q: '❓ Какви качества са налични?', a: 'Налични качества: 480p, 720p HD, 1080p Full HD и 4K UHD. Изберете според вашата интернет връзка.' },
+            { q: '❓ Има ли субтитри?', a: 'Да, субтитрите са налични на множество езици, включително български, английски, испански, индонезийски, виетнамски, тайландски и други.' },
+            { q: '❓ Нужна ли ми е регистрация за гледане?', a: 'Не е необходима регистрация! Просто кликнете върху бутона по-горе и започнете да гледате веднага.' },
+            { q: '❓ Легално ли е да гледам този филм?', a: 'Ние предоставяме само линкове за стрийминг. Моля, спазвайте законите във вашата страна относно онлайн стрийминга.' },
+            { q: '❓ Мога ли да изтегля този филм?', a: 'Да, налични са линкове за изтегляне за офлайн гледане. Кликнете върху бутона за изтегляне по-горе.' },
+            { q: '❓ Колко дълъг е филмът?', a: 'Продължителността е приблизително {runtime} минути. Перфектен за вечерно гледане!' },
+            { q: '❓ Това пълният филм ли е?', a: 'Да, това е пълният филм, а не трейлър или преглед.' }
+        ],
+        // ========== FAQ ZH-TW (中文繁體) ==========
+        'zh-TW': [
+            { q: '❓ 這部電影可以免費觀看嗎？', a: '可以，您可以透過上面提供的連結免費觀看 {title}。無需註冊。' },
+            { q: '❓ 有哪些畫質選項？', a: '可用畫質：480p、720p HD、1080p Full HD 和 4K UHD。您可以根據您的網路連線選擇。' },
+            { q: '❓ 有字幕嗎？', a: '有，提供多種語言字幕，包括中文、英文、西班牙文、印尼文、越南文、泰文等。' },
+            { q: '❓ 我需要註冊才能觀看嗎？', a: '無需註冊！只需點擊上面的按鈕即可立即開始觀看。' },
+            { q: '❓ 觀看這部電影合法嗎？', a: '我們只提供串流連結。請遵守您所在國家/地區有關線上串流的法律。' },
+            { q: '❓ 我可以下載這部電影嗎？', a: '可以，提供離線觀看的下載連結。點擊上面的下載按鈕。' },
+            { q: '❓ 這部電影多長？', a: '片長約 {runtime} 分鐘。非常適合晚上觀看！' },
+            { q: '❓ 這是完整電影嗎？', a: '是的，這是完整的電影，不是預告片或預覽。' }
+        ],
+        // ========== FAQ KO-KR (한국어) ==========
+        'ko-KR': [
+            { q: '❓ 이 영화는 무료로 볼 수 있나요?', a: '네, 위에 제공된 링크를 통해 {title}을(를) 무료로 시청할 수 있습니다. 등록이 필요하지 않습니다.' },
+            { q: '❓ 어떤 화질 옵션을 사용할 수 있나요?', a: '사용 가능한 화질: 480p, 720p HD, 1080p Full HD, 4K UHD. 인터넷 연결에 따라 선택할 수 있습니다.' },
+            { q: '❓ 자막이 있나요?', a: '네, 한국어, 영어, 스페인어, 인도네시아어, 베트남어, 태국어 등을 포함한 여러 언어로 자막을 제공합니다.' },
+            { q: '❓ 시청하려면 등록이 필요한가요?', a: '등록이 필요하지 않습니다! 위의 버튼을 클릭하면 즉시 시청을 시작할 수 있습니다.' },
+            { q: '❓ 이 영화를 시청하는 것이 합법인가요?', a: '당사는 스트리밍 링크만 제공합니다. 온라인 스트리밍에 관한 귀하의 국가 법률을 준수하시기 바랍니다.' },
+            { q: '❓ 이 영화를 다운로드할 수 있나요?', a: '네, 오프라인 시청을 위한 다운로드 링크가 있습니다. 위의 다운로드 버튼을 클릭하세요.' },
+            { q: '❓ 이 영화는 얼마나 긴가요?', a: '런타임은 약 {runtime}분입니다. 저녁 시청에 완벽합니다!' },
+            { q: '❓ 이것이 전체 영화인가요?', a: '네, 예고편이나 미리보기가 아닌 완전한 전체 길이 영화입니다.' }
+        ]
+    };
+
+    // DOM Elements
+    const apiKeyInput = document.getElementById('apiKey');
+    const movieIdsTextarea = document.getElementById('movieIds');
+    const bulkLang = document.getElementById('bulkLang');
+    const baseUrl = document.getElementById('baseUrl');
+    const titleTemplatesArea = document.getElementById('titleTemplates');
+    const txtFileInput = document.getElementById('txtFileInput');
+    const generateBtn = document.getElementById('generateBtn');
+    const downloadZipBtn = document.getElementById('downloadZipBtn');
+    const clearLogsBtn = document.getElementById('clearLogsBtn');
+    const logArea = document.getElementById('logArea');
+    const progressPercent = document.getElementById('progressPercent');
+    const progressFill = document.getElementById('progressFill');
+    const generatedCountSpan = document.getElementById('generatedCount');
+    const totalCountSpan = document.getElementById('totalCount');
+    const previewGrid = document.getElementById('previewGrid');
+
+    let generatedFiles = [];
+    let isGenerating = false;
+
+    function log(message, type = 'info') {
+        const entry = document.createElement('div');
+        entry.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}`;
+        entry.style.color = type === 'error' ? '#f87171' : type === 'success' ? '#4ade80' : '#a5d8ff';
+        logArea.appendChild(entry);
+        logArea.scrollTop = logArea.scrollHeight;
+    }
+
+    function clearLogs() { 
+        logArea.innerHTML = '<div>⏳ Log dibersihkan...</div>'; 
+    }
+
+    function getTitleTemplates() {
+        const text = titleTemplatesArea.value.trim();
+        if (!text) return ['WATCH {TITLE} {YEAR} FULLMOVIE Available Now Online Streaming'];
+        return text.split('|').map(t => t.trim()).filter(t => t.length);
+    }
+
+    function getRandomTitle(templates, movieTitle, year) {
+        if (!templates.length) return `${movieTitle} (${year}) Watch Online`;
+        const selected = templates[Math.floor(Math.random() * templates.length)];
+        return selected.replace(/{TITLE}/g, movieTitle).replace(/{YEAR}/g, year);
+    }
+
+    function generateUniqueCode() {
+        const length = Math.floor(Math.random() * 4) + 5;
+        const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+
+    function createSlug(title, id, lang) {
+        const uniqueCode = generateUniqueCode();
+        if (NON_LATIN_LANGS.includes(lang)) {
+            return `${uniqueCode}`;
+        }
+        const slugTitle = title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-|-$/g, '')
+            .substring(0, 50);
+        return `${uniqueCode}-${slugTitle}`;
+    }
+
+    function getRatingStars(rating) {
+        const num = parseFloat(rating);
+        if (isNaN(num)) return '☆☆☆☆☆';
+        const fullStars = Math.floor(num / 2);
+        const halfStar = (num % 2) >= 1;
+        let stars = '';
+        for (let i = 0; i < fullStars; i++) stars += '★';
+        if (halfStar) stars += '½';
+        while (stars.length < 5) stars += '☆';
+        return stars;
+    }
+
+    // Fungsi generate FAQ (tampil langsung)
+    function generateFAQ(lang, movieTitle, runtime) {
+        const faqs = faqData[lang] || faqData['en-US'];
+        let faqHtml = '';
+        
+        faqs.forEach(faq => {
+            let question = faq.q;
+            let answer = faq.a.replace(/{title}/g, movieTitle).replace(/{runtime}/g, runtime || '120');
+            
+            faqHtml += `<div style="background: #0f172a; padding: 16px; border-radius: 12px; margin: 12px 0; border-left: 4px solid #3b82f6;">\n\n`;
+            faqHtml += `**${question}**\n\n`;
+            faqHtml += `${answer}\n\n`;
+            faqHtml += `</div>\n\n`;
+        });
+        
+        return faqHtml;
+    }
+
+    txtFileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const content = e.target.result;
+            const ids = content.split(/\r?\n/)
+                .map(line => line.trim())
+                .filter(line => line && /^\d+$/.test(line));
+            if (ids.length > 0) {
+                movieIdsTextarea.value = ids.join('\n');
+                log(`📄 Import ${ids.length} ID dari file ${file.name}`, 'success');
+            } else {
+                log('❌ Tidak ada ID valid dalam file', 'error');
+            }
+        };
+        reader.readAsText(file);
+    });
+
+    async function fetchMovieDetails(apiKey, movieId, language) {
+        const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${language}&append_to_response=videos,credits`;
+        try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return await res.json();
+        } catch (e) {
+            log(`❌ Gagal fetch ID ${movieId}: ${e.message}`, 'error');
+            return null;
+        }
+    }
+
+    function generateMarkdown(movie, lang, baseUrlInput, year, trailerKey, texts, seoTitle) {
+        const posterUrl = movie.poster_path ? `${IMG_BASE}${movie.poster_path}` : '';
+        const watchUrl = baseUrlInput ? `${baseUrlInput}${movie.id}` : '#';
+        const rating = movie.vote_average?.toFixed(1) || '?';
+        const ratingStars = getRatingStars(rating);
+        const runtime = movie.runtime || '120';
+        
+        // Generate FAQ untuk bahasa yang dipilih
+        const faqHtml = generateFAQ(lang, movie.title, runtime);
+        
+        let md = '';
+        
+        // Header ASCII
+        md += `<!--\n`;
+        md += `╔═══════════════════════════════════════╗\n`;
+        md += `║     🎬 TMDB GENERATOR · STUDIO FINAL   ║\n`;
+        md += `║     ${movie.title.substring(0, 35)}${movie.title.length > 35 ? '...' : ''}\n`;
+        md += `╚═══════════════════════════════════════╝\n`;
+        md += `-->\n\n`;
+        
+        // Title (SEO Random)
+        md += `# ${seoTitle}\n\n`;
+        
+        // Poster Center
+        if (posterUrl) {
+            md += `<div align="center">\n\n`;
+            md += `<img src="${posterUrl}" alt="${movie.title} Poster" width="280" style="border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">\n\n`;
+            md += `</div>\n\n`;
+        }
+        
+        // Title Movie + Year
+        md += `<div align="center">\n\n`;
+        md += `<h2>${movie.title} (${year})</h2>\n\n`;
+        md += `</div>\n\n`;
+        
+        // Rating Table
+        md += `<div align="center">\n\n`;
+        md += `| **⭐ Rating** | **🎬 Runtime** | **📅 Release** | **🔥 Popularity** |\n`;
+        md += `|:---:|:---:|:---:|:---:|\n`;
+        md += `| **${rating}/10** <br> ${ratingStars} | **${runtime} min** | **${movie.release_date || '-'}** | **${movie.popularity?.toFixed(0) || '-'}** |\n\n`;
+        md += `</div>\n\n`;
+        
+        md += `---\n\n`;
+        
+        // Synopsis
+        md += `## ${texts.synopsis}\n\n`;
+        md += `<div style="background: #f0fdf4; padding: 16px; border-radius: 12px; color: #14532d;">\n\n`;
+        md += `${movie.overview || 'No overview available.'}\n\n`;
+        md += `</div>\n\n`;
+        
+        md += `---\n\n`;
+        
+        // Details
+        md += `## ${texts.details}\n\n`;
+        md += `| Attribute | Information |\n`;
+        md += `|:---|:---|\n`;
+        md += `| **Original Title** | ${movie.original_title || '-'} |\n`;
+        md += `| **Status** | ${movie.status || 'Released'} |\n`;
+        md += `| **Budget** | ${movie.budget ? `$${movie.budget.toLocaleString()}` : '-'} |\n`;
+        md += `| **Revenue** | ${movie.revenue ? `$${movie.revenue.toLocaleString()}` : '-'} |\n`;
+        md += `| **Vote Count** | ${movie.vote_count?.toLocaleString() || '-'} |\n`;
+        md += `| **Genres** | ${movie.genres?.map(g => g.name).join(', ') || '-'} |\n`;
+        md += `| **Production** | ${movie.production_companies?.map(c => c.name).slice(0, 3).join(', ') || '-'} |\n\n`;
+        
+        md += `---\n\n`;
+        
+        // Watch Now
+        md += `## ${texts.watchNow}\n\n`;
+        md += `<div align="center">\n\n`;
+        md += `<a href="${watchUrl}" target="_blank">\n`;
+        md += `<img src="${BUTTON_IMG}" alt="Watch Now" width="40%" style="border-radius: 12px;">\n`;
+        md += `</a>\n\n`;
+        md += `</div>\n\n`;
+        md += `> ${texts.note}\n\n`;
+        
+        md += `---\n\n`;
+        
+        // Trailer
+        if (trailerKey) {
+            md += `## 📺 Official Trailer\n\n`;
+            md += `<div align="center">\n\n`;
+            md += `<a href="${watchUrl}" target="_blank">\n`;
+            md += `<img src="https://img.youtube.com/vi/${trailerKey}/maxresdefault.jpg" alt="Trailer" width="80%" style="border-radius: 12px;">\n`;
+            md += `</a>\n\n`;
+            md += `*${texts.trailerClick}*\n\n`;
+            md += `</div>\n\n`;
+            md += `---\n\n`;
+        }
+        
+        // Article Story
+        md += `## 📖 ${texts.storyTitle.replace(/{title}/g, movie.title)}\n\n`;
+        md += `${movie.overview?.substring(0, 200) || ''} ${texts.intro}\n\n`;
+        md += `> ${texts.quote.replace(/{title}/g, movie.title)}\n\n`;
+        md += `${texts.psychology}\n\n`;
+        md += `---\n\n`;
+        
+        // Article Watch
+        md += `## 🍿 ${texts.watchTitle.replace(/{title}/g, movie.title)}\n\n`;
+        md += `${texts.streaming.replace(/{title}/g, movie.title)}\n\n`;
+        md += `<ul>\n`;
+        md += `<li>🎬 Disney+ Hotstar (expected release)</li>\n`;
+        md += `<li>🎬 Netflix (regional availability)</li>\n`;
+        md += `<li>🎬 Amazon Prime Video (rental/purchase)</li>\n`;
+        md += `<li>🎬 Local streaming providers</li>\n`;
+        md += `</ul>\n\n`;
+        md += `---\n\n`;
+        
+        // Article Analysis
+        md += `## 💡 ${texts.whyTitle.replace(/{title}/g, movie.title)}\n\n`;
+        md += `${texts.analysis}\n\n`;
+        md += `${texts.impact.replace(/{title}/g, movie.title)}\n\n`;
+        md += `---\n\n`;
+        
+        // Top Cast
+        if (movie.credits?.cast?.slice(0, 5).length) {
+            md += `## ${texts.topCast}\n\n`;
+            md += `<div align="center">\n\n`;
+            md += `| Actor | Character |\n`;
+            md += `|:---|:---|\n`;
+            movie.credits.cast.slice(0, 5).forEach(actor => {
+                md += `| ${actor.name} | ${actor.character || '-'} |\n`;
+            });
+            md += `\n</div>\n\n`;
+            md += `---\n\n`;
+        }
+        
+        // User Reviews
+        md += `## ${texts.reviewsTitle}\n\n`;
+        md += `<div style="background: #1e293b; padding: 16px; border-radius: 12px; margin: 10px 0;">\n\n`;
+        md += `**${texts.review1Name}** ⭐⭐⭐⭐⭐\n\n`;
+        md += `> "${texts.review1Text}"\n\n`;
+        md += `</div>\n\n`;
+        
+        md += `<div style="background: #1e293b; padding: 16px; border-radius: 12px; margin: 10px 0;">\n\n`;
+        md += `**${texts.review2Name}** ⭐⭐⭐⭐½\n\n`;
+        md += `> "${texts.review2Text}"\n\n`;
+        md += `</div>\n\n`;
+        
+        md += `<div style="background: #1e293b; padding: 16px; border-radius: 12px; margin: 10px 0;">\n\n`;
+        md += `**${texts.review3Name}** ⭐⭐⭐⭐⭐\n\n`;
+        md += `> "${texts.review3Text}"\n\n`;
+        md += `</div>\n\n`;
+        
+        md += `---\n\n`;
+        
+        // FAQ
+        md += `## ${texts.faqTitle}\n\n`;
+        md += faqHtml;
+        md += `---\n\n`;
+        
+        // Quick Access
+        md += `## ${texts.quickAccess}\n\n`;
+        md += `<div align="center">\n\n`;
+        md += `| **TMDB ID** | **IMDB ID** | **Language** |\n`;
+        md += `|:---:|:---:|:---:|\n`;
+        md += `| ${movie.id} | ${movie.imdb_id || '-'} | ${lang} |\n\n`;
+        md += `</div>\n\n`;
+        
+        // Footer (tanpa tanggal)
+        md += `---\n\n`;
+        md += `<div align="center">\n\n`;
+        md += `**${texts.credit.replace(/{title}/g, movie.title)}**\n\n`;
+        md += `</div>\n`;
+        
+        return md;
+    }
+
+    async function generateMarkdownFile(movieId, apiKey, lang, baseUrlInput, titleTemplates) {
+        const movie = await fetchMovieDetails(apiKey, movieId, lang);
+        if (!movie) return null;
+        
+        const year = movie.release_date ? movie.release_date.slice(0, 4) : new Date().getFullYear();
+        const slug = createSlug(movie.title, movieId, lang);
+        const trailer = movie.videos?.results?.find(v => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser'));
+        const trailerKey = trailer?.key || null;
+        const texts = articleTexts[lang] || articleTexts['en-US'];
+        
+        // Generate SEO title random dari template
+        const seoTitle = getRandomTitle(titleTemplates, movie.title, year);
+        
+        const markdown = generateMarkdown(movie, lang, baseUrlInput, year, trailerKey, texts, seoTitle);
+        
+        return {
+            filename: `${slug}.md`,
+            content: markdown,
+            title: movie.title,
+            movieId: movieId,
+            seoTitle: seoTitle
+        };
+    }
+
+    async function bulkGenerate() {
+        if (isGenerating) {
+            log('⏳ Masih dalam proses...', 'error');
+            return;
+        }
+
+        const apiKey = apiKeyInput.value.trim() || DEFAULT_API;
+        const lang = bulkLang.value;
+        const baseUrlInput = baseUrl.value.trim();
+        const titleTemplates = getTitleTemplates();
+        
+        const idsText = movieIdsTextarea.value.trim();
+        const idMatches = idsText.split(/\r?\n/)
+            .map(line => line.trim())
+            .filter(line => line && /^\d+$/.test(line));
+        
+        if (!idMatches.length) {
+            log('❌ Tidak ada ID valid', 'error');
+            return;
+        }
+
+        const uniqueIds = [...new Set(idMatches)];
+        totalCountSpan.innerText = uniqueIds.length;
+        generatedCountSpan.innerText = '0';
+        progressPercent.innerText = '0%';
+        progressFill.style.width = '0%';
+        generatedFiles = [];
+        updatePreview();
+
+        log(`🚀 Generate ${uniqueIds.length} file Markdown (.md) dengan SEO Title Random + FAQ (Tampil Langsung) + Reviews...`);
+        log(`📝 ${titleTemplates.length} template title tersedia`);
+        log(`🌍 Bahasa yang dipilih: ${bulkLang.options[bulkLang.selectedIndex].text}`);
+        isGenerating = true;
+        downloadZipBtn.disabled = true;
+
+        let successCount = 0;
+        for (let i = 0; i < uniqueIds.length; i++) {
+            const movieId = uniqueIds[i];
+            log(`⏳ [${i+1}/${uniqueIds.length}] ID ${movieId}...`);
+
+            const result = await generateMarkdownFile(movieId, apiKey, lang, baseUrlInput, titleTemplates);
+            
+            if (result) {
+                generatedFiles.push(result);
+                successCount++;
+                log(`✅ ID ${movieId} (${result.title}) -> ${result.filename} | SEO: ${result.seoTitle.substring(0, 50)}...`, 'success');
+            }
+
+            const percent = Math.round(((i + 1) / uniqueIds.length) * 100);
+            progressPercent.innerText = `${percent}%`;
+            progressFill.style.width = `${percent}%`;
+            generatedCountSpan.innerText = successCount;
+            updatePreview();
+        }
+
+        log(`🎉 Selesai! ${successCount} file Markdown berhasil digenerate`, 'success');
+        isGenerating = false;
+        if (successCount > 0) {
+            downloadZipBtn.disabled = false;
+        }
+    }
+
+    function updatePreview() {
+        if (!generatedFiles.length) {
+            previewGrid.innerHTML = '<div style="color: #6b83b0; text-align: center; padding: 2rem; grid-column: 1/-1;"><i class="fab fa-markdown" style="font-size: 3rem; opacity: 0.5;"></i><p>Belum ada file yang digenerate</p></div>';
+            return;
+        }
+        
+        previewGrid.innerHTML = generatedFiles.map(f => `
+            <div class="file-card">
+                <div class="file-icon"><i class="fab fa-markdown"></i></div>
+                <div class="file-info">
+                    <div class="file-name">${f.filename.substring(0, 35)}${f.filename.length > 35 ? '...' : ''}</div>
+                    <div class="file-meta">${f.title.substring(0, 30)} · SEO: ${f.seoTitle.substring(0, 25)}...</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function downloadZip() {
+        if (!generatedFiles.length) return;
+        const zip = new JSZip();
+        generatedFiles.forEach(f => zip.file(f.filename, f.content));
+        zip.generateAsync({ type: 'blob' }).then(blob => {
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `tmdb_markdown_${Date.now()}.zip`;
+            link.click();
+            log('📦 ZIP berhasil didownload', 'success');
+        });
+    }
+
+    // Event listener untuk preview template
+    titleTemplatesArea.addEventListener('input', () => {
+        const templates = getTitleTemplates();
+        if (templates.length) {
+            const example = templates[0].replace(/{TITLE}/g, 'Avatar 3').replace(/{YEAR}/g, '2026');
+            document.getElementById('templateExample').innerHTML = `<i class="fas fa-eye"></i> Contoh: "${example.substring(0, 70)}..."`;
+        }
+    });
+
+    generateBtn.addEventListener('click', bulkGenerate);
+    downloadZipBtn.addEventListener('click', downloadZip);
+    clearLogsBtn.addEventListener('click', clearLogs);
+
+    log('✅ TMDB GENERATOR · STUDIO FINAL (Markdown Only) siap digunakan!');
+    log('🎨 Fitur: Random Title SEO, Heading multi bahasa (8 bahasa), Judul Movie + Tahun di bawah poster');
+    log('🌍 Bahasa yang tersedia: English, Español, ไทย, Indonesia, Tiếng Việt, Български, 中文繁體, 한국어');
+    log('📅 Footer tanpa tanggal, hanya keyword SEO');
+})();
+</script>
+</body>
+</html>
