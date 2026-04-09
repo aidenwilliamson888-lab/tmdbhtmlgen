@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎬 TMDB GENERATOR · STUDIO FINAL (Safe Content)</title>
+    <title>🎬 TMDB GENERATOR · STUDIO FINAL (Safe Content - Multi Language)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -334,9 +334,9 @@
 
         <div class="title-templates">
             <label><i class="fas fa-random"></i> Template Title SEO (pisahkan dengan | )</label>
-            <textarea id="titleTemplates" rows="2">{TITLE} ({YEAR}) - Complete Film Review & Analysis|{TITLE} ({YEAR}) - Movie Review & Cast Information|✨ {TITLE} ({YEAR}) - Full Movie Review|🎬 {TITLE} ({YEAR}) - Complete Film Guide|🔥 {TITLE} ({YEAR}) - Movie Analysis & Review</textarea>
+            <textarea id="titleTemplates" rows="2">{TITLE} ({YEAR}) - Ulasan & Analisis Film Lengkap|{TITLE} ({YEAR}) - Review Film & Informasi Cast|✨ {TITLE} ({YEAR}) - Review Film Lengkap|🎬 {TITLE} ({YEAR}) - Panduan Film Complete|🔥 {TITLE} ({YEAR}) - Analisis & Review Film</textarea>
             <div class="example-box" id="templateExample">
-                <i class="fas fa-eye"></i> Contoh: "Avatar 3 (2026) - Complete Film Review & Analysis"
+                <i class="fas fa-eye"></i> Contoh: "Avatar 3 (2026) - Ulasan & Analisis Film Lengkap"
             </div>
         </div>
 
@@ -358,7 +358,7 @@
                 <option value="zh-TW">🇹🇼 中文繁體 (Safe)</option>
                 <option value="ko-KR">🇰🇷 한국어 (Safe)</option>
             </select>
-            <small style="color: #fbbf24;">⚠️ Thailand menggunakan versi original, lainnya versi safe untuk GitHub</small>
+            <small style="color: #fbbf24;">⚠️ Thailand menggunakan versi original, lainnya versi safe dalam bahasa masing-masing</small>
         </div>
 
         <div class="input-group">
@@ -405,38 +405,9 @@
     const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
     const BACKDROP_BASE = 'https://image.tmdb.org/t/p/original';
     const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
-    const BUTTON_IMG = 'https://imagdb.pages.dev/button1.jpg';
+    const BUTTON_IMG = 'https://imagdb.pages.dev/button2.jpg';
     
     const NON_LATIN_LANGS = ['th-TH', 'bg-BG', 'ja-JP', 'ko-KR', 'zh-CN', 'zh-TW', 'ar-SA', 'he-IL'];
-    
-    // ========== VERSI SAFE (UNTUK SEMUA BAHASA KECUALI THAILAND) ==========
-    const safeTexts = {
-        synopsis: '📖 Synopsis',
-        details: '🎯 Movie Details',
-        watchNow: '🎬 Movie Information',
-        topCast: '🎭 Top Cast',
-        quickAccess: '🔗 Quick Access',
-        storyTitle: '{title}: Story Analysis',
-        intro: 'The story delivers compelling narrative with exceptional cinematography and powerful performances.',
-        quote: 'This memorable line captures the essence of the film: a journey of courage, emotion, and transformation.',
-        psychology: 'The emotional depth and narrative structure make this film a standout cinematic experience worth exploring.',
-        watchTitle: 'About {title}',
-        streaming: '{title} represents a milestone in modern filmmaking, showcasing technical excellence and artistic vision.',
-        whyTitle: 'Why {title} Matters',
-        analysis: 'The film introduces fresh perspectives and meaningful character arcs that resonate with audiences worldwide.',
-        impact: 'With its innovative approach and compelling storytelling, {title} sets a new benchmark for cinematic excellence.',
-        note: 'ℹ️ For official information about this film, please visit the official movie website or authorized platforms.',
-        trailerClick: '🎥 Watch the official trailer',
-        credit: '{title} - Official Movie Information | Cast & Crew | Film Details',
-        faqTitle: '❓ Frequently Asked Questions',
-        reviewsTitle: '⭐ Audience Reviews',
-        review1Name: 'Michael R.',
-        review1Text: 'An absolutely incredible cinematic experience! The visuals are stunning and the story keeps you engaged throughout.',
-        review2Name: 'Sarah J.',
-        review2Text: 'One of the best films this year. Great acting, amazing cinematography, and a powerful storyline.',
-        review3Name: 'James C.',
-        review3Text: 'Worth every minute! The action sequences are impressive and the emotional depth is surprising.'
-    };
     
     // ========== VERSI THAILAND (ORIGINAL - TETAP SEPERTI SEBELUMNYA) ==========
     const thTexts = {
@@ -467,14 +438,198 @@
         review3Text: 'คุ้มค่าทุกนาที! ฉากแอ็คชั่นสุดอลังการ แนะนำอย่างยิ่ง!'
     };
     
-    // ========== MAPPING BAHASA KE VERSI YANG DIGUNAKAN ==========
-    // Kecuali Thailand (th-TH) pakai versi original, sisanya pakai safeTexts
-    function getTextsForLang(lang) {
-        if (lang === 'th-TH') {
-            return thTexts;
+    // ========== VERSI SAFE UNTUK SEMUA BAHASA LAIN (DALAM BAHASA MASING-MASING) ==========
+    const safeTexts = {
+        'en-US': {
+            synopsis: '📖 Synopsis',
+            details: '🎯 Movie Details',
+            watchNow: '🎬 Movie Information',
+            topCast: '🎭 Top Cast',
+            quickAccess: '🔗 Quick Access',
+            storyTitle: '{title}: Story Analysis',
+            intro: 'The story delivers compelling narrative with exceptional cinematography and powerful performances.',
+            quote: 'This memorable line captures the essence of the film: a journey of courage, emotion, and transformation.',
+            psychology: 'The emotional depth and narrative structure make this film a standout cinematic experience worth exploring.',
+            watchTitle: 'About {title}',
+            streaming: '{title} represents a milestone in modern filmmaking, showcasing technical excellence and artistic vision.',
+            whyTitle: 'Why {title} Matters',
+            analysis: 'The film introduces fresh perspectives and meaningful character arcs that resonate with audiences worldwide.',
+            impact: 'With its innovative approach and compelling storytelling, {title} sets a new benchmark for cinematic excellence.',
+            note: 'ℹ️ For official information about this film, please visit the official movie website or authorized platforms.',
+            trailerClick: '🎥 Watch the official trailer',
+            credit: '{title} - Official Movie Information | Cast & Crew | Film Details',
+            faqTitle: '❓ Frequently Asked Questions',
+            reviewsTitle: '⭐ Audience Reviews',
+            review1Name: 'Michael R.',
+            review1Text: 'An absolutely incredible cinematic experience! The visuals are stunning and the story keeps you engaged throughout.',
+            review2Name: 'Sarah J.',
+            review2Text: 'One of the best films this year. Great acting, amazing cinematography, and a powerful storyline.',
+            review3Name: 'James C.',
+            review3Text: 'Worth every minute! The action sequences are impressive and the emotional depth is surprising.'
+        },
+        'es-ES': {
+            synopsis: '📖 Sinopsis',
+            details: '🎯 Detalles de la Película',
+            watchNow: '🎬 Información de la Película',
+            topCast: '🎭 Reparto Principal',
+            quickAccess: '🔗 Acceso Rápido',
+            storyTitle: '{title}: Análisis de la Historia',
+            intro: 'La historia ofrece una narrativa convincente con una cinematografía excepcional y actuaciones poderosas.',
+            quote: 'Esta línea memorable captura la esencia de la película: un viaje de coraje, emoción y transformación.',
+            psychology: 'La profundidad emocional y la estructura narrativa hacen de esta película una experiencia cinematográfica destacada que vale la pena explorar.',
+            watchTitle: 'Acerca de {title}',
+            streaming: '{title} representa un hito en la cinematografía moderna, mostrando excelencia técnica y visión artística.',
+            whyTitle: 'Por Qué {title} Importa',
+            analysis: 'La película introduce perspectivas frescas y arcos de personajes significativos que resuenan con audiencias de todo el mundo.',
+            impact: 'Con su enfoque innovador y narrativa convincente, {title} establece un nuevo estándar para la excelencia cinematográfica.',
+            note: 'ℹ️ Para información oficial sobre esta película, visite el sitio web oficial de la película o plataformas autorizadas.',
+            trailerClick: '🎥 Ver el tráiler oficial',
+            credit: '{title} - Información Oficial de la Película | Reparto y Equipo | Detalles de la Película',
+            faqTitle: '❓ Preguntas Frecuentes',
+            reviewsTitle: '⭐ Reseñas del Público',
+            review1Name: 'Miguel R.',
+            review1Text: '¡Una experiencia cinematográfica absolutamente increíble! Las imágenes son impresionantes y la historia te mantiene enganchado.',
+            review2Name: 'Sara J.',
+            review2Text: 'Una de las mejores películas de este año. Gran actuación, cinematografía increíble y una historia poderosa.',
+            review3Name: 'Jaime C.',
+            review3Text: '¡Vale cada minuto! Las secuencias de acción son impresionantes y la profundidad emocional es sorprendente.'
+        },
+        'id-ID': {
+            synopsis: '📖 Sinopsis',
+            details: '🎯 Detail Film',
+            watchNow: '🎬 Informasi Film',
+            topCast: '🎭 Pemeran Utama',
+            quickAccess: '🔗 Akses Cepat',
+            storyTitle: '{title}: Analisis Cerita',
+            intro: 'Cerita menyajikan narasi yang menarik dengan sinematografi luar biasa dan penampilan yang kuat.',
+            quote: 'Baris berkesan ini menangkap esensi film: sebuah perjalanan keberanian, emosi, dan transformasi.',
+            psychology: 'Kedalaman emosional dan struktur narasi membuat film ini menjadi pengalaman sinematik yang layak untuk dijelajahi.',
+            watchTitle: 'Tentang {title}',
+            streaming: '{title} mewakili tonggak sejarah dalam pembuatan film modern, menunjukkan keunggulan teknis dan visi artistik.',
+            whyTitle: 'Mengapa {title} Penting',
+            analysis: 'Film ini memperkenalkan perspektif baru dan alur karakter bermakna yang bergema dengan penonton di seluruh dunia.',
+            impact: 'Dengan pendekatan inovatif dan penceritaan yang menarik, {title} menetapkan standar baru untuk keunggulan sinematik.',
+            note: 'ℹ️ Untuk informasi resmi tentang film ini, silakan kunjungi situs web resmi film atau platform resmi.',
+            trailerClick: '🎥 Tonton trailer resmi',
+            credit: '{title} - Informasi Film Resmi | Pemeran & Kru | Detail Film',
+            faqTitle: '❓ Pertanyaan Umum',
+            reviewsTitle: '⭐ Ulasan Penonton',
+            review1Name: 'Michael R.',
+            review1Text: 'Pengalaman sinematik yang sangat luar biasa! Visualnya memukau dan ceritanya membuat Anda tetap terlibat sepanjang waktu.',
+            review2Name: 'Sarah J.',
+            review2Text: 'Salah satu film terbaik tahun ini. Akting bagus, sinematografi luar biasa, dan alur cerita yang kuat.',
+            review3Name: 'James C.',
+            review3Text: 'Seimbang setiap menitnya! Urutan aksinya mengesankan dan kedalaman emosinya mengejutkan.'
+        },
+        'vi-VN': {
+            synopsis: '📖 Tóm tắt',
+            details: '🎯 Chi Tiết Phim',
+            watchNow: '🎬 Thông Tin Phim',
+            topCast: '🎭 Diễn Viên Chính',
+            quickAccess: '🔗 Truy Cập Nhanh',
+            storyTitle: '{title}: Phân Tích Câu Chuyện',
+            intro: 'Câu chuyện mang đến một câu chuyện hấp dẫn với kỹ thuật quay phim đặc biệt và màn trình diễn mạnh mẽ.',
+            quote: 'Câu thoại đáng nhớ này nắm bắt được bản chất của bộ phim: một hành trình của lòng dũng cảm, cảm xúc và sự biến đổi.',
+            psychology: 'Chiều sâu cảm xúc và cấu trúc tường thuật làm cho bộ phim này trở thành một trải nghiệm điện ảnh nổi bật đáng để khám phá.',
+            watchTitle: 'Về {title}',
+            streaming: '{title} đại diện cho một cột mốc quan trọng trong sản xuất phim hiện đại, thể hiện sự xuất sắc về kỹ thuật và tầm nhìn nghệ thuật.',
+            whyTitle: 'Tại Sao {title} Quan Trọng',
+            analysis: 'Bộ phim giới thiệu những góc nhìn mới mẻ và vòng cung nhân vật có ý nghĩa, gây được tiếng vang với khán giả trên toàn thế giới.',
+            impact: 'Với cách tiếp cận sáng tạo và cách kể chuyện hấp dẫn, {title} đặt ra một tiêu chuẩn mới cho sự xuất sắc của điện ảnh.',
+            note: 'ℹ️ Để biết thông tin chính thức về bộ phim này, vui lòng truy cập trang web chính thức của phim hoặc các nền tảng được ủy quyền.',
+            trailerClick: '🎥 Xem trailer chính thức',
+            credit: '{title} - Thông Tin Phim Chính Thức | Diễn Viên & Đoàn Làm Phim | Chi Tiết Phim',
+            faqTitle: '❓ Câu Hỏi Thường Gặp',
+            reviewsTitle: '⭐ Đánh Giá Khán Giả',
+            review1Name: 'Michael R.',
+            review1Text: 'Một trải nghiệm điện ảnh hoàn toàn đáng kinh ngạc! Hình ảnh rất đẹp và câu chuyện khiến bạn bị cuốn hút.',
+            review2Name: 'Sarah J.',
+            review2Text: 'Một trong những bộ phim hay nhất năm nay. Diễn xuất tuyệt vời, kỹ thuật quay phim tuyệt vời và cốt truyện mạnh mẽ.',
+            review3Name: 'James C.',
+            review3Text: 'Đáng từng phút! Các pha hành động rất ấn tượng và chiều sâu cảm xúc thật đáng ngạc nhiên.'
+        },
+        'bg-BG': {
+            synopsis: '📖 Резюме',
+            details: '🎯 Детайли за Филма',
+            watchNow: '🎬 Информация за Филма',
+            topCast: '🎭 Главен Актьорски Състав',
+            quickAccess: '🔗 Бърз Достъп',
+            storyTitle: '{title}: Анализ на Историята',
+            intro: 'Историята представя убедителен разказ с изключителна кинематография и мощни изпълнения.',
+            quote: 'Този запомнящ се ред улавя същността на филма: пътешествие на смелост, емоция и трансформация.',
+            psychology: 'Емоционалната дълбочина и структура на разказа правят този филм забележително киноизживяване, което си струва да се изследва.',
+            watchTitle: 'За {title}',
+            streaming: '{title} представлява крайъгълен камък в съвременното филмово производство, показвайки техническо съвършенство и артистична визия.',
+            whyTitle: 'Защо {title} Има Значение',
+            analysis: 'Филмът въвежда свежи перспективи и смислени героични арки, които резонират с публиката по света.',
+            impact: 'С иновативния си подход и убедителен разказ, {title} поставя нов стандарт за кинематографично съвършенство.',
+            note: 'ℹ️ За официална информация за този филм, моля, посетете официалния уебсайт на филма или оторизираните платформи.',
+            trailerClick: '🎥 Гледайте официалния трейлър',
+            credit: '{title} - Официална Информация за Филма | Актьорски Състав и Екип | Детайли за Филма',
+            faqTitle: '❓ Често Задавани Въпроси',
+            reviewsTitle: '⭐ Отзиви на Публиката',
+            review1Name: 'Майкъл Р.',
+            review1Text: 'Абсолютно невероятно киноизживяване! Визуалните ефекти са зашеметяващи и историята ви държи ангажирани през цялото време.',
+            review2Name: 'Сара Дж.',
+            review2Text: 'Един от най-добрите филми тази година. Страхотна игра, невероятна кинематография и мощна сюжетна линия.',
+            review3Name: 'Джеймс К.',
+            review3Text: 'Струва си всяка минута! Екшън сцените са впечатляващи и емоционалната дълбочина е изненадваща.'
+        },
+        'zh-TW': {
+            synopsis: '📖 劇情簡介',
+            details: '🎯 電影詳細資訊',
+            watchNow: '🎬 電影資訊',
+            topCast: '🎭 主要演員',
+            quickAccess: '🔗 快速連結',
+            storyTitle: '{title}: 故事分析',
+            intro: '故事以卓越的攝影技術和強大的表演呈現出引人入勝的敘事。',
+            quote: '這句令人難忘的台詞捕捉了電影的精髓：一段勇氣、情感和轉變的旅程。',
+            psychology: '情感深度和敘事結構使這部電影成為值得探索的傑出電影體驗。',
+            watchTitle: '關於 {title}',
+            streaming: '{title} 代表了現代電影製作的里程碑，展現了技術卓越和藝術視野。',
+            whyTitle: '為什麼 {title} 很重要',
+            analysis: '這部電影引入了新的視角和有意義的角色弧線，與全球觀眾產生共鳴。',
+            impact: '憑藉其創新方法和引人入勝的故事敘述，{title} 為電影卓越性設立了新標準。',
+            note: 'ℹ️ 有關這部電影的官方信息，請訪問電影官方網站或授權平台。',
+            trailerClick: '🎥 觀看官方預告片',
+            credit: '{title} - 官方電影資訊 | 演員與工作人員 | 電影詳情',
+            faqTitle: '❓ 常見問題',
+            reviewsTitle: '⭐ 觀眾評論',
+            review1Name: 'Michael R.',
+            review1Text: '絕對令人難以置信的電影體驗！視覺效果令人驚嘆，故事從頭到尾都讓你投入。',
+            review2Name: 'Sarah J.',
+            review2Text: '今年最好的電影之一。出色的表演，驚人的攝影技術，以及強大的故事情節。',
+            review3Name: 'James C.',
+            review3Text: '每一分鐘都值得！動作場面令人印象深刻，情感深度令人驚訝。'
+        },
+        'ko-KR': {
+            synopsis: '📖 시놉시스',
+            details: '🎯 영화 상세정보',
+            watchNow: '🎬 영화 정보',
+            topCast: '🎭 주요 출연진',
+            quickAccess: '🔗 빠른 접근',
+            storyTitle: '{title}: 이야기 분석',
+            intro: '이야기는 뛰어난 촬영 기법과 강력한 연기로 설득력 있는 내러티브를 전달합니다.',
+            quote: '이 기억에 남는 대사는 영화의 본질을 포착합니다: 용기, 감정, 변화의 여정.',
+            psychology: '감정적 깊이와 내러티브 구조는 이 영화를 탐구할 가치가 있는 뛰어난 영화 경험으로 만듭니다.',
+            watchTitle: '{title} 소개',
+            streaming: '{title}은 기술적 우수성과 예술적 비전을 보여주는 현대 영화 제작의 이정표입니다.',
+            whyTitle: '{title}이 중요한 이유',
+            analysis: '이 영화는 전 세계 관객과 공감하는 신선한 관점과 의미 있는 캐릭터 아크를 소개합니다.',
+            impact: '혁신적인 접근 방식과 설득력 있는 스토리텔링으로 {title}은 영화적 우수성에 대한 새로운 기준을 설정합니다.',
+            note: 'ℹ️ 이 영화에 대한 공식 정보는 영화 공식 웹사이트 또는 공인된 플랫폼을 방문하세요.',
+            trailerClick: '🎥 공식 예고편 보기',
+            credit: '{title} - 공식 영화 정보 | 출연진 및 스태프 | 영화 상세정보',
+            faqTitle: '❓ 자주 묻는 질문',
+            reviewsTitle: '⭐ 관객 리뷰',
+            review1Name: 'Michael R.',
+            review1Text: '정말 믿을 수 없을 정도로 훌륭한 영화 경험! 시각 효과는 놀랍고 이야기는 처음부터 끝까지 당신을 사로잡습니다.',
+            review2Name: 'Sarah J.',
+            review2Text: '올해 최고의 영화 중 하나입니다. 훌륭한 연기, 놀라운 촬영 기법, 강력한 스토리라인.',
+            review3Name: 'James C.',
+            review3Text: '모든 순간이 가치 있습니다! 액션 장면은 인상적이고 감정적 깊이가 놀랍습니다.'
         }
-        return safeTexts;
-    }
+    };
     
     // ========== FAQ MULTI BAHASA (VERSI SAFE UNTUK SEMUA KECUALI THAILAND) ==========
     const faqData = {
@@ -594,7 +749,7 @@
 
     function getTitleTemplates() {
         const text = titleTemplatesArea.value.trim();
-        if (!text) return ['{TITLE} ({YEAR}) - Complete Film Review & Analysis'];
+        if (!text) return ['{TITLE} ({YEAR}) - Ulasan & Analisis Film Lengkap'];
         return text.split('|').map(t => t.trim()).filter(t => t.length);
     }
 
@@ -694,8 +849,15 @@
         const ratingStars = getRatingStars(rating);
         const runtime = movie.runtime || '120';
         
-        // Pilih teks berdasarkan bahasa (Thailand beda sendiri)
-        const texts = getTextsForLang(lang);
+        // Pilih teks berdasarkan bahasa
+        let texts;
+        let faqLang = lang;
+        
+        if (lang === 'th-TH') {
+            texts = thTexts;
+        } else {
+            texts = safeTexts[lang] || safeTexts['en-US'];
+        }
         
         const faqHtml = generateFAQ(lang, movie.title, runtime);
         
@@ -777,11 +939,20 @@
         
         md += `## 🍿 ${texts.watchTitle.replace(/{title}/g, movie.title)}\n\n`;
         md += `${texts.streaming.replace(/{title}/g, movie.title)}\n\n`;
-        md += `<ul>\n`;
-        md += `<li>🎬 Official website and authorized platforms</li>\n`;
-        md += `<li>🎬 Theatrical release information</li>\n`;
-        md += `<li>🎬 Home media and digital releases</li>\n`;
-        md += `</ul>\n\n`;
+        if (lang === 'th-TH') {
+            md += `<ul>\n`;
+            md += `<li>🎬 Disney+ Hotstar (expected release)</li>\n`;
+            md += `<li>🎬 Netflix (regional availability)</li>\n`;
+            md += `<li>🎬 Amazon Prime Video (rental/purchase)</li>\n`;
+            md += `<li>🎬 Local streaming providers</li>\n`;
+            md += `</ul>\n\n`;
+        } else {
+            md += `<ul>\n`;
+            md += `<li>🎬 Official website and authorized platforms</li>\n`;
+            md += `<li>🎬 Theatrical release information</li>\n`;
+            md += `<li>🎬 Home media and digital releases</li>\n`;
+            md += `</ul>\n\n`;
+        }
         md += `---\n\n`;
         
         md += `## 💡 ${texts.whyTitle.replace(/{title}/g, movie.title)}\n\n`;
@@ -872,7 +1043,7 @@
         const titleTemplates = getTitleTemplates();
         
         const isThai = lang === 'th-TH';
-        log(`🌍 Bahasa: ${bulkLang.options[bulkLang.selectedIndex].text} ${isThai ? '(Versi Original)' : '(Versi Safe untuk GitHub)'}`);
+        log(`🌍 Bahasa: ${bulkLang.options[bulkLang.selectedIndex].text} ${isThai ? '(Versi Original)' : '(Versi Safe dalam bahasa tersebut)'}`);
         
         const idsText = movieIdsTextarea.value.trim();
         const idMatches = idsText.split(/\r?\n/)
@@ -967,7 +1138,7 @@
     clearLogsBtn.addEventListener('click', clearLogs);
 
     log('✅ TMDB GENERATOR · STUDIO FINAL (Safe Content) siap digunakan!');
-    log('🛡️ Konten safe untuk GitHub: Semua bahasa kecuali Thailand menggunakan versi review & analisis');
+    log('🛡️ Konten safe untuk GitHub: Semua bahasa menggunakan bahasa masing-masing (bukan Inggris)');
     log('🇹🇭 Thailand menggunakan versi original (sesuai permintaan)');
     log('🌍 8 bahasa tersedia: English, Español, ไทย, Indonesia, Tiếng Việt, Български, 中文繁體, 한국어');
 })();
