@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 TMDB GENERATOR · STUDIO FINAL (Safe Content - 14 Languages)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: radial-gradient(circle at 20% 30%, #1a1f35, #0a0c1a);
+            font-family: 'Inter', sans-serif;
+            color: #f0f4ff;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: float 20s infinite ease-in-out;
+        }
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: float 25s infinite ease-in-out reverse;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-5%, 5%) scale(1.05); }
+        }
+        .container { max-width: 1400px; margin: 0 auto; position: relative; z-index: 2; }
+        .hero-header {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 2rem;
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #a5d8ff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .hero-title i {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+        }
+        .hero-badge {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .badge {
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 100px;
+            padding: 0.3rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            backdrop-filter: blur(4px);
+            color: #b5d0ff;
+        }
+        .badge i { color: #3b82f6; }
+        .control-panel {
+            background: rgba(18, 25, 45, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .input-group label {
+            color: #9bb5ff;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .input-group label i { color: #3b82f6; }
+        .input-group input, .input-group select, .input-group textarea {
+            background: rgba(10, 15, 30, 0.7);
+            border: 1px solid #2a3a60;
+            border-radius: 1rem;
+            padding: 0.8rem 1.2rem;
+            font-size: 0.95rem;
+            color: white;
+            font-family: 'Inter', monospace;
+            transition: all 0.3s ease;
+        }
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        .input-group textarea { min-height: 80px; resize: vertical; }
+        .title-templates {
+            grid-column: 1 / -1;
+            background: rgba(20, 30, 55, 0.6);
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border: 1px solid #3d5a8c;
+        }
+        .title-templates label {
+            color: #9bb5ff;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+        .file-import {
+            grid-column: 1 / -1;
+            background: rgba(20, 30, 55, 0.6);
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border: 1px dashed #3b82f6;
+        }
+        .file-import:hover { border-color: #8b5cf6; background: rgba(30, 40, 65, 0.7); }
+        .file-import label {
+            color: #9bb5ff;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 0.5rem;
+        }
+        .file-import input[type="file"] {
+            background: rgba(10, 15, 30, 0.7);
+            border: 1px solid #2a3a60;
+            border-radius: 0.8rem;
+            padding: 0.5rem 1rem;
+            color: white;
+            width: 100%;
+        }
+        .file-import input[type="file"]::file-selector-button {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border: none;
+            border-radius: 2rem;
+            padding: 0.4rem 1rem;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            grid-column: 1 / -1;
+            margin-top: 0.5rem;
+        }
+        .btn {
+            background: linear-gradient(135deg, #28344e, #1f2a40);
+            border: none;
+            border-radius: 2.5rem;
+            padding: 0.8rem 1.8rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: white;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn:hover { transform: translateY(-2px); border-color: #3b82f6; box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.5); }
+        .btn-primary { background: linear-gradient(135deg, #1d4ed8, #3b82f6); border-color: #60a5fa; }
+        .btn-success { background: linear-gradient(135deg, #0f6e4a, #10b981); border-color: #34d399; }
+        .btn-warning { background: linear-gradient(135deg, #b45309, #f59e0b); border-color: #fbbf24; }
+        .progress-area {
+            background: rgba(18, 25, 45, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #b5d0ff;
+        }
+        .progress-bar-container {
+            height: 8px;
+            background: rgba(10, 15, 30, 0.6);
+            border-radius: 30px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+        .log-area {
+            background: rgba(8, 12, 25, 0.8);
+            border-radius: 1rem;
+            padding: 1rem;
+            max-height: 180px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.8rem;
+            border: 1px solid #2a3a60;
+            margin-top: 1rem;
+        }
+        .log-area div { padding: 0.2rem 0; border-bottom: 1px solid rgba(59, 130, 246, 0.1); }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .file-card {
+            background: rgba(22, 32, 55, 0.8);
+            border-radius: 1rem;
+            padding: 0.8rem 1rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .file-icon {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .file-info { flex: 1; }
+        .file-name { font-weight: 600; font-size: 0.85rem; }
+        .file-meta { font-size: 0.7rem; color: #8ba3d9; }
+        .example-box {
+            background: rgba(30, 40, 65, 0.8);
+            border: 1px solid #3b82f6;
+            border-radius: 2rem;
+            padding: 0.5rem 1rem;
+            color: #b5d0ff;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: #6b83b0;
+            padding: 1.5rem;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(10, 15, 30, 0.5); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero-header">
+        <div class="hero-title">
+            <i class="fas fa-film"></i> TMDB GENERATOR · STUDIO FINAL
+        </div>
+        <div class="hero-badge">
+            <span class="badge"><i class="fab fa-markdown"></i> Markdown Only</span>
+            <span class="badge"><i class="fas fa-globe"></i> 14 Languages</span>
+            <span class="badge"><i class="fas fa-random"></i> Random Title SEO</span>
+            <span class="badge"><i class="fas fa-question-circle"></i> FAQ + Reviews</span>
+            <span class="badge"><i class="fas fa-shield-alt"></i> Anti-Banned</span>
+        </div>
+    </div>
+
+    <div class="control-panel">
+        <div class="input-group">
+            <label><i class="fas fa-key"></i> TMDB API Key</label>
+            <input type="text" id="apiKey" value="3a660b31f4af8da5f2bd6f2799c11e2e" placeholder="Masukkan API Key">
+        </div>
+        
+        <div class="input-group">
+            <label><i class="fas fa-list"></i> ID TMDB (satu per baris)</label>
+            <textarea id="movieIds" placeholder="76600&#10;157336&#10;299534">76600
+157336
+299534</textarea>
+        </div>
+
+        <div class="title-templates">
+            <label><i class="fas fa-random"></i> Template Title SEO (pisahkan dengan | )</label>
+            <textarea id="titleTemplates" rows="2">{TITLE} ({YEAR}) - Ulasan & Analisis Film Lengkap|{TITLE} ({YEAR}) - Review Film & Informasi Cast|✨ {TITLE} ({YEAR}) - Review Film Lengkap|🎬 {TITLE} ({YEAR}) - Panduan Film Complete|🔥 {TITLE} ({YEAR}) - Analisis & Review Film</textarea>
+            <div class="example-box" id="templateExample">
+                <i class="fas fa-eye"></i> Contoh: "Avatar 3 (2026) - Ulasan & Analisis Film Lengkap"
+            </div>
+        </div>
+
+        <div class="file-import">
+            <label><i class="fas fa-file-import"></i> Import dari file .txt</label>
+            <input type="file" id="txtFileInput" accept=".txt">
+            <small style="color: #8ba3d9;">File dengan satu ID per baris</small>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fas fa-globe"></i> Bahasa</label>
+            <select id="bulkLang">
+                <option value="en-US">🇬🇧 English (Safe)</option>
+                <option value="es-ES">🇪🇸 Español (Safe)</option>
+                <option value="th-TH" selected>🇹🇭 ไทย (Original)</option>
+                <option value="id-ID">🇮🇩 Indonesia (Safe)</option>
+                <option value="vi-VN">🇻🇳 Tiếng Việt (Safe)</option>
+                <option value="bg-BG">🇧🇬 Български (Safe)</option>
+                <option value="zh-TW">🇹🇼 中文繁體 (Safe)</option>
+                <option value="ko-KR">🇰🇷 한국어 (Safe)</option>
+                <option value="cs-CZ">🇨🇿 Čeština (Safe)</option>
+                <option value="hu-HU">🇭🇺 Magyar (Safe)</option>
+                <option value="hr-HR">🇭🇷 Hrvatski (Safe)</option>
+                <option value="ru-RU">🇷🇺 Русский (Safe)</option>
+                <option value="tr-TR">🇹🇷 Türkçe (Safe)</option>
+                <option value="ro-RO">🇷🇴 Română (Safe)</option>
+            </select>
+            <small style="color: #fbbf24;">⚠️ Thailand menggunakan versi original, lainnya versi anti-banned dalam bahasa masing-masing</small>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fas fa-link"></i> Base URL (opsional)</label>
+            <input type="text" id="baseUrl" value="https://example.com/" placeholder="https://domainmu.com/id">
+            <small style="color: #8ba3d9;">Link informasi lebih lanjut tentang film</small>
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-primary" id="generateBtn"><i class="fab fa-markdown"></i> Generate .md Files</button>
+            <button class="btn btn-success" id="downloadZipBtn" disabled><i class="fas fa-file-archive"></i> Download ZIP (.md)</button>
+            <button class="btn btn-warning" id="clearLogsBtn"><i class="fas fa-broom"></i> Clear Logs</button>
+        </div>
+    </div>
+
+    <div class="progress-area">
+        <div class="progress-stats">
+            <span><i class="fas fa-chart-line"></i> Progress: <span id="progressPercent">0%</span></span>
+            <span><i class="fab fa-markdown"></i> <span id="generatedCount">0</span> / <span id="totalCount">0</span> files</span>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="log-area" id="logArea">
+            <div>⏳ Siap generate file Markdown (.md) dengan konten anti-banned (kecuali Thailand)...</div>
+        </div>
+    </div>
+
+    <div class="preview-grid" id="previewGrid">
+        <div style="color: #6b83b0; text-align: center; padding: 2rem; grid-column: 1/-1;">
+            <i class="fab fa-markdown" style="font-size: 3rem; opacity: 0.5;"></i>
+            <p>Belum ada file yang digenerate</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <i class="fas fa-film" style="color:#3b82f6;"></i> TMDB GENERATOR · STUDIO FINAL | Anti-Banned Content (kecuali Thailand) | 14 Languages | Random Title SEO
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+(function() {
+    const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
+    const BACKDROP_BASE = 'https://image.tmdb.org/t/p/original';
+    const DEFAULT_API = '3a660b31f4af8da5f2bd6f2799c11e2e';
+    const BUTTON_IMG = 'https://imagdb.pages.dev/button2.jpg';
+    
+    const NON_LATIN_LANGS = ['th-TH', 'bg-BG', 'ja-JP', 'ko-KR', 'zh-CN', 'zh-TW', 'ar-SA', 'he-IL', 'cs-CZ', 'hu-HU', 'hr-HR', 'ru-RU', 'tr-TR', 'ro-RO'];
+    
+    // ========== VERSI THAILAND (ORIGINAL) ==========
+    const thTexts = {
+        synopsis: '📖 เรื่องย่อ',
+        details: '🎯 รายละเอียดภาพยนตร์',
+        watchNow: '🎬 ดูเลย',
+        topCast: '🎭 นักแสดงนำ',
+        quickAccess: '🔗 เข้าถึงด่วน',
+        storyTitle: '{title}: เปิดโปงเรื่องราว',
+        intro: 'เรื่องราวดำเนินต่อไปด้วยความตื่นเต้นและพลิกผัน',
+        quote: 'ประโยคสุดสยองนี้สะท้อนแก่นแท้ของแฟรนไชส์: ไม่ว่าคุณจะไปไกลแค่ไหน ความสยองจะตามคุณไป',
+        psychology: 'ความลึกซึ้งทางจิตวิทยาและโครงสร้างที่เข้มข้นทำให้ภาคนี้โดดเด่น',
+        watchTitle: 'ดู {title} ออนไลน์ได้ที่ไหน',
+        streaming: 'กำลังหาที่ดู {title} ออนไลน์อยู่ใช่ไหม?',
+        whyTitle: 'ทำไม {title} ถึงเปลี่ยนทุกสิ่ง',
+        analysis: 'การแนะนำตัวละครและความขัดแย้งใหม่ๆ เพิ่มมิติทางศีลธรรม',
+        impact: '{title} ยกระดับมาตรฐานภาพยนตร์บล็อกบัสเตอร์',
+        note: '⚠️ หมายเหตุ: คลิกลิงก์ด้านบนเพื่อดูหรือดาวน์โหลดภาพยนตร์เรื่องนี้',
+        trailerClick: '🎥 คลิกที่รูปเพื่อดูตัวอย่างภาพยนตร์',
+        credit: 'ดู {title} ออนไลน์ฟรี HD | {title} หนังเต็มสตรีมมิ่ง | ดาวน์โหลด {title} 4K UHD',
+        faqTitle: '❓ คำถามที่พบบ่อย',
+        reviewsTitle: '⭐ รีวิวจากผู้ชม',
+        review1Name: 'ไมเคิล อาร์.',
+        review1Text: 'ยอดเยี่ยมมาก! เอฟเฟกต์ภาพสวยงามและเรื่องราวทำให้คุณติดตามตั้งแต่ต้นจนจบ',
+        review2Name: 'ซาร่า เจ.',
+        review2Text: 'หนึ่งในหนังที่ดีที่สุดที่ฉันดูในปีนี้ การแสดงยอดเยี่ยม ภาพยนตร์ทรงพลัง',
+        review3Name: 'เจมส์ ซี.',
+        review3Text: 'คุ้มค่าทุกนาที! ฉากแอ็คชั่นสุดอลังการ แนะนำอย่างยิ่ง!'
+    };
+    
+    // ========== VERSI ANTI-BANNED UNTUK SEMUA BAHASA (DALAM BAHASA MASING-MASING) ==========
+    const safeTexts = {
+        'en-US': {
+            synopsis: '📖 Synopsis', details: '🎯 Movie Details', watchNow: '🎬 Movie Information', topCast: '🎭 Top Cast', quickAccess: '🔗 Quick Access',
+            storyTitle: '{title}: Story Analysis', intro: 'The story delivers compelling narrative with exceptional cinematography and powerful performances.',
+            quote: 'This memorable line captures the essence of the film: a journey of courage, emotion, and transformation.',
+            psychology: 'The emotional depth and narrative structure make this film a standout cinematic experience worth exploring.',
+            watchTitle: 'About {title}', streaming: '{title} represents a milestone in modern filmmaking, showcasing technical excellence and artistic vision.',
+            whyTitle: 'Why {title} Matters', analysis: 'The film introduces fresh perspectives and meaningful character arcs that resonate with audiences worldwide.',
+            impact: 'With its innovative approach and compelling storytelling, {title} sets a new benchmark for cinematic excellence.',
+            note: 'ℹ️ For official information about this film, please visit the official movie website or authorized platforms.',
+            trailerClick: '🎥 Watch the official trailer', credit: '{title} - Official Movie Information | Cast & Crew | Film Details',
+            faqTitle: '❓ Frequently Asked Questions', reviewsTitle: '⭐ Audience Reviews',
+            review1Name: 'Michael R.', review1Text: 'An absolutely incredible cinematic experience! The visuals are stunning and the story keeps you engaged throughout.',
+            review2Name: 'Sarah J.', review2Text: 'One of the best films this year. Great acting, amazing cinematography, and a powerful storyline.',
+            review3Name: 'James C.', review3Text: 'Worth every minute! The action sequences are impressive and the emotional depth is surprising.'
+        },
+        'es-ES': {
+            synopsis: '📖 Sinopsis', details: '🎯 Detalles de la Película', watchNow: '🎬 Información de la Película', topCast: '🎭 Reparto Principal', quickAccess: '🔗 Acceso Rápido',
+            storyTitle: '{title}: Análisis de la Historia', intro: 'La historia ofrece una narrativa convincente con una cinematografía excepcional y actuaciones poderosas.',
+            quote: 'Esta línea memorable captura la esencia de la película: un viaje de coraje, emoción y transformación.',
+            psychology: 'La profundidad emocional y la estructura narrativa hacen de esta película una experiencia cinematográfica destacada que vale la pena explorar.',
+            watchTitle: 'Acerca de {title}', streaming: '{title} representa un hito en la cinematografía moderna, mostrando excelencia técnica y visión artística.',
+            whyTitle: 'Por Qué {title} Importa', analysis: 'La película introduce perspectivas frescas y arcos de personajes significativos que resuenan con audiencias de todo el mundo.',
+            impact: 'Con su enfoque innovador y narrativa convincente, {title} establece un nuevo estándar para la excelencia cinematográfica.',
+            note: 'ℹ️ Para información oficial sobre esta película, visite el sitio web oficial de la película o plataformas autorizadas.',
+            trailerClick: '🎥 Ver el tráiler oficial', credit: '{title} - Información Oficial de la Película | Reparto y Equipo | Detalles de la Película',
+            faqTitle: '❓ Preguntas Frecuentes', reviewsTitle: '⭐ Reseñas del Público',
+            review1Name: 'Miguel R.', review1Text: '¡Una experiencia cinematográfica absolutamente increíble! Las imágenes son impresionantes y la historia te mantiene enganchado.',
+            review2Name: 'Sara J.', review2Text: 'Una de las mejores películas de este año. Gran actuación, cinematografía increíble y una historia poderosa.',
+            review3Name: 'Jaime C.', review3Text: '¡Vale cada minuto! Las secuencias de acción son impresionantes y la profundidad emocional es sorprendente.'
+        },
+        'id-ID': {
+            synopsis: '📖 Sinopsis', details: '🎯 Detail Film', watchNow: '🎬 Informasi Film', topCast: '🎭 Pemeran Utama', quickAccess: '🔗 Akses Cepat',
+            storyTitle: '{title}: Analisis Cerita', intro: 'Cerita menyajikan narasi yang menarik dengan sinematografi luar biasa dan penampilan yang kuat.',
+            quote: 'Baris berkesan ini menangkap esensi film: sebuah perjalanan keberanian, emosi, dan transformasi.',
+            psychology: 'Kedalaman emosional dan struktur narasi membuat film ini menjadi pengalaman sinematik yang layak untuk dijelajahi.',
+            watchTitle: 'Tentang {title}', streaming: '{title} mewakili tonggak sejarah dalam pembuatan film modern, menunjukkan keunggulan teknis dan visi artistik.',
+            whyTitle: 'Mengapa {title} Penting', analysis: 'Film ini memperkenalkan perspektif baru dan alur karakter bermakna yang bergema dengan penonton di seluruh dunia.',
+            impact: 'Dengan pendekatan inovatif dan penceritaan yang menarik, {title} menetapkan standar baru untuk keunggulan sinematik.',
+            note: 'ℹ️ Untuk informasi resmi tentang film ini, silakan kunjungi situs web resmi film atau platform resmi.',
+            trailerClick: '🎥 Tonton trailer resmi', credit: '{title} - Informasi Film Resmi | Pemeran & Kru | Detail Film',
+            faqTitle: '❓ Pertanyaan Umum', reviewsTitle: '⭐ Ulasan Penonton',
+            review1Name: 'Michael R.', review1Text: 'Pengalaman sinematik yang sangat luar biasa! Visualnya memukau dan ceritanya membuat Anda tetap terlibat sepanjang waktu.',
+            review2Name: 'Sarah J.', review2Text: 'Salah satu film terbaik tahun ini. Akting bagus, sinematografi luar biasa, dan alur cerita yang kuat.',
+            review3Name: 'James C.', review3Text: 'Seimbang setiap menitnya! Urutan aksinya mengesankan dan kedalaman emosinya mengejutkan.'
+        },
+        'vi-VN': {
+            synopsis: '📖 Tóm tắt', details: '🎯 Chi Tiết Phim', watchNow: '🎬 Thông Tin Phim', topCast: '🎭 Diễn Viên Chính', quickAccess: '🔗 Truy Cập Nhanh',
+            storyTitle: '{title}: Phân Tích Câu Chuyện', intro: 'Câu chuyện mang đến một câu chuyện hấp dẫn với kỹ thuật quay phim đặc biệt và màn trình diễn mạnh mẽ.',
+            quote: 'Câu thoại đáng nhớ này nắm bắt được bản chất của bộ phim: một hành trình của lòng dũng cảm, cảm xúc và sự biến đổi.',
+            psychology: 'Chiều sâu cảm xúc và cấu trúc tường thuật làm cho bộ phim này trở thành một trải nghiệm điện ảnh nổi bật đáng để khám phá.',
+            watchTitle: 'Về {title}', streaming: '{title} đại diện cho một cột mốc quan trọng trong sản xuất phim hiện đại, thể hiện sự xuất sắc về kỹ thuật và tầm nhìn nghệ thuật.',
+            whyTitle: 'Tại Sao {title} Quan Trọng', analysis: 'Bộ phim giới thiệu những góc nhìn mới mẻ và vòng cung nhân vật có ý nghĩa, gây được tiếng vang với khán giả trên toàn thế giới.',
+            impact: 'Với cách tiếp cận sáng tạo và cách kể chuyện hấp dẫn, {title} đặt ra một tiêu chuẩn mới cho sự xuất sắc của điện ảnh.',
+            note: 'ℹ️ Để biết thông tin chính thức về bộ phim này, vui lòng truy cập trang web chính thức của phim hoặc các nền tảng được ủy quyền.',
+            trailerClick: '🎥 Xem trailer chính thức', credit: '{title} - Thông Tin Phim Chính Thức | Diễn Viên & Đoàn Làm Phim | Chi Tiết Phim',
+            faqTitle: '❓ Câu Hỏi Thường Gặp', reviewsTitle: '⭐ Đánh Giá Khán Giả',
+            review1Name: 'Michael R.', review1Text: 'Một trải nghiệm điện ảnh hoàn toàn đáng kinh ngạc! Hình ảnh rất đẹp và câu chuyện khiến bạn bị cuốn hút.',
+            review2Name: 'Sarah J.', review2Text: 'Một trong những bộ phim hay nhất năm nay. Diễn xuất tuyệt vời, kỹ thuật quay phim tuyệt vời và cốt truyện mạnh mẽ.',
+            review3Name: 'James C.', review3Text: 'Đáng từng phút! Các pha hành động rất ấn tượng và chiều sâu cảm xúc thật đáng ngạc nhiên.'
+        },
+        'bg-BG': {
+            synopsis: '📖 Резюме', details: '🎯 Детайли за Филма', watchNow: '🎬 Информация за Филма', topCast: '🎭 Главен Актьорски Състав', quickAccess: '🔗 Бърз Достъп',
+            storyTitle: '{title}: Анализ на Историята', intro: 'Историята представя убедителен разказ с изключителна кинематография и мощни изпълнения.',
+            quote: 'Този запомнящ се ред улавя същността на филма: пътешествие на смелост, емоция и трансформация.',
+            psychology: 'Емоционалната дълбочина и структура на разказа правят този филм забележително киноизживяване, което си струва да се изследва.',
+            watchTitle: 'За {title}', streaming: '{title} представлява крайъгълен камък в съвременното филмово производство, показвайки техническо съвършенство и артистична визия.',
+            whyTitle: 'Защо {title} Има Значение', analysis: 'Филмът въвежда свежи перспективи и смислени героични арки, които резонират с публиката по света.',
+            impact: 'С иновативния си подход и убедителен разказ, {title} поставя нов стандарт за кинематографично съвършенство.',
+            note: 'ℹ️ За официална информация за този филм, моля, посетете официалния уебсайт на филма или оторизираните платформи.',
+            trailerClick: '🎥 Гледайте официалния трейлър', credit: '{title} - Официална Информация за Филма | Актьорски Състав и Екип | Детайли за Филма',
+            faqTitle: '❓ Често Задавани Въпроси', reviewsTitle: '⭐ Отзиви на Публиката',
+            review1Name: 'Майкъл Р.', review1Text: 'Абсолютно невероятно киноизживяване! Визуалните ефекти са зашеметяващи и историята ви държи ангажирани през цялото време.',
+            review2Name: 'Сара Дж.', review2Text: 'Един от най-добрите филми тази година. Страхотна игра, невероятна кинематография и мощна сюжетна линия.',
+            review3Name: 'Джеймс К.', review3Text: 'Струва си всяка минута! Екшън сцените са впечатляващи и емоционалната дълбочина е изненадваща.'
+        },
+        'zh-TW': {
+            synopsis: '📖 電影介紹', details: '🎯 電影詳細資料', watchNow: '🎬 電影資訊', topCast: '🎭 主要演員', quickAccess: '🔗 快速連結',
+            storyTitle: '{title}: 故事分析', intro: '本片以卓越的攝影技術和精湛的演技，呈現出引人入勝的敘事。',
+            quote: '這句令人難忘的台詞捕捉了電影的精髓：一段關於勇氣、情感與蛻變的旅程。',
+            psychology: '電影的情感深度與敘事結構，使其成為值得細細品味的傑出作品。',
+            watchTitle: '關於 {title}', streaming: '{title} 代表了現代電影製作的里程碑，展現了技術的卓越與藝術的視野。',
+            whyTitle: '為何 {title} 值得關注', analysis: '本片引入了全新的視角與深刻的角色弧線，與全球觀眾產生共鳴。',
+            impact: '憑藉創新的手法與引人入勝的故事，{title} 為電影藝術設立了新的標竿。',
+            note: 'ℹ️ 有關本片的官方資訊，請參閱電影官方網站或授權平台。',
+            trailerClick: '🎥 觀看官方預告片', credit: '{title} - 官方電影資訊 | 演員與工作人員 | 電影詳細資料',
+            faqTitle: '❓ 常見問題', reviewsTitle: '⭐ 觀眾評價',
+            review1Name: '陳先生', review1Text: '絕對令人驚豔的電影體驗！視覺效果震撼，故事從頭到尾引人入勝。',
+            review2Name: '李小姐', review2Text: '今年看過最棒的電影之一。演技出色，攝影優美，劇情充滿力量。',
+            review3Name: '王先生', review3Text: '每一分鐘都值得！動作場面令人印象深刻，情感深度出乎意料。'
+        },
+        'ko-KR': {
+            synopsis: '📖 시놉시스', details: '🎯 영화 상세정보', watchNow: '🎬 영화 정보', topCast: '🎭 주요 출연진', quickAccess: '🔗 빠른 접근',
+            storyTitle: '{title}: 이야기 분석', intro: '이야기는 뛰어난 촬영 기법과 강력한 연기로 설득력 있는 내러티브를 전달합니다.',
+            quote: '이 기억에 남는 대사는 영화의 본질을 포착합니다: 용기, 감정, 변화의 여정.',
+            psychology: '감정적 깊이와 내러티브 구조는 이 영화를 탐구할 가치가 있는 뛰어난 영화 경험으로 만듭니다.',
+            watchTitle: '{title} 소개', streaming: '{title}은 기술적 우수성과 예술적 비전을 보여주는 현대 영화 제작의 이정표입니다.',
+            whyTitle: '{title}이 중요한 이유', analysis: '이 영화는 전 세계 관객과 공감하는 신선한 관점과 의미 있는 캐릭터 아크를 소개합니다.',
+            impact: '혁신적인 접근 방식과 설득력 있는 스토리텔링으로 {title}은 영화적 우수성에 대한 새로운 기준을 설정합니다.',
+            note: 'ℹ️ 이 영화에 대한 공식 정보는 영화 공식 웹사이트 또는 공인된 플랫폼을 방문하세요.',
+            trailerClick: '🎥 공식 예고편 보기', credit: '{title} - 공식 영화 정보 | 출연진 및 스태프 | 영화 상세정보',
+            faqTitle: '❓ 자주 묻는 질문', reviewsTitle: '⭐ 관객 리뷰',
+            review1Name: '김철수', review1Text: '정말 믿을 수 없을 정도로 훌륭한 영화 경험! 시각 효과는 놀랍고 이야기는 처음부터 끝까지 당신을 사로잡습니다.',
+            review2Name: '이영희', review2Text: '올해 최고의 영화 중 하나입니다. 훌륭한 연기, 놀라운 촬영 기법, 강력한 스토리라인.',
+            review3Name: '박준수', review3Text: '모든 순간이 가치 있습니다! 액션 장면은 인상적이고 감정적 깊이가 놀랍습니다.'
+        },
+        'cs-CZ': {
+            synopsis: '📖 Synopse', details: '🎯 Podrobnosti o Filmu', watchNow: '🎬 Informace o Filmu', topCast: '🎭 Hlavní Obsazení', quickAccess: '🔗 Rychlý Přístup',
+            storyTitle: '{title}: Analýza Příběhu', intro: 'Příběh přináší působivé vyprávění s výjimečnou kinematografií a silnými hereckými výkony.',
+            quote: 'Tato nezapomenutelná věta vystihuje podstatu filmu: cestu odvahy, emocí a transformace.',
+            psychology: 'Emoční hloubka a struktura vyprávění činí z tohoto filmu výjimečný kinematografický zážitek, který stojí za to prozkoumat.',
+            watchTitle: 'O filmu {title}', streaming: '{title} představuje milník v moderní filmové tvorbě, který ukazuje technickou dokonalost a uměleckou vizi.',
+            whyTitle: 'Proč na {title} Záleží', analysis: 'Film přináší nové perspektivy a smysluplné oblouky postav, které rezonují s publikem po celém světě.',
+            impact: 'Díky svému inovativnímu přístupu a působivému vyprávění nastavuje {title} nový standard pro kinematografickou dokonalost.',
+            note: 'ℹ️ Oficiální informace o tomto filmu naleznete na oficiálních webových stránkách filmu nebo autorizovaných platformách.',
+            trailerClick: '🎥 Podívejte se na oficiální trailer', credit: '{title} - Oficiální Informace o Filmu | Obsazení a Štáb | Podrobnosti o Filmu',
+            faqTitle: '❓ Často Kladené Otázky', reviewsTitle: '⭐ Recenze Diváků',
+            review1Name: 'Pavel N.', review1Text: 'Absolutně neuvěřitelný filmový zážitek! Vizuální efekty jsou úchvatné a příběh vás vtáhne od začátku do konce.',
+            review2Name: 'Eva M.', review2Text: 'Jeden z nejlepších filmů tohoto roku. Skvělé herecké výkony, úžasná kinematografie a silný příběh.',
+            review3Name: 'Jan K.', review3Text: 'Stojí za každou minutu! Akční scény jsou působivé a emocionální hloubka je překvapivá.'
+        },
+        'hu-HU': {
+            synopsis: '📖 Szinopszis', details: '🎯 Film Részletei', watchNow: '🎬 Film Információ', topCast: '🎭 Főszereplők', quickAccess: '🔗 Gyors Hozzáférés',
+            storyTitle: '{title}: Történet Elemzés', intro: 'A történet lenyűgöző narratívát nyújt kivételes operatőri munkával és erőteljes színészi alakításokkal.',
+            quote: 'Ez az emlékezetes mondat megragadja a film lényegét: a bátorság, érzelem és átalakulás útját.',
+            psychology: 'Az érzelmi mélység és a narratív szerkezet kiemelkedő mozis élménnyé teszi ezt a filmet, amelyet érdemes felfedezni.',
+            watchTitle: '{title} Bemutatása', streaming: '{title} mérföldkövet jelent a modern filmkészítésben, bemutatva a technikai kiválóságot és művészi látásmódot.',
+            whyTitle: 'Miért Számít {title}', analysis: 'A film friss perspektívákat és értelmes karakteríveket mutat be, amelyek világszerte rezonálnak a közönséggel.',
+            impact: 'Innovatív megközelítésével és lenyűgöző történetmesélésével a {title} új mércét állít fel a filmes kiválóság számára.',
+            note: 'ℹ️ A film hivatalos információiért látogasson el a film hivatalos weboldalára vagy az engedélyezett platformokra.',
+            trailerClick: '🎥 Nézd meg a hivatalos előzetest', credit: '{title} - Hivatalos Film Információ | Szereplők és Stáb | Film Részletek',
+            faqTitle: '❓ Gyakran Ismételt Kérdések', reviewsTitle: '⭐ Nézői Vélemények',
+            review1Name: 'Péter K.', review1Text: 'Abszolút hihetetlen moziélmény! A vizuális effektek lenyűgözőek, és a történet végig leköt.',
+            review2Name: 'Anna S.', review2Text: 'Az év egyik legjobb filmje. Nagyszerű színészi játék, csodálatos operatőri munka és erőteljes történet.',
+            review3Name: 'Gábor N.', review3Text: 'Minden percet megér! Az akciójelenetek lenyűgözőek, és az érzelmi mélység meglepő.'
+        },
+        // ========== BAHASA BARU: HR-HR (Croatian) ==========
+        'hr-HR': {
+            synopsis: '📖 Sinopsis', details: '🎯 Detalji Filma', watchNow: '🎬 Informacije o Filmu', topCast: '🎭 Glavna Glumačka Postava', quickAccess: '🔗 Brzi Pristup',
+            storyTitle: '{title}: Analiza Priče', intro: 'Priča donosi uvjerljivu naraciju s iznimnom kinematografijom i snažnim izvedbama.',
+            quote: 'Ova nezaboravna rečenica hvata bit filma: putovanje hrabrosti, emocija i transformacije.',
+            psychology: 'Emocionalna dubina i struktura pripovijedanja čine ovaj film izvrsnim kinematografskim iskustvom koje vrijedi istražiti.',
+            watchTitle: 'O filmu {title}', streaming: '{title} predstavlja prekretnicu u modernoj filmskoj produkciji, pokazujući tehničku izvrsnost i umjetničku viziju.',
+            whyTitle: 'Zašto je {title} Važan', analysis: 'Film donosi svježe perspektive i smislene lukove likova koji odjekuju kod publike diljem svijeta.',
+            impact: 'Svojim inovativnim pristupom i uvjerljivim pripovijedanjem, {title} postavlja novo mjerilo za kinematografsku izvrsnost.',
+            note: 'ℹ️ Za službene informacije o ovom filmu, posjetite službenu web stranicu filma ili ovlaštene platforme.',
+            trailerClick: '🎥 Pogledajte službenu najavu', credit: '{title} - Službene Informacije o Filmu | Glumačka Postava i Ekipa | Detalji Filma',
+            faqTitle: '❓ Često Postavljana Pitanja', reviewsTitle: '⭐ Recenzije Publike',
+            review1Name: 'Marko H.', review1Text: 'Apsolutno nevjerojatno kino iskustvo! Vizualni efekti su zapanjujući i priča vas drži angažiranima od početka do kraja.',
+            review2Name: 'Ana K.', review2Text: 'Jedan od najboljih filmova ove godine. Odlična gluma, nevjerojatna kinematografija i snažna priča.',
+            review3Name: 'Ivan P.', review3Text: 'Vrijedi svake minute! Akcijske sekvence su impresivne, a emocionalna dubina je iznenađujuća.'
+        },
+        // ========== BAHASA BARU: RU-RU (Russian) ==========
+        'ru-RU': {
+            synopsis: '📖 Синопсис', details: '🎯 Детали Фильма', watchNow: '🎬 Информация о Фильме', topCast: '🎭 Главный Актерский Состав', quickAccess: '🔗 Быстрый Доступ',
+            storyTitle: '{title}: Анализ Истории', intro: 'История представляет убедительное повествование с исключительной кинематографией и мощными выступлениями.',
+            quote: 'Эта запоминающаяся фраза передает суть фильма: путешествие мужества, эмоций и трансформации.',
+            psychology: 'Эмоциональная глубина и структура повествования делают этот фильм выдающимся кинематографическим опытом, который стоит изучить.',
+            watchTitle: 'О фильме {title}', streaming: '{title} представляет собой веху в современном кинопроизводстве, демонстрируя техническое совершенство и художественное видение.',
+            whyTitle: 'Почему {title} Важен', analysis: 'Фильм представляет свежие перспективы и значимые дуги персонажей, которые находят отклик у зрителей по всему миру.',
+            impact: 'Благодаря инновационному подходу и убедительному повествованию, {title} устанавливает новый стандарт кинематографического совершенства.',
+            note: 'ℹ️ Для получения официальной информации об этом фильме посетите официальный сайт фильма или авторизованные платформы.',
+            trailerClick: '🎥 Смотреть официальный трейлер', credit: '{title} - Официальная Информация о Фильме | Актеры и Съемочная Группа | Детали Фильма',
+            faqTitle: '❓ Часто Задаваемые Вопросы', reviewsTitle: '⭐ Отзывы Зрителей',
+            review1Name: 'Михаил С.', review1Text: 'Абсолютно невероятный кинематографический опыт! Визуальные эффекты потрясающие, и история держит вас в напряжении от начала до конца.',
+            review2Name: 'Елена К.', review2Text: 'Один из лучших фильмов этого года. Отличная игра, потрясающая кинематография и сильная сюжетная линия.',
+            review3Name: 'Дмитрий П.', review3Text: 'Стоит каждой минуты! Экшн-сцены впечатляют, а эмоциональная глубина удивительна.'
+        },
+        // ========== BAHASA BARU: TR-TR (Turkish) ==========
+        'tr-TR': {
+            synopsis: '📖 Sinopsis', details: '🎯 Film Detayları', watchNow: '🎬 Film Bilgisi', topCast: '🎭 Ana Kadro', quickAccess: '🔗 Hızlı Erişim',
+            storyTitle: '{title}: Hikaye Analizi', intro: 'Hikaye, olağanüstü sinematografi ve güçlü performanslarla etkileyici bir anlatı sunuyor.',
+            quote: 'Bu unutulmaz replik filmin özünü yakalıyor: cesaret, duygu ve dönüşüm yolculuğu.',
+            psychology: 'Duygusal derinlik ve anlatı yapısı, bu filmi keşfedilmeye değer öne çıkan bir sinema deneyimi haline getiriyor.',
+            watchTitle: '{title} Hakkında', streaming: '{title}, teknik mükemmelliği ve sanatsal vizyonu sergileyen modern film yapımında bir dönüm noktasını temsil ediyor.',
+            whyTitle: '{title} Neden Önemli', analysis: 'Film, dünya çapındaki izleyicilerde yankı uyandıran yeni bakış açıları ve anlamlı karakter yayları sunuyor.',
+            impact: 'Yenilikçi yaklaşımı ve etkileyici hikaye anlatımıyla {title}, sinematik mükemmellik için yeni bir standart belirliyor.',
+            note: 'ℹ️ Bu film hakkında resmi bilgi için lütfen filmin resmi web sitesini veya yetkili platformları ziyaret edin.',
+            trailerClick: '🎥 Resmi fragmanı izleyin', credit: '{title} - Resmi Film Bilgisi | Oyuncular ve Ekip | Film Detayları',
+            faqTitle: '❓ Sık Sorulan Sorular', reviewsTitle: '⭐ İzleyici Yorumları',
+            review1Name: 'Mehmet D.', review1Text: 'Kesinlikle inanılmaz bir sinema deneyimi! Görsel efektler muhteşem ve hikaye sizi baştan sona etkiliyor.',
+            review2Name: 'Ayşe K.', review2Text: 'Bu yılın en iyi filmlerinden biri. Harika oyunculuk, muhteşem sinematografi ve güçlü bir hikaye.',
+            review3Name: 'Can Y.', review3Text: 'Her dakikaya değer! Aksiyon sahneleri etkileyici ve duygusal derinlik şaşırtıcı.'
+        },
+        // ========== BAHASA BARU: RO-RO (Romanian) ==========
+        'ro-RO': {
+            synopsis: '📖 Sinopsis', details: '🎯 Detalii Film', watchNow: '🎬 Informații Film', topCast: '🎭 Distribuția Principală', quickAccess: '🔗 Acces Rapid',
+            storyTitle: '{title}: Analiza Povestirii', intro: 'Povestea oferă o narațiune convingătoare cu o cinematografie excepțională și performanțe puternice.',
+            quote: 'Această replică memorabilă surprinde esența filmului: o călătorie a curajului, emoției și transformării.',
+            psychology: 'Adâncimea emoțională și structura narativă fac din acest film o experiență cinematografică remarcabilă care merită explorată.',
+            watchTitle: 'Despre {title}', streaming: '{title} reprezintă o piatră de hotar în realizarea filmelor moderne, arătând excelența tehnică și viziunea artistică.',
+            whyTitle: 'De ce {title} Contează', analysis: 'Filmul introduce perspective noi și arcuri de personaje semnificative care rezonează cu publicul din întreaga lume.',
+            impact: 'Cu abordarea sa inovatoare și povestirea convingătoare, {title} stabilește un nou standard pentru excelența cinematografică.',
+            note: 'ℹ️ Pentru informații oficiale despre acest film, vă rugăm să vizitați site-ul oficial al filmului sau platformele autorizate.',
+            trailerClick: '🎥 Urmăriți trailerul oficial', credit: '{title} - Informații Oficiale despre Film | Distribuție și Echipă | Detalii Film',
+            faqTitle: '❓ Întrebări Frecvente', reviewsTitle: '⭐ Recenzii ale Publicului',
+            review1Name: 'Andrei M.', review1Text: 'O experiență cinematografică absolut incredibilă! Efectele vizuale sunt uimitoare și povestea te ține captivat de la început până la sfârșit.',
+            review2Name: 'Elena I.', review2Text: 'Unul dintre cele mai bune filme din acest an. Actorie grozavă, cinematografie uimitoare și o poveste puternică.',
+            review3Name: 'Mihai C.', review3Text: 'Merită fiecare minut! Secvențele de acțiune sunt impresionante, iar profunzimea emoțională este surprinzătoare.'
+        }
+    };
+    
+    // ========== FAQ ANTI-BANNED (SEMUA BAHASA KECUALI THAILAND) ==========
+    const faqData = {
+        'en-US': [
+            { q: '❓ What is this movie about?', a: '{title} is a cinematic masterpiece that explores themes of courage, family, and adventure.' },
+            { q: '❓ Who directed this film?', a: 'The film is directed by acclaimed filmmakers known for their visionary storytelling.' },
+            { q: '❓ Where can I find official information?', a: 'Official information is available on the movie\'s official website and authorized platforms.' },
+            { q: '❓ What awards has this film won?', a: 'The film has received numerous accolades for its technical and artistic achievements.' },
+            { q: '❓ How long is the runtime?', a: 'The runtime is approximately {runtime} minutes.' }
+        ],
+        'es-ES': [
+            { q: '❓ ¿De qué trata esta película?', a: '{title} es una obra maestra cinematográfica que explora temas de coraje, familia y aventura.' },
+            { q: '❓ ¿Quién dirigió esta película?', a: 'La película está dirigida por aclamados cineastas conocidos por su narrativa visionaria.' },
+            { q: '❓ ¿Dónde puedo encontrar información oficial?', a: 'La información oficial está disponible en el sitio web oficial de la película y plataformas autorizadas.' },
+            { q: '❓ ¿Qué premios ha ganado esta película?', a: 'La película ha recibido numerosos premios por sus logros técnicos y artísticos.' },
+            { q: '❓ ¿Cuánto dura la película?', a: 'La duración es de aproximadamente {runtime} minutos.' }
+        ],
+        'th-TH': [
+            { q: '❓ ดูหนังเรื่องนี้ฟรีไหม?', a: 'ได้ คุณสามารถดู {title} ได้ฟรีผ่านลิงก์ที่ให้ไว้ด้านบน ไม่ต้องสมัครสมาชิก' },
+            { q: '❓ มีคุณภาพความคมชัดอะไรบ้าง?', a: 'คุณภาพที่มี: 480p, 720p HD, 1080p Full HD และ 4K UHD' },
+            { q: '❓ มีคำบรรยายไหม?', a: 'มี คำบรรยายหลายภาษา เช่น ไทย อังกฤษ อินโดนีเซีย เวียดนาม สเปน และอื่นๆ' },
+            { q: '❓ ต้องสมัครสมาชิกเพื่อดูไหม?', a: 'ไม่ต้องสมัคร! คลิกปุ่มด้านบนและเริ่มดูได้ทันที' },
+            { q: '❓ หนังยาวกี่นาที?', a: 'ความยาวประมาณ {runtime} นาที เหมาะสำหรับดูยามเย็น!' }
+        ],
+        'id-ID': [
+            { q: '❓ Tentang apakah film ini?', a: '{title} adalah mahakarya sinematik yang mengeksplorasi tema keberanian, keluarga, dan petualangan.' },
+            { q: '❓ Siapa sutradara film ini?', a: 'Film ini disutradarai oleh sineas terkenal yang dikenal dengan penceritaan visioner mereka.' },
+            { q: '❓ Di mana saya bisa menemukan informasi resmi?', a: 'Informasi resmi tersedia di situs web resmi film dan platform resmi.' },
+            { q: '❓ Penghargaan apa yang telah dimenangkan film ini?', a: 'Film ini telah menerima banyak penghargaan atas pencapaian teknis dan artistiknya.' },
+            { q: '❓ Berapa durasi filmnya?', a: 'Durasi sekitar {runtime} menit.' }
+        ],
+        'vi-VN': [
+            { q: '❓ Phim này kể về điều gì?', a: '{title} là một kiệt tác điện ảnh khám phá các chủ đề về lòng dũng cảm, gia đình và phiêu lưu.' },
+            { q: '❓ Ai là đạo diễn của phim này?', a: 'Phim được đạo diễn bởi những nhà làm phim nổi tiếng với cách kể chuyện tầm nhìn xa.' },
+            { q: '❓ Tôi có thể tìm thông tin chính thức ở đâu?', a: 'Thông tin chính thức có sẵn trên trang web chính thức của phim và các nền tảng được ủy quyền.' },
+            { q: '❓ Phim này đã thắng những giải thưởng nào?', a: 'Phim đã nhận được nhiều giải thưởng cho thành tựu kỹ thuật và nghệ thuật.' },
+            { q: '❓ Thời lượng phim là bao lâu?', a: 'Thời lượng khoảng {runtime} phút.' }
+        ],
+        'bg-BG': [
+            { q: '❓ За какво е този филм?', a: '{title} е кинематографичен шедьовър, който изследва темите за смелостта, семейството и приключенията.' },
+            { q: '❓ Кой е режисьорът на този филм?', a: 'Филмът е режисиран от известни режисьори, известни с визионерското си разказване на истории.' },
+            { q: '❓ Къде мога да намеря официална информация?', a: 'Официална информация е достъпна на официалния уебсайт на филма и оторизирани платформи.' },
+            { q: '❓ Какви награди е спечелил този филм?', a: 'Филмът е получил множество награди за своите технически и артистични постижения.' },
+            { q: '❓ Колко е дълъг филмът?', a: 'Продължителността е приблизително {runtime} минути.' }
+        ],
+        'zh-TW': [
+            { q: '❓ 這部電影是關於什麼？', a: '{title} 是一部電影傑作，探討勇氣、家庭和冒險的主題。' },
+            { q: '❓ 誰導演了這部電影？', a: '這部電影由以富有遠見的故事敘述而聞名的著名電影製作人執導。' },
+            { q: '❓ 哪裡可以找到官方資訊？', a: '官方資訊可在電影的官方網站和授權平台上獲得。' },
+            { q: '❓ 這部電影獲得了哪些獎項？', a: '這部電影因其技術和藝術成就而獲得了無數獎項。' },
+            { q: '❓ 電影時長是多少？', a: '運行時間約為 {runtime} 分鐘。' }
+        ],
+        'ko-KR': [
+            { q: '❓ 이 영화는 무엇에 관한 것인가요?', a: '{title}은 용기, 가족, 모험에 대한 주제를 탐구하는 영화적 걸작입니다.' },
+            { q: '❓ 이 영화의 감독은 누구인가요?', a: '이 영화는 비전 있는 스토리텔링으로 유명한 저명한 영화 제작자들이 감독했습니다.' },
+            { q: '❓ 공식 정보는 어디서 찾을 수 있나요?', a: '공식 정보는 영화 공식 웹사이트와 공인된 플랫폼에서 확인할 수 있습니다.' },
+            { q: '❓ 이 영화는 어떤 상을 받았나요?', a: '이 영화는 기술적, 예술적 성과로 수많은 상을 받았습니다.' },
+            { q: '❓ 런타임은 얼마인가요?', a: '런타임은 약 {runtime}분입니다.' }
+        ],
+        'cs-CZ': [
+            { q: '❓ O čem tento film je?', a: '{title} je kinematografické mistrovské dílo, které zkoumá témata odvahy, rodiny a dobrodružství.' },
+            { q: '❓ Kdo režíroval tento film?', a: 'Film režírovali uznávaní filmaři známí svým vizionářským vyprávěním.' },
+            { q: '❓ Kde najdu oficiální informace?', a: 'Oficiální informace jsou k dispozici na oficiálních webových stránkách filmu a autorizovaných platformách.' },
+            { q: '❓ Jaká ocenění tento film získal?', a: 'Film získal řadu ocenění za své technické a umělecké úspěchy.' },
+            { q: '❓ Jaká je délka filmu?', a: 'Délka filmu je přibližně {runtime} minut.' }
+        ],
+        'hu-HU': [
+            { q: '❓ Miről szól ez a film?', a: '{title} egy filmes remekmű, amely a bátorság, a család és a kaland témáit vizsgálja.' },
+            { q: '❓ Ki rendezte ezt a filmet?', a: 'A filmet elismert filmkészítők rendezték, akik víziós történetmesélésükről ismertek.' },
+            { q: '❓ Hol találok hivatalos információkat?', a: 'Hivatalos információk a film hivatalos weboldalán és az engedélyezett platformokon érhetők el.' },
+            { q: '❓ Milyen díjakat nyert ez a film?', a: 'A film számos elismerést kapott technikai és művészi teljesítményéért.' },
+            { q: '❓ Mennyi a film hossza?', a: 'A film hossza körülbelül {runtime} perc.' }
+        ],
+        'hr-HR': [
+            { q: '❓ O čemu se radi u ovom filmu?', a: '{title} je kinematografsko remek-djelo koje istražuje teme hrabrosti, obitelji i avanture.' },
+            { q: '❓ Tko je režirao ovaj film?', a: 'Film su režirali priznati filmaši poznati po svom vizionarskom pripovijedanju.' },
+            { q: '❓ Gdje mogu pronaći službene informacije?', a: 'Službene informacije dostupne su na službenoj web stranici filma i ovlaštenim platformama.' },
+            { q: '❓ Koje je nagrade osvojio ovaj film?', a: 'Film je dobio brojna priznanja za svoja tehnička i umjetnička dostignuća.' },
+            { q: '❓ Koliko traje film?', a: 'Trajanje filma je približno {runtime} minuta.' }
+        ],
+        'ru-RU': [
+            { q: '❓ О чем этот фильм?', a: '{title} - кинематографический шедевр, исследующий темы мужества, семьи и приключений.' },
+            { q: '❓ Кто снял этот фильм?', a: 'Фильм снят признанными режиссерами, известными своим visionary storytelling.' },
+            { q: '❓ Где можно найти официальную информацию?', a: 'Официальная информация доступна на официальном сайте фильма и авторизованных платформах.' },
+            { q: '❓ Какие награды получил этот фильм?', a: 'Фильм получил множество наград за свои технические и художественные достижения.' },
+            { q: '❓ Какова продолжительность фильма?', a: 'Продолжительность фильма составляет примерно {runtime} минут.' }
+        ],
+        'tr-TR': [
+            { q: '❓ Bu film ne hakkında?', a: '{title}, cesaret, aile ve macera temalarını keşfeden sinematografik bir başyapıttır.' },
+            { q: '❓ Bu filmi kim yönetti?', a: 'Film, vizyoner hikaye anlatımıyla tanınan ünlü film yapımcıları tarafından yönetildi.' },
+            { q: '❓ Resmi bilgileri nerede bulabilirim?', a: 'Resmi bilgiler filmin resmi web sitesinde ve yetkili platformlarda mevcuttur.' },
+            { q: '❓ Bu film hangi ödülleri kazandı?', a: 'Film, teknik ve sanatsal başarıları için çok sayıda ödül aldı.' },
+            { q: '❓ Filmin süresi ne kadar?', a: 'Filmin süresi yaklaşık {runtime} dakikadır.' }
+        ],
+        'ro-RO': [
+            { q: '❓ Despre ce este acest film?', a: '{title} este o capodoperă cinematografică care explorează teme precum curajul, familia și aventura.' },
+            { q: '❓ Cine a regizat acest film?', a: 'Filmul este regizat de cineaști apreciați, cunoscuți pentru povestirile lor vizionare.' },
+            { q: '❓ Unde pot găsi informații oficiale?', a: 'Informațiile oficiale sunt disponibile pe site-ul oficial al filmului și pe platformele autorizate.' },
+            { q: '❓ Ce premii a câștigat acest film?', a: 'Filmul a primit numeroase premii pentru realizările sale tehnice și artistice.' },
+            { q: '❓ Care este durata filmului?', a: 'Durata filmului este de aproximativ {runtime} minute.' }
+        ]
+    };
+
+    // DOM Elements
+    const apiKeyInput = document.getElementById('apiKey');
+    const movieIdsTextarea = document.getElementById('movieIds');
+    const bulkLang = document.getElementById('bulkLang');
+    const baseUrl = document.getElementById('baseUrl');
+    const titleTemplatesArea = document.getElementById('titleTemplates');
+    const txtFileInput = document.getElementById('txtFileInput');
+    const generateBtn = document.getElementById('generateBtn');
+    const downloadZipBtn = document.getElementById('downloadZipBtn');
+    const clearLogsBtn = document.getElementById('clearLogsBtn');
+    const logArea = document.getElementById('logArea');
+    const progressPercent = document.getElementById('progressPercent');
+    const progressFill = document.getElementById('progressFill');
+    const generatedCountSpan = document.getElementById('generatedCount');
+    const totalCountSpan = document.getElementById('totalCount');
+    const previewGrid = document.getElementById('previewGrid');
+
+    let generatedFiles = [];
+    let isGenerating = false;
+
+    function log(message, type = 'info') {
+        const entry = document.createElement('div');
+        entry.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}`;
+        entry.style.color = type === 'error' ? '#f87171' : type === 'success' ? '#4ade80' : '#a5d8ff';
+        logArea.appendChild(entry);
+        logArea.scrollTop = logArea.scrollHeight;
+    }
+
+    function clearLogs() { 
+        logArea.innerHTML = '<div>⏳ Log dibersihkan...</div>'; 
+    }
+
+    function getTitleTemplates() {
+        const text = titleTemplatesArea.value.trim();
+        if (!text) return ['{TITLE} ({YEAR}) - Ulasan & Analisis Film Lengkap'];
+        return text.split('|').map(t => t.trim()).filter(t => t.length);
+    }
+
+    function getRandomTitle(templates, movieTitle, year) {
+        if (!templates.length) return `${movieTitle} (${year}) - Film Review`;
+        const selected = templates[Math.floor(Math.random() * templates.length)];
+        return selected.replace(/{TITLE}/g, movieTitle).replace(/{YEAR}/g, year);
+    }
+
+    function generateUniqueCode() {
+        const length = Math.floor(Math.random() * 4) + 5;
+        const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+
+    function createSlug(title, id, lang) {
+        const uniqueCode = generateUniqueCode();
+        if (NON_LATIN_LANGS.includes(lang)) {
+            return `${uniqueCode}`;
+        }
+        const slugTitle = title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-|-$/g, '')
+            .substring(0, 50);
+        return `${uniqueCode}-${slugTitle}`;
+    }
+
+    function getRatingStars(rating) {
+        const num = parseFloat(rating);
+        if (isNaN(num)) return '☆☆☆☆☆';
+        const fullStars = Math.floor(num / 2);
+        const halfStar = (num % 2) >= 1;
+        let stars = '';
+        for (let i = 0; i < fullStars; i++) stars += '★';
+        if (halfStar) stars += '½';
+        while (stars.length < 5) stars += '☆';
+        return stars;
+    }
+
+    function generateFAQ(lang, movieTitle, runtime) {
+        const faqs = faqData[lang] || faqData['en-US'];
+        let faqHtml = '';
+        
+        faqs.forEach(faq => {
+            let question = faq.q;
+            let answer = faq.a.replace(/{title}/g, movieTitle).replace(/{runtime}/g, runtime || '120');
+            
+            faqHtml += `<div style="background: #0f172a; padding: 16px; border-radius: 12px; margin: 12px 0; border-left: 4px solid #3b82f6;">\n\n`;
+            faqHtml += `**${question}**\n\n`;
+            faqHtml += `${answer}\n\n`;
+            faqHtml += `</div>\n\n`;
+        });
+        
+        return faqHtml;
+    }
+
+    txtFileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const content = e.target.result;
+            const ids = content.split(/\r?\n/)
+                .map(line => line.trim())
+                .filter(line => line && /^\d+$/.test(line));
+            if (ids.length > 0) {
+                movieIdsTextarea.value = ids.join('\n');
+                log(`📄 Import ${ids.length} ID dari file ${file.name}`, 'success');
+            } else {
+                log('❌ Tidak ada ID valid dalam file', 'error');
+            }
+        };
+        reader.readAsText(file);
+    });
+
+    async function fetchMovieDetails(apiKey, movieId, language) {
+        const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${language}&append_to_response=videos,credits`;
+        try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return await res.json();
+        } catch (e) {
+            log(`❌ Gagal fetch ID ${movieId}: ${e.message}`, 'error');
+            return null;
+        }
+    }
+
+    function generateMarkdown(movie, lang, baseUrlInput, year, trailerKey, seoTitle) {
+        const posterUrl = movie.poster_path ? `${IMG_BASE}${movie.poster_path}` : '';
+        const infoUrl = baseUrlInput ? `${baseUrlInput}${movie.id}` : '#';
+        const rating = movie.vote_average?.toFixed(1) || '?';
+        const ratingStars = getRatingStars(rating);
+        const runtime = movie.runtime || '120';
+        
+        let texts;
+        if (lang === 'th-TH') {
+            texts = thTexts;
+        } else {
+            texts = safeTexts[lang] || safeTexts['en-US'];
+        }
+        
+        const faqHtml = generateFAQ(lang, movie.title, runtime);
+        
+        let md = `${seoTitle}\n\n`;
+        
+        if (posterUrl) {
+            md += `<div align="center">\n\n`;
+            md += `<img src="${posterUrl}" alt="${movie.title} Poster" width="280" style="border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">\n\n`;
+            md += `</div>\n\n`;
+        }
+        
+        md += `<div align="center">\n\n`;
+        md += `<h2>${movie.title} (${year})</h2>\n\n`;
+        md += `</div>\n\n`;
+        
+        md += `<div align="center">\n\n`;
+        md += `| **⭐ Rating** | **🎬 Runtime** | **📅 Release** | **🔥 Popularity** |\n`;
+        md += `|:---:|:---:|:---:|:---:|\n`;
+        md += `| **${rating}/10** <br> ${ratingStars} | **${runtime} min** | **${movie.release_date || '-'}** | **${movie.popularity?.toFixed(0) || '-'}** |\n\n`;
+        md += `</div>\n\n`;
+        
+        md += `---\n\n`;
+        
+        md += `## ${texts.synopsis}\n\n`;
+        md += `<div style="background: #f0fdf4; padding: 16px; border-radius: 12px; color: #14532d;">\n\n`;
+        md += `${movie.title} бг аудио. ${movie.overview || 'No overview available.'}\n\n`;
+        md += `</div>\n\n`;
+        
+        md += `---\n\n`;
+        
+        md += `## ${texts.details}\n\n`;
+        md += `| Attribute | Information |\n`;
+        md += `|:---|:---|\n`;
+        md += `| **Original Title** | ${movie.original_title || '-'} |\n`;
+        md += `| **Status** | ${movie.status || 'Released'} |\n`;
+        md += `| **Budget** | ${movie.budget ? `$${movie.budget.toLocaleString()}` : '-'} |\n`;
+        md += `| **Revenue** | ${movie.revenue ? `$${movie.revenue.toLocaleString()}` : '-'} |\n`;
+        md += `| **Vote Count** | ${movie.vote_count?.toLocaleString() || '-'} |\n`;
+        md += `| **Genres** | ${movie.genres?.map(g => g.name).join(', ') || '-'} |\n`;
+        md += `| **Production** | ${movie.production_companies?.map(c => c.name).slice(0, 3).join(', ') || '-'} |\n\n`;
+        
+        md += `---\n\n`;
+        
+        md += `## ${texts.watchNow}\n\n`;
+        md += `<div align="center">\n\n`;
+        md += `<a href="${infoUrl}" target="_blank" rel="nofollow">\n`;
+        md += `<img src="${BUTTON_IMG}" alt="Movie Information" width="50%" style="border-radius: 12px;">\n`;
+        md += `</a>\n\n`;
+        md += `</div>\n\n`;
+        md += `> ${texts.note}\n\n`;
+        
+        md += `---\n\n`;
+        
+        if (trailerKey) {
+            md += `## 📺 Official Trailer\n\n`;
+            md += `<div align="center">\n\n`;
+            md += `<a href="https://www.youtube.com/watch?v=${trailerKey}" target="_blank" rel="nofollow">\n`;
+            md += `<img src="https://img.youtube.com/vi/${trailerKey}/maxresdefault.jpg" alt="Trailer" width="80%" style="border-radius: 12px;">\n`;
+            md += `</a>\n\n`;
+            md += `*${texts.trailerClick}*\n\n`;
+            md += `</div>\n\n`;
+            md += `---\n\n`;
+        }
+        
+        md += `## 📖 ${texts.storyTitle.replace(/{title}/g, movie.title)}\n\n`;
+        md += `${movie.overview?.substring(0, 200) || ''} ${texts.intro}\n\n`;
+        md += `> ${texts.quote}\n\n`;
+        md += `${texts.psychology}\n\n`;
+        md += `---\n\n`;
+        
+        md += `## 🍿 ${texts.watchTitle.replace(/{title}/g, movie.title)}\n\n`;
+        md += `${texts.streaming.replace(/{title}/g, movie.title)}\n\n`;
+        if (lang === 'th-TH') {
+            md += `<ul>\n<li>🎬 Disney+ Hotstar</li>\n<li>🎬 Netflix</li>\n<li>🎬 Amazon Prime Video</li>\n</ul>\n\n`;
+        } else {
+            md += `<ul>\n<li>🎬 Official website and authorized platforms</li>\n<li>🎬 Theatrical release information</li>\n<li>🎬 Home media and digital releases</li>\n</ul>\n\n`;
+        }
+        md += `---\n\n`;
+        
+        md += `## 💡 ${texts.whyTitle.replace(/{title}/g, movie.title)}\n\n`;
+        md += `${texts.analysis}\n\n`;
+        md += `${texts.impact.replace(/{title}/g, movie.title)}\n\n`;
+        md += `---\n\n`;
+        
+        if (movie.credits?.cast?.slice(0, 5).length) {
+            md += `## ${texts.topCast}\n\n`;
+            md += `<div align="center">\n\n`;
+            md += `| Actor | Character |\n`;
+            md += `|:---|:---|\n`;
+            movie.credits.cast.slice(0, 5).forEach(actor => {
+                md += `| ${actor.name} | ${actor.character || '-'} |\n`;
+            });
+            md += `\n</div>\n\n`;
+            md += `---\n\n`;
+        }
+        
+        md += `## ${texts.reviewsTitle}\n\n`;
+        md += `<div style="background: #1e293b; padding: 16px; border-radius: 12px; margin: 10px 0;">\n\n`;
+        md += `**${texts.review1Name}** ⭐⭐⭐⭐⭐\n\n`;
+        md += `> "${texts.review1Text}"\n\n`;
+        md += `</div>\n\n`;
+        
+        md += `<div style="background: #1e293b; padding: 16px; border-radius: 12px; margin: 10px 0;">\n\n`;
+        md += `**${texts.review2Name}** ⭐⭐⭐⭐½\n\n`;
+        md += `> "${texts.review2Text}"\n\n`;
+        md += `</div>\n\n`;
+        
+        md += `<div style="background: #1e293b; padding: 16px; border-radius: 12px; margin: 10px 0;">\n\n`;
+        md += `**${texts.review3Name}** ⭐⭐⭐⭐⭐\n\n`;
+        md += `> "${texts.review3Text}"\n\n`;
+        md += `</div>\n\n`;
+        
+        md += `---\n\n`;
+        
+        md += `## ${texts.faqTitle}\n\n`;
+        md += faqHtml;
+        md += `---\n\n`;
+        
+        md += `## ${texts.quickAccess}\n\n`;
+        md += `<div align="center">\n\n`;
+        md += `| **TMDB ID** | **IMDB ID** | **Language** |\n`;
+        md += `|:---:|:---:|:---:|\n`;
+        md += `| ${movie.id} | ${movie.imdb_id || '-'} | ${lang} |\n\n`;
+        md += `</div>\n\n`;
+        
+        md += `---\n\n`;
+        md += `<div align="center">\n\n`;
+        md += `**${texts.credit.replace(/{title}/g, movie.title)}**\n\n`;
+        md += `</div>\n`;
+        
+        return md;
+    }
+
+    async function generateMarkdownFile(movieId, apiKey, lang, baseUrlInput, titleTemplates) {
+        const movie = await fetchMovieDetails(apiKey, movieId, lang);
+        if (!movie) return null;
+        
+        const year = movie.release_date ? movie.release_date.slice(0, 4) : new Date().getFullYear();
+        const slug = createSlug(movie.title, movieId, lang);
+        const trailer = movie.videos?.results?.find(v => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser'));
+        const trailerKey = trailer?.key || null;
+        
+        const seoTitle = getRandomTitle(titleTemplates, movie.title, year);
+        const markdown = generateMarkdown(movie, lang, baseUrlInput, year, trailerKey, seoTitle);
+        
+        return {
+            filename: `${slug}.md`,
+            content: markdown,
+            title: movie.title,
+            movieId: movieId,
+            seoTitle: seoTitle,
+            lang: lang
+        };
+    }
+
+    async function bulkGenerate() {
+        if (isGenerating) {
+            log('⏳ Masih dalam proses...', 'error');
+            return;
+        }
+
+        const apiKey = apiKeyInput.value.trim() || DEFAULT_API;
+        const lang = bulkLang.value;
+        const baseUrlInput = baseUrl.value.trim();
+        const titleTemplates = getTitleTemplates();
+        
+        const isThai = lang === 'th-TH';
+        log(`🌍 Bahasa: ${bulkLang.options[bulkLang.selectedIndex].text} ${isThai ? '(Versi Original)' : '(Versi Anti-Banned)'}`);
+        
+        const idsText = movieIdsTextarea.value.trim();
+        const idMatches = idsText.split(/\r?\n/)
+            .map(line => line.trim())
+            .filter(line => line && /^\d+$/.test(line));
+        
+        if (!idMatches.length) {
+            log('❌ Tidak ada ID valid', 'error');
+            return;
+        }
+
+        const uniqueIds = [...new Set(idMatches)];
+        totalCountSpan.innerText = uniqueIds.length;
+        generatedCountSpan.innerText = '0';
+        progressPercent.innerText = '0%';
+        progressFill.style.width = '0%';
+        generatedFiles = [];
+        updatePreview();
+
+        log(`🚀 Generate ${uniqueIds.length} file Markdown (.md)...`);
+        log(`📝 ${titleTemplates.length} template title tersedia`);
+        isGenerating = true;
+        downloadZipBtn.disabled = true;
+
+        let successCount = 0;
+        for (let i = 0; i < uniqueIds.length; i++) {
+            const movieId = uniqueIds[i];
+            log(`⏳ [${i+1}/${uniqueIds.length}] ID ${movieId}...`);
+
+            const result = await generateMarkdownFile(movieId, apiKey, lang, baseUrlInput, titleTemplates);
+            
+            if (result) {
+                generatedFiles.push(result);
+                successCount++;
+                log(`✅ ID ${movieId} (${result.title}) -> ${result.filename}`, 'success');
+            }
+
+            const percent = Math.round(((i + 1) / uniqueIds.length) * 100);
+            progressPercent.innerText = `${percent}%`;
+            progressFill.style.width = `${percent}%`;
+            generatedCountSpan.innerText = successCount;
+            updatePreview();
+        }
+
+        log(`🎉 Selesai! ${successCount} file Markdown berhasil digenerate`, 'success');
+        isGenerating = false;
+        if (successCount > 0) {
+            downloadZipBtn.disabled = false;
+        }
+    }
+
+    function updatePreview() {
+        if (!generatedFiles.length) {
+            previewGrid.innerHTML = '<div style="color: #6b83b0; text-align: center; padding: 2rem; grid-column: 1/-1;"><i class="fab fa-markdown" style="font-size: 3rem; opacity: 0.5;"></i><p>Belum ada file yang digenerate</p></div>';
+            return;
+        }
+        
+        previewGrid.innerHTML = generatedFiles.map(f => `
+            <div class="file-card">
+                <div class="file-icon"><i class="fab fa-markdown"></i></div>
+                <div class="file-info">
+                    <div class="file-name">${f.filename.substring(0, 35)}${f.filename.length > 35 ? '...' : ''}</div>
+                    <div class="file-meta">${f.title.substring(0, 30)} · ${f.lang === 'th-TH' ? '🇹🇭 Original' : '🛡️ Safe'}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function downloadZip() {
+        if (!generatedFiles.length) return;
+        const zip = new JSZip();
+        generatedFiles.forEach(f => zip.file(f.filename, f.content));
+        zip.generateAsync({ type: 'blob' }).then(blob => {
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `tmdb_markdown_${Date.now()}.zip`;
+            link.click();
+            log('📦 ZIP berhasil didownload', 'success');
+        });
+    }
+
+    titleTemplatesArea.addEventListener('input', () => {
+        const templates = getTitleTemplates();
+        if (templates.length) {
+            const example = templates[0].replace(/{TITLE}/g, 'Avatar 3').replace(/{YEAR}/g, '2026');
+            document.getElementById('templateExample').innerHTML = `<i class="fas fa-eye"></i> Contoh: "${example.substring(0, 70)}..."`;
+        }
+    });
+
+    generateBtn.addEventListener('click', bulkGenerate);
+    downloadZipBtn.addEventListener('click', downloadZip);
+    clearLogsBtn.addEventListener('click', clearLogs);
+
+    log('✅ TMDB GENERATOR · STUDIO FINAL (Anti-Banned) siap digunakan!');
+    log('🛡️ Konten anti-banned untuk GitHub: 13 bahasa safe + 1 bahasa original (Thailand)');
+    log('🇹🇭 Thailand menggunakan versi original (sesuai permintaan)');
+    log('🌍 14 bahasa tersedia: English, Español, ไทย, Indonesia, Tiếng Việt, Български, 中文繁體, 한국어, Čeština, Magyar, Hrvatski, Русский, Türkçe, Română');
+})();
+</script>
+</body>
+</html>
