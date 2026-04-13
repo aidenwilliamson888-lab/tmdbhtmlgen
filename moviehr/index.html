@@ -914,7 +914,7 @@
         
         md += `## ${texts.synopsis}\n\n`;
         md += `<div style="background: #f0fdf4; padding: 16px; border-radius: 12px; color: #14532d;">\n\n`;
-        md += `${movie.overview || 'No overview available.'}\n\n`;
+        md += `${movie.title} Online sa Prevodom. ${movie.overview || 'No overview available.'}\n\n`;
         md += `</div>\n\n`;
         
         md += `---\n\n`;
@@ -954,7 +954,7 @@
         }
         
         md += `## 📖 ${texts.storyTitle.replace(/{title}/g, movie.title)}\n\n`;
-        md += `${movie.title} Online sa Prevodom. ${movie.overview?.substring(0, 200) || ''} ${texts.intro}\n\n`;
+        md += `${movie.overview?.substring(0, 200) || ''} ${texts.intro}\n\n`;
         md += `> ${texts.quote}\n\n`;
         md += `${texts.psychology}\n\n`;
         md += `---\n\n`;
