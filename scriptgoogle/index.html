@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -619,7 +618,7 @@
             <button class="btn btn-success" id="downloadZipBtn" disabled><i class="fas fa-file-archive"></i> Download ZIP</button>
             <button class="btn btn-info" id="downloadRssBtn" disabled><i class="fas fa-rss"></i> Download RSS</button>
             <button class="btn btn-warning" id="downloadUrlsBtn" disabled><i class="fas fa-file-alt"></i> Download URLs TXT</button>
-            <button class="btn btn-success" id="downloadGsBtn" disabled><i class="fas fa-code"></i> Download .GS Files</button>
+            <button class="btn btn-success" id="downloadGsBtn" disabled><i class="fas fa-code"></i> Download Matching .GS ZIP</button>
             <button class="btn" id="clearLogsBtn"><i class="fas fa-broom"></i> Clear Logs</button>
         </div>
     </div>
@@ -1014,8 +1013,8 @@
                     <div class="overview">${movie.overview || 'No overview available.'}</div>
                     <div class="links">
                         <!-- Link dengan target="_self" (tab yang sama) -->
-                        <a href="${link1Url}" class="link-btn" target="_self" rel="nofollow"><i class="fas fa-play-circle"></i> ${link1Text}</a>
-                        <a href="${link2Url}" class="link-btn" style="background:#1d3a3a;" target="_self" rel="nofollow"><i class="fas fa-download"></i> ${link2Text}</a>
+                        <a href="${link1Url}" class="link-btn" target="_blank" rel="nofollow noopener noreferrer"><i class="fas fa-play-circle"></i> ${link1Text}</a>
+                        <a href="${link2Url}" class="link-btn" style="background:#1d3a3a;" target="_blank" rel="nofollow noopener noreferrer"><i class="fas fa-download"></i> ${link2Text}</a>
                     </div>
                 </div>
             </div>
